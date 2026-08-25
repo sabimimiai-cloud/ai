@@ -1,0 +1,8 @@
+{
+  "name": "Remix Buubu Bloom Boutique",
+  "description": "A premium, playful destination for stylish children’s fashion, toys, and gifts, delivering confidence and joy to every child.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
