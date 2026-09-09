@@ -45,30 +45,30 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
                 Lagos Retail Store
               </p>
               <p className="text-xs text-gray-600">
-                Galleria Mall, Orchid, Lagos. Open for walk-ins, fitting trials and gifting pickups.
+                Galleria Mall, Orchid, Lagos. Open for walk-ins, sizing checks, and pickups.
               </p>
             </div>
           </div>
 
           <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-[#172033]/85 leading-relaxed">
             <h2 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display">
-              Finding Something Special Shouldn’t Be Hard.
+              Dressing children should be fun, not stressful.
             </h2>
             
             <p>
-              Parents already have enough on their plates. Finding outfits, shoes, gifts and little extras for children shouldn't mean driving across Lagos or browsing endless unverified accounts.
+              Whether you're shopping for your own child or picking out a gift for a niece, nephew, or friend's celebration, you want pieces that look great, feel soft, and hold up through a full day of playing.
             </p>
 
             <p>
-              <strong className="text-[#173F70] font-bold">Buubu Bloom</strong> brings playful girls' fashion, sharp boys' sets, sweet baby pieces, head-to-toe shoes, and unforgettable birthday toys together in one easy place.
+              <strong className="text-[#173F70] font-bold">Buubu Bloom</strong> is our store at Galleria Mall, Orchid, Lagos. We bring together cute everyday outfits, party dresses, sharp boys' sets, comfortable shoes, and fun gifts all in one welcoming place.
             </p>
 
             <p>
-              Visit our store in <strong className="text-[#173F70]">Galleria Mall, Orchid, Lagos</strong> or shop online with reliable doorstep delivery anywhere in Nigeria.
+              You can stop by the store to feel the fabrics and try things on, or order online and we'll dispatch it to your doorstep anywhere in Nigeria.
             </p>
 
-            <div className="p-4 rounded-2xl bg-[#F4F1EA] border-l-4 border-[#F58220] text-sm italic font-medium text-[#173F70]">
-              “Find the outfits, shoes, gifts and little extras that make their personality shine.”
+            <div className="p-4 rounded-2xl bg-[#F4F1EA] border-l-4 border-[#F58220] text-sm font-medium text-[#173F70]">
+              “Clothes they love wearing. Shoes they can run in. Gifts they'll actually be excited to open.”
             </div>
           </div>
 
@@ -78,7 +78,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
         <div className="mb-20">
           <div className="text-center mb-10">
             <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display">
-              WHY BUUBU BLOOM?
+              WHAT WE CARE ABOUT
             </h3>
           </div>
 
@@ -87,9 +87,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <div className="w-12 h-12 rounded-2xl bg-[#D93F92]/20 text-[#D93F92] flex items-center justify-center font-bold mb-4">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Style with Personality</h4>
+              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Clothes They Love</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Pretty, playful and made to be noticed for every little trendsetter.
+                Cute, comfortable styles that children feel excited to put on without fussing.
               </p>
             </div>
 
@@ -97,9 +97,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <div className="w-12 h-12 rounded-2xl bg-[#F9C928]/25 text-[#173F70] flex items-center justify-center font-bold mb-4">
                 <Heart className="w-6 h-6 text-[#F58220]" />
               </div>
-              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Real Kid Comfort</h4>
+              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Shoes & Gifts Too</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Soft, breathable fabrics made for everyday adventures and celebrations.
+                Matching shoes, fun accessories, and ready-to-go birthday presents in one stop.
               </p>
             </div>
 
@@ -107,9 +107,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <div className="w-12 h-12 rounded-2xl bg-[#27AFA5]/20 text-[#27AFA5] flex items-center justify-center font-bold mb-4">
                 <MapPin className="w-6 h-6" />
               </div>
-              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Visit Us in Person</h4>
+              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Visit Us in Lagos</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Find us at Galleria Mall, Orchid, Lagos for in-store shopping.
+                Find us at Galleria Mall, Orchid, Lagos whenever you want to check sizes in person.
               </p>
             </div>
 
@@ -117,9 +117,9 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <div className="w-12 h-12 rounded-2xl bg-[#2563C7]/20 text-[#2563C7] flex items-center justify-center font-bold mb-4">
                 <Truck className="w-6 h-6" />
               </div>
-              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Nationwide Delivery</h4>
+              <h4 className="text-base font-black text-[#173F70] mb-2 font-display">Delivery Across Nigeria</h4>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Doorstep delivery to anywhere in Nigeria with protective packaging.
+                Packaged carefully and dispatched quickly right to your door, wherever you are.
               </p>
             </div>
           </div>
@@ -129,18 +129,26 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
         <div className="bg-[#173F70] rounded-3xl text-white p-8 sm:p-12 text-center relative overflow-hidden">
           <div className="relative z-10 max-w-xl mx-auto space-y-5">
             <h3 className="text-2xl sm:text-3xl font-black font-display text-white">
-              Ready to find their next favourite?
+              Ready to find something for them?
             </h3>
             <p className="text-xs sm:text-sm text-white/80">
-              Browse our fresh arrivals or explore gifts for their next special moment.
+              Browse the collection online or stop by the store at Galleria Mall, Orchid, Lagos.
             </p>
-            <button
-              onClick={() => onNavigate('shop', 'all')}
-              className="bg-[#F58220] hover:bg-[#F58220]/90 text-white px-8 py-4 rounded-2xl font-black text-sm tracking-wide shadow-lg inline-flex items-center gap-2 transition-all active:scale-95"
-            >
-              <span>SHOP BUUBU BLOOM</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={() => onNavigate('shop', 'all')}
+                className="w-full sm:w-auto bg-[#F58220] hover:bg-[#F58220]/90 text-white px-8 py-4 rounded-2xl font-black text-sm tracking-wide shadow-lg inline-flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
+              >
+                <span>SHOP NOW</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => onNavigate('contact')}
+                className="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white px-7 py-4 rounded-2xl font-bold text-sm tracking-wide transition-all cursor-pointer"
+              >
+                VISIT OUR STORE
+              </button>
+            </div>
           </div>
         </div>
 

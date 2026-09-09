@@ -37,15 +37,15 @@ export const ShopByMoment: React.FC<ShopByMomentProps> = ({
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-1.5 bg-white border border-[#123B68]/10 text-xs font-extrabold uppercase px-3.5 py-1 rounded-full text-[#123B68] mb-3 shadow-2xs">
+          <div className="inline-flex items-center gap-1.5 bg-white border border-[#173F70]/10 text-xs font-extrabold uppercase px-3.5 py-1 rounded-full text-[#173F70] mb-3 shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-[#F58220]" />
-            <span>MOMENTS THAT MATTER</span>
+            <span>BY OCCASION OR MOOD</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-black text-[#123B68] tracking-tight font-display mb-3">
-            What Are We Dressing For?
+          <h2 className="text-3xl sm:text-4xl font-black text-[#173F70] tracking-tight font-display mb-3">
+            What are you looking for?
           </h2>
-          <p className="text-sm sm:text-base text-[#172033]/70">
-            Because a birthday shoot is different from a Sunday dinner or school run. Shop outfits crafted for the exact moment.
+          <p className="text-sm sm:text-base text-[#172033]/75">
+            Tell us what’s on the calendar and we’ll show you outfits, shoes and gifts ready for the moment.
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export const ShopByMoment: React.FC<ShopByMomentProps> = ({
 
               {/* Action */}
               <div className="pt-5 mt-4 border-t border-[#F4F1EA] flex items-center justify-between text-xs font-bold text-[#123B68] group-hover:text-[#F58220] transition-colors">
-                <span>FIND THE PERFECT LOOK</span>
+                <span>SEE OUTFITS</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>

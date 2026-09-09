@@ -34,14 +34,14 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose 
 
         <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#27AFA3] tracking-wider mb-2">
           <Ruler className="w-4 h-4" />
-          <span>FITTING ASSISTANCE</span>
+          <span>SIZING HELP</span>
         </div>
 
         <h2 className="text-2xl sm:text-3xl font-black text-[#123B68] font-display mb-2">
           Buubu Bloom Size Guide
         </h2>
         <p className="text-xs sm:text-sm text-gray-600 mb-6">
-          Our clothing is designed for growing kids. When in doubt or between sizes, we recommend sizing up for comfortable wear.
+          Kids grow fast! If you're between sizes, we always recommend sizing up so they get plenty of comfortable wear out of it.
         </p>
 
         {/* Tab Switcher */}
@@ -198,20 +198,20 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose 
           )}
         </div>
 
-        {/* Live Personal Stylist Callout */}
+        {/* Live Size Help Callout */}
         <div className="bg-[#FFFDF8] border border-[#F4F1EA] p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3">
           <div>
-            <p className="text-xs font-bold text-[#123B68]">Need help measuring before ordering?</p>
-            <p className="text-[11px] text-gray-500">Send us your child's age or current shoe size on WhatsApp for an instant recommendation.</p>
+            <p className="text-xs font-bold text-[#123B68]">Still not sure which size to pick?</p>
+            <p className="text-[11px] text-gray-500">Send us their age, height, or current shoe size on WhatsApp and we'll help you pick the right fit before ordering.</p>
           </div>
           <a
             href={STORE_CONTACT.whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="shrink-0 bg-[#27AFA3] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#27AFA3]/90"
+            className="shrink-0 bg-[#27AFA3] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#27AFA3]/90 cursor-pointer"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span>Chat Stylist</span>
+            <span>Ask on WhatsApp</span>
           </a>
         </div>
 

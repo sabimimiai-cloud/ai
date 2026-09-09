@@ -129,7 +129,7 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
                 <div className="flex items-center gap-1 text-amber-500 text-xs font-bold">
                   <Star className="w-3.5 h-3.5 fill-current" />
                   <span>{product.rating}</span>
-                  <span className="text-gray-400 font-normal">({product.reviewCount} customer ratings)</span>
+                  <span className="text-gray-400 font-normal">({product.reviewCount} reviews)</span>
                 </div>
               </div>
 
@@ -162,7 +162,7 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
               <div className="mb-5">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-black uppercase tracking-wider text-[#123B68]">
-                    Select Size:
+                    Size:
                   </span>
                   {onOpenSizeGuide && (
                     <button
@@ -170,7 +170,7 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
                       onClick={onOpenSizeGuide}
                       className="text-[11px] text-[#2563C7] font-semibold hover:underline cursor-pointer"
                     >
-                      Age / Fit Guide
+                      Size guide
                     </button>
                   )}
                 </div>
@@ -254,16 +254,16 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
                 <button
                   id="modal-add-to-bag-btn"
                   onClick={handleAdd}
-                  className="flex-1 bg-[#123B68] hover:bg-[#2563C7] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+                  className="flex-1 bg-[#123B68] hover:bg-[#2563C7] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  <span>ADD TO SHOPPING BAG (₦{(product.price * quantity).toLocaleString()})</span>
+                  <span>ADD TO BAG • ₦{(product.price * quantity).toLocaleString()}</span>
                 </button>
 
                 <button
                   id="modal-wishlist-toggle-btn"
                   onClick={() => onToggleWishlist(product)}
-                  className={`p-4 rounded-2xl border transition-all ${
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
                     isWishlisted
                       ? 'bg-[#F58220] text-white border-[#F58220]'
                       : 'border-[#F4F1EA] text-[#123B68] hover:bg-[#F4F1EA]'
@@ -277,7 +277,7 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
               {addedNotice && (
                 <div className="p-3 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2 animate-in fade-in">
                   <Check className="w-4 h-4 text-emerald-600" />
-                  <span>Added to your shopping bag!</span>
+                  <span>Added to your bag!</span>
                 </div>
               )}
 
@@ -290,18 +290,18 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
                 className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>ORDER DIRECTLY VIA WHATSAPP (0806 014 3654)</span>
+                <span>ASK ABOUT THIS ON WHATSAPP</span>
               </a>
 
               {/* Store & Delivery Notes */}
               <div className="bg-[#F4F1EA]/60 p-3.5 rounded-2xl text-[11px] text-[#172033]/80 space-y-1.5">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-3.5 h-3.5 text-[#F58220]" />
-                  <span><strong>Store Pickup:</strong> Galleria Mall, Orchid, Lagos</span>
+                  <span><strong>Store pickup:</strong> Galleria Mall, Orchid, Lagos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Truck className="w-3.5 h-3.5 text-[#2563C7]" />
-                  <span><strong>Doorstep Delivery:</strong> Fast dispatch across Lagos & nationwide Nigeria</span>
+                  <span><strong>Delivery:</strong> Lagos & nationwide doorstep delivery</span>
                 </div>
               </div>
 

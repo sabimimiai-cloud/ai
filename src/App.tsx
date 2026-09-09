@@ -2,14 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CategoryDiscovery } from './components/CategoryDiscovery';
-import { BrandStory } from './components/BrandStory';
-import { FeaturedProducts } from './components/FeaturedProducts';
+import { NewArrivalsSection } from './components/NewArrivalsSection';
 import { ShopByMoment } from './components/ShopByMoment';
-import { EditorialSection } from './components/EditorialSection';
+import { FeaturedProducts } from './components/FeaturedProducts';
+import { TheBloomEdit } from './components/TheBloomEdit';
+import { CompleteTheLook } from './components/CompleteTheLook';
 import { GiftingSection } from './components/GiftingSection';
+import { SpottedInBuubuBloom } from './components/SpottedInBuubuBloom';
+import { BrandStory } from './components/BrandStory';
 import { PhysicalStoreSection } from './components/PhysicalStoreSection';
 import { DeliveryTrustStrip } from './components/DeliveryTrustStrip';
 import { InstagramGrid } from './components/InstagramGrid';
+import { FAQSection } from './components/FAQSection';
 import { FinalCTA } from './components/FinalCTA';
 import { Footer } from './components/Footer';
 import { ProductDetailModal } from './components/ProductDetailModal';
@@ -201,12 +205,31 @@ export function App() {
       <main className="flex-1">
         {activeView === 'home' && (
           <div id="homepage-view">
+            {/* 1. Hero */}
             <Hero onNavigate={handleNavigate} />
+
+            {/* 2. Shop By Who You're Shopping For */}
             <CategoryDiscovery 
               onSelectCategory={(cat) => handleNavigate('shop', cat)} 
               onNavigate={handleNavigate}
             />
-            <BrandStory onNavigate={handleNavigate} />
+
+            {/* 3. NEW ARRIVALS: Just In at Buubu Bloom */}
+            <NewArrivalsSection
+              onQuickView={(p) => setSelectedProduct(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
+              wishlistIds={wishlistIds}
+              onToggleWishlist={handleToggleWishlist}
+              onNavigate={handleNavigate}
+            />
+
+            {/* 4. Shop By Occasion / Need */}
+            <ShopByMoment 
+              onSelectMoment={(momentKey) => handleNavigate('shop')} 
+              onNavigate={handleNavigate}
+            />
+
+            {/* 4. New Arrivals (Just Bloomed 🌸) */}
             <FeaturedProducts
               onQuickView={(p) => setSelectedProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
@@ -214,19 +237,50 @@ export function App() {
               onToggleWishlist={handleToggleWishlist}
               onNavigate={handleNavigate}
             />
-            <ShopByMoment 
-              onSelectMoment={(momentKey) => handleNavigate('shop')} 
+
+            {/* 5. The Bloom Edit */}
+            <TheBloomEdit
+              onQuickView={(p) => setSelectedProduct(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
               onNavigate={handleNavigate}
             />
-            <EditorialSection onNavigate={handleNavigate} />
+
+            {/* 6. Complete The Look */}
+            <CompleteTheLook
+              onQuickView={(p) => setSelectedProduct(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
+              onOpenCart={() => setIsCartOpen(true)}
+            />
+
+            {/* 7. Gift Concierge */}
             <GiftingSection 
               onNavigate={handleNavigate} 
               onQuickView={(p) => setSelectedProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
             />
+
+            {/* 8. Spotted in Buubu Bloom */}
+            <SpottedInBuubuBloom
+              onQuickView={(p) => setSelectedProduct(p)}
+              onNavigate={handleNavigate}
+            />
+
+            {/* 9. Why Buubu Bloom */}
+            <BrandStory onNavigate={handleNavigate} />
+
+            {/* 10. Store / Location (Come see us in Lagos) */}
             <PhysicalStoreSection />
+
+            {/* Fast Dispatch Strip */}
             <DeliveryTrustStrip onNavigate={handleNavigate} />
+
+            {/* 11. Instagram / Social (More Buubu Bloom moments) */}
             <InstagramGrid />
+
+            {/* Common Questions */}
+            <FAQSection onNavigate={handleNavigate} />
+
+            {/* 12. Final CTA (Let's get them dressed.) */}
             <FinalCTA onNavigate={handleNavigate} />
           </div>
         )}

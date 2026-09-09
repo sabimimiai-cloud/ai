@@ -137,15 +137,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           {/* Product Title */}
           <h3 
             onClick={handleView}
-            className="text-sm sm:text-base font-bold text-[#172033] hover:text-[#173F70] transition-colors line-clamp-1 cursor-pointer"
+            className="text-sm sm:text-base font-bold text-[#172033] hover:text-[#173F70] transition-colors line-clamp-1 cursor-pointer mb-2"
           >
             {product.name}
           </h3>
-
-          {/* Short Teaser / Emotional Description */}
-          <p className="text-xs text-[#172033]/70 line-clamp-2 mt-1 mb-3">
-            {product.description}
-          </p>
         </div>
 
         {/* Pricing & Add to Bag Trigger */}

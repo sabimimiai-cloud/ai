@@ -1,6 +1,6 @@
 {
-  "name": "Remix Buubu Bloom Boutique",
-  "description": "A premium, playful destination for stylish children’s fashion, toys, and gifts, delivering confidence and joy to every child.",
+  "name": "Buubu Bloom",
+  "description": "Shop kids’ fashion, shoes, toys and gifts at Buubu Bloom. Find cute looks for girls, boys and little ones, with nationwide delivery from our Lagos store.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

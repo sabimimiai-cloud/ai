@@ -14,6 +14,7 @@ import {
   Sparkles 
 } from 'lucide-react';
 import { STORE_CONTACT, FAQS } from '../data/storeData';
+import { BuubuBloomLogo } from '../components/BuubuBloomLogo';
 
 export const ContactView: React.FC = () => {
   const [formState, setFormState] = useState({
@@ -41,6 +42,9 @@ export const ContactView: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20">
+          <div className="flex justify-center mb-6">
+            <BuubuBloomLogo height={50} className="h-12 w-auto" />
+          </div>
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#F58220] mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>WE ARE HERE FOR YOU</span>

@@ -47,15 +47,15 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
         <div className="max-w-2xl mx-auto text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 bg-[#F58220]/15 text-[#F58220] px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-4">
             <MapPin className="w-3.5 h-3.5" />
-            <span>VISIT OR CONTACT</span>
+            <span>GET IN TOUCH</span>
           </div>
 
           <h1 className="text-3xl sm:text-5xl font-black text-[#173F70] tracking-tight font-display mb-4">
-            Let’s Help You Find It.
+            We’re Happy to Help
           </h1>
 
           <p className="text-sm sm:text-base text-[#172033]/80">
-            Have a specific sizing question? Planning a birthday surprise or looking to pick up an order today at Galleria Mall? We’re just a call, visit or message away.
+            Not sure about sizing? Need an outfit in a hurry? Or planning to visit the store today? Reach out anytime — we're always happy to help you find what you need.
           </p>
         </div>
 
@@ -68,10 +68,10 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
               <MapPin className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black text-[#173F70] uppercase tracking-wider mb-1">
-              Visit Store
+              Visit Our Store
             </h3>
             <p className="text-xs font-bold text-[#172033]">Galleria Mall, Orchid</p>
-            <p className="text-xs text-gray-500 mb-4">Lekki / Orchid Road, Lagos</p>
+            <p className="text-xs text-gray-500 mb-4">Orchid Road, Lekki / Ajah, Lagos</p>
             <a
               href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
               target="_blank"
@@ -89,17 +89,17 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
               <MessageSquare className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black text-[#173F70] uppercase tracking-wider mb-1">
-              WhatsApp Chat
+              WhatsApp Us
             </h3>
             <p className="text-xs font-bold text-[#172033]">{STORE_CONTACT.phoneDisplay}</p>
-            <p className="text-xs text-gray-500 mb-4">Fast product checks & video views</p>
+            <p className="text-xs text-gray-500 mb-4">Fast sizing advice & live videos</p>
             <a
               href={STORE_CONTACT.whatsappUrl}
               target="_blank"
               rel="noreferrer"
               className="text-xs font-bold text-[#27AFA5] hover:underline flex items-center gap-1"
             >
-              <span>Chat on WhatsApp →</span>
+              <span>Message on WhatsApp →</span>
             </a>
           </div>
 
@@ -109,15 +109,15 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
               <Phone className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black text-[#173F70] uppercase tracking-wider mb-1">
-              Direct Phone Call
+              Call the Store
             </h3>
             <p className="text-xs font-bold text-[#172033]">{STORE_CONTACT.phoneDisplay}</p>
-            <p className="text-xs text-gray-500 mb-4">Speak with store styling staff</p>
+            <p className="text-xs text-gray-500 mb-4">Speak directly with our team</p>
             <a
               href={`tel:${STORE_CONTACT.phoneRaw}`}
               className="text-xs font-bold text-[#173F70] hover:underline flex items-center gap-1"
             >
-              <span>Call Now →</span>
+              <span>Call 0806 014 3654 →</span>
             </a>
           </div>
 
@@ -127,13 +127,13 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
               <ShoppingBag className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-black text-[#173F70] uppercase tracking-wider mb-1">
-              Shop Online
+              Order Online
             </h3>
-            <p className="text-xs font-bold text-[#172033]">Nationwide Delivery</p>
-            <p className="text-xs text-gray-500 mb-4">Order 24/7 to any state in Nigeria</p>
+            <p className="text-xs font-bold text-[#172033]">Delivery Across Nigeria</p>
+            <p className="text-xs text-gray-500 mb-4">Doorstep dispatch to any state</p>
             <button
               onClick={() => onNavigate('shop', 'all')}
-              className="text-xs font-bold text-[#F58220] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#F58220] hover:underline flex items-center gap-1 cursor-pointer"
             >
               <span>Browse Catalog →</span>
             </button>
@@ -148,13 +148,13 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
           <div className="lg:col-span-6 bg-white p-6 sm:p-8 rounded-3xl border border-[#F4F1EA] shadow-sm">
             <div className="mb-6">
               <span className="text-xs font-black uppercase text-[#27AFA5] tracking-wider">
-                MESSAGE OUR TEAM
+                SEND A MESSAGE
               </span>
               <h2 className="text-2xl font-black text-[#173F70] font-display mt-1">
-                Send an Enquiry
+                How Can We Help?
               </h2>
               <p className="text-xs text-gray-600">
-                Let us know what you're looking for and we’ll get back to you promptly.
+                Tell us what you're looking for and we'll reply right away.
               </p>
             </div>
 
@@ -163,16 +163,16 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
                 <div className="w-14 h-14 rounded-full bg-[#27AFA5]/15 text-[#27AFA5] flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-lg font-bold text-[#173F70]">Enquiry Form Submitted!</h3>
+                <h3 className="text-lg font-bold text-[#173F70]">Message Received!</h3>
                 <p className="text-xs text-gray-600 max-w-sm mx-auto">
-                  Thank you, <strong>{formName}</strong>. You can also forward this directly to our WhatsApp for instant response:
+                  Thank you, <strong>{formName}</strong>. If you need an immediate reply, tap below to chat with us on WhatsApp:
                 </p>
                 <button
                   onClick={handleWhatsAppDirect}
-                  className="bg-[#27AFA5] text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 mx-auto shadow-sm hover:bg-[#27AFA5]/90"
+                  className="bg-[#27AFA5] text-white px-6 py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 mx-auto shadow-sm hover:bg-[#27AFA5]/90 cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>FORWARD TO WHATSAPP (0806 014 3654)</span>
+                  <span>CONTINUE ON WHATSAPP (0806 014 3654)</span>
                 </button>
               </div>
             ) : (
@@ -214,23 +214,23 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
                     onChange={(e) => setFormInterest(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#173F70]"
                   >
-                    <option value="Girls Dresses & Fashion">Girls Dresses & Fashion</option>
-                    <option value="Boys Denim & Tailored Sets">Boys Denim & Tailored Sets</option>
+                    <option value="Girls Dresses & Outfits">Girls' Dresses & Outfits</option>
+                    <option value="Boys Sets & Clothing">Boys' Sets & Clothing</option>
                     <option value="Baby Rompers & Newborn Sets">Baby Rompers & Newborn Sets</option>
-                    <option value="Children Shoes & Accessories">Children Shoes & Accessories</option>
-                    <option value="Ride-on Toys & Educational Games">Ride-on Toys & Educational Games</option>
-                    <option value="Birthday Gift Hamper Curation">Birthday Gift Hamper Curation</option>
-                    <option value="Store Pickup / Sizing Confirmation">Store Pickup / Sizing Confirmation</option>
+                    <option value="Children Shoes & Footwear">Children's Shoes & Footwear</option>
+                    <option value="Toys & Birthday Gifts">Toys & Birthday Gifts</option>
+                    <option value="Help with Sizing or Store Pickup">Help with Sizing or Store Pickup</option>
+                    <option value="Something Else">Something Else</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-[#173F70] mb-1">
-                    Message / Age / Special Requirements
+                    Your Message (optional)
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="e.g. Looking for a birthday party outfit for a 5-year-old girl before Friday."
+                    placeholder="e.g. Need a birthday outfit for a 5-year-old girl before Friday."
                     value={formMessage}
                     onChange={(e) => setFormMessage(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#173F70]"
@@ -240,19 +240,19 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
                 <div className="pt-2 flex flex-col sm:flex-row gap-3">
                   <button
                     type="submit"
-                    className="flex-1 bg-[#173F70] hover:bg-[#2563C7] text-white py-3.5 rounded-xl font-bold text-xs tracking-wider flex items-center justify-center gap-2 transition-colors active:scale-95"
+                    className="flex-1 bg-[#173F70] hover:bg-[#2563C7] text-white py-3.5 rounded-xl font-bold text-xs tracking-wider flex items-center justify-center gap-2 transition-colors active:scale-95 cursor-pointer"
                   >
                     <Send className="w-4 h-4" />
-                    <span>SEND ENQUIRY</span>
+                    <span>SEND MESSAGE</span>
                   </button>
 
                   <button
                     type="button"
                     onClick={handleWhatsAppDirect}
-                    className="bg-[#27AFA5] hover:bg-[#27AFA5]/90 text-white px-5 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors active:scale-95"
+                    className="bg-[#27AFA5] hover:bg-[#27AFA5]/90 text-white px-5 py-3.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-colors active:scale-95 cursor-pointer"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>WHATSAPP DIRECT</span>
+                    <span>CHAT ON WHATSAPP</span>
                   </button>
                 </div>
               </form>

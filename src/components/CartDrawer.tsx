@@ -70,7 +70,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 Shopping Bag ({items.reduce((acc, i) => acc + i.quantity, 0)})
               </h2>
               <p className="text-[11px] text-[#27AFA3] font-bold">
-                ✓ Ready for Lagos & Nationwide Delivery
+                ✓ Delivering across Nigeria or pickup in store
               </p>
             </div>
           </div>
@@ -78,7 +78,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           <button
             id="close-cart-btn"
             onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-[#F4F1EA]"
+            className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-[#F4F1EA] cursor-pointer"
             aria-label="Close cart"
           >
             <X className="w-5 h-5" />
@@ -92,16 +92,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="w-16 h-16 rounded-full bg-[#F4F1EA] text-[#123B68]/40 flex items-center justify-center mx-auto mb-4">
                 <ShoppingBag className="w-8 h-8" />
               </div>
-              <h3 className="text-base font-bold text-[#123B68] mb-1">Your bag is currently empty</h3>
+              <h3 className="text-base font-bold text-[#123B68] mb-1">Your bag is empty</h3>
               <p className="text-xs text-[#172033]/70 mb-6 max-w-xs mx-auto">
-                Discover fashionable children's outfits, shoes, toys and gifts made to make them smile.
+                Find something cute for them, pick out new shoes, or grab a gift for an upcoming celebration.
               </p>
               <button
                 onClick={() => {
                   onClose();
                   onNavigateToShop();
                 }}
-                className="bg-[#123B68] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm hover:bg-[#2563C7] transition-all"
+                className="bg-[#123B68] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm hover:bg-[#2563C7] transition-all cursor-pointer"
               >
                 START SHOPPING
               </button>
@@ -184,14 +184,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   />
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#123B68]">
                     <Gift className="w-4 h-4 text-[#F58220]" />
-                    <span>Add Luxury Gift Box & Ribbon (+₦2,500)</span>
+                    <span>Add Gift Box & Handwritten Card (+₦2,500)</span>
                   </div>
                 </label>
 
                 {giftWrapping && (
                   <div className="mt-3 animate-in fade-in duration-150">
                     <textarea
-                      placeholder="Write your custom birthday / gift card message here..."
+                      placeholder="Write the message you want on the gift card..."
                       value={giftNote}
                       onChange={(e) => setGiftNote(e.target.value)}
                       rows={2}
@@ -217,7 +217,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
               {giftWrapping && (
                 <div className="flex justify-between text-[#F58220]">
-                  <span>Luxury Keepsake Gift Box</span>
+                  <span>Gift Box & Card</span>
                   <span className="font-bold">₦2,500</span>
                 </div>
               )}
@@ -235,9 +235,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   onClose();
                   onOpenCheckout();
                 }}
-                className="w-full bg-[#123B68] hover:bg-[#2563C7] text-white py-3.5 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95"
+                className="w-full bg-[#123B68] hover:bg-[#2563C7] text-white py-3.5 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
               >
-                <span>PROCEED TO ORDER / CHECKOUT</span>
+                <span>CONTINUE TO CHECKOUT</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -249,12 +249,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-3 rounded-2xl font-bold text-xs tracking-wide flex items-center justify-center gap-2 shadow-xs transition-all"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>INSTANT WHATSAPP ORDER DISPATCH</span>
+                <span>ORDER VIA WHATSAPP</span>
               </a>
             </div>
 
             <p className="text-[10px] text-center text-gray-400">
-              Galleria Mall, Orchid Lagos • Nationwide Delivery Across Nigeria
+              Pick up at Galleria Mall, Orchid, Lagos or get delivery across Nigeria
             </p>
           </div>
         )}

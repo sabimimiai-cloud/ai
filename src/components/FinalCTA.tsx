@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowRight, Gift, Sparkles, Heart } from 'lucide-react';
+import { ArrowRight, Sparkles, MessageCircle } from 'lucide-react';
 import { ActiveView, ProductCategory } from '../types';
+import { STORE_CONTACT } from '../data/storeData';
 
 interface FinalCTAProps {
   onNavigate: (view: ActiveView, category?: ProductCategory) => void;
@@ -20,32 +21,33 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onNavigate }) => {
         </div>
 
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#173F70] tracking-tight font-display mb-4">
-          READY TO FIND THEIR <br className="hidden sm:inline" />
-          <span className="text-[#F58220]">NEXT FAVOURITE?</span>
+          Let’s get them dressed.
         </h2>
 
-        <p className="text-base sm:text-xl text-[#172033]/80 max-w-xl mx-auto mb-10 leading-relaxed font-medium">
-          From everyday outfits to special gifts, there’s something waiting to make their day a little more colourful.
+        <p className="text-base sm:text-lg text-[#172033]/80 max-w-xl mx-auto mb-10 leading-relaxed font-medium">
+          Browse new arrivals, find a special gift, or visit our store in Lagos.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             id="final-cta-shop-btn"
             onClick={() => onNavigate('shop', 'all')}
-            className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-9 py-4 rounded-2xl font-black text-base tracking-wide flex items-center justify-center gap-2.5 shadow-xl transition-all active:scale-95 group"
+            className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-9 py-4 rounded-2xl font-black text-base tracking-wide flex items-center justify-center gap-2.5 shadow-xl transition-all active:scale-95 group cursor-pointer"
           >
-            <span>SHOP BUUBU BLOOM</span>
+            <span>Start Shopping</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          <button
-            id="final-cta-gifts-btn"
-            onClick={() => onNavigate('shop', 'gifts')}
-            className="w-full sm:w-auto bg-white hover:bg-white/80 text-[#173F70] border-2 border-[#173F70] px-8 py-4 rounded-2xl font-bold text-base tracking-wide flex items-center justify-center gap-2 transition-all active:scale-95"
+          <a
+            id="final-cta-whatsapp-btn"
+            href={STORE_CONTACT.whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba59] text-white px-8 py-4 rounded-2xl font-bold text-base tracking-wide flex items-center justify-center gap-2.5 shadow-lg transition-all active:scale-95 cursor-pointer"
           >
-            <Gift className="w-4 h-4 text-[#F58220]" />
-            <span>EXPLORE GIFTS</span>
-          </button>
+            <MessageCircle className="w-5 h-5 fill-current" />
+            <span>Chat with Us on WhatsApp</span>
+          </a>
         </div>
 
       </div>

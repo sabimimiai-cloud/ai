@@ -28,30 +28,30 @@ export const CategoryDiscovery: React.FC<CategoryDiscoveryProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12">
           <div>
             <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-[#27AFA5] mb-2">
               <span className="w-1.5 h-1.5 rounded-full bg-[#27AFA5]" />
-              SHOP BY CATEGORY
+              FIND THEIR LOOK
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#173F70] tracking-tight font-display">
-              FIND THEIR NEXT FAVOURITE
+            <h2 className="text-3xl sm:text-4xl font-black text-[#173F70] tracking-tight font-display">
+              Who are we shopping for today?
             </h2>
           </div>
 
           <p className="text-sm sm:text-base text-[#172033]/75 max-w-md">
-            Little styles, big choices. Shop by what they love.
+            Whether you need a full weekend look, fresh kicks, or an effortless gift they’ll love opening.
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {CATEGORIES_DATA.map((category) => (
             <div
               key={category.id}
               id={`category-card-${category.categoryKey}`}
               onClick={() => handleCategoryClick(category.categoryKey)}
-              className="group relative rounded-2xl overflow-hidden bg-[#F4F1EA] border border-[#F4F1EA] hover:border-[#173F70]/40 transition-all duration-300 hover:shadow-lg cursor-pointer flex flex-col justify-between h-[360px] sm:h-[400px]"
+              className="group relative rounded-2xl overflow-hidden bg-[#F4F1EA] border border-[#F4F1EA] hover:border-[#173F70]/40 transition-all duration-300 hover:shadow-lg cursor-pointer flex flex-col justify-between h-[300px] sm:h-[350px]"
             >
               {/* Category Background Image */}
               <div className="absolute inset-0 z-0 overflow-hidden">
@@ -88,7 +88,7 @@ export const CategoryDiscovery: React.FC<CategoryDiscoveryProps> = ({
                 </p>
 
                 <div className="flex items-center text-[11px] font-extrabold uppercase tracking-widest text-[#F9C928] group-hover:text-white transition-colors">
-                  <span>SHOP CATEGORY</span>
+                  <span>SHOP NOW</span>
                 </div>
               </div>
             </div>

@@ -24,13 +24,13 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
             <div>
               <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-[#F58220] mb-1">
                 <PackageCheck className="w-3.5 h-3.5" />
-                <span>NATIONWIDE DELIVERY ACROSS NIGERIA</span>
+                <span>FAST DISPATCH</span>
               </div>
               <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display">
-                From Our Store To Your Door.
+                DELIVERING ACROSS NIGERIA
               </h3>
               <p className="text-sm text-[#172033]/75 mt-1 max-w-xl">
-                Shopping from Lagos, Abuja, Port Harcourt or anywhere in Nigeria? Buubu Bloom delivers straight to your doorstep with careful packaging.
+                Whether you’re in Lagos or ordering from somewhere else in Nigeria, we’ll get your order packaged nicely and sent your way.
               </p>
             </div>
           </div>
@@ -40,9 +40,9 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
             <button
               id="delivery-strip-shop-btn"
               onClick={() => onNavigate('shop', 'all')}
-              className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 group"
+              className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 group cursor-pointer"
             >
-              <span>SHOP BUUBU BLOOM</span>
+              <span>SHOP NOW</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

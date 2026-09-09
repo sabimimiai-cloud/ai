@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 94" width="150" height="94" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&amp;display=swap');
+      .buubu-text {
+        font-family: 'Fredoka', 'Quicksand', 'Nunito', system-ui, -apple-system, sans-serif;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <!-- Buubu line -->
+  <text x="10" y="35" class="buubu-text" font-size="34" fill="#123B68" letter-spacing="-0.5">Buubu</text>
+  
+  <!-- Bloom line with orange second 'o' -->
+  <text x="10" y="69" class="buubu-text" font-size="34" letter-spacing="-0.5">
+    <tspan fill="#123B68">Bl</tspan><tspan fill="#123B68">o</tspan><tspan fill="#F58220">o</tspan><tspan fill="#123B68">m</tspan>
+  </text>
+  
+  <!-- Teal smile arc underneath Bloom -->
+  <path d="M 46 76 C 54 84, 76 84, 84 76" stroke="#27AFA5" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+</svg>

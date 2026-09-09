@@ -49,13 +49,13 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
           <div>
             <div className="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-widest text-[#F58220] mb-2">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>NEW ARRIVALS</span>
+              <span>MOST LOVED</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-[#173F70] tracking-tight font-display">
-              CURRENTLY BLOOMING
+              Customer Favourites ⭐
             </h2>
             <p className="text-sm sm:text-base text-[#172033]/75 mt-1">
-              Fresh finds for little people with big personalities.
+              Tried, tested, and re-ordered by parents all over Lagos and beyond.
             </p>
           </div>
 
@@ -66,7 +66,7 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                 key={tab.key}
                 id={`featured-tab-${tab.key}`}
                 onClick={() => setActiveTab(tab.key)}
-                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                   activeTab === tab.key
                     ? 'bg-[#173F70] text-white shadow-sm'
                     : 'bg-[#F4F1EA] text-[#172033]/70 hover:text-[#173F70] hover:bg-[#F4F1EA]/80'
@@ -92,14 +92,14 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
           ))}
         </div>
 
-        {/* Bottom Call to Action Banner */}
+        {/* Bottom Call to Action */}
         <div className="text-center pt-2">
           <button
             id="view-full-shop-btn"
             onClick={() => onNavigate('shop', activeTab)}
-            className="inline-flex items-center gap-2 bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wide shadow-md transition-all active:scale-95 group"
+            className="inline-flex items-center gap-2 bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl font-bold text-sm tracking-wide shadow-md transition-all active:scale-95 group cursor-pointer"
           >
-            <span>VIEW ALL PRODUCTS ({PRODUCTS.length}+ ITEMS)</span>
+            <span>Shop New Arrivals</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>

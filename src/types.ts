@@ -37,6 +37,7 @@ export interface Product {
   colors: { name: string; hex: string }[];
   inStock: boolean;
   isFeatured?: boolean;
+  isNewArrival?: boolean;
   isDemonstration?: boolean;
   occasions: OccasionMoment[];
   ageGroup: AgeGroup;

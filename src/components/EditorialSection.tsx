@@ -24,34 +24,34 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
           <div className="lg:col-span-6 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-[#F4C430] mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>THE BUUBU BLOOM LOOKBOOK</span>
+              <span>IN STORE & ONLINE</span>
             </div>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight font-display leading-[1.1] mb-6 text-white">
-              Let Them Be Little. <br />
-              <span className="text-[#F5A6C8]">Let Them Bloom.</span>
+              CLOTHES THEY LOVE. <br />
+              <span className="text-[#F5A6C8]">EASY TO WEAR.</span>
             </h2>
 
             <p className="text-base sm:text-lg text-white/85 leading-relaxed mb-8 max-w-lg font-light">
-              From bold little personalities to quiet classics, we believe children's style should leave room for them to be themselves. Clothing that moves with their laughter, withstands endless adventures, and turns ordinary moments into cherished family memories.
+              Whether it’s a twirl dress she never wants to take off, or an easy two-piece set he can run around in without fussing, we pick pieces that look great and feel good on active children.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
               <button
                 id="editorial-explore-style-btn"
                 onClick={() => onNavigate('shop')}
-                className="bg-[#F58220] hover:bg-[#F58220]/90 text-white px-8 py-4 rounded-2xl font-black text-sm tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group"
+                className="bg-[#F58220] hover:bg-[#F58220]/90 text-white px-8 py-4 rounded-2xl font-black text-sm tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 group cursor-pointer"
               >
-                <span>EXPLORE THEIR STYLE</span>
+                <span>SHOP NOW</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
               <button
                 id="editorial-about-story-btn"
                 onClick={() => onNavigate('about')}
-                className="bg-transparent hover:bg-white/10 text-white border border-white/30 px-6 py-4 rounded-2xl font-bold text-sm tracking-wide transition-all"
+                className="bg-transparent hover:bg-white/10 text-white border border-white/30 px-6 py-4 rounded-2xl font-bold text-sm tracking-wide transition-all cursor-pointer"
               >
-                OUR LAGOS STORE STORY
+                ABOUT OUR STORE
               </button>
             </div>
           </div>
@@ -70,13 +70,13 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 text-xs font-bold text-white">
-                    Confidence & Smiles
+                    Confidence & Big Smiles
                   </div>
                 </div>
 
                 <div className="bg-white/10 backdrop-blur-md p-4 sm:p-5 rounded-2xl border border-white/15">
-                  <p className="text-xl font-black text-[#F4C430] font-display">Curated Comfort</p>
-                  <p className="text-xs text-white/80 font-medium">Breathable cottons, soft seams & climate-friendly fabrics for active Nigerian kids.</p>
+                  <p className="text-xl font-black text-[#F4C430] font-display">Comfortable Fabrics</p>
+                  <p className="text-xs text-white/80 font-medium">Soft seams, breathable cottons and easy cuts that suit our weather.</p>
                 </div>
               </div>
 
@@ -84,7 +84,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
               <div className="space-y-4 sm:space-y-6 pt-6 sm:pt-10">
                 <div className="bg-gradient-to-br from-[#27AFA3] to-[#2563C7] p-4 sm:p-5 rounded-2xl shadow-xl text-white">
                   <Heart className="w-6 h-6 text-[#F5A6C8] fill-current mb-2" />
-                  <p className="text-sm font-bold leading-snug">“The outfit they’ll actually want to wear again.”</p>
+                  <p className="text-sm font-bold leading-snug">“The outfit they actually want to wear again and again.”</p>
                 </div>
 
                 <div className="rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl border-2 border-white/20 relative group">
@@ -95,7 +95,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-3 left-3 text-xs font-bold text-white">
-                    Little Gentleman Looks
+                    Everyday & Party Looks
                   </div>
                 </div>
               </div>

@@ -98,11 +98,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-[#123B68] font-display">
-              Order Prepared Successfully!
+              Your Order is Ready!
             </h2>
 
             <p className="text-sm text-[#172033]/80 max-w-md mx-auto">
-              Your order for <strong>₦{total.toLocaleString()}</strong> has been formatted. Click below to send your order receipt directly to Buubu Bloom on WhatsApp for immediate confirmation and delivery dispatch.
+              Your order total is <strong>₦{total.toLocaleString()}</strong>. Tap below to send your order details directly to our team on WhatsApp. We'll confirm your items, share payment details, and dispatch your package!
             </p>
 
             <div className="pt-4 max-w-md mx-auto space-y-3">
@@ -114,7 +114,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
               >
                 <MessageSquare className="w-5 h-5" />
-                <span>SEND ORDER ON WHATSAPP (0806 014 3654)</span>
+                <span>SEND ORDER VIA WHATSAPP (0806 014 3654)</span>
               </a>
 
               <button
@@ -122,7 +122,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   onClearCart();
                   onClose();
                 }}
-                className="w-full bg-[#F4F1EA] text-[#123B68] py-3 rounded-2xl font-bold text-xs hover:bg-gray-200 transition-colors"
+                className="w-full bg-[#F4F1EA] text-[#123B68] py-3 rounded-2xl font-bold text-xs hover:bg-gray-200 transition-colors cursor-pointer"
               >
                 BACK TO STORE
               </button>
@@ -132,20 +132,20 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           /* Order Form */
           <div>
             <div className="flex items-center gap-2 text-xs font-extrabold uppercase text-[#27AFA3] tracking-wider mb-2">
-              <Sparkles className="w-4 h-4" />
-              <span>CHECKOUT & DELIVERY</span>
+              <Truck className="w-4 h-4" />
+              <span>DELIVERY DETAILS</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-[#123B68] font-display mb-1">
-              Finalize Your Order
+              Where should we send it?
             </h2>
             
-            {/* Demonstration Notice */}
+            {/* Direct WhatsApp Ordering Notice */}
             <div className="bg-[#FFFDF8] border border-[#F4C430]/60 rounded-2xl p-3.5 mb-6 flex items-start gap-2.5 text-xs text-[#172033]/80">
               <Info className="w-4 h-4 text-[#F58220] shrink-0 mt-0.5" />
               <div>
-                <strong className="text-[#123B68] font-bold">Portfolio Demonstration: </strong>
-                This store connects directly to Buubu Bloom's official WhatsApp line (<strong>0806 014 3654</strong>) for direct ordering, sizing inquiries, and Galleria Mall Orchid pickups.
+                <strong className="text-[#123B68] font-bold">Quick Ordering: </strong>
+                Once you fill this in, your order summary is sent to our WhatsApp line (<strong>0806 014 3654</strong>) for quick confirmation and bank transfer payment.
               </div>
             </div>
 
@@ -154,13 +154,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               {/* Delivery vs Store Pickup Toggle */}
               <div>
                 <label className="block text-xs font-black text-[#123B68] uppercase tracking-wider mb-2">
-                  Choose Fulfillment Option
+                  How would you like to receive your order?
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     type="button"
                     onClick={() => setDeliveryMethod('delivery')}
-                    className={`p-3 rounded-2xl border text-xs font-bold text-left flex items-center gap-2.5 transition-all ${
+                    className={`p-3 rounded-2xl border text-xs font-bold text-left flex items-center gap-2.5 transition-all cursor-pointer ${
                       deliveryMethod === 'delivery'
                         ? 'border-[#123B68] bg-[#123B68] text-white shadow-xs'
                         : 'border-gray-200 bg-[#F4F1EA] text-[#172033]'
@@ -176,7 +176,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setDeliveryMethod('pickup')}
-                    className={`p-3 rounded-2xl border text-xs font-bold text-left flex items-center gap-2.5 transition-all ${
+                    className={`p-3 rounded-2xl border text-xs font-bold text-left flex items-center gap-2.5 transition-all cursor-pointer ${
                       deliveryMethod === 'pickup'
                         ? 'border-[#123B68] bg-[#123B68] text-white shadow-xs'
                         : 'border-gray-200 bg-[#F4F1EA] text-[#172033]'
@@ -195,12 +195,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-[#123B68] mb-1">
-                    Your Full Name *
+                    Your Name *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Mrs. Chioma Adebayo"
+                    placeholder="e.g. Chioma Adebayo"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#123B68]"
@@ -214,7 +214,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <input
                     type="tel"
                     required
-                    placeholder="e.g. 0806 000 0000"
+                    placeholder="e.g. 0806 014 3654"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#123B68]"
@@ -227,7 +227,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="space-y-3 pt-2">
                   <div>
                     <label className="block text-xs font-bold text-[#123B68] mb-1">
-                      Delivery Location / Region *
+                      Delivery Area *
                     </label>
                     <select
                       value={deliveryState}
@@ -247,7 +247,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                   <div>
                     <label className="block text-xs font-bold text-[#123B68] mb-1">
-                      Full Street Address & Landmark *
+                      Street Address & Nearest Landmark *
                     </label>
                     <textarea
                       required
@@ -263,11 +263,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               <div>
                 <label className="block text-xs font-bold text-[#123B68] mb-1">
-                  Special Notes / Child's Exact Age or Birthday
+                  Any notes? (e.g. child's age, gift card message, delivery instructions)
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Please wrap with a birthday card for 4-year-old girl"
+                  placeholder="e.g. Please include birthday card for 4-year-old girl"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   className="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-[#123B68]"
@@ -296,14 +296,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="pt-2 space-y-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#123B68] hover:bg-[#2563C7] text-white py-4 rounded-2xl font-bold text-sm tracking-wide shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
+                  className="w-full bg-[#123B68] hover:bg-[#2563C7] text-white py-4 rounded-2xl font-bold text-sm tracking-wide shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-[#F4C430]" />
-                  <span>COMPLETE & DISPATCH ORDER (₦{total.toLocaleString()})</span>
+                  <span>PROCEED TO CONFIRM ORDER (₦{total.toLocaleString()})</span>
                 </button>
 
                 <p className="text-[11px] text-center text-gray-500">
-                  No online card charges needed • Pay on delivery or direct bank transfer upon confirmation
+                  No online card needed • We confirm availability with you on WhatsApp first
                 </p>
               </div>
 

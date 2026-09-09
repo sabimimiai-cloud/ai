@@ -46,7 +46,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
   const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [selectedAge, setSelectedAge] = useState<string>('all');
   const [selectedOccasion, setSelectedOccasion] = useState<string>('all');
-  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
+  const [sortBy, setSortBy] = useState<'featured' | 'newest' | 'price-asc' | 'price-desc' | 'rating'>('featured');
   const [maxPrice, setMaxPrice] = useState<number>(350000);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -99,6 +99,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
 
       return true;
     }).sort((a, b) => {
+      if (sortBy === 'newest') return (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0);
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;
       if (sortBy === 'rating') return b.rating - a.rating;
@@ -208,6 +209,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 className="bg-white border border-[#F4F1EA] rounded-xl px-3 py-2 text-xs font-bold text-[#123B68] focus:outline-none focus:ring-2 focus:ring-[#123B68]/20"
               >
                 <option value="featured">Featured Picks</option>
+                <option value="newest">New Arrivals First</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
                 <option value="rating">Customer Rating</option>

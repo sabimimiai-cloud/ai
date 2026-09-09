@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Phone, MapPin, Instagram, ArrowUpRight, Heart, ShieldCheck, Truck } from 'lucide-react';
 import { ActiveView, ProductCategory } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
+import { BuubuBloomLogo } from './BuubuBloomLogo';
 
 interface FooterProps {
   onNavigate: (view: ActiveView, category?: ProductCategory) => void;
@@ -19,15 +20,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
           {/* Brand Col */}
           <div className="md:col-span-4 space-y-4">
             <div 
+              id="footer-brand-logo-btn"
               onClick={() => onNavigate('home')}
-              className="cursor-pointer flex items-center gap-2.5"
+              className="cursor-pointer inline-flex items-center bg-white px-3.5 py-1.5 rounded-2xl shadow-sm hover:bg-white/95 transition-all group"
+              aria-label="Buubu Bloom Home"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#F58220] to-[#F9C928] flex items-center justify-center text-white shadow-xs font-black">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-black text-2xl tracking-tight text-white font-display">
-                BUUBU <span className="text-[#F58220]">BLOOM</span>
-              </span>
+              <BuubuBloomLogo height={42} className="h-10 w-auto" />
             </div>
 
             <p className="text-sm text-[#F9C928] font-bold">
@@ -35,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
             </p>
 
             <p className="text-xs text-white/75 leading-relaxed max-w-sm">
-              Children's lifestyle, fashion, shoes, toys and gift store based in Galleria Mall, Orchid, Lagos with nationwide delivery across Nigeria.
+              Outfits, shoes, toys and thoughtful gifts for babies and growing kids. Visit us at Galleria Mall, Orchid, Lagos or order online for delivery anywhere in Nigeria.
             </p>
 
             <div className="pt-2 flex items-center gap-3">
@@ -62,14 +60,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
 
           {/* Shop Column */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-[#F9C928]">
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#F4C430]">
               SHOP
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
                 <button 
+                  onClick={() => onNavigate('shop', 'all')} 
+                  className="hover:text-white transition-colors"
+                >
+                  All Collection
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => onNavigate('shop', 'girls')} 
-                  className="hover:text-[#D93F92] transition-colors"
+                  className="hover:text-[#F4C430] transition-colors"
                 >
                   Girls
                 </button>
@@ -77,7 +83,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
               <li>
                 <button 
                   onClick={() => onNavigate('shop', 'boys')} 
-                  className="hover:text-[#F9C928] transition-colors"
+                  className="hover:text-[#27AFA5] transition-colors"
                 >
                   Boys
                 </button>
@@ -85,7 +91,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
               <li>
                 <button 
                   onClick={() => onNavigate('shop', 'baby')} 
-                  className="hover:text-[#F9C928] transition-colors"
+                  className="hover:text-[#F4C430] transition-colors"
                 >
                   Baby
                 </button>
@@ -96,6 +102,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
                   className="hover:text-[#27AFA5] transition-colors"
                 >
                   Shoes
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onNavigate('shop', 'accessories')} 
+                  className="hover:text-[#F58220] transition-colors"
+                >
+                  Accessories
                 </button>
               </li>
               <li>
@@ -111,37 +125,37 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
 
           {/* Help & Info Column */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-black uppercase tracking-widest text-[#F9C928]">
-              CUSTOMER CARE
+            <h4 className="text-xs font-black uppercase tracking-widest text-[#F4C430]">
+              HELP & QUESTIONS
             </h4>
             <ul className="space-y-2 text-xs text-white/80">
               <li>
                 <button 
-                  onClick={() => onNavigate('contact')} 
-                  className="hover:text-white transition-colors"
+                  onClick={() => onNavigate('about')} 
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
-                  Contact & Store Enquiries
+                  About Our Store
                 </button>
               </li>
               <li>
                 <button 
-                  onClick={() => onNavigate('about')} 
-                  className="hover:text-white transition-colors"
+                  onClick={() => onNavigate('contact')} 
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
-                  About Buubu Bloom
+                  Directions & Store Contact
                 </button>
               </li>
               <li>
                 <button 
                   onClick={onOpenSizeGuide} 
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors cursor-pointer"
                 >
                   Size Guide & Measurements
                 </button>
               </li>
               <li>
                 <span className="text-white/60">
-                  Nationwide Delivery Across Nigeria
+                  Delivery Across Nigeria
                 </span>
               </li>
             </ul>
@@ -150,7 +164,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
           {/* Visit & Contact Column */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-black uppercase tracking-widest text-[#F9C928]">
-              VISIT OUR STORE
+              VISIT US IN LAGOS
             </h4>
             <div className="space-y-2 text-xs text-white/80">
               <p className="flex items-start gap-2">

@@ -14,6 +14,7 @@ import {
 import { ActiveView, ProductCategory, Product } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 import { PRODUCTS } from '../data/products';
+import { BuubuBloomLogo } from './BuubuBloomLogo';
 
 interface NavbarProps {
   activeView: ActiveView;
@@ -73,10 +74,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-4">
           <div className="flex items-center gap-2 text-center sm:text-left">
             <span className="inline-flex items-center justify-center bg-[#F58220] text-white rounded-full p-0.5 px-2 text-[11px] font-bold uppercase tracking-wider">
-              NATIONWIDE DELIVERY
+              DELIVERING ACROSS NIGERIA
             </span>
             <span className="text-[#FFFDF8]/90 font-normal">
-              ✨ Nationwide Doorstep Delivery Across Nigeria | Store at Galleria Mall, Orchid, Lagos
+              Nationwide delivery to your doorstep • Visit us at Galleria Mall, Orchid, Lagos
             </span>
           </div>
           <div className="flex items-center gap-4 text-xs font-semibold text-[#F9C928]">
@@ -111,31 +112,58 @@ export const Navbar: React.FC<NavbarProps> = ({
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Logo */}
+          {/* Official Buubu Bloom Logo */}
           <div 
             id="brand-logo-btn"
             onClick={() => handleNavClick('home')}
-            className="cursor-pointer flex items-center gap-2.5 group"
+            className="cursor-pointer flex items-center py-1 group transition-transform active:scale-98"
+            aria-label="Buubu Bloom Home"
           >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#173F70] via-[#2563C7] to-[#27AFA5] flex items-center justify-center shadow-sm text-white font-black text-xl tracking-tighter group-hover:scale-105 transition-transform">
-              <Sparkles className="w-5 h-5 text-[#F9C928]" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-lg sm:text-2xl tracking-tight text-[#173F70] font-display leading-none">
-                BUUBU <span className="text-[#F58220]">BLOOM</span>
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-semibold text-[#27AFA5] tracking-wide mt-0.5">
-                Match your vibe, Bloom your style!
-              </span>
-            </div>
+            <BuubuBloomLogo 
+              height={46}
+              className="h-10 sm:h-11 md:h-12 w-auto"
+            />
           </div>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             <button
+              id="nav-link-home"
+              onClick={() => handleNavClick('home')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+                activeView === 'home'
+                  ? 'bg-[#173F70] text-white shadow-xs' 
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
+              }`}
+            >
+              HOME
+            </button>
+
+            <button
+              id="nav-link-new-arrivals"
+              onClick={() => {
+                if (activeView === 'home') {
+                  const el = document.getElementById('new-arrivals-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  else handleNavClick('shop', 'all');
+                } else {
+                  handleNavClick('home');
+                  setTimeout(() => {
+                    const el = document.getElementById('new-arrivals-section');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 120);
+                }
+              }}
+              className="px-3 py-1.5 rounded-full text-xs font-black tracking-wider transition-all cursor-pointer text-[#F58220] hover:bg-[#F58220]/10 flex items-center gap-1.5"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F58220] animate-pulse"></span>
+              <span>NEW IN</span>
+            </button>
+
+            <button
               id="nav-link-shop-all"
               onClick={() => handleNavClick('shop', 'all')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'all'
                   ? 'bg-[#173F70] text-white shadow-xs' 
                   : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
@@ -147,10 +175,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-girls"
               onClick={() => handleNavClick('shop', 'girls')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'girls'
-                  ? 'bg-[#D93F92] text-white font-bold shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#D93F92] hover:bg-[#F4F1EA]'
+                  ? 'bg-[#173F70] text-white shadow-xs' 
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
               }`}
             >
               GIRLS
@@ -159,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-boys"
               onClick={() => handleNavClick('shop', 'boys')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'boys'
                   ? 'bg-[#2563C7] text-white shadow-xs' 
                   : 'text-[#172033]/80 hover:text-[#2563C7] hover:bg-[#F4F1EA]'
@@ -171,9 +199,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-baby"
               onClick={() => handleNavClick('shop', 'baby')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'baby'
-                  ? 'bg-[#F9C928] text-[#173F70] font-bold shadow-xs' 
+                  ? 'bg-[#F4C430] text-[#173F70] font-bold shadow-xs' 
                   : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
               }`}
             >
@@ -181,62 +209,36 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
-              id="nav-link-shoes"
-              onClick={() => handleNavClick('shop', 'shoes')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
-                activeView === 'shop' && (selectedCategory === 'shoes' || selectedCategory === 'accessories')
-                  ? 'bg-[#27AFA5] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#27AFA5] hover:bg-[#F4F1EA]'
-              }`}
-            >
-              SHOES
-            </button>
-
-            <button
-              id="nav-link-toys"
-              onClick={() => handleNavClick('shop', 'toys')}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
-                activeView === 'shop' && (selectedCategory === 'toys' || selectedCategory === 'gifts')
+              id="nav-link-gifts"
+              onClick={() => handleNavClick('shop', 'gifts')}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+                activeView === 'shop' && (selectedCategory === 'gifts' || selectedCategory === 'toys')
                   ? 'bg-[#F58220] text-white shadow-xs' 
                   : 'text-[#172033]/80 hover:text-[#F58220] hover:bg-[#F4F1EA]'
               }`}
             >
-              TOYS & GIFTS
+              GIFTS
             </button>
 
             <button
-              id="nav-link-about"
-              onClick={() => handleNavClick('about')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
-                activeView === 'about' 
-                  ? 'bg-[#173F70] text-white shadow-xs' 
-                  : 'text-[#172033]/70 hover:text-[#173F70] hover:bg-[#F4F1EA]'
-              }`}
+              id="nav-link-new-in"
+              onClick={() => handleNavClick('shop', 'all')}
+              className="px-3 py-1.5 rounded-full text-xs font-bold tracking-wider text-[#27AFA5] hover:bg-[#27AFA5]/10 transition-all cursor-pointer flex items-center gap-1"
             >
-              ABOUT
-            </button>
-
-            <button
-              id="nav-link-contact"
-              onClick={() => handleNavClick('contact')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all ${
-                activeView === 'contact' 
-                  ? 'bg-[#173F70] text-white shadow-xs' 
-                  : 'text-[#172033]/70 hover:text-[#173F70] hover:bg-[#F4F1EA]'
-              }`}
-            >
-              VISIT / CONTACT
+              <span>NEW IN</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#27AFA5] animate-ping" />
             </button>
           </nav>
 
-          {/* Right Action Icons & CTA */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Right Utility Actions: Search, Wishlist, Cart, WhatsApp */}
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
             {/* Search Trigger */}
             <button
               id="header-search-toggle-btn"
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
               aria-label="Search products"
+              title="Search products"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -245,8 +247,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-wishlist-toggle-btn"
               onClick={onOpenWishlist}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
               aria-label="View saved wishlist"
+              title="Saved wishlist"
             >
               <Heart className="w-5 h-5" />
               {wishlistCount > 0 && (
@@ -260,8 +263,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-cart-toggle-btn"
               onClick={onOpenCart}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
               aria-label="View shopping bag"
+              title="Shopping bag"
             >
               <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
@@ -271,14 +275,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
 
-            {/* Quick Action Button */}
-            <button
-              id="header-shop-now-cta"
-              onClick={() => handleNavClick('shop', 'all')}
-              className="hidden sm:inline-flex items-center justify-center bg-[#173F70] hover:bg-[#2563C7] text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all shadow-sm active:scale-95"
+            {/* WhatsApp Utility Action */}
+            <a
+              id="header-whatsapp-btn"
+              href={STORE_CONTACT.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 bg-[#27AFA5] hover:bg-[#209086] text-white px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition-all shadow-xs active:scale-95"
+              title="Chat with Buubu Bloom on WhatsApp"
             >
-              SHOP NOW
-            </button>
+              <Phone className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">WhatsApp</span>
+            </a>
           </div>
         </div>
 
@@ -293,7 +301,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Search className="w-5 h-5 text-[#123B68]/60 absolute left-4" />
                 <input
                   type="text"
-                  placeholder="Search outfits, shoes, toys, birthday gifts, sizes..."
+                  placeholder="Search dresses, two-piece sets, shoes, birthday gifts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
@@ -367,7 +375,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           id="mobile-drawer-menu"
           className="lg:hidden bg-[#FFFDF8] border-b border-[#F4F1EA] shadow-xl p-5 animate-in slide-in-from-top-2 duration-200"
         >
-          <div className="grid grid-cols-2 gap-2 mb-4">
+          <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#F4F1EA]">
+            <BuubuBloomLogo height={38} className="h-9 w-auto" />
+            <span className="text-[11px] font-bold text-[#27AFA5]">
+              Match your vibe, Bloom your style!
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 mb-3">
             <button
               onClick={() => handleNavClick('home')}
               className={`p-3 text-left rounded-xl text-sm font-bold flex items-center justify-between ${
@@ -388,6 +403,29 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              if (activeView === 'home') {
+                const el = document.getElementById('new-arrivals-section');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                handleNavClick('home');
+                setTimeout(() => {
+                  const el = document.getElementById('new-arrivals-section');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 120);
+              }
+            }}
+            className="w-full mb-4 p-3 rounded-xl bg-[#F58220]/10 text-[#F58220] border border-[#F58220]/20 font-bold text-sm flex items-center justify-between"
+          >
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#F58220] animate-pulse"></span>
+              <span>JUST IN: NEW ARRIVALS</span>
+            </span>
+            <ArrowRight className="w-4 h-4" />
+          </button>
+
           <div className="mb-4">
             <p className="text-xs font-bold uppercase tracking-widest text-[#173F70]/60 mb-2 px-1">
               Shop Categories
@@ -395,37 +433,37 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="space-y-1.5">
               <button
                 onClick={() => handleNavClick('shop', 'girls')}
-                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-pink-50 text-[#173F70] hover:bg-pink-100 transition-colors"
+                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-white border border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA] transition-colors"
               >
-                <span>🌸 Girls</span>
-                <ChevronRight className="w-4 h-4 text-[#D93F92]" />
+                <span>Girls</span>
+                <ChevronRight className="w-4 h-4 text-[#173F70]" />
               </button>
               <button
                 onClick={() => handleNavClick('shop', 'boys')}
-                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-blue-50 text-[#173F70] hover:bg-blue-100 transition-colors"
+                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-white border border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA] transition-colors"
               >
-                <span>🧢 Boys</span>
+                <span>Boys</span>
                 <ChevronRight className="w-4 h-4 text-[#2563C7]" />
               </button>
               <button
                 onClick={() => handleNavClick('shop', 'baby')}
-                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-amber-50 text-[#173F70] hover:bg-amber-100 transition-colors"
+                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-white border border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA] transition-colors"
               >
-                <span>🍼 Baby</span>
-                <ChevronRight className="w-4 h-4 text-[#F9C928]" />
+                <span>Baby</span>
+                <ChevronRight className="w-4 h-4 text-[#F4C430]" />
               </button>
               <button
                 onClick={() => handleNavClick('shop', 'shoes')}
-                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-teal-50 text-[#173F70] hover:bg-teal-100 transition-colors"
+                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-white border border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA] transition-colors"
               >
-                <span>👟 Shoes</span>
+                <span>Shoes & Accessories</span>
                 <ChevronRight className="w-4 h-4 text-[#27AFA5]" />
               </button>
               <button
                 onClick={() => handleNavClick('shop', 'toys')}
-                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-orange-50 text-[#173F70] hover:bg-orange-100 transition-colors"
+                className="w-full p-2.5 px-3 rounded-xl text-sm font-bold text-left flex items-center justify-between bg-white border border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA] transition-colors"
               >
-                <span>🎁 Toys & Gifts</span>
+                <span>Toys & Gifts</span>
                 <ChevronRight className="w-4 h-4 text-[#F58220]" />
               </button>
             </div>

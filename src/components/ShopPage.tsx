@@ -135,13 +135,13 @@ export const ShopPage: React.FC<ShopPageProps> = ({
         {/* Page Header */}
         <div className="mb-8">
           <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#27AFA3] mb-2">
-            <span>BUUBU BLOOM CATALOGUE</span>
+            <span>BUUBU BLOOM</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-[#123B68] tracking-tight font-display">
             Shop Buubu Bloom
           </h1>
           <p className="text-sm sm:text-base text-[#172033]/70 mt-1 max-w-xl">
-            Find something they'll love. Everything from Sunday statement pieces and party dresses to comfortable shoes, ride-ons and ready gift sets.
+            Everyday sets, party dresses, comfortable shoes, ride-on toys, and gifts — ready to wear and delivered to your door.
           </p>
         </div>
 
@@ -319,7 +319,7 @@ export const ShopPage: React.FC<ShopPageProps> = ({
             {/* Trust badge */}
             <div className="pt-4 border-t border-[#F4F1EA] bg-[#FFFDF8] p-3 rounded-2xl text-[11px] text-[#123B68] font-medium leading-tight">
               📍 <strong className="font-bold">Galleria Mall, Orchid Lagos</strong>
-              <p className="text-gray-500 mt-1">All items in stock or ready for fast nationwide dispatch.</p>
+              <p className="text-gray-500 mt-1">Available in store and ready for delivery nationwide.</p>
             </div>
           </div>
 
@@ -355,13 +355,13 @@ export const ShopPage: React.FC<ShopPageProps> = ({
                 </div>
                 <h3 className="text-lg font-bold text-[#123B68] mb-1">No matching items found</h3>
                 <p className="text-xs text-[#172033]/70 mb-6 max-w-sm mx-auto">
-                  Try adjusting your filters or price slider to see more wonderful children's pieces.
+                  Try clearing some filters or searching for something else.
                 </p>
                 <button
                   onClick={resetFilters}
-                  className="bg-[#123B68] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm hover:bg-[#2563C7]"
+                  className="bg-[#123B68] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm hover:bg-[#2563C7] cursor-pointer"
                 >
-                  RESET ALL FILTERS
+                  RESET FILTERS
                 </button>
               </div>
             )}
