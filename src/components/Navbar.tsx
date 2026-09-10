@@ -11,6 +11,7 @@ import {
   ChevronRight,
   ArrowRight
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ActiveView, ProductCategory, Product } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 import { PRODUCTS } from '../data/products';
@@ -112,11 +113,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Official Buubu Bloom Logo */}
+          {/* Official Buubu Bloom Logo - Stable & Unanimated */}
           <div 
             id="brand-logo-btn"
             onClick={() => handleNavClick('home')}
-            className="cursor-pointer flex items-center py-1 group transition-transform active:scale-98"
+            className="cursor-pointer flex items-center py-1 select-none"
             aria-label="Buubu Bloom Home"
           >
             <BuubuBloomLogo 
@@ -130,10 +131,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-home"
               onClick={() => handleNavClick('home')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'home'
                   ? 'bg-[#173F70] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]/70'
               }`}
             >
               HOME
@@ -154,19 +155,19 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }, 120);
                 }
               }}
-              className="px-3 py-1.5 rounded-full text-xs font-black tracking-wider transition-all cursor-pointer text-[#F58220] hover:bg-[#F58220]/10 flex items-center gap-1.5"
+              className="relative px-3 py-1.5 rounded-full text-xs font-black tracking-wider transition-colors duration-200 cursor-pointer text-[#F58220] hover:bg-[#F58220]/10 flex items-center gap-1.5"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F58220] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F58220]"></span>
               <span>NEW IN</span>
             </button>
 
             <button
               id="nav-link-shop-all"
               onClick={() => handleNavClick('shop', 'all')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'all'
                   ? 'bg-[#173F70] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]/70'
               }`}
             >
               SHOP
@@ -175,10 +176,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-girls"
               onClick={() => handleNavClick('shop', 'girls')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'girls'
                   ? 'bg-[#173F70] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]/70'
               }`}
             >
               GIRLS
@@ -187,10 +188,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-boys"
               onClick={() => handleNavClick('shop', 'boys')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'boys'
                   ? 'bg-[#2563C7] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#2563C7] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#2563C7] hover:bg-[#F4F1EA]/70'
               }`}
             >
               BOYS
@@ -199,10 +200,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-baby"
               onClick={() => handleNavClick('shop', 'baby')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'shop' && selectedCategory === 'baby'
                   ? 'bg-[#F4C430] text-[#173F70] font-bold shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]/70'
               }`}
             >
               BABY
@@ -211,10 +212,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-gifts"
               onClick={() => handleNavClick('shop', 'gifts')}
-              className={`px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer ${
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
                 activeView === 'shop' && (selectedCategory === 'gifts' || selectedCategory === 'toys')
                   ? 'bg-[#F58220] text-white shadow-xs' 
-                  : 'text-[#172033]/80 hover:text-[#F58220] hover:bg-[#F4F1EA]'
+                  : 'text-[#172033]/80 hover:text-[#F58220] hover:bg-[#F4F1EA]/70'
               }`}
             >
               GIFTS
@@ -223,10 +224,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-new-in"
               onClick={() => handleNavClick('shop', 'all')}
-              className="px-3 py-1.5 rounded-full text-xs font-bold tracking-wider text-[#27AFA5] hover:bg-[#27AFA5]/10 transition-all cursor-pointer flex items-center gap-1"
+              className="px-3 py-1.5 rounded-full text-xs font-bold tracking-wider text-[#27AFA5] hover:bg-[#27AFA5]/10 transition-colors duration-200 cursor-pointer flex items-center gap-1.5"
             >
-              <span>NEW IN</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#27AFA5] animate-ping" />
+              <span>EXPLORE</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#27AFA5]" />
             </button>
           </nav>
 
@@ -236,7 +237,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-search-toggle-btn"
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer active:scale-95"
               aria-label="Search products"
               title="Search products"
             >
@@ -247,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-wishlist-toggle-btn"
               onClick={onOpenWishlist}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer active:scale-95"
               aria-label="View saved wishlist"
               title="Saved wishlist"
             >
@@ -263,7 +264,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-cart-toggle-btn"
               onClick={onOpenCart}
-              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer"
+              className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer active:scale-95"
               aria-label="View shopping bag"
               title="Shopping bag"
             >
@@ -281,7 +282,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               href={STORE_CONTACT.whatsappUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 bg-[#27AFA5] hover:bg-[#209086] text-white px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition-all shadow-xs active:scale-95"
+              className="inline-flex items-center gap-1.5 bg-[#27AFA5] hover:bg-[#209086] text-white px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition-all shadow-xs active:scale-95 hover:shadow-sm"
               title="Chat with Buubu Bloom on WhatsApp"
             >
               <Phone className="w-3.5 h-3.5" />
@@ -291,11 +292,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Live Search Expandable Drawer / Bar */}
-        {searchOpen && (
-          <div 
-            id="search-overlay-bar"
-            className="border-t border-[#F4F1EA] bg-[#FFFDF8] px-4 sm:px-6 py-4 animate-in fade-in duration-150"
-          >
+        <AnimatePresence>
+          {searchOpen && (
+            <motion.div 
+              id="search-overlay-bar"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.22, ease: [0.21, 0.47, 0.32, 0.98] }}
+              className="border-t border-[#F4F1EA] bg-[#FFFDF8] px-4 sm:px-6 py-4 overflow-hidden"
+            >
             <div className="max-w-3xl mx-auto relative">
               <div className="relative flex items-center">
                 <Search className="w-5 h-5 text-[#123B68]/60 absolute left-4" />
@@ -365,16 +371,22 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
               )}
             </div>
-          </div>
+          </motion.div>
         )}
+      </AnimatePresence>
       </div>
 
       {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div 
-          id="mobile-drawer-menu"
-          className="lg:hidden bg-[#FFFDF8] border-b border-[#F4F1EA] shadow-xl p-5 animate-in slide-in-from-top-2 duration-200"
-        >
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            id="mobile-drawer-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="lg:hidden bg-[#FFFDF8] border-b border-[#F4F1EA] shadow-xl p-5 overflow-hidden"
+          >
           <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#F4F1EA]">
             <BuubuBloomLogo height={38} className="h-9 w-auto" />
             <span className="text-[11px] font-bold text-[#27AFA5]">
@@ -385,7 +397,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="grid grid-cols-2 gap-2 mb-3">
             <button
               onClick={() => handleNavClick('home')}
-              className={`p-3 text-left rounded-xl text-sm font-bold flex items-center justify-between ${
+              className={`p-3 text-left rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${
                 activeView === 'home' ? 'bg-[#173F70] text-white' : 'bg-[#F4F1EA] text-[#172033]'
               }`}
             >
@@ -394,7 +406,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => handleNavClick('shop', 'all')}
-              className={`p-3 text-left rounded-xl text-sm font-bold flex items-center justify-between ${
+              className={`p-3 text-left rounded-xl text-sm font-bold flex items-center justify-between transition-colors ${
                 activeView === 'shop' && selectedCategory === 'all' ? 'bg-[#173F70] text-white' : 'bg-[#F4F1EA] text-[#172033]'
               }`}
             >
@@ -417,10 +429,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }, 120);
               }
             }}
-            className="w-full mb-4 p-3 rounded-xl bg-[#F58220]/10 text-[#F58220] border border-[#F58220]/20 font-bold text-sm flex items-center justify-between"
+            className="w-full mb-4 p-3 rounded-xl bg-[#F58220]/10 text-[#F58220] border border-[#F58220]/20 font-bold text-sm flex items-center justify-between transition-colors active:scale-[0.98]"
           >
             <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#F58220] animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-[#F58220]"></span>
               <span>JUST IN: NEW ARRIVALS</span>
             </span>
             <ArrowRight className="w-4 h-4" />
@@ -492,8 +504,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Call Us: 0806 014 3654</span>
             </a>
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </header>
   );
 };

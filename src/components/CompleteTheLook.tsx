@@ -22,36 +22,36 @@ interface OutfitBundle {
 
 const LOOK_BUNDLES: OutfitBundle[] = [
   {
-    id: 'look-sunshine',
-    name: 'The Birthday Sunshine Look',
-    tagline: 'Twirl dress + Honeycomb kicks + Straw mini bag',
-    mainImage: '/src/assets/images/girls_nigerian_yellow_1787489114238.jpg',
+    id: 'girls-bloom',
+    name: 'GIRLS BLOOM',
+    tagline: 'A little wardrobe refresh, all in one.',
+    mainImage: '/images/girls_nigerian_yellow_1787489114238.jpg',
     items: [
-      { productId: 'prod-1', role: 'Main Outfit' },
-      { productId: 'prod-5', role: 'Shoes' },
-      { productId: 'prod-7', role: 'Accessory' }
+      { productId: 'bb-g-002', role: 'Main Outfit' },
+      { productId: 'bb-s-001', role: 'Shoes' },
+      { productId: 'bb-a-001', role: 'Accessory' }
     ]
   },
   {
-    id: 'look-cool-gent',
-    name: 'The Cool Gent Look',
-    tagline: 'Safari linen set + Retro sneakers + Mini bag',
-    mainImage: '/src/assets/images/boys_nigerian_safari_1787489099338.jpg',
+    id: 'boys-bloom',
+    name: 'BOYS BLOOM',
+    tagline: 'Cool fits for little guys who already know their style.',
+    mainImage: '/images/boys_nigerian_safari_1787489099338.jpg',
     items: [
-      { productId: 'prod-3', role: 'Main Outfit' },
-      { productId: 'prod-6', role: 'Shoes' },
-      { productId: 'prod-8', role: 'Accessory' }
+      { productId: 'bb-b-002', role: 'Main Outfit' },
+      { productId: 'bb-s-001', role: 'Shoes' },
+      { productId: 'bb-a-002', role: 'Accessory' }
     ]
   },
   {
-    id: 'look-little-denim',
-    name: 'The Weekend Explorer Look',
-    tagline: 'Two-piece denim chore set + Sport kicks',
-    mainImage: '/src/assets/images/boys_nigerian_denim_1787489068562.jpg',
+    id: 'weekend-bloom',
+    name: 'WEEKEND EXPLORER',
+    tagline: 'Durable denim and comfortable kicks for busy days.',
+    mainImage: '/images/boys_nigerian_denim_1787489068562.jpg',
     items: [
-      { productId: 'prod-2', role: 'Main Outfit' },
-      { productId: 'prod-5', role: 'Shoes' },
-      { productId: 'prod-8', role: 'Accessory' }
+      { productId: 'bb-b-001', role: 'Main Outfit' },
+      { productId: 'bb-s-001', role: 'Shoes' },
+      { productId: 'bb-a-001', role: 'Accessory' }
     ]
   }
 ];

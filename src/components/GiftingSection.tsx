@@ -65,6 +65,111 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
             </p>
           </div>
 
+          {/* Featured Ultimate Birthday Celebration Hamper */}
+          <div 
+            id="ultimate-birthday-hamper-feature"
+            className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 border-2 border-[#F58220]/30 shadow-xl mb-12 relative z-10"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              {/* Left Image */}
+              <div className="md:col-span-5 relative">
+                <div className="rounded-2xl overflow-hidden aspect-square bg-[#F4F1EA] border border-[#F4F1EA] shadow-inner">
+                  <img
+                    src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
+                    alt="The Ultimate Birthday Celebration Hamper"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute top-3 left-3 bg-[#F58220] text-white text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                  BESTSELLER
+                </div>
+              </div>
+
+              {/* Right Details */}
+              <div className="md:col-span-7 flex flex-col justify-between">
+                <div>
+                  <span className="text-xs font-black uppercase tracking-widest text-[#27AFA5]">
+                    ALL-IN-ONE CELEBRATION BOX
+                  </span>
+                  
+                  <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mt-1 mb-2">
+                    THE ULTIMATE BIRTHDAY HAMPER
+                  </h3>
+
+                  <div className="flex items-baseline gap-3 mb-4">
+                    <span className="text-3xl font-black text-[#F58220]">
+                      ₦45,000
+                    </span>
+                    <span className="text-xs font-bold text-[#27AFA5] bg-[#27AFA5]/10 px-2.5 py-1 rounded-full">
+                      Ready to present
+                    </span>
+                  </div>
+
+                  {/* Inside the Hamper itemized list */}
+                  <div className="bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 mb-6">
+                    <p className="text-xs font-black uppercase tracking-wider text-[#173F70] mb-2.5">
+                      Inside the hamper:
+                    </p>
+                    <ul className="space-y-2 text-xs sm:text-sm text-[#172033]/85">
+                      <li className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
+                        <span><strong>Outfit:</strong> Statement celebration party outfit</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
+                        <span><strong>Shoes:</strong> Matching occasion shoes or sneakers</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
+                        <span><strong>Toy:</strong> Wooden camera or developmental toy</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
+                        <span><strong>Accessory:</strong> Mini fashion crossbody bag or sunglasses</span>
+                      </li>
+                      <li className="flex items-center gap-2.5">
+                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
+                        <span><strong>Packaging:</strong> Gold-embossed keepsake box, satin ribbon & handwritten card</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Strong CTA Button */}
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    id="add-birthday-hamper-btn"
+                    onClick={() => {
+                      const hamper = PRODUCTS.find(p => p.id === 'bb-gft-001');
+                      if (hamper && onAddToCart) {
+                        onAddToCart(hamper, 'Curated by Age (Select on order)', 'Girls Bloom Theme');
+                      }
+                    }}
+                    className="flex-1 bg-[#173F70] hover:bg-[#2563C7] text-white py-4 px-6 rounded-2xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
+                  >
+                    <ShoppingBag className="w-5 h-5" />
+                    <span>Add Birthday Hamper</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      const hamper = PRODUCTS.find(p => p.id === 'bb-gft-001');
+                      if (hamper && onQuickView) {
+                        onQuickView(hamper);
+                      }
+                    }}
+                    className="bg-[#F4F1EA] hover:bg-[#F4F1EA]/80 text-[#173F70] py-4 px-5 rounded-2xl font-bold text-sm tracking-wide transition-all active:scale-95 cursor-pointer text-center"
+                  >
+                    View Details
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
           {/* Selections Interactive Card */}
           <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1EA] shadow-md mb-10 relative z-10">
             

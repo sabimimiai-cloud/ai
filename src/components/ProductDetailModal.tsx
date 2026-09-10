@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Heart, 
@@ -13,6 +13,7 @@ import {
   Share2 
 } from 'lucide-react';
 import { Product } from '../types';
+import { PRODUCTS } from '../data/products';
 import { STORE_CONTACT } from '../data/storeData';
 
 interface ProductDetailModalProps {
@@ -22,6 +23,7 @@ interface ProductDetailModalProps {
   isWishlisted: boolean;
   onToggleWishlist: (product: Product) => void;
   onOpenSizeGuide?: () => void;
+  onSelectProduct?: (product: Product) => void;
 }
 
 export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
@@ -30,50 +32,73 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onAddToCart,
   isWishlisted,
   onToggleWishlist,
-  onOpenSizeGuide
+  onOpenSizeGuide,
+  onSelectProduct
 }) => {
-  if (!product) return null;
-
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'Standard');
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || 'Standard');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [selectedColor, setSelectedColor] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addedNotice, setAddedNotice] = useState(false);
 
+  useEffect(() => {
+    if (product) {
+      setSelectedSize(product.sizes[0] || 'Standard');
+      setSelectedColor(product.colors[0]?.name || 'Standard');
+      setQuantity(1);
+      setSelectedImageIndex(0);
+      setAddedNotice(false);
+    }
+  }, [product?.id]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
   const handleAdd = () => {
+    if (!product) return;
     onAddToCart(product, selectedSize, selectedColor, quantity);
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2500);
   };
 
   const generateWhatsAppMessage = () => {
-    const text = `Hello Buubu Bloom! 👋 I am interested in ordering:
-*Product:* ${product.name}
-*Price:* ₦${product.price.toLocaleString()}
-*Size:* ${selectedSize}
-*Color:* ${selectedColor}
-*Quantity:* ${quantity}
-
-Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery details.`;
+    if (!product) return '';
+    const text = `Hi Buubu Bloom! I need help choosing something for a child - inquiring about ${product.name} (₦${product.price.toLocaleString()}, Size: ${selectedSize || 'Standard'}).`;
     return `https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(text)}`;
   };
 
   return (
-    <div 
-      id="product-detail-modal-backdrop"
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
-      onClick={onClose}
-    >
-      <div 
-        id="product-detail-modal-content"
-        className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#F4F1EA] relative my-auto"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {product && (
+        <motion.div 
+          key="product-detail-modal-backdrop"
+          id="product-detail-modal-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+          onClick={onClose}
+        >
+          <motion.div 
+            id="product-detail-modal-content"
+            initial={{ opacity: 0, scale: 0.96, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 12 }}
+            transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="bg-white rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#F4F1EA] relative my-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Close Button */}
         <button
           id="close-product-modal-btn"
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#123B68] shadow-md flex items-center justify-center transition-all hover:scale-105"
+          className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#123B68] shadow-md flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
           aria-label="Close product view"
         >
           <X className="w-5 h-5" />
@@ -287,10 +312,10 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
                 href={generateWhatsAppMessage()}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all"
+                className="w-full bg-[#27AFA5] hover:bg-[#27AFA5]/90 text-white py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>ASK ABOUT THIS ON WHATSAPP</span>
+                <span>Need help choosing? Chat on WhatsApp</span>
               </a>
 
               {/* Store & Delivery Notes */}
@@ -310,7 +335,57 @@ Please confirm stock availability at Galleria Mall, Orchid, Lagos and delivery d
           </div>
 
         </div>
-      </div>
-    </div>
+
+        {/* You Might Want These Too */}
+        {(() => {
+          const relatedProducts = PRODUCTS.filter(
+            p => p.id !== product.id && (p.category === product.category || p.category === 'accessories' || p.category === 'shoes')
+          ).slice(0, 3);
+
+          if (relatedProducts.length === 0) return null;
+
+          return (
+            <div className="border-t border-[#F4F1EA] p-5 sm:p-8 bg-[#FFFDF8] rounded-b-3xl">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm sm:text-base font-black text-[#173F70] font-display uppercase tracking-wider">
+                  You might want these too
+                </h3>
+                <span className="text-xs text-[#172033]/60">Pairs well together</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {relatedProducts.map(rel => (
+                  <div
+                    key={rel.id}
+                    onClick={() => {
+                      if (onSelectProduct) {
+                        onSelectProduct(rel);
+                      }
+                    }}
+                    className="flex items-center gap-3 p-3 bg-white rounded-2xl border border-[#F4F1EA] hover:border-[#173F70]/30 hover:shadow-xs transition-all cursor-pointer group"
+                  >
+                    <img
+                      src={rel.images[0]}
+                      alt={rel.name}
+                      className="w-16 h-16 rounded-xl object-cover bg-[#F4F1EA] shrink-0"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-xs font-bold text-[#173F70] truncate group-hover:text-[#2563C7]">
+                        {rel.name}
+                      </p>
+                      <p className="text-xs font-black text-[#F58220] mt-0.5">
+                        ₦{rel.price.toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
+      </motion.div>
+    </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

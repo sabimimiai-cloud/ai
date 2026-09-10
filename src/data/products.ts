@@ -11,9 +11,9 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 24,
     images: [
-      '/src/assets/images/hero_nigerian_girl_1787489055452.jpg',
-      '/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg',
-      '/src/assets/images/nigerian_birthday_kids_1787489171127.jpg'
+      '/images/hero_nigerian_girl_1787489055452.jpg',
+      '/images/editorial_nigerian_twirl_1787489158292.jpg',
+      '/images/nigerian_birthday_kids_1787489171127.jpg'
     ],
     description: 'Easy, cute and ready for compliments. Featuring an oversized statement back bow, layered tulle flare, and breathable cotton inner lining so she can twirl all day without itching.',
     highlightTag: 'Birthday Favourite',
@@ -43,8 +43,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 19,
     images: [
-      '/src/assets/images/boys_nigerian_denim_1787489068562.jpg',
-      '/src/assets/images/boys_nigerian_safari_1787489099338.jpg'
+      '/images/boys_nigerian_denim_1787489068562.jpg',
+      '/images/boys_nigerian_safari_1787489099338.jpg'
     ],
     description: 'Something about this one just says main character. A washed soft-denim overshirt paired with tailored elasticated shorts. Soft on the skin, rugged for real play.',
     highlightTag: 'Trending Now',
@@ -74,8 +74,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 31,
     images: [
-      '/src/assets/images/boys_nigerian_safari_1787489099338.jpg',
-      '/src/assets/images/boys_nigerian_denim_1787489068562.jpg'
+      '/images/boys_nigerian_safari_1787489099338.jpg',
+      '/images/boys_nigerian_denim_1787489068562.jpg'
     ],
     description: 'For little guys who never sit in one place. Lightweight linen-blend shirt with wooden button detailing paired with versatile safari cargo shorts with real pockets for their mini treasures.',
     highlightTag: 'Staff Pick',
@@ -107,8 +107,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 42,
     images: [
-      '/src/assets/images/baby_nigerian_romper_1787489085642.jpg',
-      '/src/assets/images/baby_nigerian_dungaree_1787489143271.jpg'
+      '/images/baby_nigerian_romper_1787489085642.jpg',
+      '/images/baby_nigerian_dungaree_1787489143271.jpg'
     ],
     description: 'Visiting a newborn or prepping for milestone photos? This pure ribbed cotton heirloom set comes with snap closures at the crotch for quick diaper changes without messing up the look.',
     highlightTag: 'Newborn Gift Must-Have',
@@ -268,8 +268,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 16,
     images: [
-      '/src/assets/images/girls_nigerian_yellow_1787489114238.jpg',
-      '/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg'
+      '/images/girls_nigerian_yellow_1787489114238.jpg',
+      '/images/editorial_nigerian_twirl_1787489158292.jpg'
     ],
     description: 'Bright, bold and impossible to miss. Tiered ruffle skirts that flare beautifully when spinning, made from breathable organic poplin cotton that stays crisp throughout the event.',
     highlightTag: 'Sunny Vibe',
@@ -300,8 +300,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 22,
     images: [
-      '/src/assets/images/boys_nigerian_suit_1787489130668.jpg',
-      '/src/assets/images/boys_nigerian_safari_1787489099338.jpg'
+      '/images/boys_nigerian_suit_1787489130668.jpg',
+      '/images/boys_nigerian_safari_1787489099338.jpg'
     ],
     description: 'Because church, weddings and Thanksgiving services need a young man looking dapper. Comes with tailored waistcoat, crisp collared short-sleeve shirt, adjustable chinos and matching bowtie.',
     highlightTag: 'Wedding & Sunday Ready',
@@ -331,8 +331,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 27,
     images: [
-      '/src/assets/images/baby_nigerian_dungaree_1787489143271.jpg',
-      '/src/assets/images/baby_nigerian_romper_1787489085642.jpg'
+      '/images/baby_nigerian_dungaree_1787489143271.jpg',
+      '/images/baby_nigerian_romper_1787489085642.jpg'
     ],
     description: 'Stretchy canvas overalls featuring wooden button straps paired with an ultra-soft striped inner tee. Built for crawling, tummy time, and receiving endless compliments from family members.',
     highlightTag: 'Sweet Everyday',
@@ -456,7 +456,7 @@ export const PRODUCTS: Product[] = [
     originalPrice: 42000,
     rating: 5.0,
     reviewCount: 14,
-    images: ['/src/assets/images/blue_flower_dress_1788990935334.jpg'],
+    images: ['/images/blue_flower_dress_1788990935334.jpg'],
     description: 'Pretty, playful and easy to love. This one is for the little girl who likes to stand out, with dimensional 3D flower petals on a sky-blue bodice and a dreamy layered tutu flare.',
     highlightTag: 'New In',
     sizes: ['2-3Y', '3-4Y', '4-5Y', '6-7Y', '8-9Y'],
@@ -482,7 +482,7 @@ export const PRODUCTS: Product[] = [
     price: 39000,
     rating: 4.9,
     reviewCount: 12,
-    images: ['/src/assets/images/black_flower_dress_1788990950564.jpg'],
+    images: ['/images/black_flower_dress_1788990950564.jpg'],
     description: 'Bold, modern and unmistakably chic. A sculpted black flower petal top meets a crisp cloud-white ruffle skirt for high-contrast celebrations.',
     highlightTag: 'New In',
     sizes: ['3-4Y', '5-6Y', '7-8Y', '9-10Y'],
@@ -508,7 +508,7 @@ export const PRODUCTS: Product[] = [
     price: 26000,
     rating: 5.0,
     reviewCount: 18,
-    images: ['/src/assets/images/pink_school_backpack_1788990964231.jpg'],
+    images: ['/images/pink_school_backpack_1788990964231.jpg'],
     description: 'School runs just got easier. Spacious enough for the things they actually need, with durable buckled front pockets and cushioned shoulder straps.',
     highlightTag: 'New In',
     sizes: ['One Size (School / Outing)'],
@@ -534,7 +534,7 @@ export const PRODUCTS: Product[] = [
     price: 12500,
     rating: 4.8,
     reviewCount: 9,
-    images: ['/src/assets/images/pink_sleeveless_top_1788990976043.jpg'],
+    images: ['/images/pink_sleeveless_top_1788990976043.jpg'],
     description: 'Ultra-soft cotton ribbed tank top finished with neat white contrast picot piping and a dainty front bow. Cool, light, and perfect for hot afternoons.',
     highlightTag: 'New In',
     sizes: ['1-2Y', '2-3Y', '4-5Y', '6-7Y'],
@@ -563,7 +563,7 @@ export const PRODUCTS: Product[] = [
     price: 18500,
     rating: 5.0,
     reviewCount: 16,
-    images: ['/src/assets/images/purple_six_seven_top_1788990994312.jpg'],
+    images: ['/images/purple_six_seven_top_1788990994312.jpg'],
     description: 'Six Seven is having a moment. Your little one can rock it too. Vibrant purple jersey with bold cartoon characters, gold chain graphics, and cool summer energy.',
     highlightTag: 'New In',
     sizes: ['3-4Y', '5-6Y', '7-8Y', '9-11Y'],
@@ -589,7 +589,7 @@ export const PRODUCTS: Product[] = [
     price: 16500,
     rating: 4.9,
     reviewCount: 11,
-    images: ['/src/assets/images/white_graphic_tee_1788991009760.jpg'],
+    images: ['/images/white_graphic_tee_1788991009760.jpg'],
     description: 'A clean white heavy cotton tee with tactile 3D embossed red graphics. Feels super soft on active boys and looks effortlessly sharp.',
     highlightTag: 'New In',
     sizes: ['2-3Y', '4-5Y', '6-7Y', '8-10Y'],
@@ -615,7 +615,7 @@ export const PRODUCTS: Product[] = [
     price: 32000,
     rating: 5.0,
     reviewCount: 15,
-    images: ['/src/assets/images/denim_jacket_kids_1788991023527.jpg'],
+    images: ['/images/denim_jacket_kids_1788991023527.jpg'],
     description: 'A wardrobe staple that goes over literally everything. Soft vintage wash denim, durable brass buttons, and deep pockets for their little treasures.',
     highlightTag: 'New In',
     sizes: ['2-3Y', '4-5Y', '6-7Y', '8-10Y', '11-12Y'],
@@ -641,7 +641,7 @@ export const PRODUCTS: Product[] = [
     price: 29500,
     rating: 4.8,
     reviewCount: 13,
-    images: ['/src/assets/images/red_track_jacket_1788991035954.jpg'],
+    images: ['/images/red_track_jacket_1788991035954.jpg'],
     description: 'Vibrant red with clean white racing stripes and a front zip pouch. Light enough for the afternoon breeze, bold enough for every outing.',
     highlightTag: 'New In',
     sizes: ['3-4Y', '5-6Y', '7-8Y', '9-10Y'],
@@ -667,7 +667,7 @@ export const PRODUCTS: Product[] = [
     price: 28500,
     rating: 5.0,
     reviewCount: 17,
-    images: ['/src/assets/images/pearl_embellished_jeans_1788991050032.jpg'],
+    images: ['/images/pearl_embellished_jeans_1788991050032.jpg'],
     description: 'Because everyday denim doesn’t have to be ordinary. Studded with delicate faux pearls and floral crystals for a little extra shine wherever she goes.',
     highlightTag: 'New In',
     sizes: ['3-4Y', '5-6Y', '7-8Y', '9-11Y'],
@@ -693,7 +693,7 @@ export const PRODUCTS: Product[] = [
     price: 24000,
     rating: 4.9,
     reviewCount: 22,
-    images: ['/src/assets/images/white_chunky_sandals_1788991065781.jpg'],
+    images: ['/images/white_chunky_sandals_1788991065781.jpg'],
     description: 'Modern, grippy, and built for active feet. Padded crossover straps with a lightweight chunky lug sole that pairs with dresses or shorts alike.',
     highlightTag: 'New In',
     sizes: ['EU 24', 'EU 26', 'EU 28', 'EU 30', 'EU 32', 'EU 34'],

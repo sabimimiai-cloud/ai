@@ -86,7 +86,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
             <div className="space-y-4">
               <div className="rounded-3xl overflow-hidden shadow-lg aspect-[4/5] bg-gray-100">
                 <img
-                  src="/src/assets/images/hero_nigerian_girl_1787489055452.jpg"
+                  src="/images/hero_nigerian_girl_1787489055452.jpg"
                   alt="Little girl smiling in Buubu Bloom outfit"
                   className="w-full h-full object-cover"
                 />
@@ -104,7 +104,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               </div>
               <div className="rounded-3xl overflow-hidden shadow-lg aspect-[4/5] bg-gray-100">
                 <img
-                  src="/src/assets/images/boys_nigerian_safari_1787489099338.jpg"
+                  src="/images/boys_nigerian_safari_1787489099338.jpg"
                   alt="Boy laughing outdoors"
                   className="w-full h-full object-cover"
                 />

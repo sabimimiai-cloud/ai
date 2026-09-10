@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Truck, MapPin, Sparkles, Gift, ArrowRight, MessageCircle, Heart } from 'lucide-react';
 import { ActiveView } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
@@ -17,19 +18,25 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* Left Visual Composition */}
-          <div className="lg:col-span-5 relative order-2 lg:order-1">
-            <div className="relative">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="lg:col-span-5 relative order-2 lg:order-1"
+          >
+            <div className="relative group">
               {/* Main Image */}
               <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white aspect-[4/5] bg-white">
                 <img
-                  src="/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg"
+                  src="/images/editorial_nigerian_twirl_1787489158292.jpg"
                   alt="Happy stylish children at Buubu Bloom Lagos"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                 />
               </div>
 
               {/* Overlaid Floating Badge */}
-              <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-white p-4 sm:p-5 rounded-2xl shadow-xl border border-[#F4F1EA] max-w-xs">
+              <div className="absolute -bottom-6 -right-4 sm:-right-8 bg-white p-4 sm:p-5 rounded-2xl shadow-xl border border-[#F4F1EA] max-w-xs transition-transform duration-300 group-hover:-translate-y-1">
                 <div className="flex items-center gap-2 mb-1.5">
                   <div className="w-7 h-7 rounded-full bg-[#F58220]/20 flex items-center justify-center text-[#F58220]">
                     <Sparkles className="w-3.5 h-3.5" />
@@ -49,7 +56,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 <span>Galleria Mall, Orchid</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: 4 Points */}
           <div className="lg:col-span-7 flex flex-col items-start order-1 lg:order-2">
@@ -63,11 +70,17 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
               Why parents keep coming back
             </h2>
 
-            {/* 4 Core Benefit Blocks matching user prompt */}
+            {/* 4 Core Benefit Blocks with gentle staggered entrance */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full mb-8">
               
               {/* Point 1 */}
-              <div className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs">
+              <motion.div 
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs hover:border-[#173F70]/20 hover:-translate-y-0.5 transition-all duration-200"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#F9C928]/25 text-[#173F70] flex items-center justify-center font-bold mb-3">
                   <Sparkles className="w-5 h-5 text-[#F58220]" />
                 </div>
@@ -77,10 +90,16 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 <p className="text-xs sm:text-sm text-[#172033]/75 leading-relaxed">
                   From everyday outfits to those “where did you get that?” looks.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Point 2 */}
-              <div className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs">
+              <motion.div 
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.18 }}
+                className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs hover:border-[#173F70]/20 hover:-translate-y-0.5 transition-all duration-200"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#D93F92]/15 text-[#D93F92] flex items-center justify-center font-bold mb-3">
                   <Gift className="w-5 h-5" />
                 </div>
@@ -90,10 +109,16 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 <p className="text-xs sm:text-sm text-[#172033]/75 leading-relaxed">
                   Shoes, toys, accessories and gifts too.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Point 3 */}
-              <div className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs">
+              <motion.div 
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.26 }}
+                className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs hover:border-[#173F70]/20 hover:-translate-y-0.5 transition-all duration-200"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#F58220]/15 text-[#F58220] flex items-center justify-center font-bold mb-3">
                   <Truck className="w-5 h-5" />
                 </div>
@@ -103,10 +128,16 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 <p className="text-xs sm:text-sm text-[#172033]/75 leading-relaxed">
                   Visit us at Galleria Mall, Orchid, Lagos, or order for nationwide delivery.
                 </p>
-              </div>
+              </motion.div>
 
               {/* Point 4 */}
-              <div className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs">
+              <motion.div 
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.34 }}
+                className="bg-white p-5 rounded-2xl border border-[#F4F1EA] shadow-2xs hover:border-[#173F70]/20 hover:-translate-y-0.5 transition-all duration-200"
+              >
                 <div className="w-10 h-10 rounded-xl bg-[#27AFA5]/15 text-[#27AFA5] flex items-center justify-center font-bold mb-3">
                   <MessageCircle className="w-5 h-5" />
                 </div>
@@ -116,16 +147,16 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 <p className="text-xs sm:text-sm text-[#172033]/75 leading-relaxed">
                   If you’re unsure about sizing, gifting or what would look good together, chat with us.
                 </p>
-              </div>
+              </motion.div>
 
             </div>
 
-            {/* Section CTA - No Banned Words */}
+            {/* Section CTA */}
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
               <button
                 id="why-buubu-bloom-shop-btn"
                 onClick={() => onNavigate('shop', 'all')}
-                className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl text-sm font-bold tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 group cursor-pointer"
+                className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl text-sm font-bold tracking-wide flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 active:scale-95 group cursor-pointer"
               >
                 <span>Shop Buubu Bloom</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -135,7 +166,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                 href={STORE_CONTACT.whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#075E54] border border-[#25D366]/30 hover:bg-[#25D366]/20 px-6 py-4 rounded-2xl font-bold text-sm transition-colors"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#075E54] border border-[#25D366]/30 hover:bg-[#25D366]/20 px-6 py-4 rounded-2xl font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
               >
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />
                 <span>Chat with us on WhatsApp</span>

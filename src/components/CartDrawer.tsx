@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
   Trash2, 
@@ -8,7 +9,9 @@ import {
   Sparkles, 
   MessageSquare, 
   Truck, 
-  ShieldCheck 
+  ShieldCheck,
+  Share2,
+  Check
 } from 'lucide-react';
 import { CartItem } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
@@ -34,12 +37,38 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 }) => {
   const [giftWrapping, setGiftWrapping] = useState(false);
   const [giftNote, setGiftNote] = useState('');
+  const [shareCopied, setShareCopied] = useState(false);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   const subtotal = items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
   const giftWrapCost = giftWrapping ? 2500 : 0;
   const total = subtotal + giftWrapCost;
+
+  const handleShareCart = () => {
+    try {
+      const payload = items.map(i => ({
+        id: i.product.id,
+        s: i.selectedSize,
+        c: i.selectedColor,
+        q: i.quantity
+      }));
+      const shareUrl = `${window.location.origin}${window.location.pathname}?cart=${encodeURIComponent(JSON.stringify(payload))}`;
+      navigator.clipboard.writeText(shareUrl);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy share cart link', err);
+    }
+  };
 
   const whatsappReceipt = encodeURIComponent(
     `Hello Buubu Bloom! 🌸 I would like to place an order from your website:\n\n` +
@@ -49,61 +78,95 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   );
 
   return (
-    <div 
-      id="cart-drawer-backdrop"
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end"
-      onClick={onClose}
-    >
-      <div 
-        id="cart-drawer-container"
-        className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div 
+          key="cart-drawer-backdrop"
+          id="cart-drawer-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex justify-end"
+          onClick={onClose}
+        >
+          <motion.div 
+            key="cart-drawer-container"
+            id="cart-drawer-container"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.28, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Drawer Header */}
         <div className="p-5 border-b border-[#F4F1EA] flex items-center justify-between bg-[#FFFDF8]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#123B68] text-white flex items-center justify-center">
-              <ShoppingBag className="w-4 h-4 text-[#F4C430]" />
+            <div className="w-8 h-8 rounded-xl bg-[#173F70] text-white flex items-center justify-center">
+              <ShoppingBag className="w-4 h-4 text-[#F9C928]" />
             </div>
             <div>
-              <h2 className="text-lg font-black text-[#123B68] font-display">
+              <h2 className="text-lg font-black text-[#173F70] font-display">
                 Shopping Bag ({items.reduce((acc, i) => acc + i.quantity, 0)})
               </h2>
-              <p className="text-[11px] text-[#27AFA3] font-bold">
+              <p className="text-[11px] text-[#27AFA5] font-bold">
                 ✓ Delivering across Nigeria or pickup in store
               </p>
             </div>
           </div>
 
-          <button
-            id="close-cart-btn"
-            onClick={onClose}
-            className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-[#F4F1EA] cursor-pointer"
-            aria-label="Close cart"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            {items.length > 0 && (
+              <button
+                id="cart-share-btn"
+                onClick={handleShareCart}
+                className="p-2 text-[#173F70] hover:text-[#2563C7] rounded-full hover:bg-[#F4F1EA] cursor-pointer flex items-center gap-1 text-xs font-bold"
+                title="Share Cart Link"
+              >
+                {shareCopied ? (
+                  <span className="text-[11px] text-emerald-600 font-bold flex items-center gap-1">
+                    <Check className="w-4 h-4" /> Link copied!
+                  </span>
+                ) : (
+                  <Share2 className="w-4 h-4" />
+                )}
+              </button>
+            )}
+
+            <button
+              id="close-cart-btn"
+              onClick={onClose}
+              className="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-[#F4F1EA] cursor-pointer"
+              aria-label="Close cart"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
         </div>
 
         {/* Drawer Body / Items List */}
         <div className="flex-1 overflow-y-auto p-5 space-y-4">
           {items.length === 0 ? (
             <div className="text-center py-16 px-4">
-              <div className="w-16 h-16 rounded-full bg-[#F4F1EA] text-[#123B68]/40 flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full bg-[#FFFDF8] border border-[#F4F1EA] text-[#F58220] flex items-center justify-center mx-auto mb-4 shadow-sm">
                 <ShoppingBag className="w-8 h-8" />
               </div>
-              <h3 className="text-base font-bold text-[#123B68] mb-1">Your bag is empty</h3>
-              <p className="text-xs text-[#172033]/70 mb-6 max-w-xs mx-auto">
-                Find something cute for them, pick out new shoes, or grab a gift for an upcoming celebration.
+              <h3 className="text-lg font-bold text-[#173F70] mb-2 font-display">
+                Your cart is waiting. 💛
+              </h3>
+              <p className="text-sm text-[#172033]/75 mb-6 max-w-xs mx-auto leading-relaxed">
+                Found something you like? Your next favourite could be just a scroll away.
               </p>
               <button
+                id="empty-cart-shop-btn"
                 onClick={() => {
                   onClose();
                   onNavigateToShop();
                 }}
-                className="bg-[#123B68] text-white px-6 py-3 rounded-xl font-bold text-xs shadow-sm hover:bg-[#2563C7] transition-all cursor-pointer"
+                className="bg-[#173F70] text-white px-7 py-3.5 rounded-2xl font-bold text-xs tracking-wider uppercase shadow-md hover:bg-[#2563C7] transition-all active:scale-95 cursor-pointer"
               >
-                START SHOPPING
+                Shop New Arrivals
               </button>
             </div>
           ) : (
@@ -259,7 +322,9 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           </div>
         )}
 
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

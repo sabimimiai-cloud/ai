@@ -11,57 +11,57 @@ export interface CategoryInfo {
 export const CATEGORIES_DATA: CategoryInfo[] = [
   {
     id: 'cat-girls',
-    name: 'For Girls',
+    name: 'Girls',
     categoryKey: 'girls',
     description: 'Cute, fun and full of personality.',
-    image: '/src/assets/images/hero_nigerian_girl_1787489055452.jpg',
+    image: '/images/girls_nigerian_yellow_1787489114238.jpg',
     accentColor: '#173F70',
     badgeText: 'Dresses & Twirl Sets'
   },
   {
     id: 'cat-boys',
-    name: 'For Boys',
+    name: 'Boys',
     categoryKey: 'boys',
     description: 'Cool looks for every little adventure.',
-    image: '/src/assets/images/boys_nigerian_denim_1787489068562.jpg',
+    image: '/images/boys_nigerian_safari_1787489099338.jpg',
     accentColor: '#2563C7',
     badgeText: 'Cool Sets & Denim'
   },
   {
     id: 'cat-baby',
-    name: 'For Babies',
+    name: 'Baby',
     categoryKey: 'baby',
-    description: 'Tiny outfits. Very big cuteness.',
-    image: '/src/assets/images/baby_nigerian_romper_1787489085642.jpg',
+    description: 'Tiny outfits with plenty of charm.',
+    image: '/images/baby_nigerian_romper_1787489085642.jpg',
     accentColor: '#F4C430',
     badgeText: 'Soft Rompers & Sets'
-  },
-  {
-    id: 'cat-gifts',
-    name: 'For Gifts',
-    categoryKey: 'gifts',
-    description: 'Because finding the right gift shouldn’t be stressful.',
-    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
-    accentColor: '#F58220',
-    badgeText: 'Ready Gift Boxes'
   },
   {
     id: 'cat-shoes',
     name: 'Shoes',
     categoryKey: 'shoes',
     description: 'Comfy kicks for playing and shiny pairs for parties.',
-    image: 'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=700&q=80',
+    image: '/images/white_chunky_sandals_1788991065781.jpg',
     accentColor: '#27AFA5',
-    badgeText: 'Sneakers & Flats'
+    badgeText: 'Sneakers & Sandals'
   },
   {
     id: 'cat-accessories',
-    name: 'Accessories & Toys',
+    name: 'Accessories',
     categoryKey: 'accessories',
-    description: 'Mini bags, sunglasses, and cool play pieces.',
-    image: 'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=700&q=80',
+    description: 'Mini bags, backpacks, and little touches.',
+    image: '/images/pink_school_backpack_1788990964231.jpg',
     accentColor: '#D93F92',
-    badgeText: 'Mini Bags & Toys'
+    badgeText: 'Bags & Hats'
+  },
+  {
+    id: 'cat-gifts',
+    name: 'Toys & Gifts',
+    categoryKey: 'gifts',
+    description: 'Thoughtful surprises that get the happiest smiles.',
+    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
+    accentColor: '#F58220',
+    badgeText: 'Hampers & Toys'
   }
 ];
 
@@ -82,7 +82,7 @@ export const MOMENTS_DATA: MomentInfo[] = [
     momentKey: 'birthday',
     tagline: 'Their Big Day',
     description: 'Find something they’ll be excited to unwrap.',
-    image: '/src/assets/images/nigerian_birthday_kids_1787489171127.jpg',
+    image: '/images/nigerian_birthday_kids_1787489171127.jpg',
     color: '#F58220'
   },
   {
@@ -91,7 +91,7 @@ export const MOMENTS_DATA: MomentInfo[] = [
     momentKey: 'everyday',
     tagline: 'Fresh Fits',
     description: 'Let’s get them looking good.',
-    image: '/src/assets/images/boys_nigerian_safari_1787489099338.jpg',
+    image: '/images/boys_nigerian_safari_1787489099338.jpg',
     color: '#2563C7'
   },
   {
@@ -109,7 +109,7 @@ export const MOMENTS_DATA: MomentInfo[] = [
     momentKey: 'special-occasion',
     tagline: 'Spoil Them A Little',
     description: 'Honestly, they deserve it. 😂',
-    image: '/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg',
+    image: '/images/editorial_nigerian_twirl_1787489158292.jpg',
     color: '#173F70'
   }
 ];
@@ -125,21 +125,21 @@ export interface InstagramPost {
 export const INSTAGRAM_FEED: InstagramPost[] = [
   {
     id: 'ig-1',
-    image: '/src/assets/images/hero_nigerian_girl_1787489055452.jpg',
+    image: '/images/hero_nigerian_girl_1787489055452.jpg',
     caption: 'Birthday twirls in our Petal Pink Bow Dress ✨ She understood the assignment!',
     type: 'look',
     likes: '482'
   },
   {
     id: 'ig-2',
-    image: '/src/assets/images/boys_nigerian_denim_1787489068562.jpg',
+    image: '/images/boys_nigerian_denim_1787489068562.jpg',
     caption: 'Boys denim drop now live in store and online 💙 Match your vibe!',
     type: 'look',
     likes: '390'
   },
   {
     id: 'ig-3',
-    image: '/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg',
+    image: '/images/editorial_nigerian_twirl_1787489158292.jpg',
     caption: 'Walking into Galleria Mall, Orchid like... ✨ Come visit us today!',
     type: 'store',
     likes: '612'
@@ -169,13 +169,13 @@ export const INSTAGRAM_FEED: InstagramPost[] = [
 
 export const STORE_CONTACT = {
   name: 'BUUBU BLOOM',
-  tagline: 'Match your vibe, Bloom your style!',
+  tagline: 'Match your vibe, Bloom your style',
   address: 'Galleria Mall, Orchid, Lagos, Nigeria',
   phoneDisplay: '0806 014 3654',
   phoneRaw: '2348060143654',
   instagramHandle: '@buububloom_',
   instagramUrl: 'https://instagram.com/buububloom_',
-  whatsappUrl: 'https://wa.me/2348060143654',
+  whatsappUrl: 'https://wa.me/2348060143654?text=Hi%20Buubu%20Bloom%2C%20I%20need%20help%20choosing%20something%20for%20a%20child.',
   deliveryText: 'Nationwide delivery across all 36 Nigerian states & FCT Abuja'
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { MapPin, Phone, MessageSquare, Clock, Navigation, CheckCircle2 } from 'lucide-react';
 import { STORE_CONTACT } from '../data/storeData';
 
@@ -9,7 +10,13 @@ export const PhysicalStoreSection: React.FC = () => {
       className="py-16 sm:py-24 bg-[#FFFDF8] border-b border-[#F4F1EA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-gradient-to-br from-[#173F70] via-[#173F70] to-[#2563C7] rounded-3xl text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+          className="bg-gradient-to-br from-[#173F70] via-[#173F70] to-[#2563C7] rounded-3xl text-white p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl"
+        >
           
           {/* Subtle Decorative Backdrop */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#27AFA5]/20 rounded-full blur-3xl pointer-events-none" />
@@ -25,12 +32,16 @@ export const PhysicalStoreSection: React.FC = () => {
                 <span>STORE LOCATION</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight font-display text-white leading-tight mb-4">
-                Come see us in Lagos
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight font-display text-white leading-tight mb-2">
+                COME SAY HELLO
               </h2>
 
+              <p className="text-xl sm:text-2xl font-bold text-[#F9C928] mb-4">
+                Galleria Mall, Orchid, Lagos
+              </p>
+
               <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-6 font-light">
-                Want to feel the fabrics, check the fit, or let your little one pick their own favourites in person?
+                Prefer to see it before you buy? Visit us in-store.
               </p>
 
               {/* Quick Info Grid */}
@@ -65,10 +76,10 @@ export const PhysicalStoreSection: React.FC = () => {
                   href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
                   target="_blank"
                   rel="noreferrer"
-                  className="bg-[#F58220] hover:bg-[#F58220]/90 text-white px-7 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 cursor-pointer"
+                  className="bg-[#F58220] hover:bg-[#e07519] text-white px-7 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 active:scale-[0.98] cursor-pointer"
                 >
                   <Navigation className="w-4 h-4" />
-                  <span>Get Directions / Visit the Store</span>
+                  <span>Get Directions</span>
                 </a>
 
                 <a
@@ -76,7 +87,7 @@ export const PhysicalStoreSection: React.FC = () => {
                   href={STORE_CONTACT.whatsappUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="bg-[#27AFA5] hover:bg-[#27AFA5]/90 text-white px-6 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer"
+                  className="bg-[#27AFA5] hover:bg-[#209c93] text-white px-6 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 active:scale-[0.98] cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
@@ -87,11 +98,11 @@ export const PhysicalStoreSection: React.FC = () => {
 
             {/* Right Visual Image */}
             <div className="lg:col-span-5 relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
                   src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
                   alt="Buubu Bloom Galleria Mall store environment"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-[#173F70] border border-white/20 p-3.5 rounded-2xl shadow-xl text-xs font-bold text-[#F9C928] flex items-center gap-2">
@@ -102,7 +113,7 @@ export const PhysicalStoreSection: React.FC = () => {
 
           </div>
 
-        </div>
+        </motion.div>
       </div>
     </section>
   );

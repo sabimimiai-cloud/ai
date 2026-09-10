@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, ArrowRight, Heart, ShoppingBag, Eye } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Product, ActiveView, ProductCategory } from '../types';
 import { PRODUCTS } from '../data/products';
 
@@ -25,18 +26,18 @@ const EDITS: EditStory[] = [
     title: 'Birthday Looks',
     subtitle: 'Centre-of-attention style for their big day',
     description: 'Golden tulle, twirl-tested hems, and bright birthday energy that looks just as good in photos as it does in person.',
-    image: '/src/assets/images/nigerian_birthday_kids_1787489171127.jpg',
+    image: '/images/nigerian_birthday_kids_1787489171127.jpg',
     tag: 'Celebration Ready',
-    productIds: ['prod-1', 'prod-7', 'prod-8']
+    productIds: ['bb-g-001', 'bb-g-002', 'bb-a-001']
   },
   {
     id: 'weekend',
     title: 'Weekend Looks',
     subtitle: 'Easy breezy pieces for Saturdays & family outings',
     description: 'Soft breathable cottons, elastic waists, and easy-moving cuts designed for playground running and Sunday brunch.',
-    image: '/src/assets/images/boys_nigerian_safari_1787489099338.jpg',
+    image: '/images/boys_nigerian_safari_1787489099338.jpg',
     tag: 'Comfy & Playful',
-    productIds: ['prod-3', 'prod-5', 'prod-6']
+    productIds: ['bb-b-001', 'bb-b-002', 'bb-s-001']
   },
   {
     id: 'back-to-school',
@@ -45,16 +46,16 @@ const EDITS: EditStory[] = [
     description: 'Flexible sneakers, lightweight layers, and versatile basics that survive the school year while looking crisp.',
     image: 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80',
     tag: 'Durable & Sharp',
-    productIds: ['prod-5', 'prod-6', 'prod-2']
+    productIds: ['bb-na-003', 'bb-s-001', 'bb-na-006']
   },
   {
     id: 'trendsetters',
     title: 'Tiny Trendsetters',
     subtitle: 'Street-smart denim & relaxed two-piece sets',
     description: 'Denim chore jackets, relaxed carpenter shorts, and vintage-tone sneakers for kids who already pick out their own outfits.',
-    image: '/src/assets/images/boys_nigerian_denim_1787489068562.jpg',
+    image: '/images/boys_nigerian_denim_1787489068562.jpg',
     tag: 'Cool & Confident',
-    productIds: ['prod-2', 'prod-5', 'prod-8']
+    productIds: ['bb-b-001', 'bb-na-007', 'bb-na-005']
   },
   {
     id: 'gift-worthy',
@@ -63,16 +64,16 @@ const EDITS: EditStory[] = [
     description: 'Curated sets, keepsake baby hampers, and playful battery cruisers that make any celebration feel extra special.',
     image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
     tag: 'Unwrap The Joy',
-    productIds: ['prod-10', 'prod-11', 'prod-4']
+    productIds: ['bb-gft-001', 'bb-t-001', 'bb-t-002']
   },
   {
     id: 'special-day',
     title: 'Special Day Looks',
     subtitle: 'Thanksgiving, weddings and dress-up milestones',
     description: 'Tailored pastel blazers, tiered ruffled gowns, and pristine patent loafers for when the whole family is dressing up.',
-    image: '/src/assets/images/editorial_nigerian_twirl_1787489158292.jpg',
+    image: '/images/editorial_nigerian_twirl_1787489158292.jpg',
     tag: 'Dressed To Impress',
-    productIds: ['prod-9', 'prod-1', 'prod-7']
+    productIds: ['bb-b-003', 'bb-na-001', 'bb-na-002']
   }
 ];
 

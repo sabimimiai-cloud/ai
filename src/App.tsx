@@ -12,6 +12,7 @@ import { SpottedInBuubuBloom } from './components/SpottedInBuubuBloom';
 import { BrandStory } from './components/BrandStory';
 import { PhysicalStoreSection } from './components/PhysicalStoreSection';
 import { DeliveryTrustStrip } from './components/DeliveryTrustStrip';
+import { RecentlyViewed } from './components/RecentlyViewed';
 import { InstagramGrid } from './components/InstagramGrid';
 import { FAQSection } from './components/FAQSection';
 import { FinalCTA } from './components/FinalCTA';
@@ -25,6 +26,7 @@ import { ShopView } from './views/ShopView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
 import { Product, CartItem, ActiveView, ProductCategory } from './types';
+import { PRODUCTS } from './data/products';
 import { STORE_CONTACT } from './data/storeData';
 import { MessageSquare, Check, X } from 'lucide-react';
 
@@ -43,20 +45,41 @@ export function App() {
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Cart State with localStorage
+  // Cart State with localStorage and catalog hydration
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
     try {
       const saved = localStorage.getItem('buubu_bloom_cart');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed: CartItem[] = JSON.parse(saved);
+        return parsed.map(item => {
+          const freshProduct = PRODUCTS.find(p => p.id === item.product?.id);
+          return freshProduct ? { ...item, product: freshProduct } : item;
+        });
+      }
+      return [];
     } catch {
       return [];
     }
   });
 
-  // Wishlist State with localStorage
+  // Wishlist State with localStorage and catalog hydration
   const [wishlistItems, setWishlistItems] = useState<Product[]>(() => {
     try {
       const saved = localStorage.getItem('buubu_bloom_wishlist');
+      if (saved) {
+        const parsed: Product[] = JSON.parse(saved);
+        return parsed.map(item => PRODUCTS.find(p => p.id === item.id) || item);
+      }
+      return [];
+    } catch {
+      return [];
+    }
+  });
+
+  // Recently Viewed Product IDs with localStorage
+  const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('buubu_bloom_recently_viewed');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -78,6 +101,58 @@ export function App() {
       console.error('Failed to save wishlist:', e);
     }
   }, [wishlistItems]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('buubu_bloom_recently_viewed', JSON.stringify(recentlyViewedIds));
+    } catch (e) {
+      console.error('Failed to save recently viewed:', e);
+    }
+  }, [recentlyViewedIds]);
+
+  // Support shared cart links (?cart=...)
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const cartParam = params.get('cart');
+      if (cartParam) {
+        const decoded = JSON.parse(decodeURIComponent(cartParam));
+        if (Array.isArray(decoded) && decoded.length > 0) {
+          const loadedItems: CartItem[] = [];
+          decoded.forEach((entry: { id: string; s?: string; c?: string; q?: number }) => {
+            const product = PRODUCTS.find(p => p.id === entry.id);
+            if (product) {
+              loadedItems.push({
+                product,
+                selectedSize: entry.s || product.sizes[0] || 'Standard',
+                selectedColor: entry.c || product.colors[0]?.name || 'Standard',
+                quantity: entry.q && entry.q > 0 ? entry.q : 1
+              });
+            }
+          });
+          if (loadedItems.length > 0) {
+            setCartItems(loadedItems);
+            setIsCartOpen(true);
+            showToast('Loaded shared cart items');
+            window.history.replaceState({}, document.title, window.location.pathname);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load shared cart link', err);
+    }
+  }, []);
+
+  // Selection with tracking for recently viewed
+  const handleSelectProduct = (product: Product | null) => {
+    setSelectedProduct(product);
+    if (product) {
+      setRecentlyViewedIds(prev => {
+        const filtered = prev.filter(id => id !== product.id);
+        return [product.id, ...filtered].slice(0, 10);
+      });
+    }
+  };
 
   // Scroll to top on view change
   const handleNavigate = (view: ActiveView, category?: ProductCategory) => {
@@ -216,7 +291,7 @@ export function App() {
 
             {/* 3. NEW ARRIVALS: Just In at Buubu Bloom */}
             <NewArrivalsSection
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
               wishlistIds={wishlistIds}
               onToggleWishlist={handleToggleWishlist}
@@ -231,7 +306,7 @@ export function App() {
 
             {/* 4. New Arrivals (Just Bloomed 🌸) */}
             <FeaturedProducts
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
               wishlistIds={wishlistIds}
               onToggleWishlist={handleToggleWishlist}
@@ -240,14 +315,14 @@ export function App() {
 
             {/* 5. The Bloom Edit */}
             <TheBloomEdit
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
               onNavigate={handleNavigate}
             />
 
             {/* 6. Complete The Look */}
             <CompleteTheLook
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
               onOpenCart={() => setIsCartOpen(true)}
             />
@@ -255,24 +330,32 @@ export function App() {
             {/* 7. Gift Concierge */}
             <GiftingSection 
               onNavigate={handleNavigate} 
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onAddToCart={(p) => handleAddToCart(p)}
             />
 
             {/* 8. Spotted in Buubu Bloom */}
             <SpottedInBuubuBloom
-              onQuickView={(p) => setSelectedProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
               onNavigate={handleNavigate}
             />
 
             {/* 9. Why Buubu Bloom */}
             <BrandStory onNavigate={handleNavigate} />
 
-            {/* 10. Store / Location (Come see us in Lagos) */}
+            {/* 10. Store / Location (Come say hello in Lagos) */}
             <PhysicalStoreSection />
 
             {/* Fast Dispatch Strip */}
             <DeliveryTrustStrip onNavigate={handleNavigate} />
+
+            {/* Recently Viewed */}
+            <RecentlyViewed
+              recentProductIds={recentlyViewedIds}
+              onQuickView={(p) => handleSelectProduct(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
+              onClearRecent={() => setRecentlyViewedIds([])}
+            />
 
             {/* 11. Instagram / Social (More Buubu Bloom moments) */}
             <InstagramGrid />
@@ -286,16 +369,26 @@ export function App() {
         )}
 
         {activeView === 'shop' && (
-          <ShopView
-            initialCategory={selectedCategory}
-            initialSearchQuery={searchQuery}
-            onSelectProduct={(p) => setSelectedProduct(p)}
-            onQuickView={(p) => setSelectedProduct(p)}
-            onQuickAdd={(p) => handleAddToCart(p)}
-            onAddToCart={(p) => handleAddToCart(p)}
-            wishlistIds={wishlistIds}
-            onToggleWishlist={handleToggleWishlist}
-          />
+          <div id="shop-page-view">
+            <ShopView
+              initialCategory={selectedCategory}
+              initialSearchQuery={searchQuery}
+              onSelectProduct={(p) => handleSelectProduct(p)}
+              onQuickView={(p) => handleSelectProduct(p)}
+              onQuickAdd={(p) => handleAddToCart(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
+              wishlistIds={wishlistIds}
+              onToggleWishlist={handleToggleWishlist}
+            />
+
+            {/* Recently Viewed in Shop View */}
+            <RecentlyViewed
+              recentProductIds={recentlyViewedIds}
+              onQuickView={(p) => handleSelectProduct(p)}
+              onAddToCart={(p) => handleAddToCart(p)}
+              onClearRecent={() => setRecentlyViewedIds([])}
+            />
+          </div>
         )}
 
         {activeView === 'about' && (
@@ -313,23 +406,24 @@ export function App() {
         href={STORE_CONTACT.whatsappUrl}
         target="_blank"
         rel="noreferrer"
-        className="fixed bottom-6 right-6 z-40 bg-[#27AFA5] hover:bg-[#209086] text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95 group border-2 border-white"
-        title="Chat with Buubu Bloom Stylist on WhatsApp"
+        className="fixed bottom-6 right-6 z-40 bg-[#27AFA5] hover:bg-[#209086] text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95 group border-2 border-white cursor-pointer"
+        title="Chat with Buubu Bloom on WhatsApp"
       >
         <MessageSquare className="w-5 h-5" />
         <span className="hidden sm:inline font-bold text-xs tracking-wide">
-          WhatsApp Styling (0806 014 3654)
+          Need help choosing?
         </span>
       </a>
 
       {/* Product Detail Modal */}
       <ProductDetailModal
         product={selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={() => handleSelectProduct(null)}
         onAddToCart={handleAddToCart}
         isWishlisted={selectedProduct ? wishlistIds.includes(selectedProduct.id) : false}
         onToggleWishlist={handleToggleWishlist}
         onOpenSizeGuide={() => setIsSizeGuideOpen(true)}
+        onSelectProduct={handleSelectProduct}
       />
 
       {/* Cart Drawer */}

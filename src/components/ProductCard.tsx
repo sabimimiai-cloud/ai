@@ -167,10 +167,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             id={`add-to-bag-btn-${product.id}`}
             type="button"
             onClick={handleAdd}
-            className={`p-2.5 px-3 rounded-xl transition-all shadow-2xs active:scale-90 flex items-center gap-1.5 text-xs font-bold ${
+            className={`min-h-[44px] min-w-[44px] p-2.5 px-3 rounded-xl transition-all duration-200 shadow-2xs active:scale-90 flex items-center justify-center gap-1.5 text-xs font-bold cursor-pointer ${
               isAddedRecently 
-                ? 'bg-[#27AFA5] text-white scale-105' 
-                : 'bg-[#173F70] hover:bg-[#2563C7] text-white'
+                ? 'bg-[#27AFA5] text-white scale-102 shadow-sm' 
+                : 'bg-[#173F70] hover:bg-[#2563C7] text-white hover:shadow-sm'
             }`}
             title="Add to shopping bag"
             aria-label={`Add ${product.name} to bag`}
