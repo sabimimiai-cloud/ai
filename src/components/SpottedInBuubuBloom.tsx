@@ -21,35 +21,35 @@ interface CustomerLook {
 const CUSTOMER_LOOKS: CustomerLook[] = [
   {
     id: 'look-1',
-    childName: 'Sunny Day Twirl',
+    childName: 'Yellow Party Dress',
     styleTag: 'Weekend & Party Look',
     image: '/images/girls_nigerian_yellow_1787489114238.jpg',
     featuredProductId: 'bb-g-002',
-    lookTitle: 'Daisy Sunshine Tiered Dress'
+    lookTitle: 'Yellow Tiered Dress'
   },
   {
     id: 'look-2',
-    childName: 'Explorer Safari Set',
+    childName: 'Linen Shorts Set',
     styleTag: 'Playground & Outdoor Fit',
     image: '/images/boys_nigerian_safari_1787489099338.jpg',
     featuredProductId: 'bb-b-002',
-    lookTitle: 'Safari Explorer Two-Piece Set'
+    lookTitle: 'Linen Shirt & Shorts Set'
   },
   {
     id: 'look-3',
-    childName: 'Birthday Celebration Fit',
+    childName: 'Pink Birthday Dress',
     styleTag: 'Occasion & Celebration',
     image: '/images/nigerian_birthday_kids_1787489171127.jpg',
     featuredProductId: 'bb-g-001',
-    lookTitle: 'Party Celebration Edition'
+    lookTitle: 'Pink Bow Dress'
   },
   {
     id: 'look-4',
-    childName: 'Classic Denim Duo',
+    childName: 'Boys Denim Set',
     styleTag: 'Everyday Cool Style',
     image: '/images/boys_nigerian_denim_1787489068562.jpg',
     featuredProductId: 'bb-b-001',
-    lookTitle: 'Denim Chore Jacket & Shorts'
+    lookTitle: 'Boys Denim Two-Piece Set'
   }
 ];
 

@@ -126,7 +126,7 @@ export const INSTAGRAM_FEED: InstagramPost[] = [
   {
     id: 'ig-1',
     image: '/images/hero_nigerian_girl_1787489055452.jpg',
-    caption: 'Birthday twirls in our Petal Pink Bow Dress ✨ She understood the assignment!',
+    caption: 'Birthday twirls in our Pink Bow Dress ✨ She understood the assignment!',
     type: 'look',
     likes: '482'
   },
@@ -209,13 +209,13 @@ export const FAQ_ITEMS = [
 export const FAQS = FAQ_ITEMS;
 
 export const CATEGORIES = [
-  { id: 'all' as const, name: 'All Collection', count: 12 },
-  { id: 'girls' as const, name: "Girls' Style", count: 4 },
-  { id: 'boys' as const, name: "Boys' Outfits", count: 3 },
-  { id: 'baby' as const, name: 'Baby & Newborn', count: 2 },
-  { id: 'shoes' as const, name: 'Shoes & Footwear', count: 2 },
-  { id: 'accessories' as const, name: 'Accessories', count: 2 },
-  { id: 'toys' as const, name: 'Ride-ons & Toys', count: 2 },
-  { id: 'gifts' as const, name: 'Gift Hampers', count: 2 },
+  { id: 'all' as const, name: 'All Collection', count: 23 },
+  { id: 'girls' as const, name: "Girls' Fashion", count: 6 },
+  { id: 'boys' as const, name: "Boys' Fashion", count: 6 },
+  { id: 'baby' as const, name: 'Baby Essentials', count: 2 },
+  { id: 'shoes' as const, name: 'Footwear & Shoes', count: 3 },
+  { id: 'accessories' as const, name: 'Bags & Accessories', count: 3 },
+  { id: 'toys' as const, name: 'Toys & Play', count: 2 },
+  { id: 'gifts' as const, name: 'Curated Gifts', count: 1 },
 ];
 

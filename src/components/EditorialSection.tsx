@@ -64,8 +64,8 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
               <div className="space-y-4 sm:space-y-6">
                 <div className="rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl border-2 border-white/20 relative group">
                   <img
-                    src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=700&q=80"
-                    alt="Girl in floral outfit"
+                    src="/images/editorial_nigerian_twirl_1787489158292.jpg"
+                    alt="Girl in twirl celebration dress"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -89,7 +89,7 @@ export const EditorialSection: React.FC<EditorialSectionProps> = ({ onNavigate }
 
                 <div className="rounded-3xl overflow-hidden aspect-[3/4] shadow-2xl border-2 border-white/20 relative group">
                   <img
-                    src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
+                    src="/images/boys_nigerian_suit_1787489130668.jpg"
                     alt="Boys tailored style"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />

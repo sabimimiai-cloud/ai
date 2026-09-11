@@ -44,7 +44,7 @@ const EDITS: EditStory[] = [
     title: 'Back-to-School Picks',
     subtitle: 'Durable kicks & sharp pieces that last',
     description: 'Flexible sneakers, lightweight layers, and versatile basics that survive the school year while looking crisp.',
-    image: 'https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80',
+    image: '/images/pink_school_backpack_1788990964231.jpg',
     tag: 'Durable & Sharp',
     productIds: ['bb-na-003', 'bb-s-001', 'bb-na-006']
   },

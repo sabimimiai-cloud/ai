@@ -22,13 +22,14 @@ import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { SizeGuideModal } from './components/SizeGuideModal';
+import { ScreenshotExtractorModal } from './components/ScreenshotExtractorModal';
 import { ShopView } from './views/ShopView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
 import { Product, CartItem, ActiveView, ProductCategory } from './types';
 import { PRODUCTS } from './data/products';
 import { STORE_CONTACT } from './data/storeData';
-import { MessageSquare, Check, X } from 'lucide-react';
+import { MessageSquare, Check, X, Camera } from 'lucide-react';
 
 export function App() {
   const [activeView, setActiveView] = useState<ActiveView>('home');
@@ -41,6 +42,7 @@ export function App() {
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState<boolean>(false);
+  const [isExtractorOpen, setIsExtractorOpen] = useState<boolean>(false);
   
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -50,11 +52,15 @@ export function App() {
     try {
       const saved = localStorage.getItem('buubu_bloom_cart');
       if (saved) {
-        const parsed: CartItem[] = JSON.parse(saved);
-        return parsed.map(item => {
-          const freshProduct = PRODUCTS.find(p => p.id === item.product?.id);
-          return freshProduct ? { ...item, product: freshProduct } : item;
-        });
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed
+            .filter((item): item is CartItem => Boolean(item && item.product && item.product.id))
+            .map(item => {
+              const freshProduct = PRODUCTS.find(p => p.id === item.product.id);
+              return freshProduct ? { ...item, product: freshProduct } : item;
+            });
+        }
       }
       return [];
     } catch {
@@ -67,8 +73,12 @@ export function App() {
     try {
       const saved = localStorage.getItem('buubu_bloom_wishlist');
       if (saved) {
-        const parsed: Product[] = JSON.parse(saved);
-        return parsed.map(item => PRODUCTS.find(p => p.id === item.id) || item);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed
+            .filter((item): item is Product => Boolean(item && item.id))
+            .map(item => PRODUCTS.find(p => p.id === item.id) || item);
+        }
       }
       return [];
     } catch {
@@ -80,7 +90,13 @@ export function App() {
   const [recentlyViewedIds, setRecentlyViewedIds] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem('buubu_bloom_recently_viewed');
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((id): id is string => typeof id === 'string');
+        }
+      }
+      return [];
     } catch {
       return [];
     }
@@ -414,6 +430,29 @@ export function App() {
           Need help choosing?
         </span>
       </a>
+
+      {/* Screenshot Photo Extractor Trigger */}
+      <button
+        id="open-photo-extractor-btn"
+        onClick={() => setIsExtractorOpen(true)}
+        className="fixed bottom-6 left-6 z-40 bg-[#123B68] hover:bg-[#0E2E52] text-white p-3.5 sm:px-4 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border-2 border-white cursor-pointer"
+        title="Extract Product Photos from Screenshots"
+      >
+        <Camera className="w-5 h-5 text-[#F58220]" />
+        <span className="hidden sm:inline font-bold text-xs tracking-wide">
+          Extract Screenshot Photos
+        </span>
+      </button>
+
+      {/* Screenshot Extractor Modal */}
+      <ScreenshotExtractorModal
+        isOpen={isExtractorOpen}
+        onClose={() => setIsExtractorOpen(false)}
+        onExtractionComplete={() => {
+          setToastMessage('All genuine product photographs extracted & catalogue updated!');
+          setTimeout(() => setToastMessage(null), 3500);
+        }}
+      />
 
       {/* Product Detail Modal */}
       <ProductDetailModal

@@ -35,7 +35,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
           <div className="lg:col-span-6 relative">
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] sm:aspect-[4/3] bg-white">
               <img
-                src="https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?auto=format&fit=crop&w=1000&q=80"
+                src="/images/nigerian_birthday_kids_1787489171127.jpg"
                 alt="Children laughing and blooming in Buubu Bloom style"
                 className="w-full h-full object-cover"
               />

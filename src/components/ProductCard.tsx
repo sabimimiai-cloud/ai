@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Heart, ShoppingBag, Eye, Star, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Heart, ShoppingBag, Eye, Star, Check, Camera } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
@@ -22,6 +22,31 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onToggleWishlist
 }) => {
   const [isAddedRecently, setIsAddedRecently] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const [imgSrc, setImgSrc] = useState<string>(() => {
+    try {
+      const filename = product.images[0].split('/').pop() || '';
+      const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+      if (stored[filename]) {
+        return stored[filename];
+      }
+    } catch (e) {}
+    return product.images[0];
+  });
+
+  useEffect(() => {
+    try {
+      const filename = product.images[0].split('/').pop() || '';
+      const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+      if (stored[filename]) {
+        setImgSrc(stored[filename]);
+        setHasError(false);
+        return;
+      }
+    } catch (e) {}
+    setImgSrc(product.images[0]);
+    setHasError(false);
+  }, [product.images]);
 
   const handleView = () => {
     if (onQuickView) onQuickView(product);
@@ -50,12 +75,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* Image Container */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F1EA] cursor-pointer" onClick={handleView}>
-        <img
-          src={product.images[0]}
-          alt={product.name}
-          className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
+        {!hasError ? (
+          <img
+            src={imgSrc}
+            alt={product.name}
+            onError={() => setHasError(true)}
+            className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+          />
+        ) : (
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-[#EEF2F6]">
+            <div className="w-12 h-12 rounded-full bg-white text-[#123B68] flex items-center justify-center shadow-xs mb-2">
+              <Camera className="w-6 h-6 text-[#123B68]" />
+            </div>
+            <span className="text-xs font-bold text-[#123B68]">{product.name}</span>
+            <span className="text-[10px] text-[#5A6E85] mt-0.5">Photograph crop ready</span>
+          </div>
+        )}
 
         {/* Highlight Badge */}
         {product.highlightTag && (

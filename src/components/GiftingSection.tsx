@@ -24,11 +24,14 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
   const [occasion, setOccasion] = useState<OccasionType>('Birthday');
   const [picked, setPicked] = useState<boolean>(true);
 
-  // Dynamic filter based on selected inputs
+  // Dynamic filter based on selected inputs - ensure only genuine gifts, toys, or curated gift items
   const recommendedGifts = PRODUCTS.filter(p => {
-    if (who === 'Baby') return p.category === 'baby' || p.category === 'gifts';
-    if (who === 'Girl') return p.category === 'girls' || p.category === 'accessories' || p.category === 'gifts' || p.category === 'toys';
-    if (who === 'Boy') return p.category === 'boys' || p.category === 'shoes' || p.category === 'toys' || p.category === 'gifts';
+    const isGiftable = p.category === 'gifts' || p.category === 'toys' || p.occasions.includes('gifting') || p.occasions.includes('birthday');
+    if (!isGiftable) return false;
+
+    if (who === 'Baby') return p.category === 'baby' || p.category === 'gifts' || p.category === 'toys';
+    if (who === 'Girl') return p.category === 'gifts' || p.category === 'toys' || (p.category === 'accessories' && p.occasions.includes('gifting'));
+    if (who === 'Boy') return p.category === 'gifts' || p.category === 'toys' || (p.category === 'accessories' && p.occasions.includes('gifting'));
     return true;
   }).slice(0, 4);
 
@@ -77,7 +80,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
                 <div className="rounded-2xl overflow-hidden aspect-square bg-[#F4F1EA] border border-[#F4F1EA] shadow-inner">
                   <img
                     src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
-                    alt="The Ultimate Birthday Celebration Hamper"
+                    alt="Birthday Gift Hamper"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -94,7 +97,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
                   </span>
                   
                   <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mt-1 mb-2">
-                    THE ULTIMATE BIRTHDAY HAMPER
+                    BIRTHDAY GIFT HAMPER
                   </h3>
 
                   <div className="flex items-baseline gap-3 mb-4">

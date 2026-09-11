@@ -1,8 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, ArrowRight, ArrowLeft, Heart, ShoppingBag, Eye, Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sparkles, ArrowRight, ArrowLeft, Heart, ShoppingBag, Eye, Check, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Product, ProductCategory, ActiveView } from '../types';
 import { NEW_ARRIVALS_PRODUCTS } from '../data/products';
+
+const getResolvedImage = (src: string): string => {
+  try {
+    const filename = src.split('/').pop() || '';
+    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+    if (stored[filename]) return stored[filename];
+  } catch (e) {}
+  return src;
+};
 
 interface NewArrivalsSectionProps {
   onQuickView: (product: Product) => void;
@@ -19,19 +28,20 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
   onToggleWishlist,
   onNavigate
 }) => {
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'girls' | 'boys' | 'accessories' | 'shoes'>('all');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby'>('all');
   const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(1);
   const railRef = useRef<HTMLDivElement>(null);
 
-  const filterTabs: { key: 'all' | 'girls' | 'boys' | 'accessories' | 'shoes'; label: string }[] = [
+  const filterTabs: { key: 'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby'; label: string }[] = [
     { key: 'all', label: 'All New In' },
     { key: 'girls', label: 'Girls' },
     { key: 'boys', label: 'Boys' },
-    { key: 'accessories', label: 'Bags & Accessories' },
+    { key: 'baby', label: 'Babies' },
     { key: 'shoes', label: 'Shoes' },
+    { key: 'accessories', label: 'Bags & Accessories' },
   ];
 
   const displayedProducts = NEW_ARRIVALS_PRODUCTS.filter(product => {
@@ -191,11 +201,29 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
                   onClick={() => onQuickView(product)}
                 >
                   <img
-                    src={product.images[0]}
+                    src={getResolvedImage(product.images[0])}
                     alt={product.name}
                     className="h-full w-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                     loading="lazy"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      // If the direct image is not yet on disk, hide broken icon and show subtle photo placeholder
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent && !parent.querySelector('.photo-placeholder')) {
+                        const div = document.createElement('div');
+                        div.className = 'photo-placeholder absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-[#EEF2F6]';
+                        div.innerHTML = `
+                          <div class="w-10 h-10 rounded-full bg-white text-[#123B68] flex items-center justify-center shadow-xs mb-1.5">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                          </div>
+                          <span class="text-[11px] font-bold text-[#123B68] leading-tight">${product.name}</span>
+                          <span class="text-[9px] text-[#5A6E85] mt-0.5">Photograph crop ready</span>
+                        `;
+                        parent.appendChild(div);
+                      }
+                    }}
                   />
 
                   {/* New Arrival Badge */}

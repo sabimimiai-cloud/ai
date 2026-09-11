@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
   Heart, 
@@ -10,11 +11,21 @@ import {
   MessageSquare, 
   Check, 
   MapPin, 
-  Share2 
+  Share2,
+  Camera
 } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../data/products';
 import { STORE_CONTACT } from '../data/storeData';
+
+const getResolvedImage = (src: string): string => {
+  try {
+    const filename = src.split('/').pop() || '';
+    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+    if (stored[filename]) return stored[filename];
+  } catch (e) {}
+  return src;
+};
 
 interface ProductDetailModalProps {
   product: Product | null;
@@ -111,7 +122,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             {/* Main Active Image */}
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#F4F1EA] border border-[#F4F1EA]">
               <img
-                src={product.images[selectedImageIndex] || product.images[0]}
+                src={getResolvedImage(product.images[selectedImageIndex] || product.images[0])}
                 alt={product.name}
                 className="w-full h-full object-cover object-center"
               />
