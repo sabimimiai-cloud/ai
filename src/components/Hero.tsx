@@ -82,7 +82,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
               <button
                 id="hero-find-gift-btn"
-                onClick={() => onNavigate('shop', 'gifts')}
+                onClick={() => {
+                  const finder = document.getElementById('guided-gift-finder');
+                  if (finder) {
+                    finder.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    onNavigate('shop', 'gifts');
+                  }
+                }}
                 className="bg-white hover:bg-[#F4F1EA] text-[#173F70] border-2 border-[#173F70] px-7 py-4 rounded-2xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition-all duration-200 cursor-pointer"
               >
                 <Gift className="w-4 h-4 text-[#F58220]" />

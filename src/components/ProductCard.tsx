@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, ShoppingBag, Eye, Star, Check, Camera } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, Star, Check } from 'lucide-react';
 import { Product } from '../types';
+
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  shoes: '/images/white_chunky_sandals.jpg',
+  girls: '/images/blue_flower_dress.jpg',
+  boys: '/images/boys_nigerian_denim.jpg',
+  baby: '/images/baby_nigerian_romper.jpg',
+  accessories: '/images/pink_school_backpack.jpg'
+};
 
 interface ProductCardProps {
   product: Product;
@@ -75,23 +83,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       {/* Image Container */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F1EA] cursor-pointer" onClick={handleView}>
-        {!hasError ? (
-          <img
-            src={imgSrc}
-            alt={product.name}
-            onError={() => setHasError(true)}
-            className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            loading="lazy"
-          />
-        ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-[#EEF2F6]">
-            <div className="w-12 h-12 rounded-full bg-white text-[#123B68] flex items-center justify-center shadow-xs mb-2">
-              <Camera className="w-6 h-6 text-[#123B68]" />
-            </div>
-            <span className="text-xs font-bold text-[#123B68]">{product.name}</span>
-            <span className="text-[10px] text-[#5A6E85] mt-0.5">Photograph crop ready</span>
-          </div>
-        )}
+        <img
+          src={hasError ? (CATEGORY_FALLBACK_IMAGES[product.category] || '/images/hero_nigerian_girl.jpg') : imgSrc}
+          alt={product.name}
+          onError={() => {
+            if (!hasError) setHasError(true);
+          }}
+          className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
 
         {/* Highlight Badge */}
         {product.highlightTag && (
@@ -192,11 +192,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
             </div>
-            <div className="flex items-center gap-1 text-[11px] text-amber-500">
-              <Star className="w-3 h-3 fill-current" />
-              <span className="font-bold text-[#172033]">{product.rating}</span>
-              <span className="text-gray-400 font-normal">({product.reviewCount})</span>
-            </div>
+            {product.rating !== undefined && product.reviewCount !== undefined && product.reviewCount > 0 && (
+              <div className="flex items-center gap-1 text-[11px] text-amber-500">
+                <Star className="w-3 h-3 fill-current" />
+                <span className="font-bold text-[#172033]">{product.rating}</span>
+                <span className="text-gray-400 font-normal">({product.reviewCount})</span>
+              </div>
+            )}
           </div>
 
           <button

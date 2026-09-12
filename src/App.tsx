@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { CategoryDiscovery } from './components/CategoryDiscovery';
@@ -22,14 +22,36 @@ import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { SizeGuideModal } from './components/SizeGuideModal';
-import { ScreenshotExtractorModal } from './components/ScreenshotExtractorModal';
 import { ShopView } from './views/ShopView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
-import { Product, CartItem, ActiveView, ProductCategory } from './types';
+import { OrdersView } from './views/OrdersView';
+import { Product, CartItem, ActiveView, ProductCategory, CustomerOrder, AppNavigationState } from './types';
 import { PRODUCTS } from './data/products';
 import { STORE_CONTACT } from './data/storeData';
-import { MessageSquare, Check, X, Camera } from 'lucide-react';
+import { getStoredCart, saveStoredCart, clearStoredCart, CART_STORAGE_KEY } from './utils/cartStorage';
+import { getStoredOrders, saveStoredOrder, ORDERS_STORAGE_KEY } from './utils/orderStorage';
+import { MessageSquare, Check, X } from 'lucide-react';
+
+function buildStateUrl(state: AppNavigationState): string {
+  const params = new URLSearchParams();
+  if (state.view !== 'home') {
+    params.set('view', state.view);
+  }
+  if (state.category && state.category !== 'all') {
+    params.set('category', state.category);
+  }
+  if (state.productId) {
+    params.set('product', state.productId);
+  }
+  if (state.checkoutOpen) {
+    params.set('checkout', 'open');
+  } else if (state.cartOpen) {
+    params.set('cart', 'open');
+  }
+  const queryString = params.toString();
+  return queryString ? `?${queryString}` : window.location.pathname;
+}
 
 export function App() {
   const [activeView, setActiveView] = useState<ActiveView>('home');
@@ -42,31 +64,18 @@ export function App() {
   const [isWishlistOpen, setIsWishlistOpen] = useState<boolean>(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState<boolean>(false);
-  const [isExtractorOpen, setIsExtractorOpen] = useState<boolean>(false);
   
   // Toast Notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Cart State with localStorage and catalog hydration
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    try {
-      const saved = localStorage.getItem('buubu_bloom_cart');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          return parsed
-            .filter((item): item is CartItem => Boolean(item && item.product && item.product.id))
-            .map(item => {
-              const freshProduct = PRODUCTS.find(p => p.id === item.product.id);
-              return freshProduct ? { ...item, product: freshProduct } : item;
-            });
-        }
-      }
-      return [];
-    } catch {
-      return [];
-    }
-  });
+  // Depth tracking for internal vs external history pop
+  const depthRef = useRef<number>(0);
+
+  // 1. Cart State - Persistent across reloads, navigation & sessions via buubu_bloom_cart
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => getStoredCart());
+
+  // 2. Orders History State - Persistent across sessions via buubu_bloom_orders
+  const [orders, setOrders] = useState<CustomerOrder[]>(() => getStoredOrders());
 
   // Wishlist State with localStorage and catalog hydration
   const [wishlistItems, setWishlistItems] = useState<Product[]>(() => {
@@ -102,13 +111,23 @@ export function App() {
     }
   });
 
+  // Save cart immediately whenever cartItems changes
   useEffect(() => {
-    try {
-      localStorage.setItem('buubu_bloom_cart', JSON.stringify(cartItems));
-    } catch (e) {
-      console.error('Failed to save cart:', e);
-    }
+    saveStoredCart(cartItems);
   }, [cartItems]);
+
+  // Cross-tab / Window storage synchronization for cart and orders
+  useEffect(() => {
+    const handleStorageEvent = (e: StorageEvent) => {
+      if (e.key === CART_STORAGE_KEY) {
+        setCartItems(getStoredCart());
+      } else if (e.key === ORDERS_STORAGE_KEY) {
+        setOrders(getStoredOrders());
+      }
+    };
+    window.addEventListener('storage', handleStorageEvent);
+    return () => window.removeEventListener('storage', handleStorageEvent);
+  }, []);
 
   useEffect(() => {
     try {
@@ -131,7 +150,7 @@ export function App() {
     try {
       const params = new URLSearchParams(window.location.search);
       const cartParam = params.get('cart');
-      if (cartParam) {
+      if (cartParam && cartParam !== 'open') {
         const decoded = JSON.parse(decodeURIComponent(cartParam));
         if (Array.isArray(decoded) && decoded.length > 0) {
           const loadedItems: CartItem[] = [];
@@ -150,7 +169,6 @@ export function App() {
             setCartItems(loadedItems);
             setIsCartOpen(true);
             showToast('Loaded shared cart items');
-            window.history.replaceState({}, document.title, window.location.pathname);
           }
         }
       }
@@ -159,25 +177,87 @@ export function App() {
     }
   }, []);
 
-  // Selection with tracking for recently viewed
-  const handleSelectProduct = (product: Product | null) => {
-    setSelectedProduct(product);
-    if (product) {
-      setRecentlyViewedIds(prev => {
-        const filtered = prev.filter(id => id !== product.id);
-        return [product.id, ...filtered].slice(0, 10);
-      });
-    }
-  };
+  // Initialize Navigation State on initial page load
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const viewParam = params.get('view') as ActiveView;
+    const initialView: ActiveView = ['home', 'shop', 'about', 'contact', 'gifting', 'orders'].includes(viewParam) 
+      ? viewParam 
+      : 'home';
+    const categoryParam = (params.get('category') as ProductCategory) || 'all';
+    const productParam = params.get('product');
+    const cartParam = params.get('cart');
+    const checkoutParam = params.get('checkout');
 
-  // Scroll to top on view change
-  const handleNavigate = (view: ActiveView, category?: ProductCategory) => {
-    setActiveView(view);
-    if (category) {
-      setSelectedCategory(category);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+    const initialProduct = productParam ? (PRODUCTS.find(p => p.id === productParam) || null) : null;
+    const initialCartOpen = cartParam === 'open';
+    const initialCheckoutOpen = checkoutParam === 'open';
+
+    const existingDepth = typeof window.history.state?._depth === 'number' ? window.history.state._depth : 0;
+    depthRef.current = existingDepth;
+
+    const initialState: AppNavigationState = {
+      view: initialView,
+      category: categoryParam,
+      productId: initialProduct ? initialProduct.id : null,
+      cartOpen: initialCartOpen,
+      checkoutOpen: initialCheckoutOpen,
+      _depth: existingDepth
+    };
+
+    window.history.replaceState(initialState, '', window.location.href);
+
+    setActiveView(initialView);
+    setSelectedCategory(categoryParam);
+    if (initialProduct) setSelectedProduct(initialProduct);
+    if (initialCartOpen) setIsCartOpen(true);
+    if (initialCheckoutOpen) setIsCheckoutOpen(true);
+  }, []);
+
+  // Listen to native Browser Back & Forward events (popstate)
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      const state = e.state as AppNavigationState | null;
+      if (state) {
+        if (typeof state._depth === 'number') {
+          depthRef.current = state._depth;
+        }
+
+        const nextView: ActiveView = state.view || 'home';
+        setActiveView(nextView);
+
+        if (state.category) {
+          setSelectedCategory(state.category);
+        }
+
+        if (state.productId) {
+          const found = PRODUCTS.find(p => p.id === state.productId);
+          setSelectedProduct(found || null);
+        } else {
+          setSelectedProduct(null);
+        }
+
+        setIsCartOpen(Boolean(state.cartOpen));
+        setIsCheckoutOpen(Boolean(state.checkoutOpen));
+      } else {
+        const params = new URLSearchParams(window.location.search);
+        const viewParam = params.get('view') as ActiveView;
+        const v: ActiveView = ['home', 'shop', 'about', 'contact', 'gifting', 'orders'].includes(viewParam) 
+          ? viewParam 
+          : 'home';
+        setActiveView(v);
+        const cat = (params.get('category') as ProductCategory) || 'all';
+        setSelectedCategory(cat);
+        const prodId = params.get('product');
+        setSelectedProduct(prodId ? (PRODUCTS.find(p => p.id === prodId) || null) : null);
+        setIsCartOpen(params.get('cart') === 'open');
+        setIsCheckoutOpen(params.get('checkout') === 'open');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   const showToast = (message: string) => {
     setToastMessage(message);
@@ -185,6 +265,156 @@ export function App() {
       setToastMessage(null);
     }, 3000);
   };
+
+  // Safe Navigation Handler: pushes browser history so Back button restores prior page
+  const handleNavigate = useCallback((view: ActiveView, category?: ProductCategory) => {
+    const nextCategory = category || (view === 'shop' ? selectedCategory : 'all');
+    const nextDepth = depthRef.current + 1;
+    depthRef.current = nextDepth;
+
+    const nextState: AppNavigationState = {
+      view,
+      category: nextCategory,
+      productId: null,
+      cartOpen: false,
+      checkoutOpen: false,
+      _depth: nextDepth
+    };
+
+    window.history.pushState(nextState, '', buildStateUrl(nextState));
+
+    setActiveView(view);
+    if (category) {
+      setSelectedCategory(category);
+    }
+    setSelectedProduct(null);
+    setIsCartOpen(false);
+    setIsCheckoutOpen(false);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [selectedCategory]);
+
+  // Product Selection / Modal Opener
+  const handleSelectProduct = useCallback((product: Product | null) => {
+    if (product) {
+      const nextDepth = depthRef.current + 1;
+      depthRef.current = nextDepth;
+
+      const nextState: AppNavigationState = {
+        view: activeView,
+        category: selectedCategory,
+        productId: product.id,
+        cartOpen: false,
+        checkoutOpen: false,
+        _depth: nextDepth
+      };
+
+      window.history.pushState(nextState, '', buildStateUrl(nextState));
+
+      setSelectedProduct(product);
+      setIsCartOpen(false);
+      setIsCheckoutOpen(false);
+
+      setRecentlyViewedIds(prev => {
+        const filtered = prev.filter(id => id !== product.id);
+        return [product.id, ...filtered].slice(0, 10);
+      });
+    } else {
+      handleCloseProduct();
+    }
+  }, [activeView, selectedCategory]);
+
+  // Close Product Detail Modal cleanly respecting history
+  const handleCloseProduct = useCallback(() => {
+    if (depthRef.current > 0) {
+      window.history.back();
+    } else {
+      const nextState: AppNavigationState = {
+        view: activeView,
+        category: selectedCategory,
+        productId: null,
+        cartOpen: false,
+        checkoutOpen: false,
+        _depth: 0
+      };
+      window.history.replaceState(nextState, '', buildStateUrl(nextState));
+      setSelectedProduct(null);
+    }
+  }, [activeView, selectedCategory]);
+
+  // Open Cart Drawer
+  const handleOpenCart = useCallback(() => {
+    const nextDepth = depthRef.current + 1;
+    depthRef.current = nextDepth;
+
+    const nextState: AppNavigationState = {
+      view: activeView,
+      category: selectedCategory,
+      productId: selectedProduct ? selectedProduct.id : null,
+      cartOpen: true,
+      checkoutOpen: false,
+      _depth: nextDepth
+    };
+
+    window.history.pushState(nextState, '', buildStateUrl(nextState));
+    setIsCartOpen(true);
+    setIsCheckoutOpen(false);
+  }, [activeView, selectedCategory, selectedProduct]);
+
+  // Close Cart Drawer cleanly respecting history
+  const handleCloseCart = useCallback(() => {
+    if (depthRef.current > 0) {
+      window.history.back();
+    } else {
+      const nextState: AppNavigationState = {
+        view: activeView,
+        category: selectedCategory,
+        productId: selectedProduct ? selectedProduct.id : null,
+        cartOpen: false,
+        checkoutOpen: false,
+        _depth: 0
+      };
+      window.history.replaceState(nextState, '', buildStateUrl(nextState));
+      setIsCartOpen(false);
+    }
+  }, [activeView, selectedCategory, selectedProduct]);
+
+  // Open Checkout Modal
+  const handleOpenCheckout = useCallback(() => {
+    const nextDepth = depthRef.current + 1;
+    depthRef.current = nextDepth;
+
+    const nextState: AppNavigationState = {
+      view: activeView,
+      category: selectedCategory,
+      productId: selectedProduct ? selectedProduct.id : null,
+      cartOpen: false,
+      checkoutOpen: true,
+      _depth: nextDepth
+    };
+
+    window.history.pushState(nextState, '', buildStateUrl(nextState));
+    setIsCartOpen(false);
+    setIsCheckoutOpen(true);
+  }, [activeView, selectedCategory, selectedProduct]);
+
+  // Close Checkout Modal cleanly respecting history
+  const handleCloseCheckout = useCallback(() => {
+    if (depthRef.current > 0) {
+      window.history.back();
+    } else {
+      const nextState: AppNavigationState = {
+        view: activeView,
+        category: selectedCategory,
+        productId: selectedProduct ? selectedProduct.id : null,
+        cartOpen: false,
+        checkoutOpen: false,
+        _depth: 0
+      };
+      window.history.replaceState(nextState, '', buildStateUrl(nextState));
+      setIsCheckoutOpen(false);
+    }
+  }, [activeView, selectedCategory, selectedProduct]);
 
   // Cart operations
   const handleAddToCart = (
@@ -235,6 +465,15 @@ export function App() {
 
   const handleClearCart = () => {
     setCartItems([]);
+    clearStoredCart();
+  };
+
+  // Called when customer successfully submits and places their order
+  const handleOrderPlaced = (newOrder: CustomerOrder) => {
+    const updated = saveStoredOrder(newOrder);
+    setOrders(updated);
+    handleClearCart();
+    showToast(`Order ${newOrder.orderNumber} confirmed & saved to My Orders!`);
   };
 
   // Wishlist operations
@@ -287,9 +526,10 @@ export function App() {
         onNavigate={handleNavigate}
         cartCount={totalCartCount}
         wishlistCount={wishlistItems.length}
-        onOpenCart={() => setIsCartOpen(true)}
+        ordersCount={orders.length}
+        onOpenCart={handleOpenCart}
         onOpenWishlist={() => setIsWishlistOpen(true)}
-        onSelectProduct={(p) => setSelectedProduct(p)}
+        onSelectProduct={(p) => handleSelectProduct(p)}
       />
 
       {/* Main Views */}
@@ -414,6 +654,14 @@ export function App() {
         {activeView === 'contact' && (
           <ContactView />
         )}
+
+        {activeView === 'orders' && (
+          <OrdersView 
+            orders={orders}
+            onNavigate={handleNavigate}
+            onSelectProduct={handleSelectProduct}
+          />
+        )}
       </main>
 
       {/* Floating WhatsApp Quick Concierge */}
@@ -431,33 +679,10 @@ export function App() {
         </span>
       </a>
 
-      {/* Screenshot Photo Extractor Trigger */}
-      <button
-        id="open-photo-extractor-btn"
-        onClick={() => setIsExtractorOpen(true)}
-        className="fixed bottom-6 left-6 z-40 bg-[#123B68] hover:bg-[#0E2E52] text-white p-3.5 sm:px-4 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2 transition-all hover:scale-105 active:scale-95 border-2 border-white cursor-pointer"
-        title="Extract Product Photos from Screenshots"
-      >
-        <Camera className="w-5 h-5 text-[#F58220]" />
-        <span className="hidden sm:inline font-bold text-xs tracking-wide">
-          Extract Screenshot Photos
-        </span>
-      </button>
-
-      {/* Screenshot Extractor Modal */}
-      <ScreenshotExtractorModal
-        isOpen={isExtractorOpen}
-        onClose={() => setIsExtractorOpen(false)}
-        onExtractionComplete={() => {
-          setToastMessage('All genuine product photographs extracted & catalogue updated!');
-          setTimeout(() => setToastMessage(null), 3500);
-        }}
-      />
-
       {/* Product Detail Modal */}
       <ProductDetailModal
         product={selectedProduct}
-        onClose={() => handleSelectProduct(null)}
+        onClose={handleCloseProduct}
         onAddToCart={handleAddToCart}
         isWishlisted={selectedProduct ? wishlistIds.includes(selectedProduct.id) : false}
         onToggleWishlist={handleToggleWishlist}
@@ -468,16 +693,13 @@ export function App() {
       {/* Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
+        onClose={handleCloseCart}
         items={cartItems}
         onUpdateQuantity={handleUpdateCartQuantity}
         onRemoveItem={handleRemoveCartItem}
-        onOpenCheckout={() => {
-          setIsCartOpen(false);
-          setIsCheckoutOpen(true);
-        }}
+        onOpenCheckout={handleOpenCheckout}
         onNavigateToShop={() => {
-          setIsCartOpen(false);
+          handleCloseCart();
           handleNavigate('shop', 'all');
         }}
       />
@@ -495,9 +717,11 @@ export function App() {
       {/* Checkout Modal */}
       <CheckoutModal
         isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
+        onClose={handleCloseCheckout}
         items={cartItems}
         onClearCart={handleClearCart}
+        onOrderPlaced={handleOrderPlaced}
+        onViewOrders={() => handleNavigate('orders')}
       />
 
       {/* Size Guide Modal */}

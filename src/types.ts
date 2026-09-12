@@ -21,6 +21,12 @@ export type AgeGroup =
   | '8-12Y' 
   | 'all-ages';
 
+export interface BundleItem {
+  name: string;
+  image?: string;
+  description?: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -28,8 +34,8 @@ export interface Product {
   subCategory?: string;
   price: number; // in NGN
   originalPrice?: number;
-  rating: number;
-  reviewCount: number;
+  rating?: number;
+  reviewCount?: number;
   images: string[];
   description: string;
   highlightTag?: string; // e.g. "Trending", "New In", "Birthday Favourite", "Staff Pick"
@@ -41,6 +47,7 @@ export interface Product {
   isDemonstration?: boolean;
   occasions: OccasionMoment[];
   ageGroup: AgeGroup;
+  whatsInside?: BundleItem[];
   details: {
     material: string;
     fit: string;
@@ -65,4 +72,45 @@ export interface FilterState {
   sortBy: 'featured' | 'price-low' | 'price-high' | 'newest';
 }
 
-export type ActiveView = 'home' | 'shop' | 'about' | 'contact' | 'gifting';
+export type ActiveView = 'home' | 'shop' | 'about' | 'contact' | 'gifting' | 'orders';
+
+export interface OrderItem {
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  selectedSize: string;
+  selectedColor: string;
+  image: string;
+}
+
+export interface CustomerDetails {
+  fullName: string;
+  phoneNumber: string;
+  deliveryMethod: 'delivery' | 'pickup';
+  deliveryState: string;
+  address: string;
+  notes?: string;
+}
+
+export interface CustomerOrder {
+  id: string; // Unique local order ID (e.g. BB-20260912-001)
+  orderNumber: string; // Formatted Order Number (#BB-20260912-001)
+  createdAt: string; // ISO date string
+  formattedDate: string; // e.g. "12 September 2026"
+  items: OrderItem[];
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+  customer: CustomerDetails;
+  status: 'Order Received' | 'Confirmed' | 'Dispatched' | 'Delivered';
+}
+
+export interface AppNavigationState {
+  view: ActiveView;
+  category?: ProductCategory;
+  productId?: string | null;
+  cartOpen?: boolean;
+  checkoutOpen?: boolean;
+  _depth?: number;
+}

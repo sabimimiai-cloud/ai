@@ -98,6 +98,10 @@ export const WishlistDrawer: React.FC<WishlistDrawerProps> = ({
                     src={prod.images[0]}
                     alt={prod.name}
                     className="w-16 h-20 rounded-xl object-cover bg-[#F4F1EA] cursor-pointer"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.src = '/images/hero_nigerian_girl.jpg';
+                    }}
                     onClick={() => {
                       onClose();
                       handleView(prod);

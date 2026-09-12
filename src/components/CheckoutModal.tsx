@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   MapPin, 
@@ -6,36 +6,62 @@ import {
   Truck, 
   CheckCircle2, 
   MessageSquare, 
-  ShieldCheck, 
   Sparkles,
-  ShoppingBag,
-  Info
+  Info,
+  Package
 } from 'lucide-react';
-import { CartItem } from '../types';
+import { CartItem, CustomerOrder, CustomerDetails } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
+import { 
+  getStoredCheckoutDraft, 
+  saveStoredCheckoutDraft, 
+  clearStoredCheckoutDraft 
+} from '../utils/checkoutStorage';
+import { createCustomerOrderFromCart } from '../utils/orderStorage';
 
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
   items: CartItem[];
   onClearCart: () => void;
+  onOrderPlaced?: (order: CustomerOrder) => void;
+  onViewOrders?: () => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   isOpen,
   onClose,
   items,
-  onClearCart
+  onClearCart,
+  onOrderPlaced,
+  onViewOrders
 }) => {
   if (!isOpen) return null;
 
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
-  const [deliveryState, setDeliveryState] = useState('Lagos (Lekki / Ajah / Orchid)');
-  const [address, setAddress] = useState('');
-  const [notes, setNotes] = useState('');
+  // Initialize with preserved draft state if customer previously entered details
+  const initialDraft = getStoredCheckoutDraft();
+  const [fullName, setFullName] = useState(initialDraft.fullName);
+  const [phoneNumber, setPhoneNumber] = useState(initialDraft.phoneNumber);
+  const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>(initialDraft.deliveryMethod);
+  const [deliveryState, setDeliveryState] = useState(initialDraft.deliveryState || 'Lagos (Lekki / Ajah / Orchid)');
+  const [address, setAddress] = useState(initialDraft.address);
+  const [notes, setNotes] = useState(initialDraft.notes);
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const [completedOrder, setCompletedOrder] = useState<CustomerOrder | null>(null);
+
+  // Auto-save non-sensitive draft information during the current session
+  useEffect(() => {
+    if (!orderPlaced) {
+      saveStoredCheckoutDraft({
+        fullName,
+        phoneNumber,
+        deliveryMethod,
+        deliveryState,
+        address,
+        notes
+      });
+    }
+  }, [fullName, phoneNumber, deliveryMethod, deliveryState, address, notes, orderPlaced]);
 
   const subtotal = items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
   
@@ -51,11 +77,43 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   const handleSubmitOrder = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (items.length === 0 && !completedOrder) {
+      return;
+    }
+
+    const customerDetails: CustomerDetails = {
+      fullName: fullName.trim() || 'Customer',
+      phoneNumber: phoneNumber.trim() || 'Not provided',
+      deliveryMethod,
+      deliveryState: deliveryMethod === 'pickup' ? 'Lagos (Store Pickup)' : deliveryState,
+      address: deliveryMethod === 'pickup' ? 'Galleria Mall, Orchid Road, Lagos' : address.trim(),
+      notes: notes.trim() || undefined
+    };
+
+    // 1. Convert current cart into a persistent customer order
+    const newOrder = createCustomerOrderFromCart(items, customerDetails, deliveryFee);
+    setCompletedOrder(newOrder);
+
+    // 2. Add that order to Order History
+    if (onOrderPlaced) {
+      onOrderPlaced(newOrder);
+    }
+
+    // 3. Clear draft and active cart
+    clearStoredCheckoutDraft();
+    onClearCart();
+
+    // 4. Show confirmation
     setOrderPlaced(true);
   };
 
+  const activeOrder = completedOrder;
+  const displayTotal = activeOrder ? activeOrder.total : total;
+
   const formattedWhatsAppReceipt = encodeURIComponent(
-    `🛍️ *NEW ORDER - BUUBU BLOOM LAGOS*\n\n` +
+    `🛍️ *NEW ORDER - BUUBU BLOOM LAGOS*\n` +
+    `*Order Number:* ${activeOrder ? activeOrder.orderNumber : 'New Order'}\n\n` +
     `*Customer Details:*\n` +
     `• Name: ${fullName || 'Customer'}\n` +
     `• Phone: ${phoneNumber || 'Not provided'}\n` +
@@ -63,10 +121,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     (deliveryMethod === 'delivery' ? `• Address: ${address}\n` : '') +
     (notes ? `• Special Instructions / Sizing Note: ${notes}\n` : '') +
     `\n*Items Ordered:*\n` +
-    items.map(item => `• ${item.quantity}x ${item.product.name} [Size: ${item.selectedSize}, Color: ${item.selectedColor}] - ₦${(item.product.price * item.quantity).toLocaleString()}`).join('\n') +
-    `\n\n*Items Subtotal:* ₦${subtotal.toLocaleString()}\n` +
-    `*Delivery Fee:* ${deliveryFee === 0 ? 'FREE (Store Pickup)' : `₦${deliveryFee.toLocaleString()}`}\n` +
-    `*TOTAL:* ₦${total.toLocaleString()}\n\n` +
+    (activeOrder ? activeOrder.items : items).map(item => {
+      const name = 'name' in item ? item.name : item.product.name;
+      const size = item.selectedSize;
+      const color = item.selectedColor;
+      const price = 'price' in item ? item.price : item.product.price;
+      return `• ${item.quantity}x ${name} [Size: ${size}, Color: ${color}] - ₦${(price * item.quantity).toLocaleString()}`;
+    }).join('\n') +
+    `\n\n*Items Subtotal:* ₦${(activeOrder ? activeOrder.subtotal : subtotal).toLocaleString()}\n` +
+    `*Delivery Fee:* ${(activeOrder ? activeOrder.deliveryFee : deliveryFee) === 0 ? 'FREE (Store Pickup)' : `₦${(activeOrder ? activeOrder.deliveryFee : deliveryFee).toLocaleString()}`}\n` +
+    `*TOTAL:* ₦${displayTotal.toLocaleString()}\n\n` +
     `Please confirm stock availability and send payment/account instructions to finalize this order!`
   );
 
@@ -84,7 +148,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#F4F1EA] hover:bg-gray-200 text-[#123B68] flex items-center justify-center transition-colors"
+          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#F4F1EA] hover:bg-gray-200 text-[#123B68] flex items-center justify-center transition-colors cursor-pointer"
           aria-label="Close checkout"
         >
           <X className="w-5 h-5" />
@@ -97,12 +161,20 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <CheckCircle2 className="w-10 h-10" />
             </div>
 
+            {activeOrder && (
+              <div className="inline-flex items-center gap-1.5 bg-[#FFFDF8] border border-[#F4F1EA] px-3.5 py-1 rounded-full text-xs font-bold text-[#173F70]">
+                <span>Order {activeOrder.orderNumber}</span>
+                <span>•</span>
+                <span className="text-[#27AFA5]">Saved to Order History</span>
+              </div>
+            )}
+
             <h2 className="text-2xl sm:text-3xl font-black text-[#123B68] font-display">
               Your Order is Ready!
             </h2>
 
             <p className="text-sm text-[#172033]/80 max-w-md mx-auto">
-              Your order total is <strong>₦{total.toLocaleString()}</strong>. Tap below to send your order details directly to our team on WhatsApp. We'll confirm your items, share payment details, and dispatch your package!
+              Your order total is <strong>₦{displayTotal.toLocaleString()}</strong>. Tap below to send your order details directly to our team on WhatsApp. We'll confirm your items, share payment details, and dispatch your package!
             </p>
 
             <div className="pt-4 max-w-md mx-auto space-y-3">
@@ -110,18 +182,29 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${formattedWhatsAppReceipt}`}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => onClearCart()}
-                className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
+                className="w-full bg-[#27AFA3] hover:bg-[#209086] text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
               >
                 <MessageSquare className="w-5 h-5" />
                 <span>SEND ORDER VIA WHATSAPP (0806 014 3654)</span>
               </a>
 
+              {onViewOrders && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onViewOrders();
+                  }}
+                  className="w-full bg-[#173F70] hover:bg-[#2563C7] text-white py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                >
+                  <Package className="w-4 h-4 text-[#F9C928]" />
+                  <span>VIEW IN MY ORDERS</span>
+                </button>
+              )}
+
               <button
-                onClick={() => {
-                  onClearCart();
-                  onClose();
-                }}
+                type="button"
+                onClick={onClose}
                 className="w-full bg-[#F4F1EA] text-[#123B68] py-3 rounded-2xl font-bold text-xs hover:bg-gray-200 transition-colors cursor-pointer"
               >
                 BACK TO STORE

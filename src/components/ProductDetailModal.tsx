@@ -11,8 +11,7 @@ import {
   MessageSquare, 
   Check, 
   MapPin, 
-  Share2,
-  Camera
+  Share2
 } from 'lucide-react';
 import { Product } from '../types';
 import { PRODUCTS } from '../data/products';
@@ -125,6 +124,20 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 src={getResolvedImage(product.images[selectedImageIndex] || product.images[0])}
                 alt={product.name}
                 className="w-full h-full object-cover object-center"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  const fallbacks: Record<string, string> = {
+                    shoes: '/images/white_chunky_sandals.jpg',
+                    girls: '/images/blue_flower_dress.jpg',
+                    boys: '/images/boys_nigerian_denim.jpg',
+                    baby: '/images/baby_nigerian_romper.jpg',
+                    accessories: '/images/pink_school_backpack.jpg'
+                  };
+                  const fallback = fallbacks[product.category] || '/images/hero_nigerian_girl.jpg';
+                  if (target.src !== fallback) {
+                    target.src = fallback;
+                  }
+                }}
               />
               
               {product.highlightTag && (
@@ -147,7 +160,15 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         : 'border-transparent opacity-70 hover:opacity-100'
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img 
+                      src={getResolvedImage(img)} 
+                      alt="" 
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.src = '/images/hero_nigerian_girl.jpg';
+                      }}
+                    />
                   </button>
                 ))}
               </div>
@@ -162,11 +183,13 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <span className="text-xs font-black uppercase tracking-widest text-[#27AFA3]">
                   {product.category}
                 </span>
-                <div className="flex items-center gap-1 text-amber-500 text-xs font-bold">
-                  <Star className="w-3.5 h-3.5 fill-current" />
-                  <span>{product.rating}</span>
-                  <span className="text-gray-400 font-normal">({product.reviewCount} reviews)</span>
-                </div>
+                {product.rating !== undefined && product.reviewCount !== undefined && product.reviewCount > 0 && (
+                  <div className="flex items-center gap-1 text-amber-500 text-xs font-bold">
+                    <Star className="w-3.5 h-3.5 fill-current" />
+                    <span>{product.rating}</span>
+                    <span className="text-gray-400 font-normal">({product.reviewCount} reviews)</span>
+                  </div>
+                )}
               </div>
 
               {/* Title */}
@@ -193,6 +216,51 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <p className="text-sm text-[#172033]/80 leading-relaxed mb-6">
                 {product.description}
               </p>
+
+              {/* What's Inside Section for Bundles / Gift Boxes */}
+              {product.whatsInside && product.whatsInside.length > 0 && (
+                <div className="mb-6 bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 sm:p-5">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="text-xs sm:text-sm font-black text-[#123B68] uppercase tracking-wider">
+                      What's inside
+                    </h4>
+                    <span className="text-[11px] font-bold text-[#27AFA3]">
+                      {product.whatsInside.length} included items
+                    </span>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {product.whatsInside.map((item, idx) => (
+                      <div 
+                        key={idx}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-white border border-[#F4F1EA]"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-[#F4F1EA] flex items-center justify-center font-bold text-xs text-[#123B68] shrink-0 overflow-hidden">
+                          {item.image ? (
+                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <span>{idx + 1}</span>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold text-[#172033] truncate">
+                            {item.name}
+                          </p>
+                          {item.description && (
+                            <p className="text-[11px] text-[#172033]/65 leading-tight mt-0.5">
+                              {item.description}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <p className="text-[11px] text-[#172033]/70 mt-3 pt-2.5 border-t border-[#F4F1EA]">
+                    Contents are tailored to the recipient's age group and sizing preference upon order confirmation.
+                  </p>
+                </div>
+              )}
 
               {/* Size Selector */}
               <div className="mb-5">

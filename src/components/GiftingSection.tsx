@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
-import { Gift, Cake, Baby, Sparkles, Heart, ArrowRight, ShoppingBag, Check, Phone } from 'lucide-react';
+import React, { useState, useMemo, useRef } from 'react';
+import { 
+  Gift, 
+  Cake, 
+  Baby, 
+  Heart, 
+  Sparkles, 
+  ShoppingBag, 
+  Check, 
+  MessageSquare, 
+  ArrowRight, 
+  RefreshCw, 
+  Shirt, 
+  UserCheck,
+  Calendar,
+  Compass,
+  Star,
+  ExternalLink
+} from 'lucide-react';
 import { ActiveView, ProductCategory, Product } from '../types';
 import { PRODUCTS } from '../data/products';
 import { STORE_CONTACT } from '../data/storeData';
+import { 
+  GiftAudience, 
+  GiftAgeRange, 
+  GiftOccasion, 
+  getGiftRecommendations, 
+  getRecommendationHeadline,
+  GiftRecommendationItem 
+} from '../data/giftRecommendations';
 
 interface GiftingSectionProps {
   onNavigate: (view: ActiveView, category?: ProductCategory) => void;
@@ -10,34 +35,140 @@ interface GiftingSectionProps {
   onAddToCart?: (product: Product, size?: string, color?: string) => void;
 }
 
-type RecipientType = 'Girl' | 'Boy' | 'Baby';
-type AgeType = '0–2' | '3–5' | '6–9' | '10–13' | 'Teen';
-type OccasionType = 'Birthday' | 'Baby gift' | 'Christmas' | 'Just because' | 'Something special';
-
 export const GiftingSection: React.FC<GiftingSectionProps> = ({
   onNavigate,
   onQuickView,
   onAddToCart
 }) => {
-  const [who, setWho] = useState<RecipientType>('Girl');
-  const [age, setAge] = useState<AgeType>('3–5');
-  const [occasion, setOccasion] = useState<OccasionType>('Birthday');
-  const [picked, setPicked] = useState<boolean>(true);
+  // Gift Finder Selections
+  const [who, setWho] = useState<GiftAudience>('Girl');
+  const [age, setAge] = useState<GiftAgeRange>('3-5');
+  const [occasion, setOccasion] = useState<GiftOccasion>('Birthday');
 
-  // Dynamic filter based on selected inputs - ensure only genuine gifts, toys, or curated gift items
-  const recommendedGifts = PRODUCTS.filter(p => {
-    const isGiftable = p.category === 'gifts' || p.category === 'toys' || p.occasions.includes('gifting') || p.occasions.includes('birthday');
-    if (!isGiftable) return false;
+  // UI interaction feedback
+  const [addedBoxNotice, setAddedBoxNotice] = useState<boolean>(false);
+  const [addedItemNotice, setAddedItemNotice] = useState<string | null>(null);
+  const [isHighlighted, setIsHighlighted] = useState<boolean>(false);
 
-    if (who === 'Baby') return p.category === 'baby' || p.category === 'gifts' || p.category === 'toys';
-    if (who === 'Girl') return p.category === 'gifts' || p.category === 'toys' || (p.category === 'accessories' && p.occasions.includes('gifting'));
-    if (who === 'Boy') return p.category === 'gifts' || p.category === 'toys' || (p.category === 'accessories' && p.occasions.includes('gifting'));
-    return true;
-  }).slice(0, 4);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  // Find the Birthday Gift Box from real catalogue data
+  const birthdayGiftBox = useMemo(() => {
+    return PRODUCTS.find(p => p.id === 'bb-gft-001');
+  }, []);
+
+  // Map product IDs to full Product models from catalogue for instant cart & quick view
+  const productMap = useMemo(() => {
+    const map = new Map<string, Product>();
+    PRODUCTS.forEach(p => map.set(p.id, p));
+    return map;
+  }, []);
+
+  // Derived recommendation items based on who + age + occasion
+  const recommendations = useMemo(() => {
+    return getGiftRecommendations(who, age, occasion);
+  }, [who, age, occasion]);
+
+  const { title: headlineTitle, subtitle: headlineSubtitle } = useMemo(() => {
+    return getRecommendationHeadline(who, age, occasion);
+  }, [who, age, occasion]);
+
+  const ageDisplayLabel = useMemo(() => {
+    switch (age) {
+      case '0-2': return '0–2 years';
+      case '3-5': return '3–5 years';
+      case '6-9': return '6–9 years';
+      case '10-13': return '10–13 years';
+    }
+  }, [age]);
 
   const whatsappInquiryUrl = `https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(
-    `Hello Buubu Bloom! 🎁 I need help picking a gift for a ${who} (Age: ${age}) for ${occasion}. What would you recommend?`
+    `Hello Buubu Bloom, I need help choosing a gift for a ${who} (${ageDisplayLabel}) for ${occasion}. Could you suggest options?`
   )}`;
+
+  // When clicking "Help Me Pick"
+  const handleHelpMePick = () => {
+    setIsHighlighted(true);
+    setTimeout(() => setIsHighlighted(false), 2000);
+
+    if (resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      const el = document.getElementById('gift-recommendation-results');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Audience selector handler with smart age-coordination
+  const handleSelectAudience = (selectedAudience: GiftAudience) => {
+    setWho(selectedAudience);
+    if (selectedAudience === 'Baby') {
+      setAge('0-2');
+    }
+  };
+
+  // Age selector handler with smart audience-coordination
+  const handleSelectAge = (selectedAge: GiftAgeRange) => {
+    setAge(selectedAge);
+    // If Baby was selected but user chooses 6-9 or 10-13, gracefully switch to Not Sure
+    if (who === 'Baby' && (selectedAge === '6-9' || selectedAge === '10-13')) {
+      setWho('Not Sure');
+    }
+  };
+
+  // Quick gift path handler from the top banner
+  const handleSelectGiftPath = (path: 'Birthday' | 'Baby' | 'Girls' | 'Boys') => {
+    if (path === 'Birthday') {
+      setOccasion('Birthday');
+      setWho('Not Sure');
+      setAge('3-5');
+    } else if (path === 'Baby') {
+      setWho('Baby');
+      setAge('0-2');
+      setOccasion('Baby Gift');
+    } else if (path === 'Girls') {
+      setWho('Girl');
+      setAge('3-5');
+      setOccasion('Birthday');
+    } else if (path === 'Boys') {
+      setWho('Boy');
+      setAge('3-5');
+      setOccasion('Birthday');
+    }
+
+    const finder = document.getElementById('guided-gift-finder');
+    if (finder) {
+      finder.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleAddBox = () => {
+    if (birthdayGiftBox && onAddToCart) {
+      onAddToCart(birthdayGiftBox, birthdayGiftBox.sizes[0] || 'Curated by Age', 'Girls Bloom Theme');
+      setAddedBoxNotice(true);
+      setTimeout(() => setAddedBoxNotice(false), 3000);
+    }
+  };
+
+  const handleQuickAdd = (item: GiftRecommendationItem) => {
+    if (item.isRealCatalogueProduct && item.productId && onAddToCart) {
+      const prod = productMap.get(item.productId);
+      if (prod) {
+        onAddToCart(prod, prod.sizes[0] || 'Standard', prod.colors[0]?.name || 'Standard');
+        setAddedItemNotice(item.id);
+        setTimeout(() => setAddedItemNotice(null), 2500);
+      }
+    }
+  };
+
+  const handleOpenProduct = (item: GiftRecommendationItem) => {
+    if (item.isRealCatalogueProduct && item.productId && onQuickView) {
+      const prod = productMap.get(item.productId);
+      if (prod) {
+        onQuickView(prod);
+      }
+    }
+  };
 
   return (
     <section 
@@ -45,294 +176,567 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
       className="py-16 sm:py-24 bg-[#FFFDF8] border-b border-[#F4F1EA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        
-        {/* Standout Container */}
-        <div className="bg-gradient-to-br from-[#FFFDF8] to-[#F4F1EA]/60 rounded-3xl border border-[#F4F1EA] p-6 sm:p-10 lg:p-12 shadow-xl relative overflow-hidden">
-          {/* Subtle brand glow circles */}
-          <div className="absolute -top-20 -right-20 w-80 h-80 bg-[#F58220]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#27AFA5]/10 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 relative z-10">
-            <div className="inline-flex items-center gap-2 bg-[#F58220]/15 text-[#F58220] px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider mb-4">
-              <Gift className="w-4 h-4" />
-              <span>GIFT CONCIERGE</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#173F70] tracking-tight font-display leading-[1.15] mb-4">
-              Buying a gift and don’t know where to start?
-            </h2>
-
-            <p className="text-base sm:text-lg text-[#172033]/80 leading-relaxed">
-              Tell us a little about the child and we’ll help you narrow it down.
-            </p>
+        {/* Section Header: Clear, human copy */}
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 bg-[#F58220]/10 text-[#F58220] px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+            <Gift className="w-3.5 h-3.5" />
+            <span>Gift Guide</span>
           </div>
 
-          {/* Featured Ultimate Birthday Celebration Hamper */}
-          <div 
-            id="ultimate-birthday-hamper-feature"
-            className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-10 border-2 border-[#F58220]/30 shadow-xl mb-12 relative z-10"
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#173F70] tracking-tight font-display mb-3">
+            Need a gift?
+          </h2>
+
+          <p className="text-base sm:text-lg text-[#172033]/80 leading-relaxed font-medium">
+            Let us make the choice easier.
+          </p>
+        </div>
+
+        {/* 4 Clear Quick Gift Paths */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto mb-14">
+          <button
+            id="path-birthday-gifts-btn"
+            type="button"
+            onClick={() => handleSelectGiftPath('Birthday')}
+            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#F4F1EA] hover:border-[#F58220]/50 hover:shadow-md transition-all text-left group cursor-pointer"
           >
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="w-10 h-10 rounded-xl bg-[#F58220]/10 text-[#F58220] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <Cake className="w-5 h-5" />
+            </div>
+            <h3 className="text-sm font-bold text-[#173F70] mb-0.5">Birthday Gifts</h3>
+            <p className="text-xs text-[#172033]/65">Celebration outfits & boxes</p>
+          </button>
+
+          <button
+            id="path-baby-gifts-btn"
+            type="button"
+            onClick={() => handleSelectGiftPath('Baby')}
+            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#F4F1EA] hover:border-[#27AFA3]/50 hover:shadow-md transition-all text-left group cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-[#27AFA3]/10 text-[#27AFA3] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <Baby className="w-5 h-5" />
+            </div>
+            <h3 className="text-sm font-bold text-[#173F70] mb-0.5">Baby Gifts</h3>
+            <p className="text-xs text-[#172033]/65">Rompers, sets & essentials</p>
+          </button>
+
+          <button
+            id="path-girls-gifts-btn"
+            type="button"
+            onClick={() => handleSelectGiftPath('Girls')}
+            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#F4F1EA] hover:border-[#F58220]/50 hover:shadow-md transition-all text-left group cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-[#F58220]/10 text-[#F58220] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h3 className="text-sm font-bold text-[#173F70] mb-0.5">Gifts for Girls</h3>
+            <p className="text-xs text-[#172033]/65">Dresses, sets & accessories</p>
+          </button>
+
+          <button
+            id="path-boys-gifts-btn"
+            type="button"
+            onClick={() => handleSelectGiftPath('Boys')}
+            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#F4F1EA] hover:border-[#2563C7]/50 hover:shadow-md transition-all text-left group cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-[#2563C7]/10 text-[#2563C7] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <Shirt className="w-5 h-5" />
+            </div>
+            <h3 className="text-sm font-bold text-[#173F70] mb-0.5">Gifts for Boys</h3>
+            <p className="text-xs text-[#172033]/65">Casual sets, shoes & shirts</p>
+          </button>
+        </div>
+
+        {/* Featured Product: Birthday Gift Box */}
+        {birthdayGiftBox && (
+          <div 
+            id="birthday-gift-box-feature"
+            className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#F4F1EA] shadow-lg mb-16 relative"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center">
               
-              {/* Left Image */}
+              {/* Product Photograph */}
               <div className="md:col-span-5 relative">
-                <div className="rounded-2xl overflow-hidden aspect-square bg-[#F4F1EA] border border-[#F4F1EA] shadow-inner">
+                <div className="rounded-2xl overflow-hidden aspect-square bg-[#F4F1EA] border border-[#F4F1EA]">
                   <img
-                    src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=800&q=80"
-                    alt="Birthday Gift Hamper"
+                    src={birthdayGiftBox.images[0] || '/images/nigerian_birthday_kids.jpg'}
+                    alt="Birthday Gift Box"
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/images/nigerian_birthday_kids.jpg';
+                    }}
                   />
                 </div>
-                <div className="absolute top-3 left-3 bg-[#F58220] text-white text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
-                  BESTSELLER
+                <div className="absolute top-3 left-3 bg-[#F58220] text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-xs">
+                  Ready to Gift
                 </div>
               </div>
 
-              {/* Right Details */}
+              {/* Product Details */}
               <div className="md:col-span-7 flex flex-col justify-between">
                 <div>
-                  <span className="text-xs font-black uppercase tracking-widest text-[#27AFA5]">
-                    ALL-IN-ONE CELEBRATION BOX
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#27AFA3]">
+                    Curated Gift Box
                   </span>
                   
                   <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mt-1 mb-2">
-                    BIRTHDAY GIFT HAMPER
+                    Birthday Gift Box
                   </h3>
 
                   <div className="flex items-baseline gap-3 mb-4">
-                    <span className="text-3xl font-black text-[#F58220]">
-                      ₦45,000
+                    <span className="text-3xl font-black text-[#173F70] font-display">
+                      ₦{birthdayGiftBox.price.toLocaleString()}
                     </span>
-                    <span className="text-xs font-bold text-[#27AFA5] bg-[#27AFA5]/10 px-2.5 py-1 rounded-full">
-                      Ready to present
+                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+                      Assembled in Lagos
                     </span>
                   </div>
 
-                  {/* Inside the Hamper itemized list */}
-                  <div className="bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 mb-6">
-                    <p className="text-xs font-black uppercase tracking-wider text-[#173F70] mb-2.5">
-                      Inside the hamper:
+                  <p className="text-sm text-[#172033]/80 leading-relaxed mb-5">
+                    {birthdayGiftBox.description}
+                  </p>
+
+                  {/* What's Inside Section */}
+                  <div className="bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 sm:p-5 mb-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xs sm:text-sm font-black text-[#173F70] uppercase tracking-wider">
+                        What's inside
+                      </h4>
+                      <span className="text-[11px] font-bold text-[#27AFA3]">
+                        Curated for Recipient
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2.5">
+                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
+                          1
+                        </div>
+                        <span className="text-xs font-bold text-[#172033]">Party Outfit</span>
+                      </div>
+
+                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
+                          2
+                        </div>
+                        <span className="text-xs font-bold text-[#172033]">Gift Toy / Book</span>
+                      </div>
+
+                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
+                          3
+                        </div>
+                        <span className="text-xs font-bold text-[#172033]">Accessory / Socks</span>
+                      </div>
+
+                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
+                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
+                          4
+                        </div>
+                        <span className="text-xs font-bold text-[#172033]">Custom Gift Box</span>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-[#172033]/65 mt-2.5 leading-normal">
+                      Specific items are confirmed with you based on the child's age, sizing, and preferences prior to dispatch.
                     </p>
-                    <ul className="space-y-2 text-xs sm:text-sm text-[#172033]/85">
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
-                        <span><strong>Outfit:</strong> Statement celebration party outfit</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
-                        <span><strong>Shoes:</strong> Matching occasion shoes or sneakers</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
-                        <span><strong>Toy:</strong> Wooden camera or developmental toy</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
-                        <span><strong>Accessory:</strong> Mini fashion crossbody bag or sunglasses</span>
-                      </li>
-                      <li className="flex items-center gap-2.5">
-                        <Check className="w-4 h-4 text-[#27AFA5] shrink-0 stroke-[2.5]" />
-                        <span><strong>Packaging:</strong> Gold-embossed keepsake box, satin ribbon & handwritten card</span>
-                      </li>
-                    </ul>
                   </div>
                 </div>
 
-                {/* Strong CTA Button */}
+                {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-3">
                   <button
-                    id="add-birthday-hamper-btn"
-                    onClick={() => {
-                      const hamper = PRODUCTS.find(p => p.id === 'bb-gft-001');
-                      if (hamper && onAddToCart) {
-                        onAddToCart(hamper, 'Curated by Age (Select on order)', 'Girls Bloom Theme');
-                      }
-                    }}
-                    className="flex-1 bg-[#173F70] hover:bg-[#2563C7] text-white py-4 px-6 rounded-2xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
+                    id="add-birthday-gift-box-btn"
+                    type="button"
+                    onClick={handleAddBox}
+                    className="flex-1 bg-[#173F70] hover:bg-[#2563C7] text-white py-3.5 px-6 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-sm transition-all active:scale-[0.98] cursor-pointer"
                   >
-                    <ShoppingBag className="w-5 h-5" />
-                    <span>Add Birthday Hamper</span>
+                    <ShoppingBag className="w-4 h-4" />
+                    <span>Add to Bag</span>
                   </button>
 
                   <button
-                    onClick={() => {
-                      const hamper = PRODUCTS.find(p => p.id === 'bb-gft-001');
-                      if (hamper && onQuickView) {
-                        onQuickView(hamper);
-                      }
-                    }}
-                    className="bg-[#F4F1EA] hover:bg-[#F4F1EA]/80 text-[#173F70] py-4 px-5 rounded-2xl font-bold text-sm tracking-wide transition-all active:scale-95 cursor-pointer text-center"
+                    type="button"
+                    onClick={() => onQuickView?.(birthdayGiftBox)}
+                    className="bg-[#F4F1EA] hover:bg-[#F4F1EA]/80 text-[#173F70] py-3.5 px-5 rounded-2xl font-bold text-sm tracking-wide transition-all active:scale-[0.98] cursor-pointer text-center"
                   >
                     View Details
                   </button>
                 </div>
 
+                {addedBoxNotice && (
+                  <div className="mt-3 p-2.5 bg-emerald-50 text-emerald-800 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-600" />
+                    <span>Birthday Gift Box added to bag!</span>
+                  </div>
+                )}
               </div>
 
             </div>
           </div>
+        )}
 
-          {/* Selections Interactive Card */}
-          <div className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-[#F4F1EA] shadow-md mb-10 relative z-10">
-            
-            {/* Question 1: Who is it for? */}
-            <div className="mb-6 pb-6 border-b border-[#F4F1EA]">
-              <label className="block text-xs font-black uppercase tracking-wider text-[#173F70] mb-3">
-                Who is it for?
+        {/* Guided "Find a Gift" Engine */}
+        <div 
+          id="guided-gift-finder"
+          className="max-w-4xl mx-auto bg-white rounded-3xl p-6 sm:p-8 md:p-10 border border-[#F4F1EA] shadow-md"
+        >
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#F58220] mb-2">
+              <Compass className="w-4 h-4" />
+              <span>Interactive Gift Concierge</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mb-1.5">
+              Find a Gift
+            </h3>
+            <p className="text-sm text-[#172033]/70">
+              Select who you're shopping for, their age, and the occasion. We'll show immediate picks tailored for them.
+            </p>
+          </div>
+
+          {/* STAGE 1: WHO IS IT FOR? */}
+          <div className="mb-7 pb-6 border-b border-[#F4F1EA]">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-xs font-black uppercase tracking-wider text-[#173F70] flex items-center gap-2">
+                <span>1. Who is it for?</span>
+                <span className="text-[#F58220] font-normal lowercase">({who})</span>
               </label>
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-4">
-                {(['Girl', 'Boy', 'Baby'] as RecipientType[]).map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() => setWho(opt)}
-                    className={`py-3 px-4 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                      who === opt
-                        ? 'bg-[#173F70] text-white shadow-sm scale-101'
-                        : 'bg-[#F4F1EA] text-[#172033]/70 hover:bg-[#F4F1EA]/80'
-                    }`}
-                  >
-                    {opt === 'Girl' && <Sparkles className="w-4 h-4 text-[#F58220]" />}
-                    {opt === 'Boy' && <Sparkles className="w-4 h-4 text-[#2563C7]" />}
-                    {opt === 'Baby' && <Baby className="w-4 h-4 text-[#F4C430]" />}
-                    <span>{opt}</span>
-                  </button>
-                ))}
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {(['Girl', 'Boy', 'Baby', 'Not Sure'] as GiftAudience[]).map((option) => (
+                <button
+                  key={option}
+                  id={`gift-who-${option.toLowerCase().replace(' ', '-')}`}
+                  type="button"
+                  onClick={() => handleSelectAudience(option)}
+                  className={`py-3.5 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                    who === option
+                      ? 'bg-[#173F70] text-white shadow-sm ring-2 ring-[#173F70]/20 scale-[1.02]'
+                      : 'bg-[#F4F1EA] text-[#172033]/75 hover:bg-[#EBE7DC]'
+                  }`}
+                >
+                  {option === 'Girl' && <Sparkles className={`w-4 h-4 ${who === 'Girl' ? 'text-[#F58220]' : 'text-[#F58220]'}`} />}
+                  {option === 'Boy' && <Shirt className={`w-4 h-4 ${who === 'Boy' ? 'text-[#38BDF8]' : 'text-[#2563C7]'}`} />}
+                  {option === 'Baby' && <Baby className={`w-4 h-4 ${who === 'Baby' ? 'text-[#34D399]' : 'text-[#27AFA3]'}`} />}
+                  {option === 'Not Sure' && <UserCheck className={`w-4 h-4 ${who === 'Not Sure' ? 'text-amber-300' : 'text-[#173F70]'}`} />}
+                  <span>{option}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* STAGE 2: AGE */}
+          <div className="mb-7 pb-6 border-b border-[#F4F1EA]">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-xs font-black uppercase tracking-wider text-[#173F70] flex items-center gap-2">
+                <span>2. Age</span>
+                <span className="text-[#2563C7] font-normal lowercase">({ageDisplayLabel})</span>
+              </label>
+              {who === 'Baby' && (
+                <span className="text-[11px] font-bold text-[#27AFA3]">
+                  Baby age locked to 0–2 years
+                </span>
+              )}
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {[
+                { key: '0-2' as GiftAgeRange, label: '0–2 years', note: 'Baby & Toddler' },
+                { key: '3-5' as GiftAgeRange, label: '3–5 years', note: 'Preschool' },
+                { key: '6-9' as GiftAgeRange, label: '6–9 years', note: 'School Age' },
+                { key: '10-13' as GiftAgeRange, label: '10–13 years', note: 'Pre-Teen' }
+              ].map((a) => (
+                <button
+                  key={a.key}
+                  id={`gift-age-${a.key}`}
+                  type="button"
+                  onClick={() => handleSelectAge(a.key)}
+                  className={`py-3 px-3 rounded-xl transition-all text-center cursor-pointer flex flex-col items-center justify-center ${
+                    age === a.key
+                      ? 'bg-[#2563C7] text-white shadow-sm ring-2 ring-[#2563C7]/20 scale-[1.02]'
+                      : 'bg-[#F4F1EA] text-[#172033]/75 hover:bg-[#EBE7DC]'
+                  }`}
+                >
+                  <span className="text-xs sm:text-sm font-bold">{a.label}</span>
+                  <span className={`text-[10px] mt-0.5 ${age === a.key ? 'text-white/80' : 'text-[#172033]/50'}`}>
+                    {a.note}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* STAGE 3: OCCASION */}
+          <div className="mb-8 pb-6 border-b border-[#F4F1EA]">
+            <div className="flex items-center justify-between mb-3">
+              <label className="text-xs font-black uppercase tracking-wider text-[#173F70] flex items-center gap-2">
+                <span>3. Occasion</span>
+                <span className="text-[#27AFA3] font-normal lowercase">({occasion})</span>
+              </label>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+              {(['Birthday', 'Christmas', 'Baby Gift', 'Just Because', 'Something Special'] as GiftOccasion[]).map((option) => (
+                <button
+                  key={option}
+                  id={`gift-occasion-${option.toLowerCase().replace(/\s+/g, '-')}`}
+                  type="button"
+                  onClick={() => setOccasion(option)}
+                  className={`py-3 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-center ${
+                    occasion === option
+                      ? 'bg-[#27AFA3] text-white shadow-sm ring-2 ring-[#27AFA3]/20 scale-[1.02]'
+                      : 'bg-[#F4F1EA] text-[#172033]/75 hover:bg-[#EBE7DC]'
+                  }`}
+                >
+                  {option === 'Birthday' && <Cake className="w-3.5 h-3.5 shrink-0" />}
+                  {option === 'Christmas' && <Sparkles className="w-3.5 h-3.5 shrink-0" />}
+                  {option === 'Baby Gift' && <Baby className="w-3.5 h-3.5 shrink-0" />}
+                  {option === 'Just Because' && <Heart className="w-3.5 h-3.5 shrink-0" />}
+                  {option === 'Something Special' && <Star className="w-3.5 h-3.5 shrink-0" />}
+                  <span className="truncate">{option}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* ACTION: "HELP ME PICK" BUTTON */}
+          <div className="mb-10 text-center flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#FFFDF8] border border-[#F4F1EA] p-4 sm:p-5 rounded-2xl">
+            <div className="text-left">
+              <p className="text-xs text-[#172033]/60 uppercase font-bold tracking-wider">
+                Selected Criteria
+              </p>
+              <p className="text-sm sm:text-base font-black text-[#173F70]">
+                {who} • {ageDisplayLabel} • {occasion}
+              </p>
+            </div>
+
+            <button
+              id="help-me-pick-btn"
+              type="button"
+              onClick={handleHelpMePick}
+              className="w-full sm:w-auto bg-[#F58220] hover:bg-[#E07316] text-white py-3.5 px-8 rounded-2xl font-black text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4 text-amber-200" />
+              <span>HELP ME PICK</span>
+              <ArrowRight className="w-4 h-4 ml-0.5" />
+            </button>
+          </div>
+
+          {/* RECOMMENDATION RESULTS SECTION */}
+          <div 
+            ref={resultsRef}
+            id="gift-recommendation-results"
+            className={`pt-6 border-t border-[#F4F1EA] transition-all duration-500 rounded-2xl ${
+              isHighlighted ? 'ring-4 ring-[#F58220]/30 bg-[#FFFDF8] p-4' : ''
+            }`}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#173F70]/10 text-[#173F70]">
+                    {who}
+                  </span>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#2563C7]/10 text-[#2563C7]">
+                    {ageDisplayLabel}
+                  </span>
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#27AFA3]/10 text-[#27AFA3]">
+                    {occasion}
+                  </span>
+                </div>
+
+                <h4 className="text-xl sm:text-2xl font-black text-[#173F70] font-display mt-2 mb-0.5">
+                  {headlineTitle}
+                </h4>
+                <p className="text-xs sm:text-sm text-[#172033]/70">
+                  {headlineSubtitle}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setWho('Girl');
+                    setAge('3-5');
+                    setOccasion('Birthday');
+                  }}
+                  className="text-xs font-bold text-[#172033]/60 hover:text-[#173F70] flex items-center gap-1 cursor-pointer bg-[#F4F1EA] hover:bg-[#EBE7DC] px-3 py-1.5 rounded-lg transition-colors"
+                >
+                  <RefreshCw className="w-3 h-3" />
+                  <span>Reset</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onNavigate('shop', 'gifts')}
+                  className="text-xs font-bold text-[#2563C7] hover:underline flex items-center gap-1 cursor-pointer"
+                >
+                  <span>All gifts in shop</span>
+                  <ArrowRight className="w-3 h-3" />
+                </button>
               </div>
             </div>
 
-            {/* Question 2: How old are they? */}
-            <div className="mb-6 pb-6 border-b border-[#F4F1EA]">
-              <label className="block text-xs font-black uppercase tracking-wider text-[#173F70] mb-3">
-                How old are they?
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
-                {(['0–2', '3–5', '6–9', '10–13', 'Teen'] as AgeType[]).map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() => setAge(opt)}
-                    className={`py-2.5 px-3 rounded-2xl text-xs font-bold transition-all text-center cursor-pointer ${
-                      age === opt
-                        ? 'bg-[#F58220] text-white shadow-sm'
-                        : 'bg-[#F4F1EA] text-[#172033]/70 hover:bg-[#F4F1EA]/80'
-                    }`}
+            {/* Dynamic Results Grid (Always 3 to 6 matching items, zero empty states) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {recommendations.map((item) => {
+                const prod = item.productId ? productMap.get(item.productId) : undefined;
+                const isReal = item.isRealCatalogueProduct && prod !== undefined;
+
+                return (
+                  <div
+                    key={item.id}
+                    id={`gift-card-${item.id}`}
+                    className="bg-[#FFFDF8] rounded-2xl p-4 border border-[#F4F1EA] hover:border-[#173F70]/20 hover:shadow-md transition-all flex flex-col justify-between group"
                   >
-                    {opt} {opt !== 'Teen' && 'years'}
-                  </button>
-                ))}
-              </div>
+                    <div>
+                      {/* Product / Inspiration Image */}
+                      <div 
+                        className="aspect-[4/5] rounded-xl overflow-hidden mb-3 relative bg-[#F4F1EA] cursor-pointer"
+                        onClick={() => {
+                          if (isReal && prod) {
+                            handleOpenProduct(item);
+                          }
+                        }}
+                      >
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/images/nigerian_birthday_kids.jpg';
+                          }}
+                        />
+
+                        {/* Top Badge: Real Catalogue vs Gift Inspiration */}
+                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                          {isReal ? (
+                            <span className="bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+                              {item.highlightTag || 'In Stock'}
+                            </span>
+                          ) : (
+                            <span className="bg-[#173F70] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+                              Gift Inspiration
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Category pill */}
+                        <span className="absolute bottom-2.5 right-2.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md backdrop-blur-xs">
+                          {item.category}
+                        </span>
+                      </div>
+
+                      {/* Title & Description */}
+                      <h5 
+                        className={`text-sm font-bold text-[#172033] line-clamp-1 mb-1 transition-colors ${
+                          isReal ? 'cursor-pointer group-hover:text-[#173F70]' : ''
+                        }`}
+                        onClick={() => {
+                          if (isReal && prod) handleOpenProduct(item);
+                        }}
+                      >
+                        {item.title}
+                      </h5>
+
+                      <p className="text-xs text-[#172033]/70 line-clamp-2 mb-3 leading-relaxed">
+                        {item.description}
+                      </p>
+
+                      {/* Price / Stock Note */}
+                      <div className="flex items-baseline justify-between mb-4">
+                        {isReal && item.price ? (
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-base font-black text-[#173F70] font-display">
+                              ₦{item.price.toLocaleString()}
+                            </span>
+                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                              Catalogue Product
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="text-[11px] font-medium text-[#172033]/65 italic">
+                            Availability may vary. WhatsApp us to confirm.
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="pt-3 border-t border-[#F4F1EA] flex items-center gap-2">
+                      {isReal && prod ? (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => handleQuickAdd(item)}
+                            className={`flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                              addedItemNotice === item.id
+                                ? 'bg-emerald-600 text-white'
+                                : 'bg-[#173F70] hover:bg-[#2563C7] text-white active:scale-[0.98]'
+                            }`}
+                          >
+                            {addedItemNotice === item.id ? (
+                              <>
+                                <Check className="w-3.5 h-3.5" />
+                                <span>Added!</span>
+                              </>
+                            ) : (
+                              <>
+                                <ShoppingBag className="w-3.5 h-3.5" />
+                                <span>Add to Bag</span>
+                              </>
+                            )}
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleOpenProduct(item)}
+                            className="py-2.5 px-3 rounded-xl font-bold text-xs bg-[#F4F1EA] hover:bg-[#EBE7DC] text-[#173F70] transition-colors cursor-pointer"
+                          >
+                            View
+                          </button>
+                        </>
+                      ) : (
+                        <a
+                          href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(
+                            `Hello Buubu Bloom, I am interested in the ${item.title} (${who}, ${ageDisplayLabel}, for ${occasion}) from your Gift Finder. Do you currently have this or similar styles available in your Lagos store?`
+                          )}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-[#27AFA3] hover:bg-[#20968B] text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" />
+                          <span>Ask about this style</span>
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
-            {/* Question 3: What's the occasion? */}
-            <div className="mb-8">
-              <label className="block text-xs font-black uppercase tracking-wider text-[#173F70] mb-3">
-                What’s the occasion?
-              </label>
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-3">
-                {(['Birthday', 'Baby gift', 'Christmas', 'Just because', 'Something special'] as OccasionType[]).map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    onClick={() => setOccasion(opt)}
-                    className={`py-2.5 px-3 rounded-2xl text-xs font-bold transition-all text-center cursor-pointer ${
-                      occasion === opt
-                        ? 'bg-[#27AFA5] text-white shadow-sm'
-                        : 'bg-[#F4F1EA] text-[#172033]/70 hover:bg-[#F4F1EA]/80'
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
+            {/* Direct WhatsApp Concierge Help Strip */}
+            <div className="mt-8 pt-6 border-t border-[#F4F1EA] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#FFFDF8] p-4 rounded-2xl border border-[#F4F1EA]">
+              <div>
+                <p className="text-xs font-bold text-[#173F70]">
+                  Looking for custom hampers, corporate gifting or specific sizes?
+                </p>
+                <p className="text-[11px] text-[#172033]/65 mt-0.5">
+                  Our Lagos store team can prepare tailored boxes and deliver nationwide.
+                </p>
               </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-              <button
-                id="help-me-pick-btn"
-                onClick={() => setPicked(true)}
-                className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-4 rounded-2xl font-black text-sm tracking-wider flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-[#F9C928]" />
-                <span>Help Me Pick</span>
-              </button>
 
               <a
                 href={whatsappInquiryUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#27AFA5] hover:underline"
+                className="w-full sm:w-auto bg-[#27AFA3] hover:bg-[#20968B] text-white py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-colors shrink-0"
               >
-                <Phone className="w-4 h-4" />
-                <span>Or ask our personal shopper directly on WhatsApp →</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Chat with Lagos Store Team</span>
               </a>
             </div>
 
           </div>
-
-          {/* Results Display */}
-          {picked && (
-            <div className="max-w-4xl mx-auto relative z-10 animate-in fade-in duration-300">
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-xs font-black uppercase tracking-wider text-[#173F70]">
-                  Picks for {who} • {age} years • {occasion}:
-                </p>
-                <button
-                  onClick={() => onNavigate('shop', 'gifts')}
-                  className="text-xs font-bold text-[#2563C7] hover:underline cursor-pointer"
-                >
-                  View more gift ideas →
-                </button>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {recommendedGifts.map((prod) => (
-                  <div
-                    key={prod.id}
-                    className="bg-white rounded-2xl p-3 border border-[#F4F1EA] shadow-sm hover:shadow-md transition-all flex flex-col justify-between group cursor-pointer"
-                    onClick={() => onQuickView?.(prod)}
-                  >
-                    <div>
-                      <div className="aspect-[4/5] rounded-xl overflow-hidden mb-2 relative bg-[#F4F1EA]">
-                        <img
-                          src={prod.images[0]}
-                          alt={prod.name}
-                          className="w-full h-full object-cover group-hover:scale-104 transition-transform"
-                        />
-                        <span className="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs">
-                          {prod.highlightTag || 'Gift Pick'}
-                        </span>
-                      </div>
-                      <h4 className="text-xs font-bold text-[#172033] line-clamp-2 group-hover:text-[#173F70] transition-colors">
-                        {prod.name}
-                      </h4>
-                      <p className="text-xs font-black text-[#173F70] mt-1">
-                        ₦{prod.price.toLocaleString()}
-                      </p>
-                    </div>
-
-                    <div className="pt-2 mt-2 border-t border-[#F4F1EA] flex items-center justify-between">
-                      <span className="text-[10px] font-bold text-[#27AFA5]">
-                        ✓ In Stock
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onAddToCart?.(prod, prod.sizes[0], prod.colors[0]?.name || 'Standard');
-                        }}
-                        className="p-1.5 rounded-lg bg-[#173F70] hover:bg-[#2563C7] text-white transition-colors cursor-pointer"
-                        title="Add to bag"
-                      >
-                        <ShoppingBag className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
         </div>
 

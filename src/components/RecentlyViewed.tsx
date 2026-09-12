@@ -76,6 +76,10 @@ export const RecentlyViewed: React.FC<RecentlyViewedProps> = ({
                     src={product.images[0]}
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-104 transition-transform duration-500"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.src = '/images/hero_nigerian_girl.jpg';
+                    }}
                   />
                   {product.highlightTag && (
                     <span className="absolute top-2 left-2 bg-[#F58220] text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full shadow-xs">

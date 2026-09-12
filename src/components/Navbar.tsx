@@ -9,7 +9,8 @@ import {
   MapPin, 
   Sparkles,
   ChevronRight,
-  ArrowRight
+  ArrowRight,
+  Package
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ActiveView, ProductCategory, Product } from '../types';
@@ -23,6 +24,7 @@ interface NavbarProps {
   onNavigate: (view: ActiveView, category?: ProductCategory) => void;
   cartCount: number;
   wishlistCount: number;
+  ordersCount?: number;
   onOpenCart: () => void;
   onOpenWishlist: () => void;
   onSelectProduct: (product: Product) => void;
@@ -34,6 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigate,
   cartCount,
   wishlistCount,
+  ordersCount = 0,
   onOpenCart,
   onOpenWishlist,
   onSelectProduct
@@ -260,6 +263,24 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </button>
 
+            {/* My Orders History Trigger */}
+            <button
+              id="header-orders-toggle-btn"
+              onClick={() => handleNavClick('orders')}
+              className={`p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer active:scale-95 ${
+                activeView === 'orders' ? 'bg-[#F4F1EA] text-[#2563C7]' : ''
+              }`}
+              aria-label="View order history"
+              title="My Orders"
+            >
+              <Package className="w-5 h-5" />
+              {ordersCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#173F70] text-white text-[10px] font-bold rounded-full flex items-center justify-center shadow-xs">
+                  {ordersCount}
+                </span>
+              )}
+            </button>
+
             {/* Shopping Bag Trigger */}
             <button
               id="header-cart-toggle-btn"
@@ -482,6 +503,25 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="pt-3 border-t border-[#F4F1EA] flex flex-col gap-2">
+            <button
+              onClick={() => handleNavClick('orders')}
+              className={`w-full p-3 rounded-xl text-sm font-bold flex items-center justify-between transition-colors border ${
+                activeView === 'orders' 
+                  ? 'bg-[#173F70] text-white border-[#173F70]' 
+                  : 'bg-white border-[#F4F1EA] text-[#173F70] hover:bg-[#F4F1EA]'
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <Package className="w-4 h-4 text-[#F9C928]" />
+                <span>MY ORDERS</span>
+              </span>
+              {ordersCount > 0 && (
+                <span className="bg-[#27AFA5] text-white text-xs px-2 py-0.5 rounded-full">
+                  {ordersCount}
+                </span>
+              )}
+            </button>
+
             <div className="grid grid-cols-2 gap-2">
               <button
                 onClick={() => handleNavClick('about')}

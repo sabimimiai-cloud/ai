@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, ArrowRight, ArrowLeft, Heart, ShoppingBag, Eye, Check, ChevronLeft, ChevronRight, Camera } from 'lucide-react';
+import { Sparkles, ArrowRight, ArrowLeft, Heart, ShoppingBag, Eye, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { Product, ProductCategory, ActiveView } from '../types';
 import { NEW_ARRIVALS_PRODUCTS } from '../data/products';
@@ -207,21 +207,17 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
                     loading="lazy"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      // If the direct image is not yet on disk, hide broken icon and show subtle photo placeholder
                       const target = e.currentTarget;
-                      target.style.display = 'none';
-                      const parent = target.parentElement;
-                      if (parent && !parent.querySelector('.photo-placeholder')) {
-                        const div = document.createElement('div');
-                        div.className = 'photo-placeholder absolute inset-0 flex flex-col items-center justify-center p-3 text-center bg-[#EEF2F6]';
-                        div.innerHTML = `
-                          <div class="w-10 h-10 rounded-full bg-white text-[#123B68] flex items-center justify-center shadow-xs mb-1.5">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                          </div>
-                          <span class="text-[11px] font-bold text-[#123B68] leading-tight">${product.name}</span>
-                          <span class="text-[9px] text-[#5A6E85] mt-0.5">Photograph crop ready</span>
-                        `;
-                        parent.appendChild(div);
+                      const fallbacks: Record<string, string> = {
+                        shoes: '/images/white_chunky_sandals.jpg',
+                        girls: '/images/blue_flower_dress.jpg',
+                        boys: '/images/boys_nigerian_denim.jpg',
+                        baby: '/images/baby_nigerian_romper.jpg',
+                        accessories: '/images/pink_school_backpack.jpg'
+                      };
+                      const fallback = fallbacks[product.category] || '/images/hero_nigerian_girl.jpg';
+                      if (target.src !== fallback) {
+                        target.src = fallback;
                       }
                     }}
                   />

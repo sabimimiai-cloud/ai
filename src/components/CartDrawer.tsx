@@ -180,6 +180,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     src={item.product.images[0]}
                     alt={item.product.name}
                     className="w-20 h-24 rounded-xl object-cover bg-[#F4F1EA]"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.src = '/images/hero_nigerian_girl.jpg';
+                    }}
                   />
 
                   <div className="flex-1 flex flex-col justify-between">

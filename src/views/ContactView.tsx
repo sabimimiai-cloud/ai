@@ -212,7 +212,7 @@ export const ContactView: React.FC = () => {
                     className="w-full bg-[#F4F1EA]/30 border border-[#F4F1EA] rounded-xl px-3.5 py-2.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#123B68]/20 focus:bg-white"
                   >
                     <option value="Sizing & Style Advice">Sizing & Style Advice</option>
-                    <option value="Birthday Gift Hamper Customization">Birthday Gift Hamper Customization</option>
+                    <option value="Birthday Gift Box Customization">Birthday Gift Box Customization</option>
                     <option value="Store Pickup at Galleria Mall">Store Pickup at Galleria Mall</option>
                     <option value="Nationwide Delivery Tracking">Nationwide Delivery Tracking</option>
                     <option value="Ride-on Cruiser Availability">Ride-on Cruiser Availability</option>
