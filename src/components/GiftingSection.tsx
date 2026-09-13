@@ -299,47 +299,17 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
 
                   {/* What's Inside Section */}
                   <div className="bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 sm:p-5 mb-6">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center justify-between mb-2">
                       <h4 className="text-xs sm:text-sm font-black text-[#173F70] uppercase tracking-wider">
                         What's inside
                       </h4>
                       <span className="text-[11px] font-bold text-[#27AFA3]">
-                        Curated for Recipient
+                        Personalized Selection
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-2.5">
-                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
-                          1
-                        </div>
-                        <span className="text-xs font-bold text-[#172033]">Party Outfit</span>
-                      </div>
-
-                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
-                          2
-                        </div>
-                        <span className="text-xs font-bold text-[#172033]">Gift Toy / Book</span>
-                      </div>
-
-                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
-                          3
-                        </div>
-                        <span className="text-xs font-bold text-[#172033]">Accessory / Socks</span>
-                      </div>
-
-                      <div className="p-3 bg-white border border-[#F4F1EA] rounded-xl flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-lg bg-[#F4F1EA] text-[#173F70] font-bold text-xs flex items-center justify-center shrink-0">
-                          4
-                        </div>
-                        <span className="text-xs font-bold text-[#172033]">Custom Gift Box</span>
-                      </div>
-                    </div>
-
-                    <p className="text-[11px] text-[#172033]/65 mt-2.5 leading-normal">
-                      Specific items are confirmed with you based on the child's age, sizing, and preferences prior to dispatch.
+                    <p className="text-xs sm:text-sm text-[#172033]/80 leading-relaxed font-medium">
+                      Each gift box is selected according to the child's age, size and preferences. We'll confirm the contents with you before dispatch.
                     </p>
                   </div>
                 </div>
@@ -607,17 +577,11 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
                           }}
                         />
 
-                        {/* Top Badge: Real Catalogue vs Gift Inspiration */}
+                        {/* Top Badge: Real Catalogue Item */}
                         <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-                          {isReal ? (
-                            <span className="bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
-                              {item.highlightTag || 'In Stock'}
-                            </span>
-                          ) : (
-                            <span className="bg-[#173F70] text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
-                              Gift Inspiration
-                            </span>
-                          )}
+                          <span className="bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+                            {item.highlightTag || 'In Stock'}
+                          </span>
                         </div>
 
                         {/* Category pill */}
@@ -650,7 +614,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
                               ₦{item.price.toLocaleString()}
                             </span>
                             <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
-                              Catalogue Product
+                              In Stock
                             </span>
                           </div>
                         ) : (

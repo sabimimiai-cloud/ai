@@ -218,7 +218,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </p>
 
               {/* What's Inside Section for Bundles / Gift Boxes */}
-              {product.whatsInside && product.whatsInside.length > 0 && (
+              {product.whatsInside && product.whatsInside.length > 0 ? (
                 <div className="mb-6 bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 sm:p-5">
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="text-xs sm:text-sm font-black text-[#123B68] uppercase tracking-wider">
@@ -260,7 +260,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     Contents are tailored to the recipient's age group and sizing preference upon order confirmation.
                   </p>
                 </div>
-              )}
+              ) : (product.category === 'gifts' || product.id === 'bb-gft-001') ? (
+                <div className="mb-6 bg-[#FFFDF8] border border-[#F4F1EA] rounded-2xl p-4 sm:p-5">
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-xs sm:text-sm font-black text-[#123B68] uppercase tracking-wider">
+                      What's inside
+                    </h4>
+                    <span className="text-[11px] font-bold text-[#27AFA3]">
+                      Personalized Selection
+                    </span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-[#172033]/80 leading-relaxed font-medium">
+                    Each gift box is selected according to the child's age, size and preferences. We'll confirm the contents with you before dispatch.
+                  </p>
+                </div>
+              ) : null}
 
               {/* Size Selector */}
               <div className="mb-5">

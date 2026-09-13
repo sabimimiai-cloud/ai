@@ -47,6 +47,7 @@ export interface Product {
   isDemonstration?: boolean;
   occasions: OccasionMoment[];
   ageGroup: AgeGroup;
+  ageGroups?: AgeGroup[];
   whatsInside?: BundleItem[];
   details: {
     material: string;

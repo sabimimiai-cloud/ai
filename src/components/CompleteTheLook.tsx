@@ -28,7 +28,7 @@ const LOOK_BUNDLES: OutfitBundle[] = [
     mainImage: '/images/girls_nigerian_yellow_1787489114238.jpg',
     items: [
       { productId: 'bb-g-002', role: 'Main Outfit' },
-      { productId: 'bb-s-001', role: 'Shoes' },
+      { productId: 'bb-s-003', role: 'Shoes' },
       { productId: 'bb-a-001', role: 'Accessory' }
     ]
   },
@@ -39,7 +39,7 @@ const LOOK_BUNDLES: OutfitBundle[] = [
     mainImage: '/images/boys_nigerian_safari_1787489099338.jpg',
     items: [
       { productId: 'bb-b-002', role: 'Main Outfit' },
-      { productId: 'bb-s-001', role: 'Shoes' },
+      { productId: 'bb-s-004', role: 'Shoes' },
       { productId: 'bb-a-002', role: 'Accessory' }
     ]
   },
@@ -51,7 +51,7 @@ const LOOK_BUNDLES: OutfitBundle[] = [
     items: [
       { productId: 'bb-b-001', role: 'Main Outfit' },
       { productId: 'bb-s-001', role: 'Shoes' },
-      { productId: 'bb-a-001', role: 'Accessory' }
+      { productId: 'bb-a-002', role: 'Accessory' }
     ]
   }
 ];

@@ -15,6 +15,7 @@ import { ProductCard } from '../components/ProductCard';
 interface ShopViewProps {
   initialCategory?: ProductCategory;
   initialSearchQuery?: string;
+  onSelectCategory?: (category: ProductCategory) => void;
   onSelectProduct?: (product: Product) => void;
   onQuickView?: (product: Product) => void;
   onQuickAdd?: (product: Product) => void;
@@ -26,6 +27,7 @@ interface ShopViewProps {
 export const ShopView: React.FC<ShopViewProps> = ({
   initialCategory = 'all',
   initialSearchQuery = '',
+  onSelectCategory,
   onSelectProduct,
   onQuickView,
   onQuickAdd,
@@ -147,7 +149,10 @@ export const ShopView: React.FC<ShopViewProps> = ({
             return (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  if (onSelectCategory) onSelectCategory(cat.id);
+                }}
                 className={`px-4 sm:px-5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
                   isActive
                     ? 'bg-[#123B68] text-white shadow-md'

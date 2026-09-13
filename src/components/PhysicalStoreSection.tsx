@@ -100,9 +100,15 @@ export const PhysicalStoreSection: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
-                  src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
-                  alt="Buubu Bloom Galleria Mall store environment"
+                  src="/images/IMG_6596.png"
+                  alt="Buubu Bloom real store interior at Galleria Mall, Orchid, Lagos"
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('IMG_6596.png')) {
+                      target.src = '/IMG_6596.png';
+                    }
+                  }}
                 />
               </div>
               <div className="absolute -bottom-4 -left-4 bg-[#173F70] border border-white/20 p-3.5 rounded-2xl shadow-xl text-xs font-bold text-[#F9C928] flex items-center gap-2">

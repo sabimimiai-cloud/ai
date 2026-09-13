@@ -74,6 +74,60 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
 
         </div>
 
+        {/* Real Store Showcase */}
+        <div className="mb-20 bg-white rounded-3xl p-6 sm:p-10 border border-[#F4F1EA] shadow-2xs">
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <div className="inline-flex items-center gap-2 bg-[#F58220]/10 text-[#F58220] px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider mb-3">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>GALLERIA MALL, ORCHID, LAGOS</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mb-2">
+              Step Inside Our Lagos Boutique
+            </h3>
+            <p className="text-xs sm:text-sm text-[#172033]/70">
+              A vibrant, joyful space designed for children and parents alike. Walk in to feel our soft fabrics, check shoe sizes in person, and pick up ready-wrapped gifts.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] relative group shadow-md border border-[#F4F1EA] bg-[#F4F1EA]">
+              <img
+                src="/images/IMG_6597.png"
+                alt="Buubu Bloom large logo mounted on vibrant geometric wall inside the store"
+                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.includes('IMG_6597.png')) {
+                    target.src = '/IMG_6597.png';
+                  }
+                }}
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/75 to-transparent p-4 text-white">
+                <p className="text-xs font-black uppercase tracking-wider">The Iconic Buubu Bloom Wall</p>
+                <p className="text-[11px] text-white/80">Signature vibrant backdrop at Galleria Mall, Orchid</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] relative group shadow-md border border-[#F4F1EA] bg-[#F4F1EA]">
+              <img
+                src="/images/IMG_6596.png"
+                alt="Buubu Bloom real boutique interior with clothing racks and shelves"
+                className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  if (target.src.includes('IMG_6596.png')) {
+                    target.src = '/IMG_6596.png';
+                  }
+                }}
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/75 to-transparent p-4 text-white">
+                <p className="text-xs font-black uppercase tracking-wider">Curated Racks & Shelves</p>
+                <p className="text-[11px] text-white/80">Everyday outfits, party wear, footwear and toys ready for walk-ins</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* 4 Core Pillars */}
         <div className="mb-20">
           <div className="text-center mb-10">

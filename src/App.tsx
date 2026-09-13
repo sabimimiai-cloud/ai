@@ -629,6 +629,18 @@ export function App() {
             <ShopView
               initialCategory={selectedCategory}
               initialSearchQuery={searchQuery}
+              onSelectCategory={(cat) => {
+                setSelectedCategory(cat);
+                const nextState: AppNavigationState = {
+                  view: 'shop',
+                  category: cat,
+                  productId: null,
+                  cartOpen: false,
+                  checkoutOpen: false,
+                  _depth: depthRef.current
+                };
+                window.history.replaceState(nextState, '', buildStateUrl(nextState));
+              }}
               onSelectProduct={(p) => handleSelectProduct(p)}
               onQuickView={(p) => handleSelectProduct(p)}
               onQuickAdd={(p) => handleAddToCart(p)}

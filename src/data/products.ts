@@ -25,9 +25,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Premium cotton lining with soft layered organza tulle',
       fit: 'True to size with comfortable elasticated back waist',
       care: 'Hand wash gently in cold water or dry clean. Hang dry away from direct sun.',
@@ -56,9 +57,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% Breathable Washed Cotton Denim (Pre-softened)',
       fit: 'Relaxed modern fit for active boys',
       care: 'Machine wash cool with like colors. Iron on medium.',
@@ -88,9 +90,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '1-3Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '1-3Y',
+        ageGroups: ['1-3Y', '4-7Y'],
+details: {
       material: '70% Linen, 30% Fine Cotton',
       fit: 'Tailored casual cut',
       care: 'Gentle cycle, line dry in shade for long lasting softness',
@@ -121,9 +124,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['gifting', 'special-occasion'],
-    ageGroup: '0-12M',
-    details: {
+    occasions: ['gifting', 'special-occasion', 'birthday'],
+ageGroup: '0-12M',
+        ageGroups: ['0-12M'],
+details: {
       material: '100% GOTS Certified Organic Ribbed Cotton',
       fit: 'Stretchy, ultra-gentle on sensitive baby skin',
       care: 'Machine wash delicate, cool tumble dry',
@@ -153,9 +157,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Breathable mesh upper with reinforced rubber bumper and EVA sole',
       fit: 'Wide toe-box design for growing feet',
       care: 'Wipe clean with a damp cloth and mild soap',
@@ -185,9 +190,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y', 'all-ages'],
+details: {
       material: 'Soft textured vegan leather with magnetic snap closure',
       fit: 'Compact & lightweight (14cm x 11cm)',
       care: 'Wipe clean with dry or slightly damp cloth',
@@ -218,9 +224,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['birthday', 'gifting'],
-    ageGroup: '1-3Y',
-    details: {
+    occasions: ['birthday', 'gifting', 'special-occasion'],
+ageGroup: '1-3Y',
+        ageGroups: ['1-3Y', '4-7Y'],
+details: {
       material: 'Reinforced non-toxic ABS polymer body with steel frame chassis',
       fit: 'Single rider seat with adjustable seatbelt',
       care: 'Charge 6-8 hours before first ride. Wipe clean after outdoor use.',
@@ -248,14 +255,9 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isDemonstration: true,
-    occasions: ['birthday', 'gifting'],
+    occasions: ['birthday', 'gifting', 'special-occasion'],
     ageGroup: 'all-ages',
-    whatsInside: [
-      { name: 'Item 1' },
-      { name: 'Item 2' },
-      { name: 'Item 3' },
-      { name: 'Item 4' }
-    ],
+    ageGroups: ['0-12M', '1-3Y', '4-7Y', '8-12Y', 'all-ages'],
     details: {
       material: 'Gift box packaging with presentation wrap',
       fit: 'Customized based on age and sizing preferences',
@@ -285,9 +287,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isDemonstration: true,
-    occasions: ['special-occasion', 'everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: '100% Poplin Cotton with soft lining',
       fit: 'A-line flare with gentle boat neck',
       care: 'Machine wash cold inside out, warm iron',
@@ -317,9 +320,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isDemonstration: true,
-    occasions: ['special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Linen-cotton blend tailored for tropical weather',
       fit: 'Classic tailored fit with elastic inner waist adjusters',
       care: 'Dry clean recommended or hand wash with mild detergent',
@@ -348,9 +352,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isDemonstration: true,
-    occasions: ['everyday', 'gifting'],
-    ageGroup: '0-12M',
-    details: {
+    occasions: ['everyday', 'gifting', 'birthday'],
+ageGroup: '0-12M',
+        ageGroups: ['0-12M', '1-3Y'],
+details: {
       material: '95% Organic Cotton, 5% Elastane for crawling comfort',
       fit: 'Relaxed room-to-grow fit',
       care: 'Machine wash 30°C, tumble dry low',
@@ -358,34 +363,106 @@ export const PRODUCTS: Product[] = [
     }
   },
   {
-    id: 'bb-s-002',
-    name: 'Glitter Mary Jane Shoes',
+    id: 'bb-s-003',
+    name: 'Classic Black Woven Sandals',
     category: 'shoes',
-    subCategory: 'Party Shoes',
-    price: 18000,
+    subCategory: 'Sandals',
+    price: 22500,
     rating: 4.8,
-    reviewCount: 14,
-    images: [
-      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=800&q=80'
-    ],
-    description: 'The party shoes that do not pinch. Made with soft padded heel collars, flexible non-slip soles, and secure velcro mary-jane straps that keep the shoes snug during every party dance.',
-    highlightTag: 'Party Must',
+    reviewCount: 16,
+    images: ['/images/classic_black_sandals.jpg'],
+    description: 'Woven criss-cross front straps with cushioned footbeds, non-slip rubber soles, and an adjustable ankle buckle designed for all-day comfort and play.',
+    highlightTag: 'Store Favourite',
+    sizes: ['EU 26', 'EU 28', 'EU 30', 'EU 32', 'EU 34'],
+    colors: [{ name: 'Classic Black', hex: '#111827' }],
+    inStock: true,
+    isFeatured: true,
+    isNewArrival: false,
+    occasions: ['everyday', 'special-occasion'],
+    ageGroup: '4-7Y',
+    ageGroups: ['4-7Y', '8-12Y'],
+    details: {
+      material: 'Durable faux-leather woven straps with flexible cushioned rubber outsole',
+      fit: 'Comfortable regular fit with adjustable buckle ankle strap',
+      care: 'Wipe clean with a damp cloth',
+      inStoreAvailability: 'In Stock at Galleria Mall, Orchid, Lagos'
+    }
+  },
+  {
+    id: 'bb-s-004',
+    name: 'Blue Strap Comfort Sandals',
+    category: 'shoes',
+    subCategory: 'Sandals',
+    price: 21000,
+    rating: 4.9,
+    reviewCount: 19,
+    images: ['/images/blue_strap_sandals.jpg'],
+    description: 'Vibrant royal blue and teal dual-strap sandals with secure velcro closures and flexible shock-absorbing soles for active toddlers and kids.',
+    highlightTag: 'Everyday Essential',
     sizes: ['EU 22', 'EU 24', 'EU 26', 'EU 28', 'EU 30'],
-    colors: [
-      { name: 'Champagne Gold', hex: '#F4C430' },
-      { name: 'Rose Blossom', hex: '#F5A6C8' },
-      { name: 'Midnight Navy', hex: '#123B68' }
-    ],
+    colors: [{ name: 'Royal Blue & Teal', hex: '#2563C7' }],
     inStock: true,
     isFeatured: false,
-    isDemonstration: true,
-    occasions: ['special-occasion'],
+    isNewArrival: false,
+    occasions: ['everyday', 'gifting'],
     ageGroup: '1-3Y',
+    ageGroups: ['1-3Y', '4-7Y'],
     details: {
-      material: 'Fine glitter coated textile with memory foam padded insole',
-      fit: 'Regular to wide fit with adjustable strap',
-      care: 'Spot clean with soft dry brush',
+      material: 'Padded synthetic straps with quick hook-and-loop velcro and supportive EVA footbed',
+      fit: 'Adjustable velcro closure for secure fit on active little feet',
+      care: 'Rinse with clean water or wipe with damp cloth',
+      inStoreAvailability: 'In Stock at Galleria Mall, Orchid, Lagos'
+    }
+  },
+  {
+    id: 'bb-s-005',
+    name: 'Junior Formal Lace-Up Shoes',
+    category: 'shoes',
+    subCategory: 'Formal Shoes',
+    price: 26500,
+    rating: 4.9,
+    reviewCount: 15,
+    images: ['/images/junior_formal_shoes.jpg'],
+    description: 'Classic cognac derby lace-up dress shoes with premium burnished finish, cushioned memory foam insoles, and durable non-marking soles for weddings and celebrations.',
+    highlightTag: 'Occasion Ready',
+    sizes: ['EU 30', 'EU 32', 'EU 34', 'EU 36'],
+    colors: [{ name: 'Cognac Brown', hex: '#78350F' }],
+    inStock: true,
+    isFeatured: true,
+    isNewArrival: false,
+    occasions: ['special-occasion', 'birthday', 'gifting'],
+    ageGroup: '8-12Y',
+    ageGroups: ['4-7Y', '8-12Y'],
+    details: {
+      material: 'Smooth burnished faux leather upper with memory foam insole and rubber dress sole',
+      fit: 'Smart lace-up closure with cushioned heel collar',
+      care: 'Wipe clean with a soft dry cloth and buff lightly',
+      inStoreAvailability: 'In Stock at Galleria Mall, Orchid, Lagos'
+    }
+  },
+  {
+    id: 'bb-s-006',
+    name: 'Teen Retro Colorblock Sneakers',
+    category: 'shoes',
+    subCategory: 'Sneakers',
+    price: 28000,
+    rating: 5.0,
+    reviewCount: 18,
+    images: ['/images/teen_retro_sneakers.jpg'],
+    description: 'Streetwear-inspired colorblock high-traction sneakers with breathable perforated toe box, padded collar, and durable rubber cupsole for older kids and pre-teens.',
+    highlightTag: 'Trending Style',
+    sizes: ['EU 32', 'EU 34', 'EU 36', 'EU 38'],
+    colors: [{ name: 'Multi-Color Retro', hex: '#DC2626' }],
+    inStock: true,
+    isFeatured: true,
+    isNewArrival: false,
+    occasions: ['everyday', 'birthday', 'special-occasion'],
+    ageGroup: '8-12Y',
+    ageGroups: ['8-12Y'],
+    details: {
+      material: 'Premium synthetic leather panels with breathable mesh lining and rubber traction outsole',
+      fit: 'Cushioned high-top athletic fit with lace-up front',
+      care: 'Wipe clean with sneaker foam or damp cloth',
       inStoreAvailability: 'In Stock at Galleria Mall, Orchid, Lagos'
     }
   },
@@ -411,9 +488,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isDemonstration: true,
-    occasions: ['birthday', 'gifting'],
-    ageGroup: '1-3Y',
-    details: {
+    occasions: ['birthday', 'gifting', 'everyday'],
+ageGroup: '1-3Y',
+        ageGroups: ['0-12M', '1-3Y', '4-7Y'],
+details: {
       material: 'Natural sustainably harvested beechwood with water-based non-toxic paint',
       fit: 'Smooth rounded bevelled edges for maximum toddler safety',
       care: 'Wipe with dry cloth or lightly damp cloth. Keep away from direct water.',
@@ -442,9 +520,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Flexible paper straw weave hat with shatterproof polycarbonate UV400 lenses',
       fit: 'Hat circumference 52cm with elastic wind chin strap',
       care: 'Store flat, reshape easily with light steam if compressed',
@@ -469,9 +548,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y'],
+details: {
       material: '3D textile floral applique with soft cotton inner lining and layered organza tutu',
       fit: 'True to size with gentle elastic back for easy fit',
       care: 'Hand wash gently or dry clean. Hang dry away from direct heat.',
@@ -495,9 +575,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Sculpted 3D floral petals with breathable cotton bodice lining and multi-tier tulle',
       fit: 'Tailored bodice with flared skirt',
       care: 'Dry clean recommended or gentle cold hand wash',
@@ -521,9 +602,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday', 'gifting'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'gifting', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y', 'all-ages'],
+details: {
       material: 'Water-resistant coated nylon canvas with reinforced zippers and buckles',
       fit: 'Padded ergonomic breathable mesh straps with chest clip',
       care: 'Wipe clean with a damp cloth',
@@ -550,9 +632,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '1-3Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '1-3Y',
+        ageGroups: ['1-3Y', '4-7Y'],
+details: {
       material: '95% combed breathable ribbed cotton with 5% elastane',
       fit: 'Comfortable relaxed fit with gentle stretch',
       care: 'Machine wash warm, tumble dry low',
@@ -576,9 +659,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Breathable sports mesh jersey with durable high-density screen print',
       fit: 'Boxy streetwear fit for active play',
       care: 'Machine wash cold inside out. Iron reverse side.',
@@ -602,9 +686,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% 240gsm premium heavyweight combed cotton',
       fit: 'Relaxed drop-shoulder cut',
       care: 'Hand or gentle machine wash. Do not iron directly on 3D print.',
@@ -628,9 +713,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% washed cotton denim with antique brass hardware',
       fit: 'Classic trucker fit with room for layering',
       care: 'Machine wash cold with similar colours',
@@ -654,9 +740,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: true,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Lightweight ripstop wind-resistant nylon with breathable soft mesh lining',
       fit: 'Athletic cut with elasticated cuffs and hem',
       care: 'Gentle wash cycle, hang dry quickly',
@@ -680,9 +767,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday', 'special-occasion'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Soft durable washed cotton denim with rivet-secured crystal rhinestones',
       fit: 'Comfortable flare fit with adjustable inner waistband',
       care: 'Hand wash inside out to protect embellishments',
@@ -706,9 +794,10 @@ export const PRODUCTS: Product[] = [
     isFeatured: false,
     isNewArrival: true,
     isDemonstration: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Premium wipe-clean faux leather upper with cushioned EVA lug outsole',
       fit: 'Adjustable hook-and-loop velcro ankle strap',
       care: 'Wipe clean with a damp cloth or shoe sponge',
@@ -731,9 +820,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% soft pre-washed cotton denim',
       fit: 'Relaxed cargo fit with elasticated inner waist tab',
       care: 'Machine wash cold with like colors, tumble dry low',
@@ -756,9 +846,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% breathable heavy combed cotton jersey',
       fit: 'Modern boxy streetwear cut',
       care: 'Machine wash cool inside out, warm iron',
@@ -781,9 +872,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'gifting', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Soft cotton-blend premium textured cable knit',
       fit: 'Tailored knit fit with ribbed cuffs and polo collar',
       care: 'Gentle hand wash cold, dry flat to maintain shape',
@@ -806,9 +898,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['special-occasion', 'gifting'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'gifting', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Cotton bodice lining with soft structured organza floral petals',
       fit: 'Comfortable fit with elasticated flare skirt',
       care: 'Gentle hand wash cold or dry clean, line dry in shade',
@@ -831,9 +924,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% garment-dyed pink cotton denim',
       fit: 'Relaxed crop vest with an elasticated waistband skirt',
       care: 'Machine wash cold with like colors, hang dry',
@@ -856,9 +950,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Premium soft washed denim with reinforced metallic star applique',
       fit: 'Relaxed straight-leg cut with button-front vest',
       care: 'Wash inside out in cold water, line dry',
@@ -881,9 +976,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['special-occasion', 'gifting'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['special-occasion', 'gifting', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Handcrafted floral rosettes with breathable cotton lining',
       fit: 'Flared A-line silhouette with comfortable stretch back',
       care: 'Dry clean or gentle spot clean only',
@@ -906,9 +1002,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['everyday', 'gifting', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'gifting', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y', 'all-ages'],
+details: {
       material: 'Ultra-soft plush faux fur with faux-pearl beaded handle',
       fit: 'Mini handheld styling for girls',
       care: 'Spot clean with a damp cloth',
@@ -931,9 +1028,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% hard-wearing cotton twill',
       fit: 'Relaxed knee-length fit with drawstring elastic waist',
       care: 'Machine wash warm, tumble dry medium',
@@ -956,9 +1054,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['4-7Y', '8-12Y'],
+details: {
       material: 'Performance stretch cotton-poly blend',
       fit: 'Athletic tailored fit with tapered ankle cuffs',
       care: 'Machine wash cool, line dry away from direct heat',
@@ -981,9 +1080,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday', 'gifting'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: 'Fine cotton stripe weave with sturdy cotton twill pants',
       fit: 'Smart casual button-up with elasticated cargo trousers',
       care: 'Machine wash cool, medium iron',
@@ -1006,9 +1106,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: true,
     isNewArrival: true,
-    occasions: ['gifting', 'special-occasion'],
-    ageGroup: '0-12M',
-    details: {
+    occasions: ['gifting', 'special-occasion', 'birthday'],
+ageGroup: '0-12M',
+        ageGroups: ['0-12M', '1-3Y'],
+details: {
       material: '100% soft organic ribbed cotton with lace skirt overlay',
       fit: 'Gentle on delicate skin with snap back closure',
       care: 'Hand wash cold or delicate cycle, lay flat to dry',
@@ -1031,9 +1132,10 @@ export const PRODUCTS: Product[] = [
     inStock: true,
     isFeatured: false,
     isNewArrival: true,
-    occasions: ['everyday', 'special-occasion'],
-    ageGroup: '4-7Y',
-    details: {
+    occasions: ['everyday', 'special-occasion', 'birthday'],
+ageGroup: '4-7Y',
+        ageGroups: ['1-3Y', '4-7Y', '8-12Y'],
+details: {
       material: '100% combed cotton jersey with heat-bonded metallic studs',
       fit: 'Regular unisex crewneck cut',
       care: 'Wash inside out in cold water, hang dry away from direct heat',

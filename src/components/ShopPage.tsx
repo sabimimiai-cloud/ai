@@ -82,8 +82,12 @@ export const ShopPage: React.FC<ShopPageProps> = ({
       }
 
       // Age group filter
-      if (selectedAge !== 'all' && product.ageGroup !== selectedAge && product.ageGroup !== 'all-ages') {
-        return false;
+      if (selectedAge !== 'all') {
+        const matchesPrimary = product.ageGroup === selectedAge || product.ageGroup === 'all-ages';
+        const matchesArray = product.ageGroups?.includes(selectedAge as any);
+        if (!matchesPrimary && !matchesArray) {
+          return false;
+        }
       }
 
       // Max price filter

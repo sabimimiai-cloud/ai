@@ -51,9 +51,27 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
               </div>
 
               {/* Accent Corner Badge */}
-              <div className="absolute -top-4 -left-4 bg-[#173F70] text-white py-2 px-3.5 rounded-xl shadow-md text-xs font-bold flex items-center gap-1.5">
+              <div className="absolute -top-4 -left-4 bg-[#173F70] text-white py-2 px-3.5 rounded-xl shadow-md text-xs font-bold flex items-center gap-1.5 z-10">
                 <MapPin className="w-4 h-4 text-[#F9C928]" />
                 <span>Galleria Mall, Orchid</span>
+              </div>
+
+              {/* Secondary In-Store Geometric Wall Card */}
+              <div className="absolute -top-6 -right-4 sm:-right-8 w-32 sm:w-40 aspect-square rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white hidden sm:block group-hover:-translate-y-1 transition-transform duration-300">
+                <img
+                  src="/images/IMG_6597.png"
+                  alt="Buubu Bloom iconic logo on vibrant geometric wall at Galleria Mall store"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('IMG_6597.png')) {
+                      target.src = '/IMG_6597.png';
+                    }
+                  }}
+                />
+                <div className="absolute bottom-0 inset-x-0 bg-black/65 backdrop-blur-xs py-1 text-center text-[9px] font-black text-white uppercase tracking-wider">
+                  Our Lagos Store
+                </div>
               </div>
             </div>
           </motion.div>
