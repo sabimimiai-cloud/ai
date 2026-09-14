@@ -22,6 +22,7 @@ import { CartDrawer } from './components/CartDrawer';
 import { WishlistDrawer } from './components/WishlistDrawer';
 import { CheckoutModal } from './components/CheckoutModal';
 import { SizeGuideModal } from './components/SizeGuideModal';
+import { FootwearImageResolver } from './components/FootwearImageResolver';
 import { ShopView } from './views/ShopView';
 import { AboutView } from './views/AboutView';
 import { ContactView } from './views/ContactView';
@@ -57,6 +58,9 @@ export function App() {
   const [activeView, setActiveView] = useState<ActiveView>('home');
   const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [shopNewIn, setShopNewIn] = useState<boolean>(false);
+  const [shopAge, setShopAge] = useState<string>('all');
+  const [shopOccasion, setShopOccasion] = useState<string>('all');
   
   // Modals & Drawers
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
@@ -267,7 +271,11 @@ export function App() {
   };
 
   // Safe Navigation Handler: pushes browser history so Back button restores prior page
-  const handleNavigate = useCallback((view: ActiveView, category?: ProductCategory) => {
+  const handleNavigate = useCallback((
+    view: ActiveView, 
+    category?: ProductCategory, 
+    options?: { newIn?: boolean; age?: string; occasion?: string; search?: string }
+  ) => {
     const nextCategory = category || (view === 'shop' ? selectedCategory : 'all');
     const nextDepth = depthRef.current + 1;
     depthRef.current = nextDepth;
@@ -286,6 +294,18 @@ export function App() {
     setActiveView(view);
     if (category) {
       setSelectedCategory(category);
+    }
+    if (options?.newIn !== undefined) {
+      setShopNewIn(options.newIn);
+    }
+    if (options?.age !== undefined) {
+      setShopAge(options.age);
+    }
+    if (options?.occasion !== undefined) {
+      setShopOccasion(options.occasion);
+    }
+    if (options?.search !== undefined) {
+      setSearchQuery(options.search);
     }
     setSelectedProduct(null);
     setIsCartOpen(false);
@@ -629,6 +649,9 @@ export function App() {
             <ShopView
               initialCategory={selectedCategory}
               initialSearchQuery={searchQuery}
+              initialNewIn={shopNewIn}
+              initialAge={shopAge}
+              initialOccasion={shopOccasion}
               onSelectCategory={(cat) => {
                 setSelectedCategory(cat);
                 const nextState: AppNavigationState = {
@@ -741,6 +764,9 @@ export function App() {
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
       />
+
+      {/* Dynamic Footwear Image Resolver for uploaded reference sheet */}
+      <FootwearImageResolver />
 
       {/* Footer */}
       <Footer 

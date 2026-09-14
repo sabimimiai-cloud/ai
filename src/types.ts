@@ -1,3 +1,16 @@
+export type Audience = 'all' | 'girls' | 'boys' | 'baby' | 'unisex';
+
+export type ProductType = 
+  | 'all'
+  | 'clothing' 
+  | 'shoes' 
+  | 'accessories' 
+  | 'bags' 
+  | 'toys' 
+  | 'ride-ons' 
+  | 'baby-essentials' 
+  | 'gifts';
+
 export type ProductCategory = 
   | 'all' 
   | 'girls' 
@@ -6,7 +19,11 @@ export type ProductCategory =
   | 'shoes' 
   | 'accessories' 
   | 'toys' 
-  | 'gifts';
+  | 'gifts'
+  | 'clothing'
+  | 'bags'
+  | 'ride-ons'
+  | 'baby-essentials';
 
 export type OccasionMoment = 
   | 'everyday' 
@@ -32,6 +49,8 @@ export interface Product {
   name: string;
   category: ProductCategory;
   subCategory?: string;
+  audience?: Audience;
+  productType?: ProductType;
   price: number; // in NGN
   originalPrice?: number;
   rating?: number;
@@ -47,7 +66,7 @@ export interface Product {
   isDemonstration?: boolean;
   occasions: OccasionMoment[];
   ageGroup: AgeGroup;
-  ageGroups?: AgeGroup[];
+  ageGroups: AgeGroup[];
   whatsInside?: BundleItem[];
   details: {
     material: string;

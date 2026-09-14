@@ -18,7 +18,7 @@ interface NewArrivalsSectionProps {
   onAddToCart: (product: Product, size?: string, color?: string) => void;
   wishlistIds: string[];
   onToggleWishlist: (product: Product) => void;
-  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory, options?: { newIn?: boolean; age?: string; occasion?: string; search?: string }) => void;
 }
 
 export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
@@ -46,6 +46,11 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
 
   const displayedProducts = NEW_ARRIVALS_PRODUCTS.filter(product => {
     if (selectedFilter === 'all') return true;
+    if (selectedFilter === 'girls') return product.audience === 'girls' || product.category === 'girls';
+    if (selectedFilter === 'boys') return product.audience === 'boys' || product.category === 'boys';
+    if (selectedFilter === 'baby') return product.audience === 'baby' || product.category === 'baby' || (product.ageGroups && product.ageGroups.includes('0-12M'));
+    if (selectedFilter === 'shoes') return product.productType === 'shoes' || product.category === 'shoes';
+    if (selectedFilter === 'accessories') return product.productType === 'accessories' || product.productType === 'bags' || product.category === 'accessories';
     return product.category === selectedFilter;
   });
 
@@ -373,7 +378,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button
               id="new-arrivals-bottom-shop-btn"
-              onClick={() => onNavigate('shop', 'all')}
+              onClick={() => onNavigate('shop', 'all', { newIn: true })}
               className="bg-[#173F70] hover:bg-[#2563C7] text-white px-8 py-3.5 rounded-2xl font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 flex items-center gap-2 cursor-pointer transition-all duration-200"
             >
               <span>Shop New Arrivals</span>
@@ -381,14 +386,14 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
             </button>
             <button
               id="new-arrivals-bottom-girls-btn"
-              onClick={() => onNavigate('shop', 'girls')}
+              onClick={() => onNavigate('shop', 'girls', { newIn: true })}
               className="bg-white hover:bg-gray-50 text-[#173F70] border border-[#173F70]/20 px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
             >
               Girls New In
             </button>
             <button
               id="new-arrivals-bottom-boys-btn"
-              onClick={() => onNavigate('shop', 'boys')}
+              onClick={() => onNavigate('shop', 'boys', { newIn: true })}
               className="bg-white hover:bg-gray-50 text-[#173F70] border border-[#173F70]/20 px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-95 cursor-pointer"
             >
               Boys New In

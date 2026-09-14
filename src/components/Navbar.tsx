@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ShoppingBag, 
   Heart, 
@@ -21,7 +21,7 @@ import { BuubuBloomLogo } from './BuubuBloomLogo';
 interface NavbarProps {
   activeView: ActiveView;
   selectedCategory?: ProductCategory;
-  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory, options?: { newIn?: boolean; age?: string; occasion?: string; search?: string }) => void;
   cartCount: number;
   wishlistCount: number;
   ordersCount?: number;
@@ -54,16 +54,21 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const searchResults = searchQuery.trim() === '' 
-    ? [] 
-    : PRODUCTS.filter(p => 
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 5);
+  const searchResults = useMemo(() => {
+    if (searchQuery.trim() === '') return [];
+    const q = searchQuery.toLowerCase().trim();
+    return PRODUCTS.filter(p => 
+      p.name.toLowerCase().includes(q) ||
+      p.category.toLowerCase().includes(q) ||
+      (p.subCategory && p.subCategory.toLowerCase().includes(q)) ||
+      (p.audience && p.audience.toLowerCase().includes(q)) ||
+      (p.productType && p.productType.toLowerCase().includes(q)) ||
+      p.description.toLowerCase().includes(q)
+    ).slice(0, 6);
+  }, [searchQuery]);
 
-  const handleNavClick = (view: ActiveView, category?: ProductCategory) => {
-    onNavigate(view, category);
+  const handleNavClick = (view: ActiveView, category?: ProductCategory, options?: { newIn?: boolean; age?: string; occasion?: string; search?: string }) => {
+    onNavigate(view, category, options);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -331,6 +336,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                   placeholder="Search dresses, two-piece sets, shoes, birthday gifts..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && searchQuery.trim()) {
+                      handleNavClick('shop', 'all', { search: searchQuery.trim() });
+                      setSearchOpen(false);
+                    }
+                  }}
                   autoFocus
                   className="w-full bg-[#F4F1EA] text-[#172033] placeholder:text-[#172033]/40 pl-11 pr-12 py-3 rounded-2xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#123B68]/20"
                 />
@@ -375,12 +386,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                       <div className="pt-2 text-center">
                         <button
                           onClick={() => {
-                            handleNavClick('shop', 'all');
+                            handleNavClick('shop', 'all', { search: searchQuery.trim() });
                             setSearchOpen(false);
                           }}
                           className="text-xs font-bold text-[#2563C7] hover:underline"
                         >
-                          View all results in shop →
+                          View all results in shop ({PRODUCTS.filter(p => p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.category.toLowerCase().includes(searchQuery.toLowerCase())).length}) →
                         </button>
                       </div>
                     </div>

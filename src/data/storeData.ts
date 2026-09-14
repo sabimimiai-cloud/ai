@@ -1,3 +1,5 @@
+import { PRODUCTS } from './products';
+
 export interface CategoryInfo {
   id: string;
   name: string;
@@ -209,13 +211,46 @@ export const FAQ_ITEMS = [
 export const FAQS = FAQ_ITEMS;
 
 export const CATEGORIES = [
-  { id: 'all' as const, name: 'All Collection', count: 23 },
-  { id: 'girls' as const, name: "Girls' Fashion", count: 6 },
-  { id: 'boys' as const, name: "Boys' Fashion", count: 6 },
-  { id: 'baby' as const, name: 'Baby Essentials', count: 2 },
-  { id: 'shoes' as const, name: 'Footwear & Shoes', count: 3 },
-  { id: 'accessories' as const, name: 'Bags & Accessories', count: 3 },
-  { id: 'toys' as const, name: 'Toys & Play', count: 2 },
-  { id: 'gifts' as const, name: 'Curated Gifts', count: 1 },
+  { 
+    id: 'all' as const, 
+    name: 'All Collection', 
+    count: PRODUCTS.length 
+  },
+  { 
+    id: 'girls' as const, 
+    name: "Girls' Fashion", 
+    count: PRODUCTS.filter(p => p.audience === 'girls' || p.category === 'girls').length 
+  },
+  { 
+    id: 'boys' as const, 
+    name: "Boys' Fashion", 
+    count: PRODUCTS.filter(p => p.audience === 'boys' || p.category === 'boys').length 
+  },
+  { 
+    id: 'baby' as const, 
+    name: 'Baby Essentials', 
+    count: PRODUCTS.filter(p => p.audience === 'baby' || p.category === 'baby' || (p.ageGroups && p.ageGroups.includes('0-12M'))).length 
+  },
+  { 
+    id: 'shoes' as const, 
+    name: 'Footwear & Shoes', 
+    count: PRODUCTS.filter(p => p.productType === 'shoes' || p.category === 'shoes').length 
+  },
+  { 
+    id: 'accessories' as const, 
+    name: 'Bags & Accessories', 
+    count: PRODUCTS.filter(p => p.productType === 'accessories' || p.productType === 'bags' || p.category === 'accessories').length 
+  },
+  { 
+    id: 'toys' as const, 
+    name: 'Toys & Play', 
+    count: PRODUCTS.filter(p => p.productType === 'toys' || p.productType === 'ride-ons' || p.category === 'toys').length 
+  },
+  { 
+    id: 'gifts' as const, 
+    name: 'Curated Gifts', 
+    count: PRODUCTS.filter(p => p.productType === 'gifts' || p.category === 'gifts' || (p.occasions && p.occasions.includes('gifting'))).length 
+  },
 ];
+
 

@@ -3,6 +3,17 @@ import { motion } from 'motion/react';
 import { MapPin, Phone, MessageSquare, Clock, Navigation, CheckCircle2 } from 'lucide-react';
 import { STORE_CONTACT } from '../data/storeData';
 
+const getResolvedImage = (src: string): string => {
+  try {
+    const filename = src.split('/').pop() || '';
+    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+    if (stored[filename]) return stored[filename];
+    if (stored['IMG_6596.png']) return stored['IMG_6596.png'];
+    if (stored['IMG_6596.jpg']) return stored['IMG_6596.jpg'];
+  } catch (e) {}
+  return src;
+};
+
 export const PhysicalStoreSection: React.FC = () => {
   return (
     <section 
@@ -100,13 +111,20 @@ export const PhysicalStoreSection: React.FC = () => {
             <div className="lg:col-span-5 relative">
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
-                  src="/images/IMG_6596.png"
+                  src={getResolvedImage('/images/IMG_6596.png')}
                   alt="Buubu Bloom real store interior at Galleria Mall, Orchid, Lagos"
+                  referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src.includes('IMG_6596.png')) {
+                    if (target.src.includes('/images/IMG_6596.png')) {
                       target.src = '/IMG_6596.png';
+                    } else if (target.src.includes('/IMG_6596.png')) {
+                      target.src = '/images/IMG_6596.jpg';
+                    } else if (target.src.includes('/images/IMG_6596.jpg')) {
+                      target.src = '/IMG_6596.jpg';
+                    } else if (target.src.includes('/IMG_6596.jpg')) {
+                      target.src = 'IMG_6596.png';
                     }
                   }}
                 />

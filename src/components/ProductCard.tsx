@@ -33,28 +33,38 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [hasError, setHasError] = useState<boolean>(false);
   const [imgSrc, setImgSrc] = useState<string>(() => {
     try {
-      const filename = product.images[0].split('/').pop() || '';
+      const filename = product.images[0]?.split('/').pop() || '';
       const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-      if (stored[filename]) {
-        return stored[filename];
-      }
+      if (stored[filename]) return stored[filename];
+      if (stored[product.id]) return stored[product.id];
     } catch (e) {}
-    return product.images[0];
+    return product.images[0] || '';
   });
 
   useEffect(() => {
-    try {
-      const filename = product.images[0].split('/').pop() || '';
-      const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-      if (stored[filename]) {
-        setImgSrc(stored[filename]);
-        setHasError(false);
-        return;
-      }
-    } catch (e) {}
-    setImgSrc(product.images[0]);
-    setHasError(false);
-  }, [product.images]);
+    const updateSrc = () => {
+      try {
+        const filename = product.images[0]?.split('/').pop() || '';
+        const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
+        if (stored[filename]) {
+          setImgSrc(stored[filename]);
+          setHasError(false);
+          return;
+        }
+        if (stored[product.id]) {
+          setImgSrc(stored[product.id]);
+          setHasError(false);
+          return;
+        }
+      } catch (e) {}
+      setImgSrc(product.images[0] || '');
+      setHasError(false);
+    };
+
+    updateSrc();
+    window.addEventListener('buubu_photos_updated', updateSrc);
+    return () => window.removeEventListener('buubu_photos_updated', updateSrc);
+  }, [product.id, product.images]);
 
   const handleView = () => {
     if (onQuickView) onQuickView(product);
