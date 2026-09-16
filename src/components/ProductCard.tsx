@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, ShoppingBag, Eye, Star, Check } from 'lucide-react';
+import { Heart, ShoppingBag, Eye, Check } from 'lucide-react';
 import { Product } from '../types';
 
 const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
@@ -202,13 +202,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 </span>
               )}
             </div>
-            {product.rating !== undefined && product.reviewCount !== undefined && product.reviewCount > 0 && (
-              <div className="flex items-center gap-1 text-[11px] text-amber-500">
-                <Star className="w-3 h-3 fill-current" />
-                <span className="font-bold text-[#172033]">{product.rating}</span>
-                <span className="text-gray-400 font-normal">({product.reviewCount})</span>
-              </div>
-            )}
           </div>
 
           <button

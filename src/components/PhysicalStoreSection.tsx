@@ -8,8 +8,8 @@ const getResolvedImage = (src: string): string => {
     const filename = src.split('/').pop() || '';
     const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
     if (stored[filename]) return stored[filename];
-    if (stored['IMG_6596.png']) return stored['IMG_6596.png'];
-    if (stored['IMG_6596.jpg']) return stored['IMG_6596.jpg'];
+    if (filename.includes('05C11E55') && stored['05C11E55-4474-41F8-B3A8-29CAEA7892B8.png']) return stored['05C11E55-4474-41F8-B3A8-29CAEA7892B8.png'];
+    if (filename.includes('A3644F9A') && stored['A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png']) return stored['A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png'];
   } catch (e) {}
   return src;
 };
@@ -107,29 +107,40 @@ export const PhysicalStoreSection: React.FC = () => {
 
             </div>
 
-            {/* Right Visual Image */}
-            <div className="lg:col-span-5 relative">
+            {/* Right Visual Images */}
+            <div className="lg:col-span-5 relative space-y-4">
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
-                  src={getResolvedImage('/images/IMG_6596.png')}
+                  src={getResolvedImage('/images/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png')}
                   alt="Buubu Bloom real store interior at Galleria Mall, Orchid, Lagos"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src.includes('/images/IMG_6596.png')) {
-                      target.src = '/IMG_6596.png';
-                    } else if (target.src.includes('/IMG_6596.png')) {
-                      target.src = '/images/IMG_6596.jpg';
-                    } else if (target.src.includes('/images/IMG_6596.jpg')) {
-                      target.src = '/IMG_6596.jpg';
-                    } else if (target.src.includes('/IMG_6596.jpg')) {
-                      target.src = 'IMG_6596.png';
+                    if (!target.src.includes('A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png')) {
+                      target.src = '/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png';
                     }
                   }}
                 />
               </div>
-              <div className="absolute -bottom-4 -left-4 bg-[#173F70] border border-white/20 p-3.5 rounded-2xl shadow-xl text-xs font-bold text-[#F9C928] flex items-center gap-2">
+
+              {/* Second Real Store Photograph: Signature Geometric Wall & 3D Logo */}
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
+                <img
+                  src={getResolvedImage('/images/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png')}
+                  alt="Buubu Bloom signature 3D logo and geometric wall at Galleria Mall store"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (!target.src.includes('05C11E55-4474-41F8-B3A8-29CAEA7892B8.png')) {
+                      target.src = '/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png';
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="absolute -bottom-4 -left-4 bg-[#173F70] border border-white/20 p-3.5 rounded-2xl shadow-xl text-xs font-bold text-[#F9C928] flex items-center gap-2 z-10">
                 <CheckCircle2 className="w-4 h-4 text-[#27AFA5]" />
                 <span>Walk-ins & Order Pickups Welcome</span>
               </div>

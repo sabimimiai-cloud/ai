@@ -106,8 +106,8 @@ export const ShopView: React.FC<ShopViewProps> = ({
     return savedState?.searchQuery || '';
   });
 
-  const [sortBy, setSortBy] = useState<'featured' | 'newest' | 'price-asc' | 'price-desc' | 'rating'>(() => {
-    return savedState?.sortBy || 'featured';
+  const [sortBy, setSortBy] = useState<'featured' | 'newest' | 'price-asc' | 'price-desc'>(() => {
+    return (savedState?.sortBy && savedState.sortBy !== 'rating') ? savedState.sortBy : 'featured';
   });
 
   const [maxPrice, setMaxPrice] = useState<number>(() => {
@@ -290,7 +290,6 @@ export const ShopView: React.FC<ShopViewProps> = ({
       if (sortBy === 'newest') return (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0);
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;
-      if (sortBy === 'rating') return (b.rating || 5) - (a.rating || 5);
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
     });
   }, [selectedAudience, selectedProductType, selectedAge, selectedOccasion, onlyNewIn, maxPrice, searchQuery, sortBy]);
@@ -542,7 +541,6 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 <option value="newest">New Arrivals First</option>
                 <option value="price-asc">Price: Low to High</option>
                 <option value="price-desc">Price: High to Low</option>
-                <option value="rating">Customer Rating</option>
               </select>
             </div>
 
@@ -683,7 +681,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                   { id: 'toys', label: '🧸 Toys & Play' },
                   { id: 'ride-ons', label: '🚗 Ride-On Cars' },
                   { id: 'baby-essentials', label: '🍼 Baby Essentials' },
-                  { id: 'gifts', label: '🎁 Curated Gifts' },
+                  { id: 'gifts', label: '🎁 Gifts & Hampers' },
                 ].map((cat) => (
                   <button
                     key={cat.id}
@@ -809,7 +807,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 📍 Galleria Mall Orchid, Lagos
               </p>
               <p className="text-[11px] text-[#172033]/70">
-                All catalogue pieces are in stock and ready for immediate walk-in inspection or dispatch.
+                All catalogue pieces are available for walk-in inspection or dispatch.
               </p>
             </div>
 

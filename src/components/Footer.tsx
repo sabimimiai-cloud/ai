@@ -38,7 +38,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
           </div>
 
           <p className="text-sm sm:text-base font-bold text-[#F9C928]">
-            “Match your vibe, Bloom your style!”
+            Match your vibe, Bloom your style
           </p>
         </div>
 
@@ -233,7 +233,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
-          <p>© 2025 Buubu Bloom. Match your vibe, Bloom your style.</p>
+          <p>© {new Date().getFullYear()} Buubu Bloom. Match your vibe, Bloom your style</p>
           <p className="text-white/75 font-medium">Made for little moments that matter.</p>
         </div>
 

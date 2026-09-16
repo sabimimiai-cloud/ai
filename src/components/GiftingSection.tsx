@@ -144,7 +144,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
 
   const handleAddBox = () => {
     if (birthdayGiftBox && onAddToCart) {
-      onAddToCart(birthdayGiftBox, birthdayGiftBox.sizes[0] || 'Curated by Age', 'Girls Bloom Theme');
+      onAddToCart(birthdayGiftBox, birthdayGiftBox.sizes[0] || 'Selected by Age', 'Girls Bloom Theme');
       setAddedBoxNotice(true);
       setTimeout(() => setAddedBoxNotice(false), 3000);
     }
@@ -185,11 +185,11 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#173F70] tracking-tight font-display mb-3">
-            Need a gift?
+            Need a Gift?
           </h2>
 
           <p className="text-base sm:text-lg text-[#172033]/80 leading-relaxed font-medium">
-            Let us make the choice easier.
+            We’ve got ideas for the little one.
           </p>
         </div>
 
@@ -277,7 +277,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
               <div className="md:col-span-7 flex flex-col justify-between">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-widest text-[#27AFA3]">
-                    Curated Gift Box
+                    Gift Box
                   </span>
                   
                   <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mt-1 mb-2">
@@ -355,7 +355,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
           <div className="mb-8">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-[#F58220] mb-2">
               <Compass className="w-4 h-4" />
-              <span>Interactive Gift Concierge</span>
+              <span>Gift Assistant</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-[#173F70] font-display mb-1.5">
               Find a Gift
@@ -546,137 +546,171 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
               </div>
             </div>
 
-            {/* Dynamic Results Grid (Always 3 to 6 matching items, zero empty states) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              {recommendations.map((item) => {
-                const prod = item.productId ? productMap.get(item.productId) : undefined;
-                const isReal = item.isRealCatalogueProduct && prod !== undefined;
-
-                return (
-                  <div
-                    key={item.id}
-                    id={`gift-card-${item.id}`}
-                    className="bg-[#FFFDF8] rounded-2xl p-4 border border-[#F4F1EA] hover:border-[#173F70]/20 hover:shadow-md transition-all flex flex-col justify-between group"
+            {/* Dynamic Results Grid or Empty State */}
+            {recommendations.length === 0 ? (
+              <div className="bg-[#FFFDF8] rounded-2xl p-8 sm:p-12 text-center border border-[#F4F1EA]">
+                <div className="w-12 h-12 rounded-full bg-[#F4F1EA] flex items-center justify-center text-[#173F70] mx-auto mb-3">
+                  <Gift className="w-6 h-6 text-[#173F70]/50" />
+                </div>
+                <h5 className="text-lg font-bold text-[#173F70] mb-1.5 font-display">
+                  No exact match found
+                </h5>
+                <p className="text-sm text-[#172033]/70 max-w-md mx-auto mb-5">
+                  We couldn't find an exact match for that combination. Try another age group or occasion, or reset the filters to see popular recommendations.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWho('Girl');
+                      setAge('3-5');
+                      setOccasion('Birthday');
+                    }}
+                    className="bg-[#173F70] hover:bg-[#2563C7] text-white px-5 py-2.5 rounded-xl font-bold text-xs shadow-xs cursor-pointer transition-colors"
                   >
-                    <div>
-                      {/* Product / Inspiration Image */}
-                      <div 
-                        className="aspect-[4/5] rounded-xl overflow-hidden mb-3 relative bg-[#F4F1EA] cursor-pointer"
-                        onClick={() => {
-                          if (isReal && prod) {
-                            handleOpenProduct(item);
-                          }
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/images/nigerian_birthday_kids.jpg';
-                          }}
-                        />
+                    Reset Gift Finder
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('shop', 'gifts')}
+                    className="bg-[#F4F1EA] hover:bg-[#EBE7DC] text-[#173F70] px-5 py-2.5 rounded-xl font-bold text-xs cursor-pointer transition-colors"
+                  >
+                    Browse All Gifts in Shop
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {recommendations.map((item) => {
+                  const prod = item.productId ? productMap.get(item.productId) : undefined;
+                  const isReal = item.isRealCatalogueProduct && prod !== undefined;
 
-                        {/* Top Badge: Real Catalogue Item */}
-                        <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
-                          <span className="bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
-                            {item.highlightTag || 'In Stock'}
+                  return (
+                    <div
+                      key={item.id}
+                      id={`gift-card-${item.id}`}
+                      className="bg-[#FFFDF8] rounded-2xl p-4 border border-[#F4F1EA] hover:border-[#173F70]/20 hover:shadow-md transition-all flex flex-col justify-between group"
+                    >
+                      <div>
+                        {/* Product / Inspiration Image */}
+                        <div 
+                          className="aspect-[4/5] rounded-xl overflow-hidden mb-3 relative bg-[#F4F1EA] cursor-pointer"
+                          onClick={() => {
+                            if (isReal && prod) {
+                              handleOpenProduct(item);
+                            }
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = '/images/nigerian_birthday_kids.jpg';
+                            }}
+                          />
+
+                          {/* Top Badge: Real Catalogue Item */}
+                          <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 items-start">
+                            <span className="bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md shadow-xs">
+                              {item.highlightTag || 'Available'}
+                            </span>
+                          </div>
+
+                          {/* Category pill */}
+                          <span className="absolute bottom-2.5 right-2.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md backdrop-blur-xs">
+                            {item.category}
                           </span>
                         </div>
 
-                        {/* Category pill */}
-                        <span className="absolute bottom-2.5 right-2.5 bg-black/60 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md backdrop-blur-xs">
-                          {item.category}
-                        </span>
+                        {/* Title & Description */}
+                        <h5 
+                          className={`text-sm font-bold text-[#172033] line-clamp-1 mb-1 transition-colors ${
+                            isReal ? 'cursor-pointer group-hover:text-[#173F70]' : ''
+                          }`}
+                          onClick={() => {
+                            if (isReal && prod) handleOpenProduct(item);
+                          }}
+                        >
+                          {item.title}
+                        </h5>
+
+                        <p className="text-xs text-[#172033]/70 line-clamp-2 mb-3 leading-relaxed">
+                          {item.description}
+                        </p>
+
+                        {/* Price / Stock Note */}
+                        <div className="flex items-baseline justify-between mb-4">
+                          {isReal && item.price ? (
+                            <div className="flex items-baseline gap-2">
+                              <span className="text-base font-black text-[#173F70] font-display">
+                                ₦{item.price.toLocaleString()}
+                              </span>
+                              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
+                                Available
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="text-[11px] font-medium text-[#172033]/65 italic">
+                              Availability may vary. WhatsApp us to confirm.
+                            </div>
+                          )}
+                        </div>
                       </div>
 
-                      {/* Title & Description */}
-                      <h5 
-                        className={`text-sm font-bold text-[#172033] line-clamp-1 mb-1 transition-colors ${
-                          isReal ? 'cursor-pointer group-hover:text-[#173F70]' : ''
-                        }`}
-                        onClick={() => {
-                          if (isReal && prod) handleOpenProduct(item);
-                        }}
-                      >
-                        {item.title}
-                      </h5>
+                      {/* Action Buttons */}
+                      <div className="pt-3 border-t border-[#F4F1EA] flex items-center gap-2">
+                        {isReal && prod ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => handleQuickAdd(item)}
+                              className={`flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                                addedItemNotice === item.id
+                                  ? 'bg-emerald-600 text-white'
+                                  : 'bg-[#173F70] hover:bg-[#2563C7] text-white active:scale-[0.98]'
+                              }`}
+                            >
+                              {addedItemNotice === item.id ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  <span>Added!</span>
+                                </>
+                              ) : (
+                                <>
+                                  <ShoppingBag className="w-3.5 h-3.5" />
+                                  <span>Add to Bag</span>
+                                </>
+                              )}
+                            </button>
 
-                      <p className="text-xs text-[#172033]/70 line-clamp-2 mb-3 leading-relaxed">
-                        {item.description}
-                      </p>
-
-                      {/* Price / Stock Note */}
-                      <div className="flex items-baseline justify-between mb-4">
-                        {isReal && item.price ? (
-                          <div className="flex items-baseline gap-2">
-                            <span className="text-base font-black text-[#173F70] font-display">
-                              ₦{item.price.toLocaleString()}
-                            </span>
-                            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">
-                              In Stock
-                            </span>
-                          </div>
+                            <button
+                              type="button"
+                              onClick={() => handleOpenProduct(item)}
+                              className="py-2.5 px-3 rounded-xl font-bold text-xs bg-[#F4F1EA] hover:bg-[#EBE7DC] text-[#173F70] transition-colors cursor-pointer"
+                            >
+                              View
+                            </button>
+                          </>
                         ) : (
-                          <div className="text-[11px] font-medium text-[#172033]/65 italic">
-                            Availability may vary. WhatsApp us to confirm.
-                          </div>
+                          <a
+                            href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(
+                              `Hello Buubu Bloom, I am interested in the ${item.title} (${who}, ${ageDisplayLabel}, for ${occasion}) from your Gift Finder. Do you currently have this or similar styles available in your Lagos store?`
+                            )}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-[#27AFA3] hover:bg-[#20968B] text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                          >
+                            <MessageSquare className="w-3.5 h-3.5" />
+                            <span>Ask about this style</span>
+                          </a>
                         )}
                       </div>
                     </div>
-
-                    {/* Action Buttons */}
-                    <div className="pt-3 border-t border-[#F4F1EA] flex items-center gap-2">
-                      {isReal && prod ? (
-                        <>
-                          <button
-                            type="button"
-                            onClick={() => handleQuickAdd(item)}
-                            className={`flex-1 py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
-                              addedItemNotice === item.id
-                                ? 'bg-emerald-600 text-white'
-                                : 'bg-[#173F70] hover:bg-[#2563C7] text-white active:scale-[0.98]'
-                            }`}
-                          >
-                            {addedItemNotice === item.id ? (
-                              <>
-                                <Check className="w-3.5 h-3.5" />
-                                <span>Added!</span>
-                              </>
-                            ) : (
-                              <>
-                                <ShoppingBag className="w-3.5 h-3.5" />
-                                <span>Add to Bag</span>
-                              </>
-                            )}
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => handleOpenProduct(item)}
-                            className="py-2.5 px-3 rounded-xl font-bold text-xs bg-[#F4F1EA] hover:bg-[#EBE7DC] text-[#173F70] transition-colors cursor-pointer"
-                          >
-                            View
-                          </button>
-                        </>
-                      ) : (
-                        <a
-                          href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(
-                            `Hello Buubu Bloom, I am interested in the ${item.title} (${who}, ${ageDisplayLabel}, for ${occasion}) from your Gift Finder. Do you currently have this or similar styles available in your Lagos store?`
-                          )}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-[#27AFA3] hover:bg-[#20968B] text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
-                        >
-                          <MessageSquare className="w-3.5 h-3.5" />
-                          <span>Ask about this style</span>
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Direct WhatsApp Concierge Help Strip */}
             <div className="mt-8 pt-6 border-t border-[#F4F1EA] flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#FFFDF8] p-4 rounded-2xl border border-[#F4F1EA]">

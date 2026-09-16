@@ -25,7 +25,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-base sm:text-xl text-[#172033]/80 leading-relaxed font-normal">
-            “Match your vibe, Bloom your style!” — Buubu Bloom is your go-to children's fashion, shoes, toys and gift store at Galleria Mall, Orchid, Lagos with nationwide delivery across Nigeria.
+            Match your vibe, Bloom your style. Buubu Bloom is your go-to children's fashion, shoes, toys and gift store at Galleria Mall, Orchid, Lagos with nationwide delivery across Nigeria.
           </p>
         </div>
 
@@ -92,13 +92,13 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="rounded-2xl overflow-hidden aspect-[4/3] relative group shadow-md border border-[#F4F1EA] bg-[#F4F1EA]">
               <img
-                src="/images/IMG_6597.png"
+                src="/images/buubu_geometric_wall.jpg"
                 alt="Buubu Bloom large logo mounted on vibrant geometric wall inside the store"
                 className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (target.src.includes('IMG_6597.png')) {
-                    target.src = '/IMG_6597.png';
+                  if (!target.src.includes('buubu_geometric_wall.jpg')) {
+                    target.src = '/images/buubu_geometric_wall.jpg';
                   }
                 }}
               />
@@ -121,7 +121,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
                 }}
               />
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/75 to-transparent p-4 text-white">
-                <p className="text-xs font-black uppercase tracking-wider">Curated Racks & Shelves</p>
+                <p className="text-xs font-black uppercase tracking-wider">In-Store Racks & Shelves</p>
                 <p className="text-[11px] text-white/80">Everyday outfits, party wear, footwear and toys ready for walk-ins</p>
               </div>
             </div>

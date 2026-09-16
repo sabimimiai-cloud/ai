@@ -115,24 +115,26 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button 
             id="mobile-menu-toggle-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#173F70] hover:bg-[#F4F1EA] rounded-lg transition-colors"
+            className="lg:hidden p-2 text-[#173F70] hover:bg-[#F4F1EA] rounded-lg transition-colors cursor-pointer"
             aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
           {/* Official Buubu Bloom Logo - Stable & Unanimated */}
-          <div 
+          <button 
             id="brand-logo-btn"
+            type="button"
             onClick={() => handleNavClick('home')}
-            className="cursor-pointer flex items-center py-1 select-none"
+            className="cursor-pointer flex items-center py-1 select-none bg-transparent border-none text-left p-0"
             aria-label="Buubu Bloom Home"
           >
             <BuubuBloomLogo 
               height={46}
               className="h-10 sm:h-11 md:h-12 w-auto"
             />
-          </div>
+          </button>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
@@ -230,12 +232,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             <button
-              id="nav-link-new-in"
-              onClick={() => handleNavClick('shop', 'all')}
-              className="px-3 py-1.5 rounded-full text-xs font-bold tracking-wider text-[#27AFA5] hover:bg-[#27AFA5]/10 transition-colors duration-200 cursor-pointer flex items-center gap-1.5"
+              id="nav-link-shoes"
+              onClick={() => handleNavClick('shop', 'shoes')}
+              className={`relative px-3 py-1.5 rounded-full text-xs font-bold tracking-wider transition-colors duration-200 cursor-pointer ${
+                activeView === 'shop' && selectedCategory === 'shoes'
+                  ? 'bg-[#173F70] text-white shadow-xs' 
+                  : 'text-[#172033]/80 hover:text-[#173F70] hover:bg-[#F4F1EA]/70'
+              }`}
             >
-              <span>EXPLORE</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#27AFA5]" />
+              SHOES
             </button>
           </nav>
 
@@ -247,6 +252,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => setSearchOpen(!searchOpen)}
               className="p-2.5 text-[#173F70] hover:bg-[#F4F1EA] rounded-full transition-colors relative cursor-pointer active:scale-95"
               aria-label="Search products"
+              aria-expanded={searchOpen}
               title="Search products"
             >
               <Search className="w-5 h-5" />
@@ -310,6 +316,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#27AFA5] hover:bg-[#209086] text-white px-3 sm:px-3.5 py-2 rounded-xl text-xs font-bold tracking-wide transition-all shadow-xs active:scale-95 hover:shadow-sm"
               title="Chat with Buubu Bloom on WhatsApp"
+              aria-label="Chat with Buubu Bloom on WhatsApp"
             >
               <Phone className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">WhatsApp</span>
@@ -422,7 +429,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-[#F4F1EA]">
             <BuubuBloomLogo height={38} className="h-9 w-auto" />
             <span className="text-[11px] font-bold text-[#27AFA5]">
-              Match your vibe, Bloom your style!
+              Match your vibe, Bloom your style
             </span>
           </div>
 

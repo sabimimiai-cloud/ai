@@ -24,13 +24,15 @@ export function getStoredCart(): CartItem[] {
     const validItems: CartItem[] = [];
 
     for (const item of parsed) {
-      if (!item || !item.product || typeof item.product.id !== 'string') {
-        continue;
-      }
+      if (!item) continue;
+
+      const productId = item.product?.id || item.productId || (typeof item.id === 'string' ? item.id : null);
+      if (!productId) continue;
 
       // Rehydrate product from canonical catalogue or fallback to saved snapshot
-      const catalogProduct = PRODUCTS.find(p => p.id === item.product.id);
+      const catalogProduct = PRODUCTS.find(p => p.id === productId);
       const product = catalogProduct || item.product;
+      if (!product || !product.id) continue;
 
       const quantity = typeof item.quantity === 'number' && item.quantity > 0 
         ? Math.floor(item.quantity) 

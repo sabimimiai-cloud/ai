@@ -3,6 +3,8 @@ import sys
 import subprocess
 
 CANDIDATE_NAMES = [
+    'buubu_footwear_crops_clean_contact_sheet.jpg',
+    'buubu_footwear_crops_clean_contact_sheet.png',
     '15B49463-E79A-4E87-AB54-F19311D128FD.png',
     '15B49463-E79A-4E87-AB54-F19311D128FD.jpg',
     'footwear_sheet.png',

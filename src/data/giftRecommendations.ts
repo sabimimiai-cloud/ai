@@ -251,8 +251,8 @@ export const GIFT_RECOMMENDATIONS: GiftRecommendationItem[] = PRODUCTS.map((prod
     occasions: getProductOccasions(product),
     category: mappedCategory,
     isRealCatalogueProduct: true,
-    highlightTag: product.highlightTag || 'In Stock',
-    badge: 'In Stock Catalogue Item'
+    highlightTag: product.highlightTag || 'Available',
+    badge: 'Available'
   };
 });
 
@@ -266,8 +266,8 @@ export function getGiftRecommendations(
   age: GiftAgeRange,
   occasion: GiftOccasion
 ): GiftRecommendationItem[] {
-  // If audience is Baby, age must be 0-2
-  const effectiveAge: GiftAgeRange = audience === 'Baby' ? '0-2' : age;
+  // Age is strictly respected - under no circumstances should baby items be returned for older age ranges
+  const effectiveAge: GiftAgeRange = age;
 
   // Filter candidate pool strictly matching the target age range
   const ageCandidates = GIFT_RECOMMENDATIONS.filter(item => 
@@ -380,13 +380,13 @@ export function getRecommendationHeadline(
 
   if (audience === 'Not Sure') {
     return {
-      title: `Curated Picks for ${ageLabel}`,
-      subtitle: `Universally loved in-stock favourites for ${occasion.toLowerCase()}.`
+      title: `Picks for ${ageLabel}`,
+      subtitle: `Popular choices for ${occasion.toLowerCase()}.`
     };
   }
 
   return {
     title: `Your Picks for ${recipient}`,
-    subtitle: `Curated for ${ageLabel} • ${occasion}`
+    subtitle: `Selected for ${ageLabel} • ${occasion}`
   };
 }

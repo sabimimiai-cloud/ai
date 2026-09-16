@@ -36,19 +36,19 @@ export const FootwearImageResolver: React.FC = () => {
           const h = img.naturalHeight;
           if (w < 400 || h < 400) return;
 
-          // Relative boundaries
+          // Relative boundaries for clean contact sheet (3 rows x 5 cols, no header)
           const colBounds = [
-            [0.010, 0.200],
-            [0.205, 0.400],
-            [0.405, 0.600],
-            [0.605, 0.800],
-            [0.805, 0.990],
+            [0.005, 0.198],
+            [0.202, 0.398],
+            [0.402, 0.598],
+            [0.602, 0.798],
+            [0.802, 0.995],
           ];
 
           const rowBounds = [
-            [0.140, 0.390],
-            [0.445, 0.655],
-            [0.700, 0.895],
+            [0.010, 0.295],
+            [0.340, 0.625],
+            [0.670, 0.955],
           ];
 
           let existingData: Record<string, string> = {};
@@ -90,6 +90,7 @@ export const FootwearImageResolver: React.FC = () => {
     };
 
     const handleDrop = (e: DragEvent) => {
+      e.preventDefault();
       if (e.dataTransfer && e.dataTransfer.files.length > 0) {
         const file = e.dataTransfer.files[0];
         if (file.type.startsWith('image/')) {
@@ -98,11 +99,28 @@ export const FootwearImageResolver: React.FC = () => {
       }
     };
 
+    const handlePaste = (e: ClipboardEvent) => {
+      if (e.clipboardData && e.clipboardData.items) {
+        for (let i = 0; i < e.clipboardData.items.length; i++) {
+          const item = e.clipboardData.items[i];
+          if (item.type.indexOf('image') !== -1) {
+            const file = item.getAsFile();
+            if (file) {
+              processReferenceSheet(file);
+              break;
+            }
+          }
+        }
+      }
+    };
+
     window.addEventListener('dragover', (e) => e.preventDefault());
     window.addEventListener('drop', handleDrop);
+    window.addEventListener('paste', handlePaste);
 
     return () => {
       window.removeEventListener('drop', handleDrop);
+      window.removeEventListener('paste', handlePaste);
     };
   }, []);
 

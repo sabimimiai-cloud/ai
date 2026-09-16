@@ -51,7 +51,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
             </div>
             
             <h2 className="text-3xl sm:text-4xl font-black text-[#173F70] font-display">
-              Match your vibe, Bloom your style!
+              Match your vibe, Bloom your style
             </h2>
 
             <p className="text-base text-[#172033]/80 leading-relaxed">
@@ -59,7 +59,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
             </p>
 
             <p className="text-base text-[#172033]/80 leading-relaxed">
-              At <strong>Buubu Bloom</strong>, we hand-select pieces with breathable cottons, easy closures, and joyful colours that suit our Nigerian climate. From birthday party dresses and sharp boys’ sets to soft newborn rompers, comfy kicks, and ready gift hampers — we have you covered.
+              At <strong>Buubu Bloom</strong>, we hand-select pieces with breathable cottons, easy closures, and joyful colours that suit our Nigerian climate. From birthday party dresses and sharp boys’ sets to soft newborn rompers, comfy kicks, and ready gift hampers. We have you covered.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center gap-4">

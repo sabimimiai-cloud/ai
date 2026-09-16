@@ -106,7 +106,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-[#F58220] mb-2.5">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>CURATED RAIL</span>
+              <span>NEW ARRIVALS</span>
             </div>
             
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#173F70] tracking-tight font-display">
@@ -356,7 +356,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
           <div className="flex items-center gap-1.5">
             <span className="text-[11px] font-bold text-[#173F70]">Swipe or drag to explore</span>
             <span className="text-gray-300">•</span>
-            <span className="text-[11px] text-[#27AFA5] font-semibold">{displayedProducts.length} items curated</span>
+            <span className="text-[11px] text-[#27AFA5] font-semibold">{displayedProducts.length} items</span>
           </div>
           <button 
             onClick={() => onNavigate('shop', 'all')}
@@ -373,7 +373,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
             Want to see even more new arrivals?
           </h3>
           <p className="text-sm text-[#172033]/75 max-w-md mx-auto mb-6">
-            We drop new pieces weekly. Grab your little one’s size before it runs out.
+            Explore more styles in our full collection online or visit us in store.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button

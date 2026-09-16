@@ -244,6 +244,7 @@ export function App() {
         setIsCartOpen(Boolean(state.cartOpen));
         setIsCheckoutOpen(Boolean(state.checkoutOpen));
       } else {
+        depthRef.current = 0;
         const params = new URLSearchParams(window.location.search);
         const viewParam = params.get('view') as ActiveView;
         const v: ActiveView = ['home', 'shop', 'about', 'contact', 'gifting', 'orders'].includes(viewParam) 
@@ -562,7 +563,6 @@ export function App() {
             {/* 2. Shop By Who You're Shopping For */}
             <CategoryDiscovery 
               onSelectCategory={(cat) => handleNavigate('shop', cat)} 
-              onNavigate={handleNavigate}
             />
 
             {/* 3. NEW ARRIVALS: Just In at Buubu Bloom */}
@@ -576,8 +576,7 @@ export function App() {
 
             {/* 4. Shop By Occasion / Need */}
             <ShopByMoment 
-              onSelectMoment={(momentKey) => handleNavigate('shop')} 
-              onNavigate={handleNavigate}
+              onSelectMoment={(momentKey) => handleNavigate('shop', 'all', { occasion: momentKey })} 
             />
 
             {/* 4. New Arrivals (Just Bloomed 🌸) */}
@@ -654,15 +653,17 @@ export function App() {
               initialOccasion={shopOccasion}
               onSelectCategory={(cat) => {
                 setSelectedCategory(cat);
+                const nextDepth = depthRef.current + 1;
+                depthRef.current = nextDepth;
                 const nextState: AppNavigationState = {
                   view: 'shop',
                   category: cat,
                   productId: null,
                   cartOpen: false,
                   checkoutOpen: false,
-                  _depth: depthRef.current
+                  _depth: nextDepth
                 };
-                window.history.replaceState(nextState, '', buildStateUrl(nextState));
+                window.history.pushState(nextState, '', buildStateUrl(nextState));
               }}
               onSelectProduct={(p) => handleSelectProduct(p)}
               onQuickView={(p) => handleSelectProduct(p)}
@@ -699,14 +700,15 @@ export function App() {
         )}
       </main>
 
-      {/* Floating WhatsApp Quick Concierge */}
+      {/* Floating WhatsApp Contact */}
       <a
-        id="floating-whatsapp-concierge-btn"
+        id="floating-whatsapp-btn"
         href={STORE_CONTACT.whatsappUrl}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-[#27AFA5] hover:bg-[#209086] text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95 group border-2 border-white cursor-pointer"
         title="Chat with Buubu Bloom on WhatsApp"
+        aria-label="Chat with Buubu Bloom on WhatsApp"
       >
         <MessageSquare className="w-5 h-5" />
         <span className="hidden sm:inline font-bold text-xs tracking-wide">
@@ -733,10 +735,7 @@ export function App() {
         onUpdateQuantity={handleUpdateCartQuantity}
         onRemoveItem={handleRemoveCartItem}
         onOpenCheckout={handleOpenCheckout}
-        onNavigateToShop={() => {
-          handleCloseCart();
-          handleNavigate('shop', 'all');
-        }}
+        onNavigateToShop={() => handleNavigate('shop', 'all')}
       />
 
       {/* Wishlist Drawer */}
@@ -757,6 +756,7 @@ export function App() {
         onClearCart={handleClearCart}
         onOrderPlaced={handleOrderPlaced}
         onViewOrders={() => handleNavigate('orders')}
+        onBackToStore={() => handleNavigate('shop', 'all')}
       />
 
       {/* Size Guide Modal */}

@@ -152,7 +152,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "1-3Y",
     "ageGroups": [
-      "0-12M",
       "1-3Y",
       "4-7Y"
     ],
@@ -322,10 +321,8 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "8-12Y"
     ],
     "details": {
       "material": "Soft textured vegan leather with magnetic snap closure",
@@ -379,8 +376,7 @@ export const PRODUCTS: Product[] = [
     "ageGroup": "1-3Y",
     "ageGroups": [
       "1-3Y",
-      "4-7Y",
-      "all-ages"
+      "4-7Y"
     ],
     "details": {
       "material": "Reinforced non-toxic ABS polymer body with steel frame chassis",
@@ -401,10 +397,10 @@ export const PRODUCTS: Product[] = [
       "/images/nigerian_birthday_kids.jpg",
       "/images/editorial_nigerian_twirl.jpg"
     ],
-    "description": "A curated gift box prepared for birthdays. Each box is assembled to match the child's age group and sizing, with contents confirmed prior to dispatch.",
+    "description": "Each gift box is selected according to the child's age, size and preferences. We'll confirm the contents with you before dispatch.",
     "highlightTag": "Birthday Box",
     "sizes": [
-      "Curated by Age (Select on order)"
+      "Selected by Age (Select on order)"
     ],
     "colors": [
       {
@@ -485,7 +481,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -632,7 +627,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": true,
-    "isNewArrival": false,
+    "isNewArrival": true,
     "occasions": [
       "everyday",
       "special-occasion"
@@ -679,14 +674,13 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": false,
-    "isNewArrival": false,
+    "isNewArrival": true,
     "occasions": [
       "everyday",
       "gifting"
     ],
     "ageGroup": "1-3Y",
     "ageGroups": [
-      "0-12M",
       "1-3Y",
       "4-7Y"
     ],
@@ -726,7 +720,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": true,
-    "isNewArrival": false,
+    "isNewArrival": true,
     "occasions": [
       "special-occasion",
       "birthday",
@@ -1059,7 +1053,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": true,
-    "isNewArrival": false,
+    "isNewArrival": true,
     "occasions": [
       "everyday",
       "special-occasion"
@@ -1087,7 +1081,7 @@ export const PRODUCTS: Product[] = [
     "rating": 4.8,
     "reviewCount": 15,
     "images": [
-      "/images/real_neon_sport_sneakers.jpg"
+      "/images/teen_retro_sneakers.jpg"
     ],
     "description": "Ultra-light athletic sneakers crafted from breathable white mesh with energetic volt neon overlays, cushioned phylon midsole, and flexible traction pods.",
     "highlightTag": "Active Play",
@@ -1106,7 +1100,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": false,
-    "isNewArrival": true,
+    "isNewArrival": false,
     "occasions": [
       "everyday",
       "gifting"
@@ -1249,7 +1243,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": true,
-    "isNewArrival": false,
+    "isNewArrival": true,
     "occasions": [
       "everyday",
       "special-occasion"
@@ -1447,10 +1441,8 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "1-3Y",
     "ageGroups": [
-      "0-12M",
       "1-3Y",
-      "4-7Y",
-      "all-ages"
+      "4-7Y"
     ],
     "details": {
       "material": "Natural sustainably harvested beechwood with water-based non-toxic paint",
@@ -1499,9 +1491,7 @@ export const PRODUCTS: Product[] = [
     "ageGroup": "4-7Y",
     "ageGroups": [
       "1-3Y",
-      "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "4-7Y"
     ],
     "details": {
       "material": "Flexible paper straw weave hat with shatterproof polycarbonate UV400 lenses",
@@ -1599,7 +1589,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -1646,8 +1635,7 @@ export const PRODUCTS: Product[] = [
     "ageGroup": "4-7Y",
     "ageGroups": [
       "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "8-12Y"
     ],
     "details": {
       "material": "Water-resistant coated nylon canvas with reinforced zippers and buckles",
@@ -1744,7 +1732,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -1891,7 +1878,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -1940,7 +1926,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -1982,7 +1967,7 @@ export const PRODUCTS: Product[] = [
     ],
     "inStock": true,
     "isFeatured": false,
-    "isNewArrival": true,
+    "isNewArrival": false,
     "isDemonstration": true,
     "occasions": [
       "everyday",
@@ -2284,7 +2269,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -2379,10 +2363,8 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "8-12Y"
     ],
     "details": {
       "material": "Ultra-soft plush faux fur with faux-pearl beaded handle",
@@ -2476,7 +2458,6 @@ export const PRODUCTS: Product[] = [
     ],
     "ageGroup": "4-7Y",
     "ageGroups": [
-      "1-3Y",
       "4-7Y",
       "8-12Y"
     ],
@@ -2767,8 +2748,7 @@ export const PRODUCTS: Product[] = [
     "ageGroup": "8-12Y",
     "ageGroups": [
       "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "8-12Y"
     ],
     "details": {
       "material": "100% durable cotton twill with reinforced buckram crown",
@@ -2814,8 +2794,7 @@ export const PRODUCTS: Product[] = [
     "ageGroup": "8-12Y",
     "ageGroups": [
       "4-7Y",
-      "8-12Y",
-      "all-ages"
+      "8-12Y"
     ],
     "details": {
       "material": "Smooth vegan faux leather with polished gold hardware",
@@ -2875,4 +2854,41 @@ export const PRODUCTS: Product[] = [
   }
 ];
 
-export const NEW_ARRIVALS_PRODUCTS: Product[] = PRODUCTS.filter(p => p.isNewArrival);
+// Helper to determine if a product is footwear
+const isFootwearProduct = (p: Product): boolean =>
+  p.category === 'shoes' || p.productType === 'shoes';
+
+// Merchandises New Arrivals sequence so that there are NEVER more than 2 consecutive footwear items.
+// Interleaves naturally with clothing, bags & accessories, baby essentials, and lifestyle pieces.
+const createMerchandisedNewArrivals = (allProducts: Product[]): Product[] => {
+  const newArrivals = allProducts.filter(p => p.isNewArrival);
+  const footwear = newArrivals.filter(isFootwearProduct);
+  const nonFootwear = newArrivals.filter(p => !isFootwearProduct(p));
+
+  const result: Product[] = [];
+  let fwIdx = 0;
+  let nonFwIdx = 0;
+
+  // Natural merchandising rhythm: alternating 2-3 lifestyle items with 1-2 footwear pieces
+  const nonFwBatches = [2, 3, 2, 3, 2, 3, 2, 3];
+  const fwBatches = [1, 2, 1, 2, 1, 2, 1, 2];
+  let batchIndex = 0;
+
+  while (nonFwIdx < nonFootwear.length || fwIdx < footwear.length) {
+    const nonFwTake = nonFwBatches[batchIndex % nonFwBatches.length];
+    for (let i = 0; i < nonFwTake && nonFwIdx < nonFootwear.length; i++) {
+      result.push(nonFootwear[nonFwIdx++]);
+    }
+
+    const fwTake = fwBatches[batchIndex % fwBatches.length];
+    for (let i = 0; i < fwTake && fwIdx < footwear.length; i++) {
+      result.push(footwear[fwIdx++]);
+    }
+
+    batchIndex++;
+  }
+
+  return result;
+};
+
+export const NEW_ARRIVALS_PRODUCTS: Product[] = createMerchandisedNewArrivals(PRODUCTS);

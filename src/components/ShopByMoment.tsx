@@ -23,8 +23,11 @@ export const ShopByMoment: React.FC<ShopByMomentProps> = ({
   };
 
   const handleMomentClick = (momentKey: string) => {
-    onSelectMoment(momentKey);
-    onNavigate('shop');
+    if (onSelectMoment) {
+      onSelectMoment(momentKey);
+    } else if (onNavigate) {
+      onNavigate('shop');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

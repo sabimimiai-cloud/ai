@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Instagram, Heart, Play, ArrowUpRight } from 'lucide-react';
+import { Instagram, Play, ArrowUpRight } from 'lucide-react';
 import { INSTAGRAM_FEED, STORE_CONTACT } from '../data/storeData';
 
 export const InstagramGrid: React.FC = () => {
@@ -64,11 +64,7 @@ export const InstagramGrid: React.FC = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#173F70]/90 via-[#173F70]/40 to-black/20 opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-end text-white">
-                <div className="flex items-center gap-1.5 text-xs font-bold mb-1 text-[#F9C928]">
-                  <Heart className="w-3.5 h-3.5 fill-current" />
-                  <span>{post.likes}</span>
-                </div>
-                <p className="text-[11px] text-white/90 line-clamp-3 leading-snug">
+                <p className="text-[11px] text-white/95 line-clamp-3 leading-snug">
                   {post.caption}
                 </p>
               </div>

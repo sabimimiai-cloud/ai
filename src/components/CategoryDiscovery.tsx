@@ -13,8 +13,9 @@ export const CategoryDiscovery: React.FC<CategoryDiscoveryProps> = ({
   onNavigate
 }) => {
   const handleCategoryClick = (categoryKey: string) => {
-    onSelectCategory(categoryKey as ProductCategory);
-    if (onNavigate) {
+    if (onSelectCategory) {
+      onSelectCategory(categoryKey as ProductCategory);
+    } else if (onNavigate) {
       onNavigate('shop');
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });

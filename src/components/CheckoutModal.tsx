@@ -26,6 +26,7 @@ interface CheckoutModalProps {
   onClearCart: () => void;
   onOrderPlaced?: (order: CustomerOrder) => void;
   onViewOrders?: () => void;
+  onBackToStore?: () => void;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -34,7 +35,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   items,
   onClearCart,
   onOrderPlaced,
-  onViewOrders
+  onViewOrders,
+  onBackToStore
 }) => {
   if (!isOpen) return null;
 
@@ -191,10 +193,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               {onViewOrders && (
                 <button
                   type="button"
-                  onClick={() => {
-                    onClose();
-                    onViewOrders();
-                  }}
+                  id="checkout-view-my-orders-btn"
+                  onClick={onViewOrders}
                   className="w-full bg-[#173F70] hover:bg-[#2563C7] text-white py-3.5 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
                 >
                   <Package className="w-4 h-4 text-[#F9C928]" />
@@ -204,7 +204,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               <button
                 type="button"
-                onClick={onClose}
+                id="checkout-back-to-store-btn"
+                onClick={onBackToStore || onClose}
                 className="w-full bg-[#F4F1EA] text-[#123B68] py-3 rounded-2xl font-bold text-xs hover:bg-gray-200 transition-colors cursor-pointer"
               >
                 BACK TO STORE

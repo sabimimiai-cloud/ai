@@ -160,10 +160,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </p>
               <button
                 id="empty-cart-shop-btn"
-                onClick={() => {
-                  onClose();
-                  onNavigateToShop();
-                }}
+                onClick={onNavigateToShop}
                 className="bg-[#173F70] text-white px-7 py-3.5 rounded-2xl font-bold text-xs tracking-wider uppercase shadow-md hover:bg-[#2563C7] transition-all active:scale-95 cursor-pointer"
               >
                 Shop New Arrivals
@@ -298,10 +295,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="space-y-2 pt-1">
               <button
                 id="cart-proceed-checkout-btn"
-                onClick={() => {
-                  onClose();
-                  onOpenCheckout();
-                }}
+                onClick={onOpenCheckout}
                 className="w-full bg-[#123B68] hover:bg-[#2563C7] text-white py-3.5 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
               >
                 <span>CONTINUE TO CHECKOUT</span>

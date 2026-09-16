@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Heart, Sparkles, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Sparkles, ArrowRight, Eye } from 'lucide-react';
 import { Product, ActiveView } from '../types';
 import { PRODUCTS } from '../data/products';
 
@@ -111,9 +111,9 @@ export const SpottedInBuubuBloom: React.FC<SpottedInBuubuBloomProps> = ({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-90" />
                   
-                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full flex items-center gap-1 text-[11px] font-black text-[#173F70]">
-                    <Heart className="w-3 h-3 fill-[#F58220] text-[#F58220]" />
-                    <span>Lagos</span>
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-xs px-2.5 py-1 rounded-full flex items-center gap-1 text-[11px] font-bold text-[#173F70]">
+                    <Sparkles className="w-3 h-3 text-[#F58220]" />
+                    <span>Inspiration</span>
                   </div>
 
                   <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -130,7 +130,7 @@ export const SpottedInBuubuBloom: React.FC<SpottedInBuubuBloomProps> = ({
                 <div className="p-4 bg-[#FFFDF8] border-t border-[#F4F1EA] flex items-center justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#27AFA5] block">
-                      Featured Look
+                      Style Inspiration
                     </span>
                     <h4 
                       onClick={() => onQuickView(product)}
@@ -138,7 +138,7 @@ export const SpottedInBuubuBloom: React.FC<SpottedInBuubuBloomProps> = ({
                     >
                       {look.lookTitle}
                     </h4>
-                    <span className="text-xs font-black text-[#F58220]">
+                    <span className="text-xs font-bold text-[#173F70]">
                       ₦{product.price.toLocaleString()}
                     </span>
                   </div>
@@ -146,10 +146,10 @@ export const SpottedInBuubuBloom: React.FC<SpottedInBuubuBloomProps> = ({
                   <button
                     onClick={() => onQuickView(product)}
                     className="min-h-[44px] min-w-[44px] p-2 bg-[#F4F1EA] hover:bg-[#173F70] hover:text-white rounded-xl text-[#173F70] transition-all duration-200 cursor-pointer active:scale-90 flex items-center justify-center"
-                    title="View this product"
+                    title="View look"
                     aria-label={`View ${look.lookTitle}`}
                   >
-                    <ShoppingBag className="w-4 h-4" />
+                    <Eye className="w-4 h-4" />
                   </button>
                 </div>
               </motion.div>

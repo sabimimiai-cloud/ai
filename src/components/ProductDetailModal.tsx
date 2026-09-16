@@ -4,7 +4,6 @@ import {
   X, 
   Heart, 
   ShoppingBag, 
-  Star, 
   Truck, 
   ShieldCheck, 
   Sparkles, 
@@ -178,18 +177,11 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           {/* Right Column: Product Info & Actions */}
           <div className="md:col-span-6 flex flex-col justify-between">
             <div>
-              {/* Category & Rating */}
+              {/* Category */}
               <div className="flex items-center justify-between gap-2 mb-2">
                 <span className="text-xs font-black uppercase tracking-widest text-[#27AFA3]">
                   {product.category}
                 </span>
-                {product.rating !== undefined && product.reviewCount !== undefined && product.reviewCount > 0 && (
-                  <div className="flex items-center gap-1 text-amber-500 text-xs font-bold">
-                    <Star className="w-3.5 h-3.5 fill-current" />
-                    <span>{product.rating}</span>
-                    <span className="text-gray-400 font-normal">({product.reviewCount} reviews)</span>
-                  </div>
-                )}
               </div>
 
               {/* Title */}
@@ -208,7 +200,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   </span>
                 )}
                 <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
-                  In Stock
+                  Available
                 </span>
               </div>
 

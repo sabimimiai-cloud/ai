@@ -46,7 +46,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
                   </span>
                 </div>
                 <p className="text-xs text-[#172033]/80 font-medium">
-                  “Match your vibe, Bloom your style!”
+                  Match your vibe, Bloom your style
                 </p>
               </div>
 
@@ -59,13 +59,13 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
               {/* Secondary In-Store Geometric Wall Card */}
               <div className="absolute -top-6 -right-4 sm:-right-8 w-32 sm:w-40 aspect-square rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white hidden sm:block group-hover:-translate-y-1 transition-transform duration-300">
                 <img
-                  src="/images/IMG_6597.png"
+                  src="/images/buubu_geometric_wall.jpg"
                   alt="Buubu Bloom iconic logo on vibrant geometric wall at Galleria Mall store"
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (target.src.includes('IMG_6597.png')) {
-                      target.src = '/IMG_6597.png';
+                    if (!target.src.includes('buubu_geometric_wall.jpg')) {
+                      target.src = '/images/buubu_geometric_wall.jpg';
                     }
                   }}
                 />

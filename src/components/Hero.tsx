@@ -34,7 +34,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             >
               <span className="w-2 h-2 rounded-full bg-[#F58220]" />
               <span className="text-xs sm:text-sm font-bold text-[#173F70] tracking-wide">
-                “Match your vibe, Bloom your style”
+                Match your vibe, Bloom your style
               </span>
             </motion.div>
 
@@ -45,13 +45,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               transition={{ duration: 0.5, delay: 0.12, ease: easeEditorial }}
               className="text-4xl sm:text-5xl md:text-6xl font-black text-[#173F70] tracking-tight font-display leading-[1.15] mb-5"
             >
-              Little things they’ll love. <br className="hidden sm:inline" />
-              <span className="text-[#F58220] relative inline-block">
-                Big moments you’ll remember.
-                <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 100 8" preserveAspectRatio="none">
-                  <path d="M0,5 Q50,0 100,5" stroke="#F9C928" strokeWidth="4" fill="none" />
-                </svg>
-              </span>
+              Little looks, big personality.
             </motion.h1>
 
             {/* Supporting Body */}
@@ -61,7 +55,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               transition={{ duration: 0.5, delay: 0.22, ease: easeEditorial }}
               className="text-base sm:text-lg text-[#172033]/85 leading-relaxed max-w-xl mb-8"
             >
-              From everyday outfits to birthday surprises, find something special for the little ones in your life.
+              From everyday looks to birthday moments, find clothes, shoes, toys and gifts for every occasion.
             </motion.p>
 
             {/* Primary Action Buttons */}

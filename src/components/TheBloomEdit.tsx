@@ -61,7 +61,7 @@ const EDITS: EditStory[] = [
     id: 'gift-worthy',
     title: 'Gift-Worthy Picks',
     subtitle: 'Boxes & surprises that get the biggest smiles',
-    description: 'Curated sets, keepsake baby hampers, and playful battery cruisers that make any celebration feel extra special.',
+    description: 'Gift sets, keepsake baby hampers, and playful battery cruisers that make any celebration feel extra special.',
     image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
     tag: 'Unwrap The Joy',
     productIds: ['bb-gft-001', 'bb-t-001', 'bb-t-002']

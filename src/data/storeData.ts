@@ -163,7 +163,7 @@ export const INSTAGRAM_FEED: InstagramPost[] = [
   {
     id: 'ig-6',
     image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80',
-    caption: 'Curated gift hampers headed out this morning 🎁 Let us handle the gift stress!',
+    caption: 'Gift boxes headed out this morning 🎁 Let us handle the gift stress!',
     type: 'product',
     likes: '455'
   }
@@ -248,7 +248,7 @@ export const CATEGORIES = [
   },
   { 
     id: 'gifts' as const, 
-    name: 'Curated Gifts', 
+    name: 'Gifts & Hampers', 
     count: PRODUCTS.filter(p => p.productType === 'gifts' || p.category === 'gifts' || (p.occasions && p.occasions.includes('gifting'))).length 
   },
 ];
