@@ -3,17 +3,6 @@ import { motion } from 'motion/react';
 import { MapPin, Phone, MessageSquare, Clock, Navigation, CheckCircle2 } from 'lucide-react';
 import { STORE_CONTACT } from '../data/storeData';
 
-const getResolvedImage = (src: string): string => {
-  try {
-    const filename = src.split('/').pop() || '';
-    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-    if (stored[filename]) return stored[filename];
-    if (filename.includes('05C11E55') && stored['05C11E55-4474-41F8-B3A8-29CAEA7892B8.png']) return stored['05C11E55-4474-41F8-B3A8-29CAEA7892B8.png'];
-    if (filename.includes('A3644F9A') && stored['A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png']) return stored['A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png'];
-  } catch (e) {}
-  return src;
-};
-
 export const PhysicalStoreSection: React.FC = () => {
   return (
     <section 
@@ -111,14 +100,14 @@ export const PhysicalStoreSection: React.FC = () => {
             <div className="lg:col-span-5 relative space-y-4">
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
-                  src={getResolvedImage('/images/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png')}
+                  src="/images/buubu_store_interior.jpg"
                   alt="Buubu Bloom real store interior at Galleria Mall, Orchid, Lagos"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     if (!target.src.includes('A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png')) {
-                      target.src = '/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png';
+                      target.src = '/images/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png';
                     }
                   }}
                 />
@@ -127,14 +116,14 @@ export const PhysicalStoreSection: React.FC = () => {
               {/* Second Real Store Photograph: Signature Geometric Wall & 3D Logo */}
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white/30 aspect-[4/3] bg-white group">
                 <img
-                  src={getResolvedImage('/images/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png')}
+                  src="/images/buubu_geometric_wall.jpg"
                   alt="Buubu Bloom signature 3D logo and geometric wall at Galleria Mall store"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     if (!target.src.includes('05C11E55-4474-41F8-B3A8-29CAEA7892B8.png')) {
-                      target.src = '/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png';
+                      target.src = '/images/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png';
                     }
                   }}
                 />

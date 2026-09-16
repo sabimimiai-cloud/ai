@@ -210,8 +210,8 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
             <div className="lg:col-span-5">
               <div className="rounded-2xl overflow-hidden border-2 border-white/20 aspect-video bg-white">
                 <img
-                  src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=800&q=80"
-                  alt="Buubu Bloom store experience"
+                  src="/images/buubu_store_interior.jpg"
+                  alt="Buubu Bloom Galleria Mall store interior"
                   className="w-full h-full object-cover"
                 />
               </div>

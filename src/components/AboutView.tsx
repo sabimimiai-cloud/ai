@@ -110,13 +110,13 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
 
             <div className="rounded-2xl overflow-hidden aspect-[4/3] relative group shadow-md border border-[#F4F1EA] bg-[#F4F1EA]">
               <img
-                src="/images/IMG_6596.png"
+                src="/images/buubu_store_interior.jpg"
                 alt="Buubu Bloom real boutique interior with clothing racks and shelves"
                 className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
-                  if (target.src.includes('IMG_6596.png')) {
-                    target.src = '/IMG_6596.png';
+                  if (!target.src.includes('buubu_store_interior.jpg')) {
+                    target.src = '/images/buubu_store_interior.jpg';
                   }
                 }}
               />

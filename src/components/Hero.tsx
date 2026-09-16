@@ -43,9 +43,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.12, ease: easeEditorial }}
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-[#173F70] tracking-tight font-display leading-[1.15] mb-5"
+              className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight font-display leading-[1.15] mb-5"
             >
-              Little looks, big personality.
+              <span className="text-[#173F70]">Little looks, </span>
+              <span className="text-[#F58220]">big personality.</span>
             </motion.h1>
 
             {/* Supporting Body */}

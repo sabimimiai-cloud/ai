@@ -3,18 +3,6 @@ import { Truck, MapPin, MessageSquare, Gift, ArrowRight } from 'lucide-react';
 import { ActiveView } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 
-const getResolvedImage = (src: string): string => {
-  try {
-    const filename = src.split('/').pop() || '';
-    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-    if (stored[filename]) return stored[filename];
-    if (stored['D09D57BF-2CF4-490E-B205-980879DD3341.png']) return stored['D09D57BF-2CF4-490E-B205-980879DD3341.png'];
-    if (stored['buubu_shopping_bag.jpg']) return stored['buubu_shopping_bag.jpg'];
-    if (stored['IMG_6594.png']) return stored['IMG_6594.png'];
-  } catch (e) {}
-  return src;
-};
-
 interface DeliveryTrustStripProps {
   onNavigate: (view: ActiveView) => void;
 }
@@ -154,14 +142,14 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
             <div className="md:col-span-4 sm:md:col-span-5 flex justify-center">
               <div className="w-full max-w-xs aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-[#F4F1EA] relative group bg-[#F4F1EA]">
                 <img
-                  src={getResolvedImage('/images/D09D57BF-2CF4-490E-B205-980879DD3341.png')}
+                  src="/images/buubu_shopping_bag.jpg"
                   alt="Buubu Bloom signature geometric boutique shopping bag"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.includes('buubu_shopping_bag.jpg')) {
-                      target.src = '/images/buubu_shopping_bag.jpg';
+                    if (!target.src.includes('D09D57BF-2CF4-490E-B205-980879DD3341.png')) {
+                      target.src = '/images/D09D57BF-2CF4-490E-B205-980879DD3341.png';
                     }
                   }}
                 />

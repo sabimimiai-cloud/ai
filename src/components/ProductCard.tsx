@@ -31,39 +31,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const [isAddedRecently, setIsAddedRecently] = useState<boolean>(false);
   const [hasError, setHasError] = useState<boolean>(false);
-  const [imgSrc, setImgSrc] = useState<string>(() => {
-    try {
-      const filename = product.images[0]?.split('/').pop() || '';
-      const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-      if (stored[filename]) return stored[filename];
-      if (stored[product.id]) return stored[product.id];
-    } catch (e) {}
-    return product.images[0] || '';
-  });
+  const [imgSrc, setImgSrc] = useState<string>(product.images[0] || '');
 
   useEffect(() => {
-    const updateSrc = () => {
-      try {
-        const filename = product.images[0]?.split('/').pop() || '';
-        const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-        if (stored[filename]) {
-          setImgSrc(stored[filename]);
-          setHasError(false);
-          return;
-        }
-        if (stored[product.id]) {
-          setImgSrc(stored[product.id]);
-          setHasError(false);
-          return;
-        }
-      } catch (e) {}
-      setImgSrc(product.images[0] || '');
-      setHasError(false);
-    };
-
-    updateSrc();
-    window.addEventListener('buubu_photos_updated', updateSrc);
-    return () => window.removeEventListener('buubu_photos_updated', updateSrc);
+    setImgSrc(product.images[0] || '');
+    setHasError(false);
   }, [product.id, product.images]);
 
   const handleView = () => {
@@ -94,10 +66,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Image Container */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#F4F1EA] cursor-pointer" onClick={handleView}>
         <img
-          src={hasError ? (CATEGORY_FALLBACK_IMAGES[product.category] || '/images/hero_nigerian_girl.jpg') : imgSrc}
+          src={imgSrc || product.images[0]}
           alt={product.name}
-          onError={() => {
-            if (!hasError) setHasError(true);
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            const filename = (product.images[0] || '').split('/').pop();
+            if (filename && !target.src.includes(`/images/${filename}`)) {
+              target.src = `/images/${filename}`;
+            } else if (!hasError) {
+              setHasError(true);
+            }
           }}
           className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"

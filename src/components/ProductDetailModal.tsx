@@ -16,14 +16,7 @@ import { Product } from '../types';
 import { PRODUCTS } from '../data/products';
 import { STORE_CONTACT } from '../data/storeData';
 
-const getResolvedImage = (src: string): string => {
-  try {
-    const filename = src.split('/').pop() || '';
-    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-    if (stored[filename]) return stored[filename];
-  } catch (e) {}
-  return src;
-};
+const getResolvedImage = (src: string): string => src;
 
 interface ProductDetailModalProps {
   product: Product | null;

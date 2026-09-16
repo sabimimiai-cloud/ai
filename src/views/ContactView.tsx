@@ -256,8 +256,8 @@ export const ContactView: React.FC = () => {
 
               <div className="rounded-2xl overflow-hidden border border-white/20 aspect-[16/10] bg-white mb-4">
                 <img
-                  src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=700&q=80"
-                  alt="Galleria Mall Orchid Lagos"
+                  src="/images/buubu_store_interior.jpg"
+                  alt="Buubu Bloom Galleria Mall Orchid Lagos store interior"
                   className="w-full h-full object-cover"
                 />
               </div>

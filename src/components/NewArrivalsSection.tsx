@@ -4,14 +4,7 @@ import { motion } from 'motion/react';
 import { Product, ProductCategory, ActiveView } from '../types';
 import { NEW_ARRIVALS_PRODUCTS } from '../data/products';
 
-const getResolvedImage = (src: string): string => {
-  try {
-    const filename = src.split('/').pop() || '';
-    const stored = JSON.parse(localStorage.getItem('buubu_bloom_extracted_photos') || '{}');
-    if (stored[filename]) return stored[filename];
-  } catch (e) {}
-  return src;
-};
+const getResolvedImage = (src: string): string => src;
 
 interface NewArrivalsSectionProps {
   onQuickView: (product: Product) => void;
