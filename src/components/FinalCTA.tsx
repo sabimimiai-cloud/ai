@@ -42,7 +42,7 @@ export const FinalCTA: React.FC<FinalCTAProps> = ({ onNavigate }) => {
             id="final-cta-whatsapp-btn"
             href={STORE_CONTACT.whatsappUrl}
             target="_blank"
-            rel="noreferrer"
+                rel="noopener noreferrer"
             className="w-full sm:w-auto bg-[#25D366] hover:bg-[#20ba59] text-white px-8 py-4 rounded-2xl font-bold text-base tracking-wide flex items-center justify-center gap-2.5 shadow-lg transition-all active:scale-95 cursor-pointer"
           >
             <MessageCircle className="w-5 h-5 fill-current" />

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Sparkles, Heart, CheckCircle2, MapPin, Truck, ShoppingBag, ArrowRight } from 'lucide-react';
-import { ActiveView } from '../types';
+import { ActiveView, ProductCategory } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 
 interface AboutViewProps {
-  onNavigate: (view: ActiveView) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
 }
 
 export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {

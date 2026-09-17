@@ -1,10 +1,11 @@
 import { CustomerOrder, CartItem, CustomerDetails, OrderItem } from '../types';
+import { PRODUCTS } from '../data/products';
 
 export const ORDERS_STORAGE_KEY = 'buubu_bloom_orders';
 
 /**
  * Retrieves customer orders from localStorage.
- * Strictly returns customer-created orders — no fake or placeholder orders.
+ * Strictly returns customer-created orders, no fake or placeholder orders.
  */
 export function getStoredOrders(): CustomerOrder[] {
   if (typeof window === 'undefined' || !window.localStorage) {
@@ -82,18 +83,39 @@ export function createCustomerOrderFromCart(
     year: 'numeric'
   });
 
-  const orderItems: OrderItem[] = items.map(item => ({
-    productId: item.product.id,
-    name: item.product.name,
-    price: item.product.price,
-    quantity: item.quantity,
-    selectedSize: item.selectedSize,
-    selectedColor: item.selectedColor,
-    image: item.product.images?.[0] || ''
-  }));
+  const sanitizedCustomer: CustomerDetails = {
+    fullName: String(customer.fullName || 'Customer').slice(0, 100).trim(),
+    phoneNumber: String(customer.phoneNumber || 'Not provided').slice(0, 30).trim(),
+    deliveryMethod: customer.deliveryMethod === 'pickup' ? 'pickup' : 'delivery',
+    deliveryState: String(customer.deliveryState || '').slice(0, 100).trim(),
+    address: String(customer.address || '').slice(0, 300).trim(),
+    notes: customer.notes ? String(customer.notes).slice(0, 500).trim() : undefined
+  };
 
-  const subtotal = items.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
-  const total = subtotal + deliveryFee;
+  const orderItems: OrderItem[] = items.map(item => {
+    // Canonical price from catalog prevents price tampering
+    const catalogProduct = PRODUCTS.find(p => p.id === item.product.id);
+    const verifiedProduct = catalogProduct || item.product;
+    const cleanQty = typeof item.quantity === 'number' && Number.isFinite(item.quantity) && item.quantity > 0
+      ? Math.min(99, Math.floor(item.quantity))
+      : 1;
+
+    return {
+      productId: verifiedProduct.id,
+      name: verifiedProduct.name,
+      price: verifiedProduct.price,
+      quantity: cleanQty,
+      selectedSize: String(item.selectedSize || 'Standard').slice(0, 50),
+      selectedColor: String(item.selectedColor || 'Standard').slice(0, 50),
+      image: verifiedProduct.images?.[0] || ''
+    };
+  });
+
+  const subtotal = orderItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  const cleanDeliveryFee = typeof deliveryFee === 'number' && Number.isFinite(deliveryFee) && deliveryFee >= 0
+    ? Math.floor(deliveryFee)
+    : 0;
+  const total = subtotal + cleanDeliveryFee;
 
   return {
     id,
@@ -102,9 +124,9 @@ export function createCustomerOrderFromCart(
     formattedDate,
     items: orderItems,
     subtotal,
-    deliveryFee,
+    deliveryFee: cleanDeliveryFee,
     total,
-    customer,
+    customer: sanitizedCustomer,
     status: 'Order Received'
   };
 }

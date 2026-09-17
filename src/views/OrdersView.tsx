@@ -283,7 +283,7 @@ export const OrdersView: React.FC<OrdersViewProps> = ({
                       <a
                         href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${whatsappInquiryText}`}
                         target="_blank"
-                        rel="noreferrer"
+                rel="noopener noreferrer"
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#27AFA5] hover:bg-[#209086] text-white px-5 py-3 rounded-xl text-xs font-bold shadow-xs transition-colors"
                       >
                         <MessageSquare className="w-4 h-4" />

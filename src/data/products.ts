@@ -8,8 +8,6 @@ export const PRODUCTS: Product[] = [
     "subCategory": "Dresses",
     "price": 34500,
     "originalPrice": 38000,
-    "rating": 4.9,
-    "reviewCount": 24,
     "images": [
       "/images/hero_nigerian_girl_1787489055452.jpg",
       "/images/editorial_nigerian_twirl_1787489158292.jpg",
@@ -62,8 +60,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Sets",
     "price": 28000,
-    "rating": 4.8,
-    "reviewCount": 19,
     "images": [
       "/images/boys_nigerian_denim_1787489068562.jpg",
       "/images/boys_nigerian_safari_1787489099338.jpg"
@@ -114,8 +110,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Sets",
     "price": 24500,
-    "rating": 5,
-    "reviewCount": 31,
     "images": [
       "/images/boys_nigerian_safari_1787489099338.jpg",
       "/images/boys_nigerian_denim_1787489068562.jpg"
@@ -171,8 +165,6 @@ export const PRODUCTS: Product[] = [
     "subCategory": "Rompers",
     "price": 19500,
     "originalPrice": 22000,
-    "rating": 4.9,
-    "reviewCount": 42,
     "images": [
       "/images/baby_nigerian_romper_1787489085642.jpg",
       "/images/baby_nigerian_dungaree_1787489143271.jpg"
@@ -227,8 +219,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sneakers",
     "price": 22500,
-    "rating": 4.8,
-    "reviewCount": 28,
     "images": [
       "https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80"
@@ -285,8 +275,6 @@ export const PRODUCTS: Product[] = [
     "category": "accessories",
     "subCategory": "Bags",
     "price": 12500,
-    "rating": 4.9,
-    "reviewCount": 37,
     "images": [
       "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80"
@@ -340,8 +328,6 @@ export const PRODUCTS: Product[] = [
     "subCategory": "Ride-On Toys",
     "price": 145000,
     "originalPrice": 160000,
-    "rating": 5,
-    "reviewCount": 15,
     "images": [
       "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80"
@@ -447,8 +433,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Dresses",
     "price": 29500,
-    "rating": 4.8,
-    "reviewCount": 16,
     "images": [
       "/images/girls_nigerian_yellow_1787489114238.jpg",
       "/images/editorial_nigerian_twirl_1787489158292.jpg"
@@ -500,8 +484,6 @@ export const PRODUCTS: Product[] = [
     "subCategory": "Sets",
     "price": 36000,
     "originalPrice": 40000,
-    "rating": 4.9,
-    "reviewCount": 22,
     "images": [
       "/images/boys_nigerian_suit_1787489130668.jpg",
       "/images/boys_nigerian_safari_1787489099338.jpg"
@@ -553,8 +535,6 @@ export const PRODUCTS: Product[] = [
     "category": "baby",
     "subCategory": "Sets",
     "price": 18500,
-    "rating": 4.9,
-    "reviewCount": 27,
     "images": [
       "/images/baby_nigerian_dungaree_1787489143271.jpg",
       "/images/baby_nigerian_romper_1787489085642.jpg"
@@ -605,8 +585,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 22500,
-    "rating": 4.8,
-    "reviewCount": 16,
     "images": [
       "/images/black_woven_sandals.jpg"
     ],
@@ -652,8 +630,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 21000,
-    "rating": 4.9,
-    "reviewCount": 19,
     "images": [
       "/images/blue_fashion_sandals.jpg"
     ],
@@ -699,12 +675,10 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 26500,
-    "rating": 4.9,
-    "reviewCount": 15,
     "images": [
       "/images/black_lace_up_school_shoes.jpg"
     ],
-    "description": "Classic cognac derby lace-up dress shoes with premium burnished finish, cushioned memory foam insoles, and durable non-marking soles for weddings and celebrations.",
+    "description": "Classic black derby lace-up school shoes with durable smooth finish, cushioned insoles, and hard-wearing non-marking outsoles for school and formal occasions.",
     "highlightTag": "Occasion Ready",
     "sizes": [
       "EU 30",
@@ -714,8 +688,8 @@ export const PRODUCTS: Product[] = [
     ],
     "colors": [
       {
-        "name": "Cognac Brown",
-        "hex": "#78350F"
+        "name": "Classic Black",
+        "hex": "#111827"
       }
     ],
     "inStock": true,
@@ -732,7 +706,7 @@ export const PRODUCTS: Product[] = [
       "8-12Y"
     ],
     "details": {
-      "material": "Smooth burnished faux leather upper with memory foam insole and rubber dress sole",
+      "material": "Durable black faux leather upper with cushioned insole and non-marking dress sole",
       "fit": "Smart lace-up closure with cushioned heel collar",
       "care": "Wipe clean with a soft dry cloth and buff lightly",
       "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos"
@@ -746,8 +720,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sneakers",
     "price": 28000,
-    "rating": 5,
-    "reviewCount": 18,
     "images": [
       "/images/teen_retro_sneakers.jpg"
     ],
@@ -792,8 +764,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sneakers",
     "price": 26000,
-    "rating": 4.9,
-    "reviewCount": 14,
     "images": [
       "/images/purple_character_sneakers.jpg"
     ],
@@ -840,8 +810,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 23500,
-    "rating": 4.8,
-    "reviewCount": 17,
     "images": [
       "/images/pastel_strap_sandals.jpg"
     ],
@@ -888,8 +856,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 24500,
-    "rating": 4.9,
-    "reviewCount": 22,
     "images": [
       "/images/gold_strappy_sandals.jpg"
     ],
@@ -936,8 +902,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 24000,
-    "rating": 4.8,
-    "reviewCount": 16,
     "images": [
       "/images/white_doit_sport_sandals.jpg"
     ],
@@ -983,8 +947,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Boots",
     "price": 28500,
-    "rating": 5,
-    "reviewCount": 20,
     "images": [
       "/images/black_combat_boots.jpg"
     ],
@@ -1031,8 +993,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 24500,
-    "rating": 4.9,
-    "reviewCount": 25,
     "images": [
       "/images/black_buckle_school_shoes.jpg"
     ],
@@ -1078,8 +1038,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sneakers",
     "price": 25000,
-    "rating": 4.8,
-    "reviewCount": 15,
     "images": [
       "/images/teen_retro_sneakers.jpg"
     ],
@@ -1125,8 +1083,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 24500,
-    "rating": 4.9,
-    "reviewCount": 21,
     "images": [
       "/images/black_patent_mary_janes.jpg"
     ],
@@ -1173,8 +1129,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 26000,
-    "rating": 4.8,
-    "reviewCount": 18,
     "images": [
       "/images/black_formal_shoes.jpg"
     ],
@@ -1221,8 +1175,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 24000,
-    "rating": 4.9,
-    "reviewCount": 24,
     "images": [
       "/images/black_school_shoes.jpg"
     ],
@@ -1268,8 +1220,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 18500,
-    "rating": 4.8,
-    "reviewCount": 16,
     "images": [
       "/images/cream_pink_slides.jpg"
     ],
@@ -1315,8 +1265,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Formal Shoes",
     "price": 25500,
-    "rating": 4.9,
-    "reviewCount": 20,
     "images": [
       "/images/brown_bow_loafers.jpg"
     ],
@@ -1363,8 +1311,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 23500,
-    "rating": 4.8,
-    "reviewCount": 19,
     "images": [
       "/images/beige_chunky_sandals.jpg"
     ],
@@ -1410,8 +1356,6 @@ export const PRODUCTS: Product[] = [
     "category": "toys",
     "subCategory": "Educational Toys",
     "price": 26500,
-    "rating": 5,
-    "reviewCount": 35,
     "images": [
       "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?auto=format&fit=crop&w=800&q=80"
@@ -1459,8 +1403,6 @@ export const PRODUCTS: Product[] = [
     "category": "accessories",
     "subCategory": "Hats & Sunnies",
     "price": 14000,
-    "rating": 4.9,
-    "reviewCount": 21,
     "images": [
       "/images/editorial_nigerian_twirl_1787489158292.jpg",
       "/images/pink_school_backpack_1788990964231.jpg"
@@ -1509,8 +1451,6 @@ export const PRODUCTS: Product[] = [
     "subCategory": "Dresses",
     "price": 38500,
     "originalPrice": 42000,
-    "rating": 5,
-    "reviewCount": 14,
     "images": [
       "/images/blue_flower_dress_1788990935334.jpg"
     ],
@@ -1559,8 +1499,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Dresses",
     "price": 39000,
-    "rating": 4.9,
-    "reviewCount": 12,
     "images": [
       "/images/black_flower_dress_1788990950564.jpg"
     ],
@@ -1607,8 +1545,6 @@ export const PRODUCTS: Product[] = [
     "category": "accessories",
     "subCategory": "Bags",
     "price": 26000,
-    "rating": 5,
-    "reviewCount": 18,
     "images": [
       "/images/pink_school_backpack_1788990964231.jpg"
     ],
@@ -1652,8 +1588,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Tops",
     "price": 12500,
-    "rating": 4.8,
-    "reviewCount": 9,
     "images": [
       "/images/pink_sleeveless_top_1788990976043.jpg"
     ],
@@ -1703,8 +1637,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Tops",
     "price": 18500,
-    "rating": 5,
-    "reviewCount": 16,
     "images": [
       "/images/purple_six_seven_top_1788990994312.jpg"
     ],
@@ -1750,8 +1682,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "T-Shirts",
     "price": 16500,
-    "rating": 4.9,
-    "reviewCount": 11,
     "images": [
       "/images/white_graphic_tee_1788991009760.jpg"
     ],
@@ -1798,8 +1728,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Jackets",
     "price": 32000,
-    "rating": 5,
-    "reviewCount": 15,
     "images": [
       "/images/denim_jacket_kids_1788991023527.jpg"
     ],
@@ -1848,8 +1776,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Jackets",
     "price": 29500,
-    "rating": 4.8,
-    "reviewCount": 13,
     "images": [
       "/images/red_track_jacket_1788991035954.jpg"
     ],
@@ -1896,8 +1822,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Jeans",
     "price": 28500,
-    "rating": 5,
-    "reviewCount": 17,
     "images": [
       "/images/pearl_embellished_jeans_1788991050032.jpg"
     ],
@@ -1944,8 +1868,6 @@ export const PRODUCTS: Product[] = [
     "category": "shoes",
     "subCategory": "Sandals",
     "price": 24000,
-    "rating": 4.9,
-    "reviewCount": 22,
     "images": [
       "/images/white_chunky_sandals_1788991065781.jpg"
     ],
@@ -1995,8 +1917,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Shorts",
     "price": 18500,
-    "rating": 4.9,
-    "reviewCount": 14,
     "images": [
       "/images/denim_cargo_shorts.jpg",
       "/images/denim_cargo_shorts_1789206962535.jpg"
@@ -2043,8 +1963,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "T-Shirts",
     "price": 16500,
-    "rating": 4.8,
-    "reviewCount": 11,
     "images": [
       "/images/tan_buckle_tshirt.jpg",
       "/images/khaki_cargo_tshirt.jpg"
@@ -2091,8 +2009,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Sweaters",
     "price": 24500,
-    "rating": 5,
-    "reviewCount": 16,
     "images": [
       "/images/striped_knit_sweater.jpg",
       "/images/striped_knit_sweater_1789207006442.jpg"
@@ -2141,8 +2057,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Dresses",
     "price": 32000,
-    "rating": 5,
-    "reviewCount": 19,
     "images": [
       "/images/girls_floral_dress.jpg",
       "/images/red_floral_dress.jpg"
@@ -2190,8 +2104,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Sets",
     "price": 29500,
-    "rating": 4.9,
-    "reviewCount": 15,
     "images": [
       "/images/pink_utility_set.jpg",
       "/images/pink_utility_set_1789207030879.jpg"
@@ -2239,8 +2151,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Sets",
     "price": 33000,
-    "rating": 4.9,
-    "reviewCount": 12,
     "images": [
       "/images/denim_vest_jeans_set.jpg",
       "/images/heart_denim_set.jpg"
@@ -2287,8 +2197,6 @@ export const PRODUCTS: Product[] = [
     "category": "girls",
     "subCategory": "Dresses",
     "price": 33500,
-    "rating": 5,
-    "reviewCount": 17,
     "images": [
       "/images/peach_floral_dress.jpg"
     ],
@@ -2335,8 +2243,6 @@ export const PRODUCTS: Product[] = [
     "category": "accessories",
     "subCategory": "Bags",
     "price": 15500,
-    "rating": 4.9,
-    "reviewCount": 20,
     "images": [
       "/images/small_girls_handbag.jpg",
       "/images/plush_girls_handbag.jpg"
@@ -2381,8 +2287,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Shorts",
     "price": 17500,
-    "rating": 4.8,
-    "reviewCount": 15,
     "images": [
       "/images/camouflage_shorts.jpg",
       "/images/camo_cargo_shorts.jpg"
@@ -2429,8 +2333,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Sets",
     "price": 27500,
-    "rating": 4.9,
-    "reviewCount": 14,
     "images": [
       "/images/black_athletic_trackset.jpg"
     ],
@@ -2476,8 +2378,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "Sets",
     "price": 29000,
-    "rating": 5,
-    "reviewCount": 13,
     "images": [
       "/images/striped_shirt_cargo_set.jpg",
       "/images/striped_utility_set.jpg"
@@ -2526,8 +2426,6 @@ export const PRODUCTS: Product[] = [
     "category": "baby",
     "subCategory": "Dresses",
     "price": 21000,
-    "rating": 5,
-    "reviewCount": 21,
     "images": [
       "/images/baby_red_bow_dress.jpg",
       "/images/baby_burgundy_dress.jpg"
@@ -2574,8 +2472,6 @@ export const PRODUCTS: Product[] = [
     "category": "boys",
     "subCategory": "T-Shirts",
     "price": 16500,
-    "rating": 4.8,
-    "reviewCount": 13,
     "images": [
       "/images/black_sparkle_tshirt.jpg",
       "/images/black_sparkle_graphic_tshirt.jpg"
@@ -2625,8 +2521,6 @@ export const PRODUCTS: Product[] = [
     "productType": "clothing",
     "subCategory": "Sets",
     "price": 34500,
-    "rating": 5,
-    "reviewCount": 16,
     "images": [
       "/images/teen_boy_streetwear_set.jpg",
       "/images/teen_boy_streetwear_set_1789207448289.jpg"
@@ -2672,8 +2566,6 @@ export const PRODUCTS: Product[] = [
     "productType": "clothing",
     "subCategory": "Sets",
     "price": 35000,
-    "rating": 4.9,
-    "reviewCount": 14,
     "images": [
       "/images/teen_girl_varsity_set.jpg",
       "/images/teen_girl_varsity_set_1789207437792.jpg"
@@ -2720,8 +2612,6 @@ export const PRODUCTS: Product[] = [
     "productType": "accessories",
     "subCategory": "Hats",
     "price": 11500,
-    "rating": 4.8,
-    "reviewCount": 12,
     "images": [
       "/images/teen_boy_snapback.jpg",
       "/images/teen_boy_snapback_1789207483812.jpg"
@@ -2765,8 +2655,6 @@ export const PRODUCTS: Product[] = [
     "productType": "bags",
     "subCategory": "Bags",
     "price": 16000,
-    "rating": 5,
-    "reviewCount": 19,
     "images": [
       "/images/teen_girl_crossbody.jpg",
       "/images/teen_girl_crossbody_1789207471857.jpg"
@@ -2811,8 +2699,6 @@ export const PRODUCTS: Product[] = [
     "productType": "baby-essentials",
     "subCategory": "Sets",
     "price": 19500,
-    "rating": 5,
-    "reviewCount": 18,
     "images": [
       "/images/baby_nigerian_dungaree.jpg",
       "/images/baby_nigerian_dungaree_1787489143271.jpg"

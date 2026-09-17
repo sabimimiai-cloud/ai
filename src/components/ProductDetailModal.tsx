@@ -389,7 +389,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 id="modal-whatsapp-enquire-btn"
                 href={generateWhatsAppMessage()}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full bg-[#27AFA5] hover:bg-[#27AFA5]/90 text-white py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />

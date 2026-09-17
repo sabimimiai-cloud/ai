@@ -13,10 +13,10 @@ import {
   ShoppingBag
 } from 'lucide-react';
 import { STORE_CONTACT, FAQ_ITEMS } from '../data/storeData';
-import { ActiveView } from '../types';
+import { ActiveView, ProductCategory } from '../types';
 
 interface ContactViewProps {
-  onNavigate: (view: ActiveView) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
 }
 
 export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
@@ -55,7 +55,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
           </h1>
 
           <p className="text-sm sm:text-base text-[#172033]/80">
-            Not sure about sizing? Need an outfit in a hurry? Or planning to visit the store today? Reach out anytime — we're always happy to help you find what you need.
+            Not sure about sizing? Need an outfit in a hurry? Or planning to visit the store today? Reach out anytime, we're always happy to help you find what you need.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
             <a
               href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="text-xs font-bold text-[#2563C7] hover:underline flex items-center gap-1"
             >
               <Navigation className="w-3.5 h-3.5" />
@@ -96,7 +96,7 @@ export const ContactView: React.FC<ContactViewProps> = ({ onNavigate }) => {
             <a
               href={STORE_CONTACT.whatsappUrl}
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="text-xs font-bold text-[#27AFA5] hover:underline flex items-center gap-1"
             >
               <span>Message on WhatsApp →</span>

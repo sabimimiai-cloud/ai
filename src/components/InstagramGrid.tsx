@@ -31,7 +31,7 @@ export const InstagramGrid: React.FC = () => {
             id="instagram-follow-cta"
             href={STORE_CONTACT.instagramUrl}
             target="_blank"
-            rel="noreferrer"
+                rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#173F70] hover:bg-[#2563C7] text-white px-7 py-4 rounded-2xl font-bold text-xs sm:text-sm tracking-wide shadow-md transition-all active:scale-95 self-start sm:self-auto cursor-pointer"
           >
             <Instagram className="w-4 h-4" />

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Truck, MapPin, MessageSquare, Gift, ArrowRight } from 'lucide-react';
-import { ActiveView } from '../types';
+import { ActiveView, ProductCategory } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 
 interface DeliveryTrustStripProps {
-  onNavigate: (view: ActiveView) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
 }
 
 export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNavigate }) => {
@@ -68,7 +68,7 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
             <a
               href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#173F70] hover:text-[#F58220] cursor-pointer pt-2 border-t border-[#F4F1EA]"
             >
               <span>Get Directions</span>
@@ -98,7 +98,7 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
             <a
               href={STORE_CONTACT.whatsappUrl}
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#173F70] hover:text-[#27AFA5] cursor-pointer pt-2 border-t border-[#F4F1EA]"
             >
               <span>Chat on WhatsApp</span>
@@ -148,8 +148,8 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
                   className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.includes('D09D57BF-2CF4-490E-B205-980879DD3341.png')) {
-                      target.src = '/images/D09D57BF-2CF4-490E-B205-980879DD3341.png';
+                    if (!target.src.endsWith('/buubu_shopping_bag.jpg')) {
+                      target.src = '/buubu_shopping_bag.jpg';
                     }
                   }}
                 />
@@ -168,7 +168,7 @@ export const DeliveryTrustStrip: React.FC<DeliveryTrustStripProps> = ({ onNaviga
                 Boutique Presentation for Every Order
               </h4>
               <p className="text-xs sm:text-sm text-[#172033]/75 leading-relaxed mb-4 max-w-xl">
-                Every purchase—whether picked up at our Galleria Mall, Orchid store or delivered straight to your door across Nigeria—arrives neatly packed in our vibrant, custom-designed Buubu Bloom geometric shopping bags. Perfect for unboxings and ready to present directly as a thoughtful gift.
+                Every purchase, whether picked up at our Galleria Mall, Orchid store or delivered straight to your door across Nigeria, arrives neatly packed in our vibrant, custom-designed Buubu Bloom geometric shopping bags. Perfect for unboxings and ready to present directly as a thoughtful gift.
               </p>
               <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-[#173F70]">
                 <div className="flex items-center gap-1.5">

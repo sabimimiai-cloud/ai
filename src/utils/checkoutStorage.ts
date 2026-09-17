@@ -35,12 +35,12 @@ export function getStoredCheckoutDraft(): CheckoutDraft {
 
     const parsed = JSON.parse(raw);
     return {
-      fullName: typeof parsed.fullName === 'string' ? parsed.fullName : '',
-      phoneNumber: typeof parsed.phoneNumber === 'string' ? parsed.phoneNumber : '',
+      fullName: typeof parsed.fullName === 'string' ? parsed.fullName.slice(0, 100).trim() : '',
+      phoneNumber: typeof parsed.phoneNumber === 'string' ? parsed.phoneNumber.slice(0, 30).trim() : '',
       deliveryMethod: parsed.deliveryMethod === 'pickup' ? 'pickup' : 'delivery',
-      deliveryState: typeof parsed.deliveryState === 'string' ? parsed.deliveryState : DEFAULT_DRAFT.deliveryState,
-      address: typeof parsed.address === 'string' ? parsed.address : '',
-      notes: typeof parsed.notes === 'string' ? parsed.notes : ''
+      deliveryState: typeof parsed.deliveryState === 'string' ? parsed.deliveryState.slice(0, 100).trim() : DEFAULT_DRAFT.deliveryState,
+      address: typeof parsed.address === 'string' ? parsed.address.slice(0, 300).trim() : '',
+      notes: typeof parsed.notes === 'string' ? parsed.notes.slice(0, 500).trim() : ''
     };
   } catch (err) {
     console.warn('[CheckoutStorage] Failed to read draft from storage:', err);
@@ -58,12 +58,12 @@ export function saveStoredCheckoutDraft(draft: Partial<CheckoutDraft>): void {
   try {
     const current = getStoredCheckoutDraft();
     const updated: CheckoutDraft = {
-      fullName: draft.fullName !== undefined ? draft.fullName : current.fullName,
-      phoneNumber: draft.phoneNumber !== undefined ? draft.phoneNumber : current.phoneNumber,
-      deliveryMethod: draft.deliveryMethod !== undefined ? draft.deliveryMethod : current.deliveryMethod,
-      deliveryState: draft.deliveryState !== undefined ? draft.deliveryState : current.deliveryState,
-      address: draft.address !== undefined ? draft.address : current.address,
-      notes: draft.notes !== undefined ? draft.notes : current.notes
+      fullName: draft.fullName !== undefined ? String(draft.fullName).slice(0, 100).trim() : current.fullName,
+      phoneNumber: draft.phoneNumber !== undefined ? String(draft.phoneNumber).slice(0, 30).trim() : current.phoneNumber,
+      deliveryMethod: draft.deliveryMethod !== undefined ? (draft.deliveryMethod === 'pickup' ? 'pickup' : 'delivery') : current.deliveryMethod,
+      deliveryState: draft.deliveryState !== undefined ? String(draft.deliveryState).slice(0, 100).trim() : current.deliveryState,
+      address: draft.address !== undefined ? String(draft.address).slice(0, 300).trim() : current.address,
+      notes: draft.notes !== undefined ? String(draft.notes).slice(0, 500).trim() : current.notes
     };
 
     const storage = window.sessionStorage || window.localStorage;

@@ -75,7 +75,7 @@ export const PhysicalStoreSection: React.FC = () => {
                   id="store-directions-btn"
                   href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
                   target="_blank"
-                  rel="noreferrer"
+                rel="noopener noreferrer"
                   className="bg-[#F58220] hover:bg-[#e07519] text-white px-7 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 active:scale-[0.98] cursor-pointer"
                 >
                   <Navigation className="w-4 h-4" />
@@ -86,7 +86,7 @@ export const PhysicalStoreSection: React.FC = () => {
                   id="store-whatsapp-btn"
                   href={STORE_CONTACT.whatsappUrl}
                   target="_blank"
-                  rel="noreferrer"
+                rel="noopener noreferrer"
                   className="bg-[#27AFA5] hover:bg-[#209c93] text-white px-6 py-4 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 active:scale-[0.98] cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
@@ -106,8 +106,8 @@ export const PhysicalStoreSection: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.includes('A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png')) {
-                      target.src = '/images/A3644F9A-97DF-4442-B44A-10B49BCBBC6B.png';
+                    if (!target.src.endsWith('/buubu_store_interior.jpg')) {
+                      target.src = '/buubu_store_interior.jpg';
                     }
                   }}
                 />
@@ -122,8 +122,8 @@ export const PhysicalStoreSection: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-600 ease-out"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    if (!target.src.includes('05C11E55-4474-41F8-B3A8-29CAEA7892B8.png')) {
-                      target.src = '/images/05C11E55-4474-41F8-B3A8-29CAEA7892B8.png';
+                    if (!target.src.endsWith('/buubu_geometric_wall.jpg')) {
+                      target.src = '/buubu_geometric_wall.jpg';
                     }
                   }}
                 />

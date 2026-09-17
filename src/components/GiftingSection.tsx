@@ -698,7 +698,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
                               `Hello Buubu Bloom, I am interested in the ${item.title} (${who}, ${ageDisplayLabel}, for ${occasion}) from your Gift Finder. Do you currently have this or similar styles available in your Lagos store?`
                             )}`}
                             target="_blank"
-                            rel="noreferrer"
+                rel="noopener noreferrer"
                             className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-[#27AFA3] hover:bg-[#20968B] text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                           >
                             <MessageSquare className="w-3.5 h-3.5" />
@@ -726,7 +726,7 @@ export const GiftingSection: React.FC<GiftingSectionProps> = ({
               <a
                 href={whatsappInquiryUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-[#27AFA3] hover:bg-[#20968B] text-white py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-colors shrink-0"
               >
                 <MessageSquare className="w-4 h-4" />

@@ -306,7 +306,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 id="cart-whatsapp-order-btn"
                 href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${whatsappReceipt}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-3 rounded-2xl font-bold text-xs tracking-wide flex items-center justify-center gap-2 shadow-xs transition-all"
               >
                 <MessageSquare className="w-4 h-4" />

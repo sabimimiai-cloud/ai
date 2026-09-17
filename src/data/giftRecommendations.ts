@@ -324,7 +324,28 @@ export function getGiftRecommendations(
   });
 
   // Filter out incompatible candidates
-  const valid = scored.filter(entry => entry.score > 0);
+  let valid = scored.filter(entry => entry.score > 0);
+
+  // Safety fallback: if no candidate matched the strict filter (e.g. Baby audience with an older age range),
+  // pull suitable age-appropriate gifts (toys, footwear, accessories, gift sets)
+  if (valid.length === 0) {
+    const agePool = GIFT_RECOMMENDATIONS.filter(item => item.ageRanges.includes(effectiveAge));
+    for (const item of agePool) {
+      if (
+        item.audiences.includes('Not Sure') || 
+        item.category === 'toys' || 
+        item.category === 'gifts' || 
+        item.category === 'shoes' ||
+        item.category === 'accessories'
+      ) {
+        valid.push({ item, score: 10 });
+      }
+    }
+    // If still empty, fall back to general gift box and popular items
+    if (valid.length === 0) {
+      valid = GIFT_RECOMMENDATIONS.slice(0, 4).map(item => ({ item, score: 5 }));
+    }
+  }
 
   // Sort descending by relevance score
   valid.sort((a, b) => b.score - a.score);

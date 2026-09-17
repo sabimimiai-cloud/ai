@@ -1,11 +1,11 @@
 import React from 'react';
 import { Sparkles, ArrowRight, Camera, Cake, Heart, Sun } from 'lucide-react';
 import { MOMENTS_DATA } from '../data/storeData';
-import { ActiveView } from '../types';
+import { ActiveView, ProductCategory } from '../types';
 
 interface ShopByMomentProps {
   onSelectMoment: (momentKey: string) => void;
-  onNavigate: (view: ActiveView) => void;
+  onNavigate?: (view: ActiveView, category?: ProductCategory) => void;
 }
 
 export const ShopByMoment: React.FC<ShopByMomentProps> = ({

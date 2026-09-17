@@ -144,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
                 <a 
                   href={STORE_CONTACT.whatsappUrl}
                   target="_blank"
-                  rel="noreferrer"
+                rel="noopener noreferrer"
                   className="hover:text-[#27AFA5] transition-colors inline-flex items-center gap-1.5"
                 >
                   <span>WhatsApp Styling</span>
@@ -180,8 +180,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
               <p>
                 <a 
                   href={STORE_CONTACT.whatsappUrl} 
-                  target="_blank" 
-                  rel="noreferrer"
+                  target="_blank"
+                rel="noopener noreferrer"
                   className="hover:text-[#27AFA5] transition-colors flex items-center gap-2"
                 >
                   <Phone className="w-4 h-4 text-[#27AFA5]" />
@@ -191,8 +191,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenSizeGuide }) =
               <p>
                 <a 
                   href={STORE_CONTACT.instagramUrl} 
-                  target="_blank" 
-                  rel="noreferrer"
+                  target="_blank"
+                rel="noopener noreferrer"
                   className="hover:text-[#F58220] transition-colors flex items-center gap-2"
                 >
                   <Instagram className="w-4 h-4 text-[#F58220]" />

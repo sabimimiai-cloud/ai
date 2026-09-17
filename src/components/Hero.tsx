@@ -46,7 +46,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight font-display leading-[1.15] mb-5"
             >
               <span className="text-[#173F70]">Little looks, </span>
-              <span className="text-[#F58220]">big personality.</span>
+              <span className="text-[#F58220] underline decoration-[#F4C430]/60 decoration-wavy decoration-2 underline-offset-8">big personality.</span>
             </motion.h1>
 
             {/* Supporting Body */}
@@ -56,7 +56,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               transition={{ duration: 0.5, delay: 0.22, ease: easeEditorial }}
               className="text-base sm:text-lg text-[#172033]/85 leading-relaxed max-w-xl mb-8"
             >
-              From everyday looks to birthday moments, find clothes, shoes, toys and gifts for every occasion.
+              From everyday outfits to birthday moments, find clothes, shoes, toys and gifts they’ll be excited to receive.
             </motion.p>
 
             {/* Primary Action Buttons */}

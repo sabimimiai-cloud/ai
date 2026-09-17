@@ -81,7 +81,7 @@ export const ContactView: React.FC = () => {
             <a
               href="https://maps.google.com/?q=Galleria+Mall+Orchid+Lagos"
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="mt-6 inline-flex items-center justify-center gap-2 bg-[#F4F1EA] hover:bg-[#123B68] hover:text-white text-[#123B68] px-4 py-3 rounded-xl text-xs font-bold transition-all"
             >
               <Navigation className="w-4 h-4" />
@@ -110,7 +110,7 @@ export const ContactView: React.FC = () => {
             <a
               href={STORE_CONTACT.whatsappUrl}
               target="_blank"
-              rel="noreferrer"
+                rel="noopener noreferrer"
               className="mt-6 inline-flex items-center justify-center gap-2 bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white px-4 py-3 rounded-xl text-xs font-bold transition-all shadow-xs"
             >
               <MessageSquare className="w-4 h-4" />
@@ -265,7 +265,7 @@ export const ContactView: React.FC = () => {
               <a
                 href={generateDirectWhatsAppMessage()}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full bg-[#27AFA3] hover:bg-[#27AFA3]/90 text-white py-3 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all"
               >
                 <MessageSquare className="w-4 h-4" />

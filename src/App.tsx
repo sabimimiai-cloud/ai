@@ -158,14 +158,29 @@ export function App() {
         const decoded = JSON.parse(decodeURIComponent(cartParam));
         if (Array.isArray(decoded) && decoded.length > 0) {
           const loadedItems: CartItem[] = [];
-          decoded.forEach((entry: { id: string; s?: string; c?: string; q?: number }) => {
+          decoded.forEach((entry: { id?: unknown; s?: unknown; c?: unknown; q?: unknown }) => {
+            if (!entry || typeof entry.id !== 'string') return;
             const product = PRODUCTS.find(p => p.id === entry.id);
             if (product) {
+              const rawSize = typeof entry.s === 'string' ? entry.s.trim().slice(0, 50) : '';
+              const selectedSize = (rawSize && product.sizes?.includes(rawSize))
+                ? rawSize
+                : (product.sizes?.[0] || 'Standard');
+
+              const rawColor = typeof entry.c === 'string' ? entry.c.trim().slice(0, 50) : '';
+              const selectedColor = (rawColor && product.colors?.some(c => c.name === rawColor))
+                ? rawColor
+                : (product.colors?.[0]?.name || 'Standard');
+
+              const quantity = typeof entry.q === 'number' && Number.isFinite(entry.q) && entry.q > 0
+                ? Math.min(99, Math.floor(entry.q))
+                : 1;
+
               loadedItems.push({
                 product,
-                selectedSize: entry.s || product.sizes[0] || 'Standard',
-                selectedColor: entry.c || product.colors[0]?.name || 'Standard',
-                quantity: entry.q && entry.q > 0 ? entry.q : 1
+                selectedSize,
+                selectedColor,
+                quantity
               });
             }
           });
@@ -177,18 +192,22 @@ export function App() {
         }
       }
     } catch (err) {
-      console.error('Failed to load shared cart link', err);
+      console.warn('Failed to load shared cart link safely');
     }
   }, []);
 
   // Initialize Navigation State on initial page load
   useEffect(() => {
+    const VALID_CATEGORIES: ProductCategory[] = [
+      'all', 'girls', 'boys', 'baby', 'shoes', 'accessories', 'toys', 'gifts', 'clothing', 'bags', 'ride-ons', 'baby-essentials'
+    ];
     const params = new URLSearchParams(window.location.search);
     const viewParam = params.get('view') as ActiveView;
     const initialView: ActiveView = ['home', 'shop', 'about', 'contact', 'gifting', 'orders'].includes(viewParam) 
       ? viewParam 
       : 'home';
-    const categoryParam = (params.get('category') as ProductCategory) || 'all';
+    const rawCat = params.get('category') as ProductCategory;
+    const categoryParam: ProductCategory = VALID_CATEGORIES.includes(rawCat) ? rawCat : 'all';
     const productParam = params.get('product');
     const cartParam = params.get('cart');
     const checkoutParam = params.get('checkout');
@@ -251,7 +270,11 @@ export function App() {
           ? viewParam 
           : 'home';
         setActiveView(v);
-        const cat = (params.get('category') as ProductCategory) || 'all';
+        const VALID_CATS: ProductCategory[] = [
+          'all', 'girls', 'boys', 'baby', 'shoes', 'accessories', 'toys', 'gifts', 'clothing', 'bags', 'ride-ons', 'baby-essentials'
+        ];
+        const rawCat = params.get('category') as ProductCategory;
+        const cat: ProductCategory = VALID_CATS.includes(rawCat) ? rawCat : 'all';
         setSelectedCategory(cat);
         const prodId = params.get('product');
         setSelectedProduct(prodId ? (PRODUCTS.find(p => p.id === prodId) || null) : null);
@@ -511,7 +534,8 @@ export function App() {
     });
   };
 
-  const handleRemoveWishlist = (productId: string) => {
+  const handleRemoveWishlist = (productOrId: Product | string) => {
+    const productId = typeof productOrId === 'string' ? productOrId : productOrId.id;
     setWishlistItems(prev => prev.filter(item => item.id !== productId));
   };
 
@@ -577,6 +601,7 @@ export function App() {
             {/* 4. Shop By Occasion / Need */}
             <ShopByMoment 
               onSelectMoment={(momentKey) => handleNavigate('shop', 'all', { occasion: momentKey })} 
+              onNavigate={handleNavigate}
             />
 
             {/* 4. New Arrivals (Just Bloomed 🌸) */}
@@ -705,7 +730,7 @@ export function App() {
         id="floating-whatsapp-btn"
         href={STORE_CONTACT.whatsappUrl}
         target="_blank"
-        rel="noreferrer"
+                rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-[#27AFA5] hover:bg-[#209086] text-white p-3.5 sm:px-5 sm:py-3.5 rounded-full shadow-2xl flex items-center gap-2.5 transition-all hover:scale-105 active:scale-95 group border-2 border-white cursor-pointer"
         title="Chat with Buubu Bloom on WhatsApp"
         aria-label="Chat with Buubu Bloom on WhatsApp"

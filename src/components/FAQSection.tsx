@@ -91,7 +91,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onNavigate }) => {
             id="faq-whatsapp-cta"
             href={STORE_CONTACT.whatsappUrl}
             target="_blank"
-            rel="noreferrer"
+                rel="noopener noreferrer"
             className="w-full sm:w-auto bg-[#173F70] hover:bg-[#2563C7] text-white px-5 py-2.5 rounded-xl font-bold text-xs tracking-wider flex items-center justify-center gap-2 transition-all shrink-0 active:scale-95 shadow-xs"
           >
             <span>CHAT ON WHATSAPP</span>

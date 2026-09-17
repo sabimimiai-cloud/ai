@@ -74,7 +74,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
               <a
                 href={STORE_CONTACT.whatsappUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="bg-[#27AFA5]/10 text-[#0f5c56] hover:bg-[#27AFA5]/20 border border-[#27AFA5]/30 px-6 py-4 rounded-2xl font-bold text-sm transition-colors"
               >
                 Chat with our Stylist

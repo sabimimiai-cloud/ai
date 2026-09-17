@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Truck, MapPin, Sparkles, Gift, ArrowRight, MessageCircle, Heart } from 'lucide-react';
-import { ActiveView } from '../types';
+import { ActiveView, ProductCategory } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
 
 interface BrandStoryProps {
-  onNavigate: (view: ActiveView) => void;
+  onNavigate: (view: ActiveView, category?: ProductCategory) => void;
 }
 
 export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
@@ -183,7 +183,7 @@ export const BrandStory: React.FC<BrandStoryProps> = ({ onNavigate }) => {
               <a
                 href={STORE_CONTACT.whatsappUrl}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366]/10 text-[#075E54] border border-[#25D366]/30 hover:bg-[#25D366]/20 px-6 py-4 rounded-2xl font-bold text-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
               >
                 <MessageCircle className="w-4 h-4 text-[#25D366]" />

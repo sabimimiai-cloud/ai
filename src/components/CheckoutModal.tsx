@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { CartItem, CustomerOrder, CustomerDetails } from '../types';
 import { STORE_CONTACT } from '../data/storeData';
+import { PRODUCTS } from '../data/products';
 import { 
   getStoredCheckoutDraft, 
   saveStoredCheckoutDraft, 
@@ -124,10 +125,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     (notes ? `• Special Instructions / Sizing Note: ${notes}\n` : '') +
     `\n*Items Ordered:*\n` +
     (activeOrder ? activeOrder.items : items).map(item => {
-      const name = 'name' in item ? item.name : item.product.name;
+      const productId = 'productId' in item ? item.productId : item.product.id;
+      const catalogProduct = PRODUCTS.find(p => p.id === productId);
+      const name = catalogProduct ? catalogProduct.name : ('name' in item ? item.name : item.product.name);
       const size = item.selectedSize;
       const color = item.selectedColor;
-      const price = 'price' in item ? item.price : item.product.price;
+      const price = catalogProduct ? catalogProduct.price : ('price' in item ? item.price : item.product.price);
       return `• ${item.quantity}x ${name} [Size: ${size}, Color: ${color}] - ₦${(price * item.quantity).toLocaleString()}`;
     }).join('\n') +
     `\n\n*Items Subtotal:* ₦${(activeOrder ? activeOrder.subtotal : subtotal).toLocaleString()}\n` +
@@ -183,7 +186,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <a
                 href={`https://wa.me/${STORE_CONTACT.phoneRaw}?text=${formattedWhatsAppReceipt}`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="w-full bg-[#27AFA3] hover:bg-[#209086] text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all"
               >
                 <MessageSquare className="w-5 h-5" />
@@ -318,9 +321,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       onChange={(e) => setDeliveryState(e.target.value)}
                       className="w-full text-xs p-3 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-1 focus:ring-[#123B68]"
                     >
-                      <option value="Lagos (Lekki / Ajah / Orchid)">Lagos — Lekki, Ajah, Orchid, Ikoyi, Victoria Island (₦2,500)</option>
-                      <option value="Lagos (Mainland)">Lagos — Ikeja, Surulere, Yaba, Maryland, Magodo (₦3,500)</option>
-                      <option value="Abuja (FCT)">Abuja (FCT) — Nationwide Express (₦6,000)</option>
+                      <option value="Lagos (Lekki / Ajah / Orchid)">Lagos: Lekki, Ajah, Orchid, Ikoyi, Victoria Island (₦2,500)</option>
+                      <option value="Lagos (Mainland)">Lagos: Ikeja, Surulere, Yaba, Maryland, Magodo (₦3,500)</option>
+                      <option value="Abuja (FCT)">Abuja (FCT): Nationwide Express (₦6,000)</option>
                       <option value="Rivers (Port Harcourt)">Rivers (Port Harcourt) (₦6,000)</option>
                       <option value="Oyo (Ibadan)">Oyo (Ibadan) (₦5,000)</option>
                       <option value="Ogun State">Ogun State (Abeokuta / Ota) (₦4,500)</option>

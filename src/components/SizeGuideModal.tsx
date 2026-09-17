@@ -207,7 +207,7 @@ export const SizeGuideModal: React.FC<SizeGuideModalProps> = ({ isOpen, onClose 
           <a
             href={STORE_CONTACT.whatsappUrl}
             target="_blank"
-            rel="noreferrer"
+                rel="noopener noreferrer"
             className="shrink-0 bg-[#27AFA3] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 hover:bg-[#27AFA3]/90 cursor-pointer"
           >
             <MessageSquare className="w-3.5 h-3.5" />
