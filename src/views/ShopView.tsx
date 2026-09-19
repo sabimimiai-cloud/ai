@@ -11,7 +11,7 @@ import {
   ArrowUpDown
 } from 'lucide-react';
 import { Product, ProductCategory, OccasionMoment, AgeGroup, Audience, ProductType } from '../types';
-import { PRODUCTS } from '../data/products';
+import { PRODUCTS, interleaveProductVariety } from '../data/products';
 import { CATEGORIES } from '../data/storeData';
 import { ProductCard } from '../components/ProductCard';
 
@@ -111,8 +111,13 @@ export const ShopView: React.FC<ShopViewProps> = ({
   });
 
   const [maxPrice, setMaxPrice] = useState<number>(() => {
-    return typeof savedState?.maxPrice === 'number' ? savedState.maxPrice : 350000;
+    if (typeof savedState?.maxPrice === 'number' && savedState.maxPrice > 0) {
+      return savedState.maxPrice === 350000 ? 500000 : savedState.maxPrice;
+    }
+    return 500000;
   });
+
+  const [selectedSubCategory, setSelectedSubCategory] = useState<string>('all');
 
   const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -123,6 +128,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
         category: selectedCategory,
         audience: selectedAudience,
         productType: selectedProductType,
+        subCategory: selectedSubCategory,
         age: selectedAge,
         occasion: selectedOccasion,
         onlyNewIn,
@@ -133,7 +139,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
     } catch {
       // Ignore storage errors
     }
-  }, [selectedCategory, selectedAudience, selectedProductType, selectedAge, selectedOccasion, onlyNewIn, searchQuery, sortBy, maxPrice]);
+  }, [selectedCategory, selectedAudience, selectedProductType, selectedSubCategory, selectedAge, selectedOccasion, onlyNewIn, searchQuery, sortBy, maxPrice]);
 
   // Sync with incoming navigation props if they explicitly change
   const initialCategoryRef = useRef(initialCategory);
@@ -195,7 +201,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
 
   // Combined Master Filtering Logic (Sections 1-12)
   const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter((item) => {
+    const filtered = PRODUCTS.filter((item) => {
       // 1. Audience / Department filter (Girls, Boys, Baby, Unisex)
       if (selectedAudience !== 'all') {
         const audienceMatches =
@@ -217,9 +223,16 @@ export const ShopView: React.FC<ShopViewProps> = ({
           (selectedProductType === 'accessories' && (item.category === 'accessories' || item.productType === 'accessories' || item.productType === 'bags')) ||
           (selectedProductType === 'bags' && (item.subCategory === 'Bags' || item.productType === 'bags')) ||
           (selectedProductType === 'toys' && (item.category === 'toys' || item.productType === 'toys' || item.productType === 'ride-ons')) ||
-          (selectedProductType === 'ride-ons' && (item.productType === 'ride-ons' || item.subCategory === 'Ride-On')) ||
+          (selectedProductType === 'ride-ons' && (item.productType === 'ride-ons' || item.subCategory === 'Ride-On Toys' || item.subCategory === 'Ride-On')) ||
           (selectedProductType === 'gifts' && (item.category === 'gifts' || item.productType === 'gifts' || (item.occasions && item.occasions.includes('gifting'))));
         if (!typeMatches) return false;
+      }
+
+      // Subcategory Filter (e.g. Toys & Play -> Ride-On Toys)
+      if (selectedSubCategory !== 'all') {
+        if (item.subCategory !== selectedSubCategory) {
+          return false;
+        }
       }
 
       // 3. Age Group Filter (Section 6, 8)
@@ -252,7 +265,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
       }
 
       // 6. Max Budget Slider Filter (Section 10)
-      if (item.price > maxPrice) {
+      if (maxPrice < 500000 && item.price > maxPrice) {
         return false;
       }
 
@@ -286,22 +299,38 @@ export const ShopView: React.FC<ShopViewProps> = ({
       }
 
       return true;
-    }).sort((a, b) => {
+    });
+
+    const sorted = [...filtered].sort((a, b) => {
       if (sortBy === 'newest') return (b.isNewArrival ? 1 : 0) - (a.isNewArrival ? 1 : 0);
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;
       return (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0);
     });
-  }, [selectedAudience, selectedProductType, selectedAge, selectedOccasion, onlyNewIn, maxPrice, searchQuery, sortBy]);
+
+    // When browsing broad mixed catalogue views (not filtered to a single product type or specific price sort),
+    // interleave product variety so identical product types are never adjacent in the grid.
+    if (
+      (selectedProductType === 'all' || selectedCategory === 'all') &&
+      sortBy !== 'price-asc' &&
+      sortBy !== 'price-desc' &&
+      searchQuery.trim() === ''
+    ) {
+      return interleaveProductVariety(sorted);
+    }
+
+    return sorted;
+  }, [selectedAudience, selectedProductType, selectedSubCategory, selectedAge, selectedOccasion, onlyNewIn, maxPrice, searchQuery, sortBy]);
 
   const resetFilters = () => {
     setSelectedCategory('all');
     setSelectedAudience('all');
     setSelectedProductType('all');
+    setSelectedSubCategory('all');
     setSelectedAge('all');
     setSelectedOccasion('all');
     setOnlyNewIn(false);
-    setMaxPrice(350000);
+    setMaxPrice(500000);
     setSearchQuery('');
     setSortBy('featured');
     if (onSelectCategory) onSelectCategory('all');
@@ -309,6 +338,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
 
   const handleCategoryTabClick = (catId: ProductCategory) => {
     setSelectedCategory(catId);
+    setSelectedSubCategory('all');
     if (catId === 'girls') {
       setSelectedAudience('girls');
       setSelectedProductType('all');
@@ -365,7 +395,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
       accessories: "Accessories",
       bags: "Bags & Backpacks",
       toys: "Toys & Play",
-      'ride-ons': "Ride-Ons",
+      'ride-ons': "Ride-On Toys",
       'baby-essentials': "Baby Essentials",
       gifts: "Gifts & Hampers"
     };
@@ -378,6 +408,13 @@ export const ShopView: React.FC<ShopViewProps> = ({
           if (onSelectCategory) onSelectCategory('all');
         }
       }
+    });
+  }
+
+  if (selectedSubCategory !== 'all') {
+    activeFiltersList.push({
+      label: selectedSubCategory,
+      onRemove: () => setSelectedSubCategory('all')
     });
   }
 
@@ -415,10 +452,10 @@ export const ShopView: React.FC<ShopViewProps> = ({
     });
   }
 
-  if (maxPrice < 350000) {
+  if (maxPrice < 500000) {
     activeFiltersList.push({
       label: `Max ₦${maxPrice.toLocaleString()}`,
-      onRemove: () => setMaxPrice(350000)
+      onRemove: () => setMaxPrice(500000)
     });
   }
 
@@ -490,6 +527,53 @@ export const ShopView: React.FC<ShopViewProps> = ({
             <span>New Arrivals Only</span>
           </button>
         </div>
+
+        {/* Toys & Play Subcategory Quick Navigation Strip */}
+        {(selectedCategory === 'toys' || selectedProductType === 'toys' || selectedProductType === 'ride-ons') && (
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-4 scrollbar-none">
+            <span className="text-xs font-black text-[#123B68] uppercase tracking-wider mr-1 whitespace-nowrap flex items-center gap-1">
+              <span>Toys & Play:</span>
+            </span>
+            {[
+              { id: 'all-toys', label: 'All Toys', sub: 'all', prodType: 'toys' },
+              { id: 'ride-on-toys', label: '🚗 Ride-On Toys', sub: 'Ride-On Toys', prodType: 'ride-ons' },
+              { id: 'educational-toys', label: '🧩 Educational', sub: 'Educational Toys', prodType: 'toys' },
+              { id: 'pretend-play', label: '🍳 Pretend Play', sub: 'Pretend Play', prodType: 'toys' },
+              { id: 'dolls-plush', label: '🧸 Dolls & Plush', sub: 'Plush Toys', prodType: 'toys' },
+              { id: 'rc-musical', label: '🎮 RC & Musical', sub: 'Remote-Control Toys', prodType: 'toys' },
+            ].map((subTab) => {
+              const isActive =
+                (subTab.id === 'ride-on-toys' && (selectedProductType === 'ride-ons' || selectedSubCategory === 'Ride-On Toys')) ||
+                (subTab.id === 'all-toys' && selectedProductType === 'toys' && selectedSubCategory === 'all') ||
+                (selectedSubCategory === subTab.sub && selectedProductType !== 'ride-ons');
+              return (
+                <button
+                  key={subTab.id}
+                  id={`toy-sub-${subTab.id}`}
+                  onClick={() => {
+                    if (subTab.id === 'ride-on-toys') {
+                      setSelectedProductType('ride-ons');
+                      setSelectedSubCategory('Ride-On Toys');
+                    } else if (subTab.id === 'all-toys') {
+                      setSelectedProductType('toys');
+                      setSelectedSubCategory('all');
+                    } else {
+                      setSelectedProductType('toys');
+                      setSelectedSubCategory(subTab.sub);
+                    }
+                  }}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-[#123B68] text-white shadow-xs'
+                      : 'bg-white border border-[#F4F1EA] text-[#172033] hover:bg-[#F4F1EA]'
+                  }`}
+                >
+                  {subTab.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {/* Search, Filter Summary, and Sort Row */}
         <div className="bg-white rounded-2xl p-4 border border-[#F4F1EA] shadow-2xs mb-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
@@ -679,7 +763,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                   { id: 'accessories', label: '👑 Accessories & Sunnies' },
                   { id: 'bags', label: '🎒 Bags & Backpacks' },
                   { id: 'toys', label: '🧸 Toys & Play' },
-                  { id: 'ride-ons', label: '🚗 Ride-On Cars' },
+                  { id: 'ride-ons', label: '🚗 Ride-On Toys' },
                   { id: 'baby-essentials', label: '🍼 Baby Essentials' },
                   { id: 'gifts', label: '🎁 Gifts & Hampers' },
                 ].map((cat) => (
@@ -741,7 +825,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 </span>
               </div>
               <p className="text-[11px] text-gray-500 mb-2">
-                {maxPrice >= 350000 
+                {maxPrice >= 500000 
                   ? 'Showing all items regardless of price' 
                   : `Filtering items priced up to ₦${maxPrice.toLocaleString()}`}
               </p>
@@ -749,15 +833,15 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 id="shop-budget-slider"
                 type="range"
                 min={10000}
-                max={350000}
-                step={5000}
+                max={500000}
+                step={10000}
                 value={maxPrice}
                 onChange={(e) => setMaxPrice(Number(e.target.value))}
                 className="w-full accent-[#123B68] cursor-pointer"
               />
               <div className="flex justify-between text-[10px] text-gray-400 font-semibold mt-1">
                 <span>₦10,000</span>
-                <span>₦350,000</span>
+                <span>₦500,000+</span>
               </div>
 
               {/* Quick Budget Presets */}
@@ -767,7 +851,8 @@ export const ShopView: React.FC<ShopViewProps> = ({
                   { label: '≤ ₦35k', val: 35000 },
                   { label: '≤ ₦50k', val: 50000 },
                   { label: '≤ ₦100k', val: 100000 },
-                  { label: 'Any Budget', val: 350000 },
+                  { label: '≤ ₦250k', val: 250000 },
+                  { label: 'Any Budget', val: 500000 },
                 ].map((preset) => (
                   <button
                     key={preset.val}
@@ -838,10 +923,10 @@ export const ShopView: React.FC<ShopViewProps> = ({
                       <li className="flex items-center justify-between gap-2">
                         <span>• Your budget is set to ₦{maxPrice.toLocaleString()}.</span>
                         <button
-                          onClick={() => setMaxPrice(350000)}
+                          onClick={() => setMaxPrice(500000)}
                           className="text-[#123B68] font-bold underline cursor-pointer hover:text-[#F58220]"
                         >
-                          Increase budget to ₦350k
+                          Increase budget to ₦500k+
                         </button>
                       </li>
                     )}
@@ -907,7 +992,7 @@ export const ShopView: React.FC<ShopViewProps> = ({
                 <div className="flex items-center justify-between mb-4 px-1">
                   <p className="text-xs text-[#172033]/70 font-semibold">
                     Showing <strong className="text-[#123B68]">{filteredProducts.length}</strong> items
-                    {maxPrice < 350000 && (
+                    {maxPrice < 500000 && (
                       <span className="text-[#F58220] ml-1.5 font-bold">
                         (Budget ≤ ₦{maxPrice.toLocaleString()})
                       </span>

@@ -47,6 +47,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     e.preventDefault();
     e.stopPropagation();
 
+    if (product.price === 0) {
+      handleView();
+      return;
+    }
+
     if (onAddToCart) {
       onAddToCart(product);
     } else if (onQuickAdd) {
@@ -171,10 +176,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         <div className="pt-2 border-t border-[#F4F1EA] flex items-center justify-between gap-2">
           <div>
             <div className="flex items-baseline gap-1.5">
-              <span className="text-base sm:text-lg font-black text-[#173F70] font-display">
-                ₦{product.price.toLocaleString()}
-              </span>
-              {product.originalPrice && (
+              {product.price > 0 ? (
+                <span className="text-base sm:text-lg font-black text-[#173F70] font-display">
+                  ₦{product.price.toLocaleString()}
+                </span>
+              ) : (
+                <span className="text-xs sm:text-sm font-bold text-[#F58220] font-display">
+                  Price on Request
+                </span>
+              )}
+              {product.price > 0 && product.originalPrice && (
                 <span className="text-xs text-gray-400 line-through font-normal">
                   ₦{product.originalPrice.toLocaleString()}
                 </span>
@@ -191,18 +202,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 ? 'bg-[#27AFA5] text-white scale-102 shadow-sm' 
                 : 'bg-[#173F70] hover:bg-[#2563C7] text-white hover:shadow-sm'
             }`}
-            title="Add to shopping bag"
-            aria-label={`Add ${product.name} to bag`}
+            title={product.price > 0 ? "Add to shopping bag" : "Inquire for price"}
+            aria-label={product.price > 0 ? `Add ${product.name} to bag` : `Inquire about ${product.name}`}
           >
             {isAddedRecently ? (
               <>
                 <Check className="w-4 h-4 text-white" />
                 <span className="hidden sm:inline">ADDED!</span>
               </>
-            ) : (
+            ) : product.price > 0 ? (
               <>
                 <ShoppingBag className="w-4 h-4" />
                 <span className="hidden sm:inline">ADD TO BAG</span>
+              </>
+            ) : (
+              <>
+                <Eye className="w-4 h-4" />
+                <span className="hidden sm:inline">INQUIRE</span>
               </>
             )}
           </button>

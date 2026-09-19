@@ -61,7 +61,7 @@ export const CATEGORIES_DATA: CategoryInfo[] = [
     name: 'Toys & Gifts',
     categoryKey: 'gifts',
     description: 'Thoughtful surprises that get the happiest smiles.',
-    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=700&q=80',
+    image: '/images/wooden_rainbow_blocks.jpg',
     accentColor: '#F58220',
     badgeText: 'Hampers & Toys'
   }
@@ -102,7 +102,7 @@ export const MOMENTS_DATA: MomentInfo[] = [
     momentKey: 'gifting',
     tagline: 'Stress-Free Picking',
     description: 'We’ve got ideas for the little one.',
-    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80',
+    image: '/images/deluxe_birthday_gift_hamper.jpg',
     color: '#27AFA5'
   },
   {

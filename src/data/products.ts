@@ -1,6 +1,7 @@
 import { Product } from '../types';
 
-export const PRODUCTS: Product[] = [
+const RAW_PRODUCTS: Product[] = [
+
   {
     "id": "bb-g-001",
     "name": "Pink Bow Dress",
@@ -374,14 +375,436 @@ export const PRODUCTS: Product[] = [
     "productType": "ride-ons"
   },
   {
+    "id": "bb-t-003",
+    "name": "Mercedes-Benz AMG Ride-On Car",
+    "category": "toys",
+    "subCategory": "Ride-On Toys",
+    "price": 223600,
+    "images": [
+      "/images/mercedes_benz_amg_ride_on_car.jpg"
+    ],
+    "description": "Big wheels, bold presence, pure luxury. This Mercedes-Benz AMG ride is ready to turn heads wherever it goes.",
+    "highlightTag": "Luxury Ride-On",
+    "sizes": [
+      "Single Rider (Ages 2-6)"
+    ],
+    "colors": [
+      {
+        "name": "Gloss Black",
+        "hex": "#1A1A1A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "Reinforced polymer body with authentic Mercedes-Benz AMG styling and detailing",
+      "fit": "Single rider seat with safety seatbelt",
+      "care": "Wipe clean with a damp cloth after outdoor use. Store indoors.",
+      "inStoreAvailability": "Available at Buubu Bloom, Galleria Mall, Orchid, Lagos. Boxed units ready for Lagos & Nationwide delivery."
+    },
+    "audience": "unisex",
+    "productType": "ride-ons"
+  },
+  {
+    "id": "bb-t-004",
+    "name": "Pink Mini Sports Ride-On Car",
+    "category": "toys",
+    "subCategory": "Ride-On Toys",
+    "price": 360340,
+    "images": [
+      "/images/pink_mini_sports_ride_on_car.jpg"
+    ],
+    "description": "Luxury looks better in PINK. Make every ride a statement with this gorgeous mini sports car.",
+    "highlightTag": "Statement Ride",
+    "sizes": [
+      "Single Rider (Ages 2-6)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Pink",
+        "hex": "#F7A8C4"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "Glossy sculpted sports body with authentic aerodynamic styling",
+      "fit": "Single rider seat with safety seatbelt",
+      "care": "Wipe clean with a damp cloth after outdoor use. Store indoors.",
+      "inStoreAvailability": "Available at Buubu Bloom, Galleria Mall, Orchid, Lagos. Boxed units ready for Lagos & Nationwide delivery."
+    },
+    "audience": "unisex",
+    "productType": "ride-ons"
+  },
+  {
+    "id": "bb-t-005",
+    "name": "Lime Green & White Electric Kids Bike",
+    "category": "toys",
+    "subCategory": "Ride-On Toys",
+    "price": 400000,
+    "images": [
+      "/images/lime_green_white_electric_bike.jpg",
+      "/images/lime_green_bike_1789721375029.jpg"
+    ],
+    "description": "Clean, powerful, and ready to turn heads. This lime green and white electric dirt bike is engineered for safe outdoor adventure with authentic motocross styling, real throttle response, and durable knobby all-terrain tires.",
+    "highlightTag": "Head-Turner",
+    "sizes": [
+      "Single Rider (Ages 4-10)"
+    ],
+    "colors": [
+      {
+        "name": "Lime Green & White",
+        "hex": "#78C800"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-tensile steel frame with impact-resistant lime green and white motocross body fairings and rugged spoked wheels",
+      "fit": "Comfortable motocross saddle with twist-grip throttle and dual lever handbrakes",
+      "care": "Rechargeable electric battery. Wipe down after outdoor rides. Store in a dry indoor area.",
+      "inStoreAvailability": "Available at Buubu Bloom, Galleria Mall, Orchid, Lagos. Boxed units ready for Lagos & Nationwide delivery."
+    },
+    "audience": "unisex",
+    "productType": "ride-ons"
+  },
+  {
+    "id": "bb-t-006",
+    "name": "Pink & White Electric Kids Bike",
+    "category": "toys",
+    "subCategory": "Ride-On Toys",
+    "price": 400000,
+    "images": [
+      "/images/pink_white_electric_bike.jpg",
+      "/images/pink_white_bike_1789721386933.jpg"
+    ],
+    "description": "Ride in style, stand out effortlessly. The perfect blend of electric power, sports styling, and high-speed fun in a chic pink and white motocross build.",
+    "highlightTag": "Statement Ride",
+    "sizes": [
+      "Single Rider (Ages 4-10)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Pink & White",
+        "hex": "#F7A8C4"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-tensile steel frame with impact-resistant pastel pink and white motocross body fairings and rugged spoked wheels",
+      "fit": "Comfortable motocross saddle with twist-grip throttle and dual lever handbrakes",
+      "care": "Rechargeable electric battery. Wipe down after outdoor rides. Store in a dry indoor area.",
+      "inStoreAvailability": "Available at Buubu Bloom, Galleria Mall, Orchid, Lagos. Boxed units ready for Lagos & Nationwide delivery."
+    },
+    "audience": "unisex",
+    "productType": "ride-ons"
+  },
+  {
+    "id": "bb-bag-001",
+    "name": "Burgundy School Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 24500,
+    "images": [
+      "/images/burgundy_school_backpack.jpg",
+      "/images/burgundy_backpack_1789721398358.jpg"
+    ],
+    "description": "A structured wide-frame school backpack crafted with water-resistant burgundy canvas, top grab handles with snap clasp, front gold zipper pocket, and side water bottle compartments.",
+    "highlightTag": "School Favourite",
+    "sizes": [
+      "Standard (Ages 5-12)"
+    ],
+    "colors": [
+      {
+        "name": "Burgundy",
+        "hex": "#722F37"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Durable water-repellent burgundy canvas with brass zip hardware and structured doctor-mouth frame opening",
+      "fit": "Wide easy-access opening with reinforced top grab handles and padded ergonomic shoulder straps",
+      "care": "Spot clean with a damp cloth or soft sponge. Air dry away from direct heat.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-002",
+    "name": "Grey School Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 24500,
+    "images": [
+      "/images/grey_school_backpack.jpg",
+      "/images/grey_backpack_1789721413333.jpg"
+    ],
+    "description": "A modern structured frame backpack in heather grey canvas. Features wide-mouth easy-access opening, gold-tone hardware, secure top carry handles, and side bottle holders.",
+    "highlightTag": "School Favourite",
+    "sizes": [
+      "Standard (Ages 5-12)"
+    ],
+    "colors": [
+      {
+        "name": "Heather Grey",
+        "hex": "#9CA3AF"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Textured woven heather grey canvas with brass zip hardware and structured doctor-mouth frame opening",
+      "fit": "Doctor-frame structured opening with snap handle clasp and cushioned shoulder straps",
+      "care": "Spot clean with a damp cloth or soft sponge. Air dry away from direct heat.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-003",
+    "name": "White & Black School Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 22000,
+    "images": [
+      "/images/white_black_school_backpack.jpg",
+      "/images/white_black_bag_1789721425322.jpg"
+    ],
+    "description": "Contemporary multi-compartment student backpack featuring black contrast cord netting, clear front window compartment, padded handle, and high-capacity book storage.",
+    "highlightTag": "Back to School",
+    "sizes": [
+      "Standard (Ages 6-14)"
+    ],
+    "colors": [
+      {
+        "name": "White & Black",
+        "hex": "#FFFFFF"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-density water-resistant nylon shell with reinforced seams and black contrast hardware",
+      "fit": "Spacious multi-pocket layout with padded air-mesh straps and chest stabilization",
+      "care": "Wipe clean with a damp cloth. Do not bleach or tumble dry.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-004",
+    "name": "White & Black Multi-Pocket Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 26000,
+    "images": [
+      "/images/white_black_multi_pocket_backpack.jpg",
+      "/images/black_white_buckle_1789721438099.jpg"
+    ],
+    "description": "High-capacity school backpack with dual front quick-release buckle clasps, transparent upper zipper pouch, breathable mesh pockets, and water-repellent white shell.",
+    "highlightTag": "Back to School",
+    "sizes": [
+      "Standard (Ages 6-14)"
+    ],
+    "colors": [
+      {
+        "name": "White & Black",
+        "hex": "#F3F4F6"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Water-resistant coated poly-canvas with dual buckle fasteners and reinforced base",
+      "fit": "Multi-pocket organized interior with cushioned back padding and ergonomic straps",
+      "care": "Wipe clean with a damp cloth. Air dry in shade.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-005",
+    "name": "Pastel Tie-Dye School Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 19500,
+    "images": [
+      "/images/pastel_tiedyed_school_backpack.jpg",
+      "/images/tiedyed_backpack_1789721447250.jpg"
+    ],
+    "description": "Vibrant pastel swirl tie-dye school backpack featuring cheerful colors, front organizer pocket, dual side bottle pouches, and durable cushioned straps.",
+    "highlightTag": "Trending Now",
+    "sizes": [
+      "Standard (Ages 5-12)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Swirl",
+        "hex": "#A7F3D0"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting",
+      "birthday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Tear-resistant lightweight canvas with smooth dual zippers and water-resistant lining",
+      "fit": "Ergonomic curved shoulder straps with breathable mesh backing",
+      "care": "Spot clean or hand wipe with mild detergent. Air dry.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-006",
+    "name": "Pastel Multi-Pocket School Backpack",
+    "category": "bags",
+    "subCategory": "School Bags",
+    "price": 23500,
+    "images": [
+      "/images/pastel_multipocket_school_backpack.jpg",
+      "/images/multi_pocket_bag_1789721459927.jpg"
+    ],
+    "description": "Multi-pocket pastel school backpack with dual buckle flap closure, safety reflective striping, front organizer compartments, and water-resistant finish.",
+    "highlightTag": "New Arrival",
+    "sizes": [
+      "Standard (Ages 5-12)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Pink & Lilac",
+        "hex": "#FBCFE8"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting",
+      "birthday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Water-repellent poly canvas with safety reflective accents and sturdy buckles",
+      "fit": "Comfortable air-cushioned straps with chest support",
+      "care": "Wipe clean with a damp cloth. Air dry naturally.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Send a DM or WhatsApp to order."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
     "id": "bb-gft-001",
     "name": "Birthday Gift Box",
     "category": "gifts",
     "subCategory": "Gift Sets",
     "price": 45000,
     "images": [
-      "/images/nigerian_birthday_kids.jpg",
-      "/images/editorial_nigerian_twirl.jpg"
+      "/images/deluxe_birthday_gift_hamper.jpg",
+      "/images/nigerian_birthday_kids.jpg"
     ],
     "description": "Each gift box is selected according to the child's age, size and preferences. We'll confirm the contents with you before dispatch.",
     "highlightTag": "Birthday Box",
@@ -573,7 +996,7 @@ export const PRODUCTS: Product[] = [
     "details": {
       "material": "95% Organic Cotton, 5% Elastane for crawling comfort",
       "fit": "Relaxed room-to-grow fit",
-      "care": "Machine wash 30°C, tumble dry low",
+      "care": "Machine wash 30\u00b0C, tumble dry low",
       "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos"
     },
     "audience": "boys",
@@ -2737,44 +3160,1984 @@ export const PRODUCTS: Product[] = [
       "care": "Machine wash warm, tumble dry gentle",
       "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos"
     }
+  },
+  {
+    "id": "bb-g-003",
+    "name": "Girls Pink Tulle Party Dress",
+    "category": "girls",
+    "subCategory": "Dresses",
+    "price": 38500,
+    "originalPrice": 45000,
+    "images": [
+      "/images/girls_tulle_party_dress.jpg"
+    ],
+    "description": "Layered tulle party dress with satin sash and soft inner cotton lining. Features a sleeveless bodice and back zipper closure for birthdays and special occasions.",
+    "highlightTag": "Party Favourite",
+    "sizes": [
+      "2-3 Years",
+      "4-5 Years",
+      "6-7 Years",
+      "8-9 Years"
+    ],
+    "colors": [
+      {
+        "name": "Blush Pink",
+        "hex": "#F7C6D0"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "special-occasion",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Multi-tiered soft nylon tulle overlay with 100% breathable pure cotton inner lining",
+      "fit": "True to size with flared twirl skirt and concealed back zip",
+      "care": "Hand wash in cold water. Hang to steam and dry.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Ready for Lagos & Nationwide delivery."
+    },
+    "audience": "girls",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-g-004",
+    "name": "Girls Floral Cotton Sundress",
+    "category": "girls",
+    "subCategory": "Dresses",
+    "price": 18500,
+    "images": [
+      "/images/girls_floral_sundress.jpg"
+    ],
+    "description": "Sleeveless breathable cotton sundress with yellow floral print and tiered skirt. Easy pull-on fit for warm weather and casual play.",
+    "sizes": [
+      "3-4 Years",
+      "4-5 Years",
+      "6-7 Years"
+    ],
+    "colors": [
+      {
+        "name": "Sunshine Yellow",
+        "hex": "#FCD34D"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "100% lightweight organic combed cotton lawn",
+      "fit": "Relaxed A-line fit with gathered empire waist",
+      "care": "Machine wash cold with similar colours. Tumble dry low.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-g-005",
+    "name": "Girls Denim Pleated Skirt",
+    "category": "girls",
+    "subCategory": "Skirts",
+    "price": 16500,
+    "images": [
+      "/images/girls_denim_skirt.jpg"
+    ],
+    "description": "Pleated washed denim skirt featuring an elasticated back waistband, front belt loops, and matching belt. Durable and versatile for everyday wear.",
+    "sizes": [
+      "4-5 Years",
+      "6-7 Years",
+      "8-9 Years",
+      "10-12 Years"
+    ],
+    "colors": [
+      {
+        "name": "Mid Denim Blue",
+        "hex": "#3B82F6"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Durable cotton denim twill with soft stone wash finish",
+      "fit": "Flared pleated silhouette with adjustable inner button-hole elastic waistband",
+      "care": "Machine wash inside out in cold water. Iron on medium.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-g-006",
+    "name": "Girls Wide-Leg Jumpsuit",
+    "category": "girls",
+    "subCategory": "Jumpsuits",
+    "price": 24000,
+    "images": [
+      "/images/girls_linen_jumpsuit.jpg"
+    ],
+    "description": "Lightweight pastel lilac sleeveless jumpsuit with square neckline and wide-leg cut. Soft breathable cotton blend fabric for casual outings.",
+    "sizes": [
+      "4-5 Years",
+      "6-7 Years",
+      "8-9 Years",
+      "10-12 Years"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Lilac",
+        "hex": "#C4B5FD"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "everyday"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Pre-washed breathable linen-cotton blend",
+      "fit": "Wide leg cut with elasticated back waist for ease of movement",
+      "care": "Gentle cycle wash cold. Warm iron while slightly damp.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-b-004",
+    "name": "Boys Navy Formal Suit (2-Piece)",
+    "category": "boys",
+    "subCategory": "Suits",
+    "price": 45000,
+    "originalPrice": 52000,
+    "images": [
+      "/images/navy_boys_occasion_suit.jpg"
+    ],
+    "description": "Tailored two-piece boys suit including single-breasted blazer and matching flat-front trousers. Poly-viscose blend with smooth lining for church, weddings, and celebrations.",
+    "highlightTag": "Special Event",
+    "sizes": [
+      "3-4 Years",
+      "5-6 Years",
+      "7-8 Years",
+      "9-10 Years",
+      "11-12 Years"
+    ],
+    "colors": [
+      {
+        "name": "Midnight Navy",
+        "hex": "#1E293B"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "birthday"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Smooth poly-viscose suiting fabric with satin lapel lining",
+      "fit": "Tailored slim-regular cut with adjustable internal trouser waistband",
+      "care": "Dry clean only. Cool iron under press cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Ready for immediate dispatch."
+    },
+    "audience": "boys",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-b-005",
+    "name": "Boys Cotton Pique Polo Shirt",
+    "category": "boys",
+    "subCategory": "T-Shirts & Polos",
+    "price": 14000,
+    "images": [
+      "/images/boys_cotton_polo.jpg"
+    ],
+    "description": "100% combed cotton pique polo shirt with ribbed collar, two-button placket, and embroidered chest detail. Pre-shrunk and machine washable.",
+    "sizes": [
+      "3-4 Years",
+      "5-6 Years",
+      "7-8 Years",
+      "9-10 Years"
+    ],
+    "colors": [
+      {
+        "name": "Forest Green",
+        "hex": "#15803D"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "100% long-staple combed cotton pique",
+      "fit": "Standard classic polo fit with side seam vents",
+      "care": "Machine wash cold inside out. Reshape collar while damp.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-b-006",
+    "name": "Boys Colour-Block Zip Hoodie",
+    "category": "boys",
+    "subCategory": "Hoodies & Sweaters",
+    "price": 18500,
+    "images": [
+      "/images/boys_colourblock_hoodie.jpg"
+    ],
+    "description": "Fleece-lined full-zip hooded sweatshirt with contrasting colour-block panels, front split pouch pockets, and ribbed cuffs.",
+    "sizes": [
+      "4-5 Years",
+      "6-7 Years",
+      "8-9 Years",
+      "10-12 Years"
+    ],
+    "colors": [
+      {
+        "name": "Navy & Heather Grey",
+        "hex": "#334155"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Heavyweight 320gsm brushed-back cotton polyester fleece",
+      "fit": "Relaxed athletic hoodie fit with heavy-duty nylon zipper",
+      "care": "Machine wash cold. Do not tumble dry high.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-b-007",
+    "name": "Boys Fleece Cargo Joggers",
+    "category": "boys",
+    "subCategory": "Joggers",
+    "price": 15000,
+    "images": [
+      "/images/boys_fleece_joggers.jpg"
+    ],
+    "description": "Warm cotton-blend fleece jogger pants with elastic drawstring waistband, ribbed ankles, and dual utility cargo side pockets.",
+    "sizes": [
+      "4-5 Years",
+      "6-7 Years",
+      "8-9 Years",
+      "10-12 Years"
+    ],
+    "colors": [
+      {
+        "name": "Charcoal Grey",
+        "hex": "#475569"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Cotton-rich fleece with reinforced knee stitching",
+      "fit": "Tapered leg with elasticated ankle cuffs and functional drawcord waist",
+      "care": "Machine wash warm with similar darks.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-b-008",
+    "name": "Boys Linen Shirt & Shorts Set",
+    "category": "boys",
+    "subCategory": "Sets",
+    "price": 28000,
+    "images": [
+      "/images/boys_linen_shirt_shorts.jpg"
+    ],
+    "description": "Two-piece warm weather outfit featuring a short-sleeve linen-blend button-down shirt and matching tailored shorts with detachable elastic suspenders.",
+    "sizes": [
+      "1-2 Years",
+      "2-3 Years",
+      "3-4 Years",
+      "5-6 Years"
+    ],
+    "colors": [
+      {
+        "name": "White & Khaki",
+        "hex": "#D4B996"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "birthday"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "Cool pure linen woven fabric with faux-leather trim details",
+      "fit": "Tailored comfort fit with removable button-on Y-suspenders",
+      "care": "Gentle wash cycle. Hang dry in shade.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "clothing"
+  },
+  {
+    "id": "bb-bb-003",
+    "name": "Baby Waffle Knit Romper",
+    "category": "baby",
+    "subCategory": "Rompers & Bodysuits",
+    "price": 12500,
+    "images": [
+      "/images/baby_waffle_romper.jpg"
+    ],
+    "description": "Soft sage green waffle textured cotton romper with functional wooden front buttons and bottom snap closures for easy diaper changes.",
+    "sizes": [
+      "0-3 Months",
+      "3-6 Months",
+      "6-12 Months",
+      "12-18 Months"
+    ],
+    "colors": [
+      {
+        "name": "Sage Green",
+        "hex": "#84A98C"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "0-12M",
+    "ageGroups": [
+      "0-12M",
+      "1-3Y"
+    ],
+    "details": {
+      "material": "100% GOTS certified organic waffle knit cotton",
+      "fit": "Stretchy relaxed baby fit with tagless collar for gentle skin protection",
+      "care": "Machine wash cold on delicate cycle. Air dry flat.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "baby",
+    "productType": "baby-essentials"
+  },
+  {
+    "id": "bb-bb-004",
+    "name": "Baby Leather Soft-Sole Crib Shoes",
+    "category": "baby",
+    "subCategory": "Baby Shoes",
+    "price": 11500,
+    "images": [
+      "/images/kids_soft_crib_shoes.jpg"
+    ],
+    "description": "Soft tan leather pre-walker crib shoes with flexible non-slip suede soles and elasticized ankle opening for gentle stay-on support.",
+    "sizes": [
+      "0-6 Months",
+      "6-12 Months",
+      "12-18 Months"
+    ],
+    "colors": [
+      {
+        "name": "Warm Tan",
+        "hex": "#C2884A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "special-occasion",
+      "gifting"
+    ],
+    "ageGroup": "0-12M",
+    "ageGroups": [
+      "0-12M",
+      "1-3Y"
+    ],
+    "details": {
+      "material": "Buttery soft non-toxic vegetable tanned cowhide leather with suede sole",
+      "fit": "Easy stay-on elastic ankle casing that keeps shoes securely on tiny feet",
+      "care": "Wipe clean with a damp cloth. Leather conditioner recommended.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "baby",
+    "productType": "shoes"
+  },
+  {
+    "id": "bb-bb-005",
+    "name": "Organic Cotton Bandana Bibs (Pack of 3)",
+    "category": "baby",
+    "subCategory": "Baby Accessories",
+    "price": 8500,
+    "images": [
+      "/images/baby_bandana_bibs.jpg"
+    ],
+    "description": "Set of 3 absorbent cotton bandana drool bibs with soft fleece backing and dual nickel-free snap button fasteners to adjust neck size.",
+    "sizes": [
+      "0-24 Months"
+    ],
+    "colors": [
+      {
+        "name": "Neutral Earth Tones",
+        "hex": "#D1C7BD"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "0-12M",
+    "ageGroups": [
+      "0-12M",
+      "1-3Y"
+    ],
+    "details": {
+      "material": "100% organic cotton front with plush absorbent micro-fleece backing",
+      "fit": "Dual snap fastenings providing 3 adjustable neck size settings",
+      "care": "Machine wash cold. Tumble dry gentle.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "baby",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-bb-006",
+    "name": "Newborn Baby Gift Hamper",
+    "category": "baby",
+    "subCategory": "Gift Sets",
+    "price": 42000,
+    "images": [
+      "/images/baby_welcome_hamper.jpg"
+    ],
+    "description": "Woven nursery storage basket containing a soft cotton receiving blanket, knitted plush rattle, soft-sole baby booties, and pure cotton baby onesie finished with a satin gift ribbon.",
+    "highlightTag": "Baby Shower Pick",
+    "sizes": [
+      "0-6 Months"
+    ],
+    "colors": [
+      {
+        "name": "Cream & Gold",
+        "hex": "#FDFBF7"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "0-12M",
+    "ageGroups": [
+      "0-12M"
+    ],
+    "details": {
+      "material": "Presented in a signature rigid Buubu Bloom gift box with grosgrain ribbon",
+      "fit": "Standard newborn infant gift assortment",
+      "care": "Garments are machine washable. Keepsake box can be preserved.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Custom message cards available."
+    },
+    "audience": "baby",
+    "productType": "gifts"
+  },
+  {
+    "id": "bb-s-020",
+    "name": "Girls Glitter Ballerina Shoes",
+    "category": "shoes",
+    "subCategory": "Formal Shoes",
+    "price": 22500,
+    "images": [
+      "/images/girls_glitter_shoes.jpg"
+    ],
+    "description": "Rose gold shimmer ballerina flat shoes with cushioned insoles, flexible rubber outsole, and secure elastic instep strap.",
+    "sizes": [
+      "EU 24",
+      "EU 26",
+      "EU 28",
+      "EU 30",
+      "EU 32"
+    ],
+    "colors": [
+      {
+        "name": "Rose Gold",
+        "hex": "#B76E79"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "birthday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Non-shedding fine metallic glitter upper with supple faux-leather collar",
+      "fit": "Standard medium width with adjustable velcro instep strap for firm grip",
+      "care": "Wipe clean with a soft dry brush.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "shoes"
+  },
+  {
+    "id": "bb-s-021",
+    "name": "Boys Leather Brogue Shoes",
+    "category": "shoes",
+    "subCategory": "Formal Shoes",
+    "price": 26500,
+    "images": [
+      "/images/boys_leather_brogues.jpg"
+    ],
+    "description": "Classic tan leather lace-up brogues with decorative wingtip perforations, cushioned footbed, and durable non-slip rubber grip sole.",
+    "sizes": [
+      "EU 27",
+      "EU 29",
+      "EU 31",
+      "EU 33",
+      "EU 35"
+    ],
+    "colors": [
+      {
+        "name": "Tan Brown",
+        "hex": "#8B4513"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Full-grain smooth genuine leather upper with breathable leather insole lining",
+      "fit": "Lace-up closure with reinforced eyelets and padded heel collar",
+      "care": "Buff gently with clear or tan shoe wax polish.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "shoes"
+  },
+  {
+    "id": "bb-s-022",
+    "name": "Kids White Cushioned Sneakers",
+    "category": "shoes",
+    "subCategory": "Sneakers",
+    "price": 24000,
+    "images": [
+      "/images/kids_white_sneakers.jpg"
+    ],
+    "description": "All-white everyday kids trainers with faux leather upper, dual velcro strap closure, padded collar, and shock-absorbing rubber outsole.",
+    "sizes": [
+      "EU 25",
+      "EU 27",
+      "EU 29",
+      "EU 31",
+      "EU 33",
+      "EU 35"
+    ],
+    "colors": [
+      {
+        "name": "Triple White",
+        "hex": "#FFFFFF"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Wipe-clean premium vegan leather with perforated toe box for breathability",
+      "fit": "Double hook-and-loop velcro straps for fast independent wear",
+      "care": "Wipe clean with a damp sneaker cleaner cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "shoes"
+  },
+  {
+    "id": "bb-s-023",
+    "name": "Kids Foam Slip-On Slides",
+    "category": "shoes",
+    "subCategory": "Slides",
+    "price": 9500,
+    "images": [
+      "/images/kids_pastel_slides.jpg"
+    ],
+    "description": "Moulded EVA foam slip-on pool and casual slides with contoured footbed and grooved anti-slip traction sole.",
+    "sizes": [
+      "EU 26-27",
+      "EU 28-29",
+      "EU 30-31",
+      "EU 32-33"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Lilac",
+        "hex": "#D8B4E2"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Single-moulded high-density hypoallergenic EVA foam",
+      "fit": "Contoured footbed with cup heel and broad arch support",
+      "care": "Rinse clean under running water. Dry away from direct sun.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "shoes"
+  },
+  {
+    "id": "bb-bag-007",
+    "name": "Kids Insulated Lunch Bag",
+    "category": "bags",
+    "subCategory": "Lunch Bags",
+    "price": 12500,
+    "images": [
+      "/images/kids_insulated_lunchbag.jpg"
+    ],
+    "description": "Thermal insulated kids lunch tote with wipe-clean food-grade interior lining, zippered mesh bottle pocket, and adjustable shoulder strap.",
+    "sizes": [
+      "Standard (4L Capacity)"
+    ],
+    "colors": [
+      {
+        "name": "Navy & Stone",
+        "hex": "#1E3A8A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Durable 600D poly exterior with seamless heat-welded PEVA thermal insulation",
+      "fit": "Compact spacious volume easily holding a bento box, fruit snack, and water bottle",
+      "care": "Wipe clean interior with mild soapy water.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-008",
+    "name": "Girls Quilted Mini Crossbody Bag",
+    "category": "bags",
+    "subCategory": "Mini Bags",
+    "price": 14000,
+    "images": [
+      "/images/girls_quilted_minibag.jpg"
+    ],
+    "description": "Pastel quilted mini crossbody bag with gold-tone chain shoulder strap and turn-lock flap closure for keys and small treasures.",
+    "sizes": [
+      "Mini (14cm x 11cm)"
+    ],
+    "colors": [
+      {
+        "name": "Blush Pink",
+        "hex": "#FBCFE8"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "birthday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Supple quilted PU leather with polished gold-tone hardware and faux-pearl beads",
+      "fit": "Lightweight miniature proportions suited for small treasures and lip balm",
+      "care": "Wipe gently with a dry microfiber cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-bag-009",
+    "name": "Kids Hard-Shell Rolling Suitcase",
+    "category": "bags",
+    "subCategory": "Travel/Trolley Bags",
+    "price": 42000,
+    "originalPrice": 48000,
+    "images": [
+      "/images/kids_rolling_luggage.jpg"
+    ],
+    "description": "Durable ABS hard-shell cabin size luggage with 360-degree dual spinner wheels, telescoping trolley handle, and fully lined interior compartments.",
+    "highlightTag": "Travel Ready",
+    "sizes": [
+      "18 Inch Cabin Size"
+    ],
+    "colors": [
+      {
+        "name": "Buttercup Yellow",
+        "hex": "#FDE047"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Scratch-resistant ABS/polycarbonate composite shell with zippered fabric divider",
+      "fit": "Airline-approved international carry-on luggage dimensions",
+      "care": "Wipe clean exterior shell with a damp cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-t-007",
+    "name": "Wooden Rainbow Building Blocks (80-Piece)",
+    "category": "toys",
+    "subCategory": "Building & Construction",
+    "price": 18500,
+    "images": [
+      "/images/wooden_rainbow_blocks.jpg"
+    ],
+    "description": "80-piece solid beechwood geometric block set in vibrant rainbow colours with smooth rounded edges, stored in a sturdy wooden storage tray.",
+    "sizes": [
+      "80 Pieces with Storage Tub"
+    ],
+    "colors": [
+      {
+        "name": "Multi-Colour",
+        "hex": "#3B82F6"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting",
+      "birthday"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "all-ages"
+    ],
+    "details": {
+      "material": "Smooth sanded FSC-certified natural beech wood with rounded child-safe edges",
+      "fit": "80 assorted cylinders, arches, cubes, and triangular prisms in sorting tub",
+      "care": "Wipe clean with a dry or lightly dampened cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-008",
+    "name": "Kids Wooden Kitchen Play Set",
+    "category": "toys",
+    "subCategory": "Pretend Play",
+    "price": 28000,
+    "images": [
+      "/images/kids_play_kitchen.jpg"
+    ],
+    "description": "Compact wooden play kitchen featuring turnable clicking stove knobs, sink with faucet, microwave, oven door, and wooden cookware accessories.",
+    "sizes": [
+      "Compact Tabletop Size"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Mint & Natural Wood",
+        "hex": "#A7F3D0"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "gifting",
+      "birthday",
+      "everyday"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "Solid pine wood and child-safe engineered wood with food-grade mini steel pans",
+      "fit": "Compact tabletop unit that sits easily on any low table or playroom shelf",
+      "care": "Wipe clean with a damp sponge.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-009",
+    "name": "Classic Plush Teddy Bear",
+    "category": "toys",
+    "subCategory": "Plush Toys",
+    "price": 12000,
+    "images": [
+      "/images/classic_teddy_bear.jpg"
+    ],
+    "description": "Soft golden plush teddy bear with embroidered facial features, stitched paw pads, and satin neck ribbon. Surface washable.",
+    "sizes": [
+      "32cm Height"
+    ],
+    "colors": [
+      {
+        "name": "Golden Caramel",
+        "hex": "#C2884A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "gifting",
+      "birthday",
+      "everyday"
+    ],
+    "ageGroup": "all-ages",
+    "ageGroups": [
+      "0-12M",
+      "1-3Y",
+      "4-7Y",
+      "all-ages"
+    ],
+    "details": {
+      "material": "Hypoallergenic plush microfiber fur with 100% recycled poly-fill stuffing",
+      "fit": "Huggable seated posture with lock-stitched seams",
+      "care": "Surface washable with mild baby soap.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-010",
+    "name": "Kids All-Terrain RC Stunt Truck",
+    "category": "toys",
+    "subCategory": "Remote-Control Toys",
+    "price": 32000,
+    "images": [
+      "/images/rc_stunt_truck.jpg"
+    ],
+    "description": "Rechargeable 2.4GHz remote-control 4WD stunt vehicle capable of 360-degree spins, flips, and rough surface driving. Includes USB charger.",
+    "sizes": [
+      "1:16 Scale"
+    ],
+    "colors": [
+      {
+        "name": "Racing Red & Black",
+        "hex": "#DC2626"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-impact ABS chassis with anti-collision bumper and rubber crawler tires",
+      "fit": "Includes USB charging cable and rechargeable lithium battery pack for truck",
+      "care": "Wipe dirt off wheels after outdoor driving. Keep battery stored in cool dry area.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-011",
+    "name": "Plush Soft Cloth Doll",
+    "category": "toys",
+    "subCategory": "Dolls",
+    "price": 14500,
+    "images": [
+      "/images/plush_companion_doll.jpg"
+    ],
+    "description": "Soft fabric rag doll with yarn hair, embroidered smile, and removable floral cotton dress. Gentle and lightweight for young children.",
+    "sizes": [
+      "38cm Standing"
+    ],
+    "colors": [
+      {
+        "name": "Floral Peach",
+        "hex": "#FDBA74"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "gifting",
+      "birthday"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "100% natural cotton canvas body with yarn hair and embroidered facial details",
+      "fit": "Lightweight soft body safe for cuddling from early toddlerhood",
+      "care": "Gentle hand wash in lukewarm water. Air dry.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-012",
+    "name": "Kids Wooden 8-Note Xylophone",
+    "category": "toys",
+    "subCategory": "Musical Toys",
+    "price": 11000,
+    "images": [
+      "/images/wooden_xylophone.jpg"
+    ],
+    "description": "Wooden melodic percussion instrument with 8 tuned rainbow-coloured metal keys and two smooth wooden mallets. Sturdy solid wood base.",
+    "sizes": [
+      "Standard 8 Keys"
+    ],
+    "colors": [
+      {
+        "name": "Rainbow Tone",
+        "hex": "#EC4899"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y"
+    ],
+    "details": {
+      "material": "Solid beech base with tuned metal bars and two smooth wooden mallets",
+      "fit": "Tabletop placement with non-slip silicone feet pads",
+      "care": "Wipe clean with a soft dry cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-013",
+    "name": "Wooden Shape Sorter Cube",
+    "category": "toys",
+    "subCategory": "Educational Toys",
+    "price": 15000,
+    "images": [
+      "/images/wooden_shape_sorter.jpg"
+    ],
+    "description": "Solid wood activity cube featuring 12 geometric shape cutouts and 12 matching colourful wooden blocks with sliding removable lid.",
+    "sizes": [
+      "15cm x 15cm Cube"
+    ],
+    "colors": [
+      {
+        "name": "Natural Wood & Rainbow",
+        "hex": "#F59E0B"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "1-3Y",
+    "ageGroups": [
+      "0-12M",
+      "1-3Y"
+    ],
+    "details": {
+      "material": "Solid hardwood cube box with sliding top lid and non-toxic water-based paints",
+      "fit": "12 chunky shape blocks designed for small hands to grasp safely",
+      "care": "Wipe clean with a damp cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-t-014",
+    "name": "World Map Floor Puzzle (48-Piece)",
+    "category": "toys",
+    "subCategory": "Games & Puzzles",
+    "price": 9500,
+    "images": [
+      "/images/world_map_puzzle.jpg"
+    ],
+    "description": "48 extra-thick cardboard jigsaw puzzle pieces forming a vibrant illustrated world map showing continents and native animals.",
+    "sizes": [
+      "48 Giant Pieces (60cm x 40cm)"
+    ],
+    "colors": [
+      {
+        "name": "Multi-Colour Illustrated",
+        "hex": "#0284C7"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Extra-thick 2.5mm recycled greyboard with glare-free matte lamination",
+      "fit": "Large easy-to-handle puzzle pieces suitable for floor building",
+      "care": "Store pieces in the original handled box when not in use.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "toys"
+  },
+  {
+    "id": "bb-acc-003",
+    "name": "Girls Hair Bow Clips (Pack of 5)",
+    "category": "accessories",
+    "subCategory": "Hair Accessories",
+    "price": 6500,
+    "images": [
+      "/images/girls_bow_clips_set.jpg"
+    ],
+    "description": "Set of 5 pastel ribbed grosgrain ribbon hair bows secured to fully lined alligator pinch clips. Non-slip grip suitable for fine or thick hair.",
+    "sizes": [
+      "Set of 5 (8cm Bows)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Assorted",
+        "hex": "#F472B6"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "special-occasion",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-density ribbed grosgrain polyester ribbon on pinch crocodile metal clips",
+      "fit": "Pinch clip mechanism holds securely in fine or thick hair without snagging",
+      "care": "Spot clean with mild damp cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-acc-004",
+    "name": "Kids Polarized UV Sunglasses",
+    "category": "accessories",
+    "subCategory": "Sunglasses",
+    "price": 8500,
+    "images": [
+      "/images/kids_sunglasses.jpg"
+    ],
+    "description": "Flexible silicone frame children sunglasses with UV400 polarized shatterproof lenses and comfortable non-pinch temples.",
+    "sizes": [
+      "Ages 3-10 Years"
+    ],
+    "colors": [
+      {
+        "name": "Olive Green",
+        "hex": "#65A30D"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Bendable shatterproof TPEE rubber frame with TAC polarized UV400 lenses",
+      "fit": "Flexible arms that gently hug temples without uncomfortable pressure",
+      "care": "Rinse in fresh water and wipe clean with provided microfiber pouch.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-acc-005",
+    "name": "Kids Digital Sports Watch",
+    "category": "accessories",
+    "subCategory": "Watches",
+    "price": 11000,
+    "images": [
+      "/images/kids_digital_watch.jpg"
+    ],
+    "description": "Water-resistant digital wristwatch with backlit LCD display, stopwatch, alarm, daily date display, and flexible resin strap.",
+    "sizes": [
+      "Adjustable Strap (Ages 5-14)"
+    ],
+    "colors": [
+      {
+        "name": "Cobalt Blue",
+        "hex": "#2563EB"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday",
+      "birthday",
+      "gifting"
+    ],
+    "ageGroup": "8-12Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Skin-friendly soft silicone band with stainless steel back and acrylic dial",
+      "fit": "Multi-hole buckle strap comfortably fitting wrists from 13cm to 19cm",
+      "care": "Wipe clean after outdoor play. Water resistant for splashes and hand washing.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-acc-006",
+    "name": "Girls Cotton Ankle Socks (Pack of 5)",
+    "category": "accessories",
+    "subCategory": "Socks",
+    "price": 7000,
+    "images": [
+      "/images/girls_cotton_ankle_socks.jpg"
+    ],
+    "description": "Pack of 5 pairs of soft combed cotton ankle socks with comfortable ribbed cuffs and flat toe seams for everyday play and school.",
+    "sizes": [
+      "2-4 Years",
+      "5-7 Years",
+      "8-10 Years"
+    ],
+    "colors": [
+      {
+        "name": "Pastel & White Pack",
+        "hex": "#FDF2F8"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "80% combed cotton, 17% polyamide, 3% elastane",
+      "fit": "Gentle elastic ribbed cuff that stays up comfortably without marking skin",
+      "care": "Machine wash warm with similar light colours.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-acc-007",
+    "name": "Boys Satin Bow Tie",
+    "category": "accessories",
+    "subCategory": "Bow Ties",
+    "price": 9000,
+    "images": [
+      "/images/boys_satin_bow_tie.jpg"
+    ],
+    "description": "Pre-tied children's satin bow tie with adjustable neckband and hook fastener for formal events, church, and celebrations.",
+    "sizes": [
+      "Adjustable (Ages 2-12)"
+    ],
+    "colors": [
+      {
+        "name": "Classic Navy",
+        "hex": "#1E3A8A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "special-occasion",
+      "birthday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "High-sheen woven satin polyester with heavy-duty stretch elastic webbing",
+      "fit": "Adjustable sliding buckles on suspenders and bow tie neckband",
+      "care": "Spot clean only.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-acc-008",
+    "name": "Girls Rainbow Bead Necklace",
+    "category": "accessories",
+    "subCategory": "Children's Jewellery",
+    "price": 7000,
+    "images": [
+      "/images/girls_charm_jewellery.jpg"
+    ],
+    "description": "Colourful wooden bead necklace strung on durable elastic cord with rainbow beads and central charm, sized safely for children.",
+    "sizes": [
+      "One Size (Stretch Fit)"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Blossom",
+        "hex": "#F9A8D4"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Child-safe smooth painted wooden beads strung on durable elastic cord",
+      "fit": "Stretches easily over small hands and heads for safe independent dressing",
+      "care": "Wipe clean with a dry cloth. Do not submerge in water.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-sch-001",
+    "name": "Kids Bento Lunch Box",
+    "category": "bags",
+    "subCategory": "Lunch Boxes",
+    "price": 14500,
+    "images": [
+      "/images/kids_bento_lunchbox.jpg"
+    ],
+    "description": "4-compartment portioned bento lunch container with silicone leakproof seal ring and kid-friendly snap locking latches. BPA-free.",
+    "sizes": [
+      "1000ml Capacity"
+    ],
+    "colors": [
+      {
+        "name": "Mint & Vanilla",
+        "hex": "#6EE7B7"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "100% food-grade BPA-free and phthalate-free PP with silicone seal",
+      "fit": "4 custom compartments keeping fruits, proteins, and snacks separated",
+      "care": "Top-rack dishwasher safe. Microwave safe with lid removed.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "bags"
+  },
+  {
+    "id": "bb-sch-002",
+    "name": "Kids Insulated Stainless Water Bottle",
+    "category": "accessories",
+    "subCategory": "Water Bottles",
+    "price": 11500,
+    "images": [
+      "/images/insulated_water_bottle.jpg"
+    ],
+    "description": "500ml double-wall vacuum insulated stainless steel water bottle with flip straw spout and integrated carry loop. Keeps drinks cold for 12 hours.",
+    "sizes": [
+      "500ml"
+    ],
+    "colors": [
+      {
+        "name": "Blush Cream",
+        "hex": "#FDE68A"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Double-wall 18/8 food-grade stainless steel with sweat-proof powder coating",
+      "fit": "Leakproof flip straw lid with wide mouth for easy ice filling",
+      "care": "Hand wash bottle. Straw and lid are dishwasher safe.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-sch-003",
+    "name": "Kids Food Flask Thermos Jar",
+    "category": "accessories",
+    "subCategory": "Food Flasks",
+    "price": 15500,
+    "images": [
+      "/images/food_flask_thermos.jpg"
+    ],
+    "description": "Wide-mouth stainless steel insulated food jar with folding stainless spoon and airtight lid. Keeps porridge, soups, and rice warm for school lunch.",
+    "sizes": [
+      "450ml"
+    ],
+    "colors": [
+      {
+        "name": "Pastel Ocean Blue",
+        "hex": "#93C5FD"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "18/8 kitchen-grade stainless steel vacuum chamber with copper lining",
+      "fit": "Wide-mouth opening with screw lid and folding compact spoon included",
+      "care": "Hand wash with warm soapy water.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-sch-004",
+    "name": "Kids Hardtop Pencil Case",
+    "category": "accessories",
+    "subCategory": "Pencil Cases",
+    "price": 8500,
+    "images": [
+      "/images/hardtop_pencil_case.jpg"
+    ],
+    "description": "Moulded EVA hardtop zippered pencil case featuring interior mesh pocket and pen holder slots. Impact resistant and spacious for school stationery.",
+    "sizes": [
+      "22cm x 15cm"
+    ],
+    "colors": [
+      {
+        "name": "Space Explorer Navy",
+        "hex": "#1E293B"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Durable molded EVA hardtop with water-resistant exterior finish",
+      "fit": "High capacity interior holding up to 50 pens, pencils, and geometric rulers",
+      "care": "Wipe clean with a damp sponge.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "unisex",
+    "productType": "accessories"
+  },
+  {
+    "id": "bb-gft-002",
+    "name": "Kids Plush Teddy Bear Gift Box",
+    "category": "gifts",
+    "subCategory": "Birthday Gifts",
+    "price": 48000,
+    "originalPrice": 55000,
+    "images": [
+      "/images/classic_teddy_bear.jpg"
+    ],
+    "description": "Gift presentation box featuring our classic golden plush teddy bear with ribbon bow, ready for birthdays and celebrations.",
+    "highlightTag": "Birthday Best Seller",
+    "sizes": [
+      "Deluxe Hamper Box"
+    ],
+    "colors": [
+      {
+        "name": "Gold & Ivory Celebration",
+        "hex": "#FBBF24"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": true,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Presented in a keepsake magnetic-closure gift box with premium tissue wrap",
+      "fit": "Generous multi-gift presentation ready for gifting directly to recipient",
+      "care": "Gift items come individually packaged inside the keepsake box.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos. Custom handwritten card included on request."
+    },
+    "audience": "unisex",
+    "productType": "gifts"
+  },
+  {
+    "id": "bb-gft-003",
+    "name": "Girls Hair Accessories Gift Set",
+    "category": "gifts",
+    "subCategory": "Gifts for Girls",
+    "price": 25000,
+    "images": [
+      "/images/girls_bow_clips_set.jpg"
+    ],
+    "description": "5-piece hair accessories gift set featuring ribbon bows and snap clips mounted on a gift presentation card for birthdays and special occasions.",
+    "sizes": [
+      "Standard Gift Box"
+    ],
+    "colors": [
+      {
+        "name": "Blush & Gold",
+        "hex": "#F472B6"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting",
+      "special-occasion"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "Handcrafted children jewelry presented in an embossed pastel pink keepsake drawer box",
+      "fit": "Sized for young girls aged 3 to 10 years",
+      "care": "Keep jewelry inside pouch when not in use.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "girls",
+    "productType": "gifts"
+  },
+  {
+    "id": "bb-gft-004",
+    "name": "Boys RC Stunt Truck Gift Box",
+    "category": "gifts",
+    "subCategory": "Gifts for Boys",
+    "price": 24000,
+    "images": [
+      "/images/rc_stunt_truck.jpg"
+    ],
+    "description": "All-terrain remote control stunt truck in presentation gift packaging with remote control, rechargeable battery, and USB charging cable.",
+    "sizes": [
+      "Standard Gift Box"
+    ],
+    "colors": [
+      {
+        "name": "Khaki & Forest",
+        "hex": "#4D7C0F"
+      }
+    ],
+    "inStock": true,
+    "isFeatured": false,
+    "isNewArrival": true,
+    "occasions": [
+      "birthday",
+      "gifting"
+    ],
+    "ageGroup": "4-7Y",
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "details": {
+      "material": "100% cotton cap, shockproof rubber-armoured binoculars, and BPA-free flask",
+      "fit": "Delivered in an adventure-themed gift presentation box",
+      "care": "Binoculars wipe clean with soft lens cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    },
+    "audience": "boys",
+    "productType": "gifts"
+  },
+  {
+    "id": "bb-b-010",
+    "name": "Boys Cotton Singlets (Pack of 3)",
+    "category": "boys",
+    "subCategory": "Singlets",
+    "price": 14500,
+    "originalPrice": 16500,
+    "images": [
+      "/images/boys_cotton_singlets.jpg"
+    ],
+    "description": "Value 3-pack of pure combed cotton sleeveless singlets for boys. Soft, breathable, and pre-shrunk for school and daily home wear.",
+    "audience": "boys",
+    "ageGroup": "4-7Y",
+    "inStock": true,
+    "rating": 4.9,
+    "reviewCount": 24,
+    "sizes": [
+      "2-3Y",
+      "3-4Y",
+      "5-6Y",
+      "7-8Y",
+      "9-10Y",
+      "11-12Y"
+    ],
+    "colors": [
+      {
+        "name": "White",
+        "hex": "#FFFFFF"
+      }
+    ],
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroups": [
+      "1-3Y",
+      "4-7Y",
+      "8-12Y"
+    ],
+    "productType": "clothing",
+    "isFeatured": false,
+    "details": {
+      "material": "100% premium combed cotton, pack of 3 white singlets",
+      "fit": "Standard comfortable base-layer fit",
+      "care": "Machine wash warm, tumble dry low.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    }
+  },
+  {
+    "id": "bb-b-011",
+    "name": "Boys Classic Baseball Cap",
+    "category": "accessories",
+    "subCategory": "Hats & Caps",
+    "price": 8500,
+    "images": [
+      "/images/kids_baseball_cap.jpg"
+    ],
+    "description": "Durable cotton twill baseball cap with curved visor and adjustable back strap. Embroidered eyelets provide ventilation for sunny days.",
+    "audience": "boys",
+    "ageGroup": "4-7Y",
+    "inStock": true,
+    "rating": 4.7,
+    "reviewCount": 14,
+    "sizes": [
+      "One Size (Adjustable)"
+    ],
+    "colors": [
+      {
+        "name": "Royal Blue",
+        "hex": "#1E3A8A"
+      }
+    ],
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "productType": "accessories",
+    "isFeatured": false,
+    "details": {
+      "material": "100% washed cotton twill with embroidered eyelets",
+      "fit": "Adjustable back strap for growing children",
+      "care": "Spot clean with damp cloth.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    }
+  },
+  {
+    "id": "bb-b-012",
+    "name": "Boys Cotton Crew Socks (Pack of 5)",
+    "category": "accessories",
+    "subCategory": "Socks",
+    "price": 7500,
+    "images": [
+      "/images/boys_crew_socks_clean.jpg"
+    ],
+    "description": "Pack of 5 pairs of cushioned cotton crew socks with ribbed cuffs and reinforced heels for school shoes and sneakers.",
+    "audience": "boys",
+    "ageGroup": "4-7Y",
+    "inStock": true,
+    "rating": 4.8,
+    "reviewCount": 22,
+    "sizes": [
+      "2-4Y",
+      "5-7Y",
+      "8-11Y"
+    ],
+    "colors": [
+      {
+        "name": "Multi Pack",
+        "hex": "#CBD5E1"
+      }
+    ],
+    "isNewArrival": true,
+    "occasions": [
+      "everyday"
+    ],
+    "ageGroups": [
+      "4-7Y",
+      "8-12Y"
+    ],
+    "productType": "accessories",
+    "isFeatured": false,
+    "details": {
+      "material": "75% combed cotton, 22% polyester, 3% elastane",
+      "fit": "Ribbed elastic cuff with reinforced heel and toe",
+      "care": "Machine wash cold.",
+      "inStoreAvailability": "In Stock at Galleria Mall, Orchid, Lagos."
+    }
   }
+
 ];
 
-// Helper to determine if a product is footwear
-const isFootwearProduct = (p: Product): boolean =>
-  p.category === 'shoes' || p.productType === 'shoes';
+// Helper to determine fine-grained retail product type for intelligent visual merchandising
+export function getProductMerchandisingType(p: Product): string {
+  const sub = (p.subCategory || '').toLowerCase();
+  const name = (p.name || '').toLowerCase();
+  const cat = (p.category || '').toLowerCase();
+  const pt = (p.productType || '').toLowerCase();
 
-// Merchandises New Arrivals sequence so that there are NEVER more than 2 consecutive footwear items.
-// Interleaves naturally with clothing, bags & accessories, baby essentials, and lifestyle pieces.
-const createMerchandisedNewArrivals = (allProducts: Product[]): Product[] => {
-  const newArrivals = allProducts.filter(p => p.isNewArrival);
-  const footwear = newArrivals.filter(isFootwearProduct);
-  const nonFootwear = newArrivals.filter(p => !isFootwearProduct(p));
+  if (sub.includes('sock') || name.includes('sock')) return 'socks';
+  if (sub.includes('bow tie') || name.includes('bow tie')) return 'bow_tie';
+  if (sub.includes('pencil') || name.includes('pencil')) return 'pencil_case';
+  if (name.includes('backpack') || sub.includes('school bag')) return 'school_bag';
+  if (sub.includes('ride-on') || pt === 'ride-ons' || name.includes('electric')) return 'ride_on';
+  if (cat === 'shoes' || pt === 'shoes') return 'shoes';
+  if (cat === 'gifts' || pt === 'gifts' || name.includes('gift')) return 'gifts';
+  if (cat === 'baby' || pt === 'baby-essentials' || name.includes('romper') || name.includes('bib')) return 'baby';
+  if (cat === 'toys' || pt === 'toys') return 'toys';
+  if (sub.includes('bag') || cat === 'bags' || pt === 'bags') return 'bags';
+  if (cat === 'girls' || (pt === 'clothing' && p.audience === 'girls')) return 'girls_clothing';
+  if (cat === 'boys' || (pt === 'clothing' && p.audience === 'boys')) return 'boys_clothing';
+  return 'accessories';
+}
 
+// Balances catalogue sequences to avoid displaying adjacent products from the same immediate type
+// (e.g. prevents consecutive school bags, shoes, socks, ride-ons, or dresses side by side).
+export function interleaveProductVariety(items: Product[]): Product[] {
+  if (items.length <= 2) return items;
+
+  const remaining = [...items];
   const result: Product[] = [];
-  let fwIdx = 0;
-  let nonFwIdx = 0;
 
-  // Natural merchandising rhythm: alternating 2-3 lifestyle items with 1-2 footwear pieces
-  const nonFwBatches = [2, 3, 2, 3, 2, 3, 2, 3];
-  const fwBatches = [1, 2, 1, 2, 1, 2, 1, 2];
-  let batchIndex = 0;
+  // Start with a high-affinity hero pick (e.g. Pink Bow Dress or Girls clothing)
+  const firstIdx = remaining.findIndex(p => p.isFeatured && (p.category === 'girls' || p.category === 'boys'));
+  const first = firstIdx >= 0 ? remaining.splice(firstIdx, 1)[0] : remaining.shift()!;
+  result.push(first);
 
-  while (nonFwIdx < nonFootwear.length || fwIdx < footwear.length) {
-    const nonFwTake = nonFwBatches[batchIndex % nonFwBatches.length];
-    for (let i = 0; i < nonFwTake && nonFwIdx < nonFootwear.length; i++) {
-      result.push(nonFootwear[nonFwIdx++]);
+  const minSpacing: Record<string, number> = {
+    socks: 20,
+    bow_tie: 25,
+    pencil_case: 25,
+    school_bag: 8,
+    ride_on: 10,
+    gifts: 8,
+    baby: 6,
+    toys: 5,
+    bags: 4,
+    shoes: 2,
+    girls_clothing: 3,
+    boys_clothing: 2,
+    accessories: 3
+  };
+
+  while (remaining.length > 0) {
+    let bestIdx = 0;
+    let minPenalty = Number.MAX_SAFE_INTEGER;
+
+    const last1 = result[result.length - 1];
+    const last1Ft = getProductMerchandisingType(last1);
+    const last2 = result.length > 1 ? result[result.length - 2] : null;
+
+    for (let i = 0; i < remaining.length; i++) {
+      const candidate = remaining[i];
+      const ft = getProductMerchandisingType(candidate);
+      let pen = 0;
+
+      // Heavy penalty for identical fine type, category, or subCategory immediately adjacent
+      if (ft === last1Ft) pen += 10000;
+      if (candidate.category === last1.category) pen += 5000;
+      if (candidate.productType === last1.productType) pen += 3000;
+      if (candidate.subCategory && candidate.subCategory === last1.subCategory) pen += 8000;
+
+      // Spacing penalty based on distance from recent occurrences
+      for (let d = 0; d < Math.min(25, result.length); d++) {
+        const prev = result[result.length - 1 - d];
+        if (getProductMerchandisingType(prev) === ft) {
+          const req = minSpacing[ft] || 3;
+          if (d < req) {
+            pen += (req - d) * 1500;
+          }
+          break;
+        }
+      }
+
+      // Row-mate penalty for 2-column mobile cards
+      if (last2) {
+        if (ft === getProductMerchandisingType(last2)) pen += 800;
+        if (candidate.category === last2.category) pen += 400;
+      }
+
+      if (pen < minPenalty) {
+        minPenalty = pen;
+        bestIdx = i;
+        if (pen === 0) break;
+      }
     }
 
-    const fwTake = fwBatches[batchIndex % fwBatches.length];
-    for (let i = 0; i < fwTake && fwIdx < footwear.length; i++) {
-      result.push(footwear[fwIdx++]);
-    }
+    const chosen = remaining.splice(bestIdx, 1)[0];
+    result.push(chosen);
+  }
 
-    batchIndex++;
+  // Post-pass to eliminate any residual adjacent fine-type or category collisions
+  for (let i = 1; i < result.length; i++) {
+    const tCurrent = getProductMerchandisingType(result[i]);
+    const tPrev = getProductMerchandisingType(result[i - 1]);
+    if (tCurrent === tPrev || result[i].category === result[i - 1].category) {
+      for (let j = 1; j < result.length - 1; j++) {
+        if (
+          j !== i &&
+          j !== i - 1 &&
+          getProductMerchandisingType(result[j - 1]) !== tCurrent &&
+          getProductMerchandisingType(result[j]) !== tCurrent &&
+          result[j - 1].category !== result[i].category &&
+          result[j].category !== result[i].category
+        ) {
+          const [item] = result.splice(i, 1);
+          result.splice(j, 0, item);
+          break;
+        }
+      }
+    }
   }
 
   return result;
-};
+}
 
-export const NEW_ARRIVALS_PRODUCTS: Product[] = createMerchandisedNewArrivals(PRODUCTS);
+export const PRODUCTS: Product[] = interleaveProductVariety(RAW_PRODUCTS);
+
+export const NEW_ARRIVALS_PRODUCTS: Product[] = interleaveProductVariety(
+  RAW_PRODUCTS.filter(p => p.isNewArrival)
+);

@@ -63,6 +63,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   const handleAdd = () => {
     if (!product) return;
+    if (product.price === 0) {
+      window.open(generateWhatsAppMessage(), '_blank');
+      return;
+    }
     onAddToCart(product, selectedSize, selectedColor, quantity);
     setAddedNotice(true);
     setTimeout(() => setAddedNotice(false), 2500);
@@ -70,7 +74,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
   const generateWhatsAppMessage = () => {
     if (!product) return '';
-    const text = `Hi Buubu Bloom! I need help choosing something for a child - inquiring about ${product.name} (₦${product.price.toLocaleString()}, Size: ${selectedSize || 'Standard'}).`;
+    const text = product.price > 0 
+      ? `Hi Buubu Bloom! I need help choosing something for a child - inquiring about ${product.name} (₦${product.price.toLocaleString()}, Size: ${selectedSize || 'Standard'}).`
+      : `Hi Buubu Bloom! I would like to inquire about price, availability and ordering for ${product.name} (Size: ${selectedSize || 'Standard'}).`;
     return `https://wa.me/${STORE_CONTACT.phoneRaw}?text=${encodeURIComponent(text)}`;
   };
 
@@ -184,10 +190,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
               {/* Price */}
               <div className="flex items-baseline gap-3 mb-4">
-                <span className="text-2xl sm:text-3xl font-black text-[#123B68] font-display">
-                  ₦{product.price.toLocaleString()}
-                </span>
-                {product.originalPrice && (
+                {product.price > 0 ? (
+                  <span className="text-2xl sm:text-3xl font-black text-[#123B68] font-display">
+                    ₦{product.price.toLocaleString()}
+                  </span>
+                ) : (
+                  <span className="text-xl sm:text-2xl font-bold text-[#F58220] font-display">
+                    Price on Request
+                  </span>
+                )}
+                {product.price > 0 && product.originalPrice && (
                   <span className="text-sm sm:text-base text-gray-400 line-through">
                     ₦{product.originalPrice.toLocaleString()}
                   </span>
@@ -359,8 +371,17 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   onClick={handleAdd}
                   className="flex-1 bg-[#123B68] hover:bg-[#2563C7] text-white py-4 px-6 rounded-2xl font-bold text-sm tracking-wide flex items-center justify-center gap-2 shadow-md transition-all active:scale-95 cursor-pointer"
                 >
-                  <ShoppingBag className="w-4 h-4" />
-                  <span>ADD TO BAG • ₦{(product.price * quantity).toLocaleString()}</span>
+                  {product.price > 0 ? (
+                    <>
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>ADD TO BAG • ₦{(product.price * quantity).toLocaleString()}</span>
+                    </>
+                  ) : (
+                    <>
+                      <MessageSquare className="w-4 h-4" />
+                      <span>INQUIRE TO ORDER VIA WHATSAPP</span>
+                    </>
+                  )}
                 </button>
 
                 <button

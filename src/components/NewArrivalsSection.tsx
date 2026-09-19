@@ -21,20 +21,21 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
   onToggleWishlist,
   onNavigate
 }) => {
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby'>('all');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby' | 'toys'>('all');
   const [recentlyAddedId, setRecentlyAddedId] = useState<string | null>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(1);
   const railRef = useRef<HTMLDivElement>(null);
 
-  const filterTabs: { key: 'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby'; label: string }[] = [
+  const filterTabs: { key: 'all' | 'girls' | 'boys' | 'accessories' | 'shoes' | 'baby' | 'toys'; label: string }[] = [
     { key: 'all', label: 'All New In' },
     { key: 'girls', label: 'Girls' },
     { key: 'boys', label: 'Boys' },
     { key: 'baby', label: 'Babies' },
     { key: 'shoes', label: 'Shoes' },
     { key: 'accessories', label: 'Bags & Accessories' },
+    { key: 'toys', label: 'Toys' },
   ];
 
   const displayedProducts = NEW_ARRIVALS_PRODUCTS.filter(product => {
@@ -44,6 +45,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
     if (selectedFilter === 'baby') return product.audience === 'baby' || product.category === 'baby' || (product.ageGroups && product.ageGroups.includes('0-12M'));
     if (selectedFilter === 'shoes') return product.productType === 'shoes' || product.category === 'shoes';
     if (selectedFilter === 'accessories') return product.productType === 'accessories' || product.productType === 'bags' || product.category === 'accessories';
+    if (selectedFilter === 'toys') return product.category === 'toys' || product.productType === 'toys' || product.productType === 'ride-ons';
     return product.category === selectedFilter;
   });
 
@@ -162,6 +164,7 @@ export const NewArrivalsSection: React.FC<NewArrivalsSectionProps> = ({
           {filterTabs.map((tab) => (
             <button
               key={tab.key}
+              id={`new-arrivals-tab-${tab.key}`}
               onClick={() => {
                 setSelectedFilter(tab.key);
                 if (railRef.current) railRef.current.scrollTo({ left: 0, behavior: 'smooth' });
